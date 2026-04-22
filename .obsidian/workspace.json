@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "ccde08328af70562",
+        "id": "95d6a36435f4849d",
         "type": "tabs",
         "children": [
           {
-            "id": "2d6be9e468da994a",
+            "id": "c293f16b72b7966e",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -210,7 +210,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "2d6be9e468da994a",
+  "active": "c293f16b72b7966e",
   "lastOpenFiles": [
     "COURSE/WEB DEVELOPMENT/08_Database (SQL)/01. Database Fundamentals & Setup.md",
     "DU IIT/cse 2202.md",
