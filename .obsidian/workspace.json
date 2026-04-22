@@ -1,0 +1,267 @@
+{
+  "main": {
+    "id": "77e85f3f970997b1",
+    "type": "split",
+    "children": [
+      {
+        "id": "7a28a57f9876fbea",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "13a531cd3ab93bcf",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "c8c5f79e0527b1b4",
+    "type": "split",
+    "children": [
+      {
+        "id": "d46aecce6a1078b0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "42af4f1ef891900d",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "8042cedd39507497",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "tag:ubuntu",
+                "matchingCase": true,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "d481b69de8ac5693",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "279416c7625b4660",
+    "type": "split",
+    "children": [
+      {
+        "id": "2fd9a64f0deb3159",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "53f920f8060070a2",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "5720a8812050f3b7",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "df102072c4a377ae",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": false,
+                "showSearch": true,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "4c18205f15a43f5d",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          },
+          {
+            "id": "c6412785a0953c64",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "9ccc1f1f4daf3b94",
+            "type": "leaf",
+            "state": {
+              "type": "file-properties",
+              "state": {},
+              "icon": "lucide-info",
+              "title": "File properties"
+            }
+          },
+          {
+            "id": "d570d18d9af49c18",
+            "type": "leaf",
+            "state": {
+              "type": "footnotes",
+              "state": {},
+              "icon": "lucide-file-signature",
+              "title": "Footnotes"
+            }
+          },
+          {
+            "id": "04477abee950afcf",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {},
+              "icon": "calendar-with-checkmark",
+              "title": "Calendar"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 343.5
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "bases:Create new base": false,
+      "markdown-importer:Open format converter": false,
+      "audio-recorder:Start/stop recording": false,
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "omnisearch:Omnisearch": false,
+      "obsidian-importer:Open Importer": false,
+      "obsidian-git:Open Git source control": false
+    }
+  },
+  "active": "13a531cd3ab93bcf",
+  "lastOpenFiles": [
+    "BUET CSE/README.md",
+    "COURSE/WEB DEVELOPMENT/01_HTML/Inline vs Block Elements.md",
+    "2026-04-21.md",
+    "COURSE/WEB DEVELOPMENT/01_HTML/Entities and Code Tags.md",
+    "PROJECTS/01. PORTFOLIO.md",
+    "Untitled.canvas",
+    "DU IIT/SE 1102 L1.md",
+    "COURSE/WEB DEVELOPMENT/instructions.md",
+    "COURSE/WEB DEVELOPMENT/99_Projects_and_Exercises/Mini Projects.md",
+    "PROJECT_07-TODO_LIST/index.md",
+    "PROJECT_07-TODO_LIST",
+    "COURSE/WEB DEVELOPMENT/99_Projects_and_Exercises/Netflix Clone.md",
+    "DU IIT/CSE 1101 L1.md",
+    "COURSE/WEB DEVELOPMENT/05_NextJS/Middleware.md",
+    "COURSE/WEB DEVELOPMENT/08_Database (SQL)/08. Performance & Advanced Operations.md",
+    "COURSE/WEB DEVELOPMENT/08_Database (SQL)/07. Data Aggregation & Functions.md",
+    "COURSE/WEB DEVELOPMENT/08_Database (SQL)/06. Joins & Table Relationships.md",
+    "COURSE/WEB DEVELOPMENT/08_Database (SQL)/05. Relational Database Design.md",
+    "COURSE/WEB DEVELOPMENT/08_Database (SQL)/04. Advanced Querying & Filtering.md",
+    "COURSE/WEB DEVELOPMENT/08_Database (SQL)/03. Core CRUD Operations.md",
+    "COURSE/WEB DEVELOPMENT/08_Database (SQL)/02. Schema Definition & Table Management.md",
+    "COURSE/WEB DEVELOPMENT/08_Database (SQL)/01. Database Fundamentals & Setup.md",
+    "COURSE/WEB DEVELOPMENT/08_Database (SQL)/00. Introduction to SQL.md",
+    "COURSE/WEB DEVELOPMENT/08_Database (SQL)",
+    "COURSE/WEB DEVELOPMENT/10_Tools_and_Frameworks/Tailwind CSS.md",
+    "COURSE/WEB DEVELOPMENT/10_Tools_and_Frameworks/Hosting and Deployment (Vercel, Hostinger).md",
+    "COURSE/WEB DEVELOPMENT/10_Tools_and_Frameworks/Git and GitHub.md",
+    "COURSE/WEB DEVELOPMENT/10_Tools_and_Frameworks/Figma Basics.md",
+    "COURSE/WEB DEVELOPMENT/10_Tools_and_Frameworks",
+    "COURSE/WEB DEVELOPMENT/09_Tools_and_Frameworks/Tailwind CSS.md",
+    "COURSE/WEB DEVELOPMENT/09_Tools_and_Frameworks",
+    "COURSE/WEB DEVELOPMENT/08_SQL",
+    "COURSE/WEB DEVELOPMENT/SQL",
+    "COURSE/WEB DEVELOPMENT/99_Projects_and_Exercises",
+    "COURSE/WEB DEVELOPMENT/08_Tools_and_Frameworks",
+    "COURSE/WEB DEVELOPMENT/07_Database (MongoDB)",
+    "COURSE/WEB DEVELOPMENT/06_Backend (Node & Express)",
+    "Untitled 1.canvas",
+    "Business/Journal/Technical/Migrated/assets/why-not-jwt.png",
+    "Business/Journal/Technical/Migrated/assets/original.jpg",
+    "Business/Journal/Technical/Migrated/assets/oYukX.jpg",
+    "Business/Journal/Technical/Migrated/assets/iqueryable-dbcontext-everywhere.jpg",
+    "Business/Journal/Technical/Migrated/assets/image4.png",
+    "Business/Journal/Technical/Migrated/assets/image3.png",
+    "Business/Journal/Technical/Migrated/assets/image2.png",
+    "Business/Journal/Technical/Migrated/assets/image1.png",
+    "Business/Journal/Technical/Migrated/assets/image.jpeg",
+    "Business/Journal/Technical/Migrated/assets/image 2.png",
+    "Business/Journal/Technical/Migrated/Mind Map.canvas",
+    "Journal/Technical/Migrated/Mind Map.canvas",
+    "Technical/Migrated/Mind Map.canvas"
+  ]
+}
