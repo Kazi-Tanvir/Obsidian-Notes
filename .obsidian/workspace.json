@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "1b3868870d99735e",
+        "id": "ccde08328af70562",
         "type": "tabs",
         "children": [
           {
-            "id": "23b4ab0efe2e3c4c",
+            "id": "2d6be9e468da994a",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -210,8 +210,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "23b4ab0efe2e3c4c",
+  "active": "2d6be9e468da994a",
   "lastOpenFiles": [
+    "COURSE/WEB DEVELOPMENT/08_Database (SQL)/01. Database Fundamentals & Setup.md",
+    "DU IIT/cse 2202.md",
     "Untitled.base",
     "BUET CSE/info.md",
     "README.md",
@@ -236,7 +238,6 @@
     "COURSE/WEB DEVELOPMENT/08_Database (SQL)/04. Advanced Querying & Filtering.md",
     "COURSE/WEB DEVELOPMENT/08_Database (SQL)/03. Core CRUD Operations.md",
     "COURSE/WEB DEVELOPMENT/08_Database (SQL)/02. Schema Definition & Table Management.md",
-    "COURSE/WEB DEVELOPMENT/08_Database (SQL)/01. Database Fundamentals & Setup.md",
     "COURSE/WEB DEVELOPMENT/08_Database (SQL)/00. Introduction to SQL.md",
     "COURSE/WEB DEVELOPMENT/08_Database (SQL)",
     "COURSE/WEB DEVELOPMENT/10_Tools_and_Frameworks/Tailwind CSS.md",
