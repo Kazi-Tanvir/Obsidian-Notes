@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "95d6a36435f4849d",
+        "id": "46863b677def9cf9",
         "type": "tabs",
         "children": [
           {
-            "id": "c293f16b72b7966e",
+            "id": "aa2e1e7b2e5b6e02",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "BUET CSE/BUET CSE 1-1 Index (খাজানা ১-১).md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "BUET CSE 1-1 Index (খাজানা ১-১)"
             }
           }
         ]
@@ -90,6 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "BUET CSE/BUET CSE 1-1 Index (খাজানা ১-১).md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -99,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks"
+              "title": "Backlinks for BUET CSE 1-1 Index (খাজানা ১-১)"
             }
           },
           {
@@ -210,12 +215,29 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "c293f16b72b7966e",
+  "active": "42af4f1ef891900d",
   "lastOpenFiles": [
-    "COURSE/WEB DEVELOPMENT/08_Database (SQL)/01. Database Fundamentals & Setup.md",
-    "DU IIT/cse 2202.md",
-    "Untitled.base",
+    "DU IIT/03-probability.pdf",
+    "BUET CSE/BUET CSE 1-1 Index (খাজানা ১-১).md",
     "BUET CSE/info.md",
+    "BUET CSE/খাজানা ১-১/CSE101/Notes/C Notes (Salman).pdf",
+    "COURSE/WEB DEVELOPMENT/08_Database (SQL)/07. Data Aggregation & Functions.md",
+    "DU IIT/cse 2202.md",
+    "Advanced Querying & Filtering.md",
+    "COURSE/WEB DEVELOPMENT/08_Database (SQL)/05. Relational Database Design.md",
+    "BUET CSE/খাজানা ১-১/PHY129/Electricity and Magnetism (EM)/Books/HRK - Physics - 5th Edition (Vol 2).pdf",
+    "খাজানা ১-১/CSE101/Books.md",
+    "খাজানা ১-১/CSE101",
+    "খাজানা ১-১",
+    "খাজানা ১-১/[​​Info Center]/Database.md",
+    "খাজানা ১-১/[​​Info Center]",
+    "BUET CSE/খাজানা ১-১/MATH141/Differential Calculus (DC)/Books/Matin - Differential Calculus/Matin - Chapter 3 (Continuity and Differentiability).pdf",
+    "BUET CSE/খাজানা ১-১/PHY129/Electricity and Magnetism (EM)/Slides/EM MME Slides/Lecture 1 (Charge & Coulomb_s Law).pdf",
+    "BUET CSE/খাজানা ১-১/MATH141/Integral Calculus (IC)/Books/Hazra - Integral Calculus with Applications/Hazra Solution/Hazra Solution - Chapter 13.pdf",
+    "BUET CSE/খাজানা ১-১/MATH141/Integral Calculus (IC)/Books/Hazra - Integral Calculus with Applications/Hazra Solution/Hazra Solution - Chapter 8 (4).pdf",
+    "BUET CSE/খাজানা ১-১/MATH141/Integral Calculus (IC)/Books/Hazra - Integral Calculus with Applications/Hazra Solution/Hazra Solution - Chapter 3.pdf",
+    "DU IIT/CSE 1101 L1.md",
+    "COURSE/WEB DEVELOPMENT/08_Database (SQL)/01. Database Fundamentals & Setup.md",
     "README.md",
     "BUET CSE/README.md",
     "COURSE/WEB DEVELOPMENT/01_HTML/Inline vs Block Elements.md",
@@ -227,28 +249,11 @@
     "COURSE/WEB DEVELOPMENT/instructions.md",
     "COURSE/WEB DEVELOPMENT/99_Projects_and_Exercises/Mini Projects.md",
     "PROJECT_07-TODO_LIST/index.md",
-    "PROJECT_07-TODO_LIST",
     "COURSE/WEB DEVELOPMENT/99_Projects_and_Exercises/Netflix Clone.md",
-    "DU IIT/CSE 1101 L1.md",
     "COURSE/WEB DEVELOPMENT/05_NextJS/Middleware.md",
     "COURSE/WEB DEVELOPMENT/08_Database (SQL)/08. Performance & Advanced Operations.md",
-    "COURSE/WEB DEVELOPMENT/08_Database (SQL)/07. Data Aggregation & Functions.md",
     "COURSE/WEB DEVELOPMENT/08_Database (SQL)/06. Joins & Table Relationships.md",
-    "COURSE/WEB DEVELOPMENT/08_Database (SQL)/05. Relational Database Design.md",
     "COURSE/WEB DEVELOPMENT/08_Database (SQL)/04. Advanced Querying & Filtering.md",
-    "COURSE/WEB DEVELOPMENT/08_Database (SQL)/03. Core CRUD Operations.md",
-    "COURSE/WEB DEVELOPMENT/08_Database (SQL)/02. Schema Definition & Table Management.md",
-    "COURSE/WEB DEVELOPMENT/08_Database (SQL)/00. Introduction to SQL.md",
-    "COURSE/WEB DEVELOPMENT/08_Database (SQL)",
-    "COURSE/WEB DEVELOPMENT/10_Tools_and_Frameworks/Tailwind CSS.md",
-    "COURSE/WEB DEVELOPMENT/10_Tools_and_Frameworks/Hosting and Deployment (Vercel, Hostinger).md",
-    "COURSE/WEB DEVELOPMENT/10_Tools_and_Frameworks",
-    "COURSE/WEB DEVELOPMENT/09_Tools_and_Frameworks",
-    "COURSE/WEB DEVELOPMENT/08_SQL",
-    "COURSE/WEB DEVELOPMENT/SQL",
-    "COURSE/WEB DEVELOPMENT/99_Projects_and_Exercises",
-    "COURSE/WEB DEVELOPMENT/08_Tools_and_Frameworks",
-    "COURSE/WEB DEVELOPMENT/07_Database (MongoDB)",
     "Untitled 1.canvas",
     "Business/Journal/Technical/Migrated/assets/why-not-jwt.png",
     "Business/Journal/Technical/Migrated/assets/original.jpg",
