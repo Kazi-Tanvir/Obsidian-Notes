@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "7417961f8a0b713b",
+        "id": "d13e390eb5daa1ea",
         "type": "tabs",
         "children": [
           {
-            "id": "4dfdac27711e3453",
+            "id": "043284c4264292f5",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "COURSE/02_C_PROGRAMING/02_C_Programming/04_Loop_Control_Instruction.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "04_Loop_Control_Instruction"
+              "title": "New tab"
             }
           }
         ]
@@ -87,6 +83,7 @@
       {
         "id": "2fd9a64f0deb3159",
         "type": "tabs",
+        "dimension": 66.60482374768088,
         "children": [
           {
             "id": "53f920f8060070a2",
@@ -94,7 +91,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "COURSE/02_C_PROGRAMING/02_C_Programming/04_Loop_Control_Instruction.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +100,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for 04_Loop_Control_Instruction"
+              "title": "Backlinks"
             }
           },
           {
@@ -184,6 +180,24 @@
             }
           },
           {
+            "id": "cffdb6a6bd990540",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
+          }
+        ],
+        "currentTab": 7
+      },
+      {
+        "id": "152c4bfc9fa84dd3",
+        "type": "tabs",
+        "dimension": 33.39517625231911,
+        "children": [
+          {
             "id": "04477abee950afcf",
             "type": "leaf",
             "state": {
@@ -215,43 +229,44 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "4dfdac27711e3453",
+  "active": "043284c4264292f5",
   "lastOpenFiles": [
-    "COURSE/02_C_PROGRAMING/02_C_Programming/03_Conditional_Instructions.md",
-    "COURSE/02_C_PROGRAMING/02_C_Programming/02_Instructions_and_Operators.md",
-    "COURSE/02_C_PROGRAMING/02_C_Programming/01_Variables_Constants_Keywords.md",
-    "COURSE/02_C_PROGRAMING/02_C_Programming/00_Introduction_and_Setup.md",
-    "COURSE/02_C_PROGRAMING/02_C_Programming/12_Projects/02_Snake_Water_Gun.md",
-    "COURSE/02_C_PROGRAMING/02_C_Programming/12_Projects/01_Number_Guessing_Game.md",
-    "DU IIT/03-probability.pdf",
-    "DU IIT/CSE 1101 L1.md",
-    "DU IIT/cse 2202.md",
-    "COURSE/02_C_PROGRAMING/02_C_Programming/11_Dynamic_Memory_Allocation.md",
-    "COURSE/02_C_PROGRAMING/02_C_Programming/10_File_IO.md",
-    "COURSE/02_C_PROGRAMING/02_C_Programming/09_Structures.md",
-    "COURSE/02_C_PROGRAMING/02_C_Programming/08_Strings.md",
-    "COURSE/02_C_PROGRAMING/02_C_Programming/07_Arrays.md",
-    "COURSE/02_C_PROGRAMING/02_C_Programming/06_Pointers.md",
-    "COURSE/02_C_PROGRAMING/02_C_Programming/05_Functions_and_Recursion.md",
-    "COURSE/02_C_PROGRAMING/02_C_Programming/04_Loop_Control_Instruction.md",
-    "COURSE/C PROGRAMMING/Chapter 2 - Instructions and operators/Types of instructions.md",
-    "COURSE/02_C_PROGRAMING/02_C_Programming/12_Projects",
-    "COURSE/02_C_PROGRAMING/02_C_Programming",
-    "COURSE/02_C_PROGRAMING/The Ultimate C Handbook.pdf",
-    "COURSE/02_C_PROGRAMING",
-    "COURSE/New folder",
-    "COURSE/C PROGRAMMING/Chapter 2 - Instructions and operators/Type conversion.md",
-    "COURSE/C PROGRAMMING/Chapter 2 - Instructions and operators/problems.md",
-    "COURSE/C PROGRAMMING/Chapter 2 - Instructions and operators/Operator precedence in c.md",
-    "COURSE/C PROGRAMMING/Chapter 2 - Instructions and operators/Control Instructions.md",
-    "COURSE/C PROGRAMMING/Chapter 2 - Instructions and operators/Arithmetic instructions.md",
-    "COURSE/C PROGRAMMING/Project 2 - Snake Water Gun/Project 2 - Snake, Water, Gun.md",
-    "COURSE/C PROGRAMMING/The Ultimate C Handbook.pdf",
-    "COURSE/C PROGRAMMING/Chapter 10 - File IO/EOF - end of file.md",
-    "COURSE/C PROGRAMMING/Chapter 10 - File IO/Closing the file.md",
-    "COURSE/C PROGRAMMING/Project 2 - Snake Water Gun",
-    "COURSE/C PROGRAMMING/Chapter 11 - Dynamic Memory Allocation",
-    "COURSE/C PROGRAMMING/Chapter 10 - File IO",
+    "01_BUET_CSE/99_ARCHIVE/খাজানা ১-১/CSE103/Term Final Questions and Solutions/(From Seniors) Solutions (16-22)/21-22/103 21-22 TF B Solve.pdf",
+    "03_COURSES/01_WEB_DEVELOPMENT/01_HTML/Basic Structure.md",
+    "03_COURSES/02_C_PROGRAMMING/The Ultimate C Handbook.pdf",
+    "03_COURSES/99_ARCHIVE",
+    "02_DU_IIT/01_CLASS/CSE 1101 L1.md",
+    "03_COURSES/02_C_PROGRAMMING/12_Projects/02_Snake_Water_Gun.md",
+    "03_COURSES/02_C_PROGRAMMING/12_Projects/01_Number_Guessing_Game.md",
+    "03_COURSES/02_C_PROGRAMMING/12_Projects",
+    "03_COURSES/02_C_PROGRAMMING/10_File_IO.md",
+    "03_COURSES/02_C_PROGRAMMING/11_Dynamic_Memory_Allocation.md",
+    "03_COURSES/02_C_PROGRAMMING/09_Structures.md",
+    "03_COURSES/02_C_PROGRAMMING/08_Strings.md",
+    "03_COURSES/02_C_PROGRAMMING/07_Arrays.md",
+    "03_COURSES/02_C_PROGRAMMING/06_Pointers.md",
+    "03_COURSES/02_C_PROGRAMMING/05_Functions_and_Recursion.md",
+    "03_COURSES/02_C_PROGRAMMING/03_Conditional_Instructions.md",
+    "03_COURSES/02_C_PROGRAMMING/04_Loop_Control_Instruction.md",
+    "03_COURSES/02_C_PROGRAMMING/02_Instructions_and_Operators.md",
+    "03_COURSES/02_C_PROGRAMMING/01_Variables_Constants_Keywords.md",
+    "03_COURSES/02_C_PROGRAMMING/00_Introduction_and_Setup.md",
+    "03_COURSES/02_C_PROGRAMMING",
+    "The Ultimate C Handbook.pdf",
+    "02_C_Programming/12_Projects/02_Snake_Water_Gun.md",
+    "02_C_Programming/12_Projects/01_Number_Guessing_Game.md",
+    "02_C_Programming/12_Projects",
+    "02_C_Programming/11_Dynamic_Memory_Allocation.md",
+    "02_C_Programming/10_File_IO.md",
+    "02_C_Programming/09_Structures.md",
+    "02_C_Programming/08_Strings.md",
+    "02_C_Programming/06_Pointers.md",
+    "02_C_Programming/07_Arrays.md",
+    "02_C_Programming/05_Functions_and_Recursion.md",
+    "02_C_Programming",
+    "02_DU_IIT/02_LECTURE_SHEET",
+    "02_DU_IIT/01_CLASS",
+    "02_DU_IIT/99_ARCHIVE",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "Business/Journal/Technical/Migrated/assets/why-not-jwt.png",

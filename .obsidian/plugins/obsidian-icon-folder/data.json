@@ -6,11 +6,11 @@
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
+      "LiTrash",
+      "LiCodepen",
+      "LiCode",
       "LiSquareActivity",
-      "LiAxe",
-      "LiComputer",
-      "LiAlbum",
-      "LiAlignHorizontalDistributeEnd"
+      "LiAxe"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -45,9 +45,14 @@
   "Business": "💰",
   "Vlog": "📸",
   "Blog": "🖋",
-  "COURSE": "LiAlignHorizontalDistributeEnd",
-  "DU IIT": "LiAlbum",
-  "BUET CSE": "LiComputer",
-  "PROJECTS": "LiAxe",
-  "COURSE/WEB DEVELOPMENT": "LiSquareActivity"
+  "01_BUET_CSE": "LiComputer",
+  "02_DU_IIT": "LiAlbum",
+  "03_COURSES": "LiCodepen",
+  "04_PROJECTS": "LiAxe",
+  "03_COURSES/01_WEB_DEVELOPMENT": "LiSquareActivity",
+  "03_COURSES/02_C_PROGRAMMING": "LiCode",
+  "03_COURSES/99_ARCHIVE": "LiTrash",
+  "01_BUET_CSE/99_ARCHIVE": "LiTrash",
+  "02_DU_IIT/99_ARCHIVE": "LiTrash",
+  "99_ARCHIVE": "LiTrash"
 }

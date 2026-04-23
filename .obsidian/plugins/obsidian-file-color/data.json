@@ -142,24 +142,44 @@
       "color": "q9l_6YdLYNcODcyTS50Ci"
     },
     {
-      "path": "DU IIT",
+      "path": "02_DU_IIT",
       "color": "rWK7ikQZ_9IvT-fIEIh5M"
     },
     {
-      "path": "BUET CSE",
-      "color": "OIGlsyo0wKJGISdlO-fOx"
-    },
-    {
-      "path": "COURSE",
-      "color": "bmJlzhD89u7qhg2-xOlLi"
-    },
-    {
-      "path": "PROJECTS",
+      "path": "01_BUET_CSE",
       "color": "_d6vwqtIp7tYO_KDcipKe"
     },
     {
-      "path": "COURSE/WEB DEVELOPMENT",
+      "path": "03_COURSES",
+      "color": "bmJlzhD89u7qhg2-xOlLi"
+    },
+    {
+      "path": "04_PROJECTS",
+      "color": "_d6vwqtIp7tYO_KDcipKe"
+    },
+    {
+      "path": "03_COURSES/01_WEB_DEVELOPMENT",
       "color": "5cQ7t4zD40rrOTwRBLrkJ"
+    },
+    {
+      "path": "03_COURSES/02_C_PROGRAMMING",
+      "color": "OlTd2c6do3Im_AmiYrUIr"
+    },
+    {
+      "path": "03_COURSES/99_ARCHIVE",
+      "color": "OIGlsyo0wKJGISdlO-fOx"
+    },
+    {
+      "path": "01_BUET_CSE/99_ARCHIVE",
+      "color": "OIGlsyo0wKJGISdlO-fOx"
+    },
+    {
+      "path": "02_DU_IIT/99_ARCHIVE",
+      "color": "OIGlsyo0wKJGISdlO-fOx"
+    },
+    {
+      "path": "99_ARCHIVE",
+      "color": "OIGlsyo0wKJGISdlO-fOx"
     }
   ]
 }
