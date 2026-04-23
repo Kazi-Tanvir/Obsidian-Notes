@@ -8,10 +8,10 @@ tags:
 # Advanced Python 1
 
 ## Newly added features in python
-পাইথন প্রোগ্রামিং ল্যাঙ্গুয়েজে নতুন বেশ কিছু ফিচার যুক্ত হয়েছে।
+Following are some of the newly added features in Python programming language.
 
 ### Walrus Operator
-ওয়ালরাস অপারেটর (`:=`) পাইথন ৩.৮ এ যুক্ত করা হয়েছে। এটি একটি এক্সপ্রেশনের ভেতরে ভেরিয়েবলে ভ্যালু অ্যাসাইন করতে ব্যবহৃত হয়। একে অফিশিয়ালি "assignment expression" বলা হয়।
+The walrus operator (`:=`), introduced in Python 3.8, allows you to assign values to variables as part of an expression. This operator, named for its resemblance to the eyes and tusks of a walrus, is officially called the "assignment expression."
 
 ```python
 # Using walrus operator
@@ -20,7 +20,7 @@ if (n := len([1, 2, 3, 4, 5])) > 3:
 ```
 
 ### Types Definitions in Python
-টাইপ হিন্ট (Type hints) অ্যাড করতে ফাংশনের রিটার্ন টাইপের জন্য `->` সিনট্যাক্স এবং ভেরিয়েবলের জন্য কোলন `:` ব্যবহার করা হয়।
+Type hints are added using the colon (`:`) syntax for variables and the `->` syntax for function return types.
 ```python
 # Variable type hint
 age: int = 25
@@ -31,7 +31,7 @@ def greeting(name: str) -> str:
 ```
 
 ### Advanced Type Hints
-পাইথনের `typing` মডিউল আরও অ্যাডভান্সড টাইপ হিন্ট যেমন List, Tuple, Dict এবং Union প্রদান করে।
+Python's `typing` module provides more advanced type hints, such as List, Tuple, Dict, and Union.
 ```python
 from typing import List, Tuple, Dict, Union
 
@@ -40,7 +40,7 @@ identifier: Union[int, str] = "ID123"
 ```
 
 ### Match Case
-পাইথন ৩.১০ এ `match` স্টেটমেন্ট যুক্ত করা হয়, যা অন্যান্য প্রোগ্রামিং ভাষার `switch` স্টেটমেন্টের মতোই কাজ করে।
+Python 3.10 introduced the `match` statement, which is similar to the switch statement found in other programming languages.
 ```python
 def http_status(status):
     match status:
@@ -53,7 +53,7 @@ def http_status(status):
 ```
 
 ### Dictionary Merge & Update Operators
-নতুন অপারেটর `|` এবং `|=` ডিকশনারি মার্জ (merge) ও আপডেট করার সুযোগ দেয়।
+New operators `|` and `|=` allow for merging and updating dictionaries.
 ```python
 dict1 = {'a': 1, 'b': 2}
 dict2 = {'b': 3, 'c': 4}
@@ -61,8 +61,8 @@ merged = dict1 | dict2
 ```
 
 ## Exception handling in Python
-যখন কোনো প্রোগ্রামে ভুল (error) ঘটে, তখন পাইথন ডিফল্টভাবে কিছু এরর থ্রো (throw) করে।
-ট্রাই-অ্যাক্সেপ্ট (`try-except`) স্টেটমেন্ট ব্যবহার করে এক্সসেপশন হ্যান্ডেল করা যায়। এতে প্রোগ্রাম ক্র্যাশ না হয়ে স্বাভাবিকভাবে চলতে পারে।
+There are many built-in exceptions which are raised in python when something goes wrong.
+Exception in python can be handled using a `try` statement. The code that handles the exception is written in the except clause.
 
 ```python
 try:
@@ -70,32 +70,32 @@ try:
 except Exception as e:
     print(e)
 ```
-আমরা সুনির্দিষ্ট এক্সসেপশনও ক্যাচ করতে পারি, যেমন `ZeroDivisionError` বা `TypeError`।
+We can also specify the exception to catch like `ZeroDivisionError` or `TypeError`.
 
 ### Raising Exceptions
-আমরা চাইলে `raise` কিওয়ার্ড ব্যবহার করে কাস্টম এক্সসেপশন তৈরি করতে পারি।
+We can raise custom exceptions using the `raise` keyword in python.
 
 ### try with else clause
-`try` ব্লকটি সফলভাবে এক্সিকিউট হলে (কোনো এরর ছাড়া), তবেই `else` ব্লকের কোড এক্সিকিউট হবে।
+Sometimes we want to run a piece of code when try was successful.
 
 ### try with finally
-`finally` ব্লকের কোড সব সময় এক্সিকিউট হবে, এরর আসুক বা না আসুক।
+Python offers a `finally` clause which ensures execution of a piece of code irrespective of the exception.
 
 ## `__name__ == '__main__'` in python
-`__name__` ইভালুয়েট করে মডিউলের নাম নির্ধারণ করে। যদি প্রোগ্রামটি সরাসরি ওই ফাইল থেকে রান করা হয়, তবে `__name__` এর ভ্যালু `__main__` হয়। এটি চেক করতে ব্যবহৃত হয় যে মডিউলটি সরাসরি রান হচ্ছে নাকি অন্য ফাইলে ইম্পোর্ট করা হয়েছে।
+`__name__` evaluates to the name of the module in python from where the program is ran. If the module is being run directly from the command line, the `__name__` is set to string `__main__`. This behaviour is used to check whether the module is run directly or imported to another file.
 
 ## The global keyword
-বর্তমান স্কোপের বাইরের গ্লোবাল ভেরিয়েবল মডিফাই করতে `global` কিওয়ার্ড ব্যবহৃত হয়।
+`global` keyword is used to modify the variable outside of the current scope.
 
 ## enumerate function in python
-`enumerate` ফাংশন যেকোনো ইটারেবলের (যেমন লিস্ট) উপাদানগুলোর সাথে একটি কাউন্টার (ইনডেক্স) যুক্ত করে রিটার্ন করে।
+The `enumerate` function adds counter to an iterable and returns it.
 ```python
 for i, item in enumerate(list1):
     print(i, item)
 ```
 
 ## List comprehensions
-বিদ্যমান লিস্টের ওপর ভিত্তি করে সুন্দর উপায়ে নতুন লিস্ট তৈরি করার পদ্ধতি হলো লিস্ট কম্প্রিহেনশন।
+List Comprehension is an elegant way to create lists based on existing lists.
 ```python
 list1 = [1, 7, 12, 11, 22]
 list2 = [item for item in list1 if item > 8]

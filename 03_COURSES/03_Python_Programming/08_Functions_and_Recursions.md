@@ -7,34 +7,34 @@ tags:
 
 # Functions & Recursions
 
-ফাংশন হলো কিছু স্টেটমেন্টের একটি গ্রুপ, যা নির্দিষ্ট কোনো কাজ সম্পন্ন করে। যখন একটি প্রোগ্রাম আকারে বড় এবং জটিল হয়ে যায়, তখন ট্র্যাক রাখা কঠিন হয় যে কোন কোড কী কাজ করছে। ফাংশন ব্যবহার করে প্রোগ্রামাররা কোডের একটি অংশকে পুনরায় যেকোনো জায়গায় ব্যবহার করতে পারেন।
+A function is a group of statements performing a specific task. When a program gets bigger in size and its complexity grows, it gets difficult for a program to keep track on which piece of code is doing what! A function can be reused by the programmer in a given program any number of times.
 
 ## Example and Syntax of a Function
-একটি ফাংশনের সিনট্যাক্স নিচের মতো হয়:
+The syntax of a function looks as follows:
 
 ```python
 def func1():
     print('hello')
 ```
-এই ফাংশনটিকে প্রোগ্রামের যেকোনো জায়গা থেকে যতবার খুশি কল (call) করা যায়।
+This function can be called any number of times, anywhere in the program.
 
 ## Function Call
-যখনই আমরা কোনো ফাংশনকে কাজ করতে নির্দেশ দিতে চাই, তখন আমরা ফাংশনের নাম এবং তার সাথে প্যারেনথেসিস `()` ব্যবহার করি।
+Whenever we want to call a function, we put the name of the function followed by parentheses as follows:
 
 ```python
 func1() # This is called function call
 ```
 
 ## Function Definition
-`def` কিওয়ার্ড দিয়ে শুরু হওয়া যে অংশটি ফাংশন কলের সময় এক্সিকিউট হবে ইনস্ট্রাকশনগুলো ধারণ করে, তাকে ফাংশন ডেফিনিশন বলা হয়।
+The part containing the exact set of instructions which are executed during the function call.
 
 ## Types of Functions in Python
-পাইথনে দুই ধরনের ফাংশন রয়েছে:
-- **Built in functions:** এগুলো পাইথনে আগে থেকেই তৈরি থাকে (যেমন: `len()`, `print()`, `range()`)।
-- **User defined functions:** যেগুলো ইউজার নিজে তৈরি করে (যেমন: আমাদের তৈরি করা `func1()`)।
+There are two types of functions in python:
+- **Built in functions:** Already present in python (e.g., `len()`, `print()`, `range()`).
+- **User defined functions:** Defined by the user (e.g., our `func1()`).
 
 ## Functions with Arguments
-একটি ফাংশন কিছু ভ্যালু ইনপুট হিসেবে গ্রহণ করতে পারে, যাকে আর্গুমেন্ট (argument) বলা হয়। আমরা এই ভ্যালুগুলোকে প্যারেনথেসিসের ভেতরে রাখি। একটি ফাংশন কোনো ভ্যালু রিটার্নও করতে পারে।
+A function can accept some value it can work with. We can put these values in the parentheses. A function can also return value as shown below:
 
 ```python
 def greet(name):
@@ -46,7 +46,7 @@ a = greet("harry")
 ```
 
 ## Default Parameter Value
-আমরা ফাংশনের আর্গুমেন্টে একটি ডিফল্ট ভ্যালু নির্ধারণ করে দিতে পারি। যদি ফাংশন কল করার সময় ওই আর্গুমেন্টের কোনো ভ্যালু দেওয়া না হয়, তবে এই ডিফল্ট ভ্যালুটি ব্যবহৃত হবে।
+We can have a value as default as default argument in a function. If we specify name = “stranger” in the line containing def, this value is used when no argument is passed.
 
 *Example:*
 ```python
@@ -58,10 +58,10 @@ greet("harry") # name will be "harry" (passed)
 ```
 
 ## Recursion
-রিকারশন (Recursion) হলো এমন একটি ফাংশন যা নিজেকে নিজেই কল করে। এটি গাণিতিক ফর্মুলাকে সরাসরি ফাংশন হিসেবে রূপান্তর করতে খুব সহায়ক।
+Recursion is a function which calls itself. It is used to directly use a mathematical formula as function.
 
 *Example:* `factorial(n) = n x factorial (n-1)`
-এই ফাংশনটি এভাবে লেখা যায়:
+This function can be defined as follows:
 
 ```python
 def factorial(n):
@@ -71,7 +71,7 @@ def factorial(n):
         return n * factorial(n-1) # function calling itself
 ```
 
-রিকারশন ব্যবহারের সময় প্রোগ্রামারকে অত্যন্ত সতর্ক থাকতে হয়, যাতে ফাংশনটি নিজেকে অসীম (infinitely) কল না করতে থাকে (Base condition নিশ্চিত করা খুব জরুরি)।
+The programmer needs to be extremely careful while working with recursion to ensure that the function doesn’t infinitely keep calling itself. Recursion is sometimes the most direct way to code an algorithm.
 
 ## Practice Set
 - [ ] 1. Write a program using functions to find greatest of three numbers.

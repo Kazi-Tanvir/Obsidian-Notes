@@ -7,7 +7,7 @@ tags:
 
 # Inheritance & more on OOPs
 
-ইনহেরিট্যান্স (Inheritance) হলো একটি বিদ্যমান ক্লাস থেকে নতুন একটি ক্লাস তৈরি করার পদ্ধতি।
+Inheritance is a way of creating a new class from an existing class.
 
 *Syntax:*
 ```python
@@ -19,7 +19,7 @@ class Programmer(Employee): # Derived or child class
     # Code
     pass
 ```
-আমরা 'Programmer' অবজেক্টে 'Employee' ক্লাসের মেথড এবং অ্যাট্রিবিউটগুলো ব্যবহার করতে পারি। পাশাপাশি 'Programmer' ক্লাসে নতুন অ্যাট্রিবিউট বা মেথড যোগ করতে পারি অথবা আগেরগুলো ওভাররাইট করতে পারি।
+We can use the method and attributes of ‘Employee’ class in ‘Programmer’ object. Also, we can overwrite or add new attributes and methods in ‘Programmer’ class.
 
 ## Types of Inheritance
 - Single inheritance
@@ -27,22 +27,22 @@ class Programmer(Employee): # Derived or child class
 - Multilevel inheritance
 
 ### Single Inheritance
-যখন কোনো চাইল্ড ক্লাস শুধুমাত্র একটি প্যারেন্ট ক্লাস থেকে ইনহেরিট করে, তখন তাকে সিঙ্গেল ইনহেরিট্যান্স বলে।
+Single inheritance occurs when child class inherits only a single parent class.
 
 ### Multiple Inheritance
-যখন কোনো চাইল্ড ক্লাস একাধিক প্যারেন্ট ক্লাস থেকে ইনহেরিট করে, তখন তাকে মাল্টিপল ইনহেরিট্যান্স বলে।
+Multiple Inheritance occurs when the child class inherits from more than one parent classes.
 
 ### Multilevel Inheritance
-যখন কোনো চাইল্ড ক্লাস অন্য আরেকটি চাইল্ড ক্লাসের প্যারেন্ট হয়ে যায়, তখন তাকে মাল্টিলেভেল ইনহেরিট্যান্স বলে।
+When a child class becomes a parent for another child class.
 
 ## super() method
-`super()` মেথড ব্যবহার করে ডিরাইভড (চাইল্ড) ক্লাসের ভেতর থেকে সুপার (প্যারেন্ট) ক্লাসের মেথড অ্যাক্সেস করা যায়।
+super() method is used to access the methods of a super class in the derived class.
 ```python
 super().__init__() # Calls constructor of the base class
 ```
 
 ## class method
-ক্লাস মেথড হলো এমন একটি মেথড যা সরাসরি ক্লাসের সাথে যুক্ত থাকে, অবজেক্টের সাথে নয়। `@classmethod` ডেকোরেটর ব্যবহার করে ক্লাস মেথড তৈরি করা হয়।
+A class method is a method which is bound to the class and not the object of the class. @classmethod decorator is used to create a class method.
 
 *Syntax:*
 ```python
@@ -52,7 +52,7 @@ def (cls, p1, p2):
 ```
 
 ## @property Decorators
-আমরা `@property` ডেকোরেটর ব্যবহার করে ক্লাসের মেথডকে প্রপার্টি হিসেবে অ্যাক্সেস করতে পারি। যে মেথডে `@property` ডেকোরেটর থাকে, তাকে গেটার (getter) মেথড বলা হয়।
+If e = Employee() is an object of class employee, we can print (e.name) to print the ename by internally calling name() function. The method name with ‘@property’ decorator is called getter method.
 ```python
 class Employee:
     @property
@@ -61,7 +61,7 @@ class Employee:
 ```
 
 ## @.getters and @.setters
-আমরা ফাংশন এবং `@name.setter` ডেকোরেটর ব্যবহার করে সেটার (setter) ডিফাইন করতে পারি:
+We can define a function + @ name.setter decorator like below:
 ```python
 @name.setter
 def name(self, value):
@@ -69,12 +69,12 @@ def name(self, value):
 ```
 
 ## Operator Overloading in Python
-ডান্ডার (dunder) বা ম্যাজিক মেথড ব্যবহার করে পাইথনে অপারেটর ওভারলোড করা যায়। অবজেক্টের সাথে অপারেটর ব্যবহার করলে এই মেথডগুলো স্বয়ংক্রিয়ভাবে কল হয়।
+Operators in Python can be overloaded using dunder methods. These methods are called when a given operator is used on the objects.
 - `p1+p2` -> `p1.__add__(p2)`
 - `p1-p2` -> `p1.__sub__(p2)`
 - `p1*p2` -> `p1.__mul__(p2)`
-- `__str__()` -> অবজেক্ট প্রিন্ট করার সময় কী আউটপুট দেখাবে তা নির্ধারণ করতে।
-- `__len__()` -> `len(obj)` কল করলে কী রেজাল্ট আসবে তা নির্ধারণ করতে।
+- `__str__()` -> used to set what gets displayed upon calling str(obj)
+- `__len__()` -> used to set what gets displayed upon calling `__len__()` or len(obj)
 
 ## Practice Set
 - [ ] 1. Create a class (2-D vector) and use it to create another class representing a 3-D vector.

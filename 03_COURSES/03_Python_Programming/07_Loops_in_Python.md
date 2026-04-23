@@ -8,15 +8,17 @@ tags:
 
 # Loops in Python
 
-কখনো কখনো আমরা আমাদের প্রোগ্রামে কিছু নির্দিষ্ট স্টেটমেন্ট বারবার এক্সিকিউট করতে চাই (যেমন: ১ থেকে ১০০০ প্রিন্ট করা)। লুপ ব্যবহার করে একজন প্রোগ্রামার খুব সহজেই কম্পিউটারকে বোঝাতে পারেন কোন ইনস্ট্রাকশনগুলো বারবার চালাতে হবে।
+Sometimes we want to repeat a set of statements in our program. For instance: Print 1 to 1000. Loops make it easy for a programmer to tell the computer which set of instructions to repeat and how!
 
 ## Types of Loops in Python
-পাইথনে মূলত দুই ধরনের লুপ থাকে:
+Primarily there are two types of loops in python:
 - `while` loops
 - `for` loops
 
+We will look into these one by one.
+
 ## While Loop
-`while` লুপে প্রথমে কন্ডিশন চেক করা হয়। যদি কন্ডিশন True হয়, তাহলে লুপের ভেতরের কোড এক্সিকিউট হয়; অন্যথায় লুপ থেকে বের হয়ে আসে। লুপের বডি এক্সিকিউট হওয়ার পর আবার কন্ডিশন চেক হয়, এবং এই প্রক্রিয়া চলতে থাকে যতক্ষণ না কন্ডিশন False হয়।
+In while loops, the condition is checked first. If it evaluates to true, the body of the loop is executed otherwise not! If the loop is entered, the process of [condition check & execution] is continued until the condition becomes False.
 
 *Syntax:*
 ```python
@@ -33,7 +35,7 @@ while i < 5: # print "Harry" - 5 times!
 ```
 
 ## For Loop
-একটি `for` লুপ কোনো একটি সিকোয়েন্স (যেমন: লিস্ট, টাপল, স্ট্রিং) এর উপাদানগুলোর ওপর ইটারেট (iterate) করতে ব্যবহৃত হয়।
+A for loop is used to iterate through a sequence like list, tuple, or string [iterables].
 
 *Syntax:*
 ```python
@@ -43,7 +45,7 @@ for item in l:
 ```
 
 ## range() Function in Python
-`range()` ফাংশনটি নাম্বারের একটি সিকোয়েন্স জেনারেট করতে ব্যবহৃত হয়। আমরা শুরু (start), শেষ (stop) এবং স্টেপ-সাইজ (step-size) উল্লেখ করতে পারি:
+The range() function in python is used to generate a sequence of number. We can also specify the start, stop and step-size as follows:
 ```python
 range(start, stop, step_size)
 ```
@@ -55,7 +57,7 @@ for i in range(0, 7): # range(7) can also be used.
 ```
 
 ## For Loop with Else
-`for` লুপের সাথে একটি ঐচ্ছিক (optional) `else` ব্লক ব্যবহার করা যায়। লুপটি যখন সফলভাবে শেষ হয়ে যায় (অর্থাৎ সব ইটারেশন শেষ হয়), তখন `else` ব্লকের কোড এক্সিকিউট হয়।
+An optional else can be used with a for loop if the code is to be executed when the loops exhausts.
 
 *Example:*
 ```python
@@ -67,7 +69,7 @@ else:
 ```
 
 ## The Break Statement
-লুপ চলতে থাকা অবস্থায় যদি `break` স্টেটমেন্ট পাওয়া যায়, তবে এটি লুপ থেকে তাৎক্ষণিকভাবে বের হয়ে আসতে ইনস্ট্রাকশন দেয়।
+‘break’ is used to come out of the loop when encountered. It instructs the program to – exit the loop now.
 
 *Example:*
 ```python
@@ -78,7 +80,7 @@ for i in range(0, 80):
 ```
 
 ## The Continue Statement
-`continue` স্টেটমেন্ট বর্তমান ইটারেশনটি থামিয়ে দিয়ে লুপের পরবর্তী ইটারেশনে চলে যেতে ব্যবহৃত হয়। এটি মূলত "এই ইটারেশনটি স্কিপ করো" নির্দেশ দেয়।
+‘continue’ is used to stop the current iteration of the loop and continue with the next one. It instructs the Program to “skip this iteration”.
 
 *Example:*
 ```python
@@ -90,7 +92,7 @@ for i in range(4):
 ```
 
 ## Pass Statement
-`pass` হলো পাইথনের একটি নাল (null) স্টেটমেন্ট। এটি মূলত নির্দেশ দেয় "কিছুই করো না" (do nothing)।
+pass is a null statement in python. It instructs to “do nothing”.
 
 *Example:*
 ```python

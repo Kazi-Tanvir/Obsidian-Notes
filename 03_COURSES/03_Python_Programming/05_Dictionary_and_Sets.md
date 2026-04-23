@@ -7,7 +7,7 @@ tags:
 
 # Dictionary & Sets
 
-ডিকশনারি হলো 'কী-ভ্যালু' (keys-value) পেয়ারের একটি সংগ্রহ।
+Dictionary is a collection of keys-value pairs.
 
 *Syntax:*
 ```python
@@ -22,13 +22,13 @@ print(a["list"]) # Output: [1, 2, 9]
 ```
 
 ## Properties of Python Dictionaries
-1. এটি অবিন্যস্ত (unordered)।
-2. এটি পরিবর্তনযোগ্য (mutable)।
-3. এটি ইনডেক্সড (indexed)।
-4. এতে ডুপ্লিকেট কী (keys) থাকতে পারে না।
+1. It is unordered.
+2. It is mutable.
+3. It is indexed.
+4. Cannot contain duplicate keys.
 
 ## Dictionary Methods
-ধরি একটি ডিকশনারি হলো:
+Consider the following dictionary:
 ```python
 a = {
     "name": "harry",
@@ -36,13 +36,13 @@ a = {
     "marks": [92, 98, 96]
 }
 ```
-- `a.items()`: ডিকশনারির (key, value) টাপলগুলোর একটি লিস্ট রিটার্ন করে।
-- `a.keys()`: ডিকশনারির সবগুলো কী (keys) এর একটি লিস্ট রিটার্ন করে।
-- `a.update({"friends": []})`: দেওয়া 'কী-ভ্যালু' পেয়ার দিয়ে ডিকশনারিটিকে আপডেট করে।
-- `a.get("name")`: নির্দিষ্ট কী (যেমন "name") এর ভ্যালু রিটার্ন করে।
+- `a.items()`: Returns a list of (key,value)tuples.
+- `a.keys()`: Returns a list containing dictionary's keys.
+- `a.update({"friends": []})`: Updates the dictionary with supplied key-value pairs.
+- `a.get("name")`: Returns the value of the specified keys (and value is returned eg."harry" is returned here).
 
 ## Sets in Python
-সেট হলো এমন উপাদানগুলোর সংগ্রহ যেখানে কোনো উপাদানের পুনরাবৃত্তি (repetition) থাকে না।
+Set is a collection of non-repetitive elements.
 
 ```python
 s = set() # empty set
@@ -51,19 +51,19 @@ s.add(2) # set becomes {1, 2}
 ```
 
 ## Properties of Sets
-1. সেটের উপাদানগুলো অবিন্যস্ত থাকে, তাই উপাদানের ক্রম (order) কোনো বিষয় না।
-2. সেট আনইনডেক্সড, অর্থাৎ ইনডেক্স দিয়ে উপাদান অ্যাক্সেস করা যায় না।
-3. সেটের উপাদানগুলো পরিবর্তন করার কোনো উপায় নেই।
-4. সেটে ডুপ্লিকেট ভ্যালু থাকতে পারে না।
+1. Sets are unordered => Element’s order doesn’t matter
+2. Sets are unindexed => Cannot access elements by index
+3. There is no way to change items in sets.
+4. Sets cannot contain duplicate values.
 
 ## Operations on Sets
-ধরি একটি সেট `s = {1, 8, 2, 3}`:
-- `len(s)`: সেটের দৈর্ঘ্য অর্থাৎ উপাদানের সংখ্যা রিটার্ন করে।
-- `s.remove(8)`: সেট থেকে 8 কে রিমুভ করে।
-- `s.pop()`: সেট থেকে যেকোনো একটি উপাদান রিমুভ করে এবং সেটি রিটার্ন করে।
-- `s.clear()`: সেটটিকে ফাঁকা করে দেয়।
-- `s.union({8, 11})`: দুটি সেটের সমস্ত উপাদান নিয়ে একটি নতুন সেট রিটার্ন করে।
-- `s.intersection({8, 11})`: দুটি সেটের মধ্যে যে উপাদানগুলো কমন (common) শুধু সেগুলো নিয়ে একটি নতুন সেট রিটার্ন করে।
+Consider the following set `s = {1, 8, 2, 3}`:
+- `len(s)`: Returns 4, the length of the set
+- `s.remove(8)`: Updates the set s and removes 8 from s.
+- `s.pop()`: Removes an arbitrary element from the set and return the element removed.
+- `s.clear()`: empties the set s.
+- `s.union({8, 11})`: Returns a new set with all items from both sets.
+- `s.intersection({8, 11})`: Return a set which contains only item in both sets.
 
 ## Practice Set
 - [ ] 1. Write a program to create a dictionary of Hindi words with values as their English translation. Provide user with an option to look it up!

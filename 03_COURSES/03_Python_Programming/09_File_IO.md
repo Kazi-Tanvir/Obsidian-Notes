@@ -6,15 +6,17 @@ tags:
 
 # File I/O
 
-র‌্যান্ডম-অ্যাক্সেস মেমরি (RAM) হলো ভোলাটাইল (volatile), অর্থাৎ প্রোগ্রাম বন্ধ হয়ে গেলে এর ভেতরের ডেটা হারিয়ে যায়। ডেটা চিরস্থায়ীভাবে সংরক্ষণ করার জন্য আমরা ফাইল ব্যবহার করি। ফাইল হলো স্টোরেজ ডিভাইসে সংরক্ষিত ডেটা। পাইথন প্রোগ্রামের মাধ্যমে ফাইলে ডেটা লেখা এবং ফাইল থেকে ডেটা পড়া যায়।
+The random-access memory is volatile, and all its contents are lost once a program terminates. In order to persist the data forever, we use files. A file is data stored in a storage device. A python program can talk to the file by reading content from it and writing content to it.
 
 ## Type of Files
-প্রধানত দুই ধরনের ফাইল আছে:
-1. **Text files:** যেমন `.txt`, `.c` ইত্যাদি।
-2. **Binary files:** যেমন `.jpg`, `.dat` ইত্যাদি।
+There are 2 types of files:
+1. **Text files:** (.txt, .c, etc)
+2. **Binary files:** (.jpg, .dat, etc)
+
+Python has a lot of functions for reading, updating, and deleting files.
 
 ## Opening a File
-ফাইল ওপেন করার জন্য পাইথনে `open()` ফাংশন রয়েছে। এটি দুটি প্যারামিটার নেয়: ফাইলের নাম এবং মোড (mode)।
+Python has an `open()` function for opening files. It takes 2 parameters: filename and mode.
 
 ```python
 # open("filename", "mode of opening(read mode by default)")
@@ -34,7 +36,7 @@ f.close()
 ```
 
 ## Other methods to read the file
-আমরা `f.readline()` ফাংশন ব্যবহার করে ফাইল থেকে এক লাইন করে পড়তে পারি।
+We can also use `f.readline()` function to read one full line at a time.
 ```python
 f.readline() # Read one line from the file.
 ```
@@ -44,11 +46,11 @@ f.readline() # Read one line from the file.
 - `w` – open for writing
 - `a` – open for appending
 - `+` – open for updating
-- `rb` – open for read in binary mode
-- `rt` – open for read in text mode
+- `rb` will open for read in binary mode.
+- `rt` will open for read in text mode.
 
 ## Write Files in Python
-কোনো ফাইলে লেখার জন্য প্রথমে সেটিকে রাইট (`w`) বা অ্যাপেন্ড (`a`) মোডে ওপেন করতে হয়, এরপর `f.write()` মেথড ব্যবহার করে ফাইলে ডেটা লেখা যায়।
+In order to write to a file, we first open it in write or append mode after which, we use the python’s `f.write()` method to write to the file!
 
 ```python
 # Open the file in write mode
@@ -60,7 +62,7 @@ f.close()
 ```
 
 ## With Statement
-ফাইল ওপেন এবং ক্লোজ করার সবচেয়ে ভালো উপায় হলো `with` স্টেটমেন্ট ব্যবহার করা। এটি ব্যবহার করলে ফাইলটি স্বয়ংক্রিয়ভাবে ক্লোজ হয়ে যায়।
+The best way to open and close the file automatically is the `with` statement.
 
 ```python
 with open("this.txt", "r") as f:

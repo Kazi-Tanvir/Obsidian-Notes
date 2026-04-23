@@ -8,10 +8,10 @@ tags:
 
 # Object Oriented Programming
 
-প্রোগ্রামিংয়ে কোনো সমস্যার সমাধান অবজেক্ট (object) তৈরি করে করার পদ্ধতি বেশ জনপ্রিয়। একে অবজেক্ট-ওরিয়েন্টেড প্রোগ্রামিং বা OOP বলা হয়। এর মূল উদ্দেশ্য হলো রিইউজেবল কোড (DRY Principle - Don't Repeat Yourself) ব্যবহার করা।
+Solving a problem by creating object is one of the most popular approaches in programming. This is called object-oriented programming. This concept focuses on using reusable code (DRY Principle).
 
 ## Class
-ক্লাস (Class) হলো অবজেক্ট তৈরি করার জন্য একটি ব্লুপ্রিন্ট বা টেমপ্লেট।
+A class is a blueprint for creating object.
 
 *Syntax:*
 ```python
@@ -21,18 +21,18 @@ class Employee: # Class name is written in pascal case
 ```
 
 ## Object
-অবজেক্ট হলো একটি ক্লাসের ইন্সট্যান্স (instantiation)। ক্লাস ডিফাইন করার পর মেমরি অ্যালোকেশন হয় না, মেমরি অ্যালোকেশন হয় অবজেক্ট তৈরি হওয়ার পর।
+An object is an instantiation of a class. When class is defined, a template (info) is defined. Memory is allocated only after object instantiation.
 
-একটি নির্দিষ্ট ক্লাসের অবজেক্ট ব্যবহার করে ইউজারের কাছে ভেতরের ইমপ্লিমেন্টেশন ডিটেইলস গোপন রেখেই মেথডগুলো কল করা যায়। একে অ্যাবস্ট্রাকশন এবং এনক্যাপসুলেশন (Abstractions & Encapsulation) বলে।
+Objects of a given class can invoke the methods available to it without revealing the implementation details to the user. – Abstractions & Encapsulation!
 
 ## Modelling a problem in OOPs
-আমরা কোনো সমস্যাকে এভাবে ভাগ করতে পারি:
+We identify the following in our problem:
 - **Noun** -> Class -> Employee
 - **Adjective** -> Attributes -> name, age, salary
 - **Verbs** -> Methods -> getSalary(), increment()
 
 ## Class Attributes
-যে অ্যাট্রিবিউটটি কোনো নির্দিষ্ট অবজেক্টের না হয়ে পুরো ক্লাসের হয়, তাকে ক্লাস অ্যাট্রিবিউট বলে।
+An attribute that belongs to the class rather than a particular object.
 
 *Example:*
 ```python
@@ -45,24 +45,24 @@ Employee.company = "YouTube" # Changing Class Attribute
 ```
 
 ## Instance attributes
-যে অ্যাট্রিবিউটটি অবজেক্ট বা ইন্সট্যান্সের সাথে সম্পর্কিত, তাকে ইন্সট্যান্স অ্যাট্রিবিউট বলে।
+An attribute that belongs to the Instance (object).
 
 ```python
 harry.name = "harry"
 harry.salary = "30k" # Adding instance attribute
 ```
-*Note:* যখন অ্যাসাইনমেন্ট বা ডেটা রিট্রিভ করা হয়, তখন ক্লাস অ্যাট্রিবিউটের চেয়ে ইন্সট্যান্স অ্যাট্রিবিউট বেশি প্রাধান্য পায়।
+*Note:* Instance attributes, take preference over class attributes during assignment & retrieval.
 
 ## self parameter
-`self` বলতে ক্লাসের নির্দিষ্ট ইন্সট্যান্সকে (অবজেক্ট) বোঝায়। যখন অবজেক্ট থেকে কোনো ফাংশন কল করা হয়, তখন এটি স্বয়ংক্রিয়ভাবে পাস হয়ে যায়।
+self refers to the instance of the class. It is automatically passed with a function call from an object.
 
 ```python
 harry.getSalary() # here self is harry
-# is equivalent to Employee.getSalary(harry)
+# equivalent to Employee.getSalary(harry)
 ```
 
 ## static method
-মাঝে মাঝে এমন ফাংশন দরকার হতে পারে যার জন্য `self` প্যারামিটারের প্রয়োজন নেই। তখন আমরা স্ট্যাটিক মেথড ব্যবহার করতে পারি।
+Sometimes we need a function that does not use the self-parameter. We can define a static method like this:
 
 ```python
 @staticmethod # decorator to mark greet as a static method
@@ -71,7 +71,7 @@ def greet():
 ```
 
 ## `__init__()` constructor
-`__init__()` হলো একটি স্পেশাল মেথড, যা অবজেক্ট তৈরি হওয়ার সাথে সাথেই স্বয়ংক্রিয়ভাবে রান হয়। একে কনস্ট্রাক্টর (constructor) বলা হয়। এটি `self` আর্গুমেন্ট গ্রহণ করে এবং আরও অন্যান্য আর্গুমেন্টও নিতে পারে।
+`__init__()` is a special method which is first run as soon as the object is created. `__init__()` method is also known as constructor. It takes ‘self’ argument and can also take further arguments.
 
 *For Example:*
 ```python

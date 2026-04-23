@@ -7,10 +7,10 @@ tags:
 
 # Conditional Expression
 
-মাঝে মাঝে আমাদের প্রোগ্রামে কিছু সিদ্ধান্ত নেওয়ার প্রয়োজন হয় যা নির্দিষ্ট শর্ত পূরণ হওয়ার ওপর নির্ভর করে। পাইথন প্রোগ্রামিংয়েও শর্তের ওপর ভিত্তি করে ইনস্ট্রাকশন এক্সিকিউট করতে হয়। এর জন্যই কন্ডিশনালস ব্যবহৃত হয়!
+Sometimes we want to play PUBG on our phone if the day is Sunday. Sometimes we order Ice Cream online if the day is sunny. Sometimes we go hiking if our parents allow. All these are decisions which depend on a condition being met. In python programming too, we must be able to execute instructions on a condition(s) being met. This is what conditionals are for!
 
 ## If Else and Elif in Python
-`If else` এবং `elif` স্টেটমেন্টগুলো আমাদের কোডের নির্দিষ্ট শর্তের কারণে প্রোগ্রামে মাল্টিওয়ে ডিসিশন (বহুমুখী সিদ্ধান্ত) নিতে সাহায্য করে।
+If else and elif statements are a multiway decision taken by our program due to certain conditions in our code.
 
 *Syntax:*
 ```python
@@ -32,23 +32,23 @@ else:
 ```
 
 ## Relational Operators
-রিলেশনাল অপারেটরগুলো `if` স্টেটমেন্টের ভেতরে কন্ডিশন ইভালুয়েট করতে ব্যবহৃত হয়। যেমন:
-- `==`: সমান কি না চেক করে।
-- `>=`: বড় বা সমান কি না।
-- `<=`: ছোট বা সমান কি না।
+Relational Operators are used to evaluate conditions inside the if statements. Some examples of relational operators are:
+- `==`: equals.
+- `>=`: greater than/ equal to.
+- `<=`: lesser than/ equal to.
 
 ## Logical Operators
-লজিক্যাল অপারেটরগুলো কন্ডিশনাল স্টেটমেন্টে কাজ করে। যেমন:
-- `and`: দুটি কন্ডিশনই সত্য হলে True রিটার্ন করে।
-- `or`: যেকোনো একটি কন্ডিশন সত্য হলে True রিটার্ন করে।
-- `not`: True কে False এবং False কে True বানায়।
+In python logical operators operate on conditional statements. For Example:
+- `and`: true if both operands are true else false.
+- `or`: true if at least one operand is true or else false.
+- `not`: inverts true to false & false to true.
 
 ## Elif Clause
-`elif` বলতে পাইথনে 'else if' বোঝায়। অনেকগুলো কন্ডিশন থাকলে আমরা একাধিক `elif` ব্যবহার করতে পারি। যখনই একটি কন্ডিশন মিলে যায় (True হয়), তখন প্রোগ্রাম সেই ব্লকটি এক্সিকিউট করে আর নিচের কন্ডিশনগুলো চেক করে না।
+elif in python means [else if]. An if statements can be chained together with a lot of these elif statements followed by an else statement.
 
 **Important notes:**
-1. আপনি যত খুশি `elif` স্টেটমেন্ট ব্যবহার করতে পারেন।
-2. সবশেষে থাকা `else` ব্লকটি তখনই এক্সিকিউট হয় যখন ওপরের সবগুলো `if` এবং `elif` কন্ডিশন ফেইল (False) করে।
+1. There can be any number of elif statements.
+2. Last else is executed only if all the conditions inside elifs fail.
 
 ## Practice Set
 - [ ] 1. Write a program to find the greatest of four numbers entered by the user.
