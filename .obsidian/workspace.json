@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "d13e390eb5daa1ea",
+        "id": "600039c20928e499",
         "type": "tabs",
         "children": [
           {
-            "id": "043284c4264292f5",
+            "id": "92bb282965b87252",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -229,7 +229,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "043284c4264292f5",
+  "active": "92bb282965b87252",
   "lastOpenFiles": [
     "01_BUET_CSE/99_ARCHIVE/খাজানা ১-১/CSE103/Term Final Questions and Solutions/(From Seniors) Solutions (16-22)/21-22/103 21-22 TF B Solve.pdf",
     "03_COURSES/01_WEB_DEVELOPMENT/01_HTML/Basic Structure.md",

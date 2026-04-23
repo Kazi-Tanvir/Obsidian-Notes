@@ -439,7 +439,11 @@
     "persistence": 247,
     "memory-allocation": 248,
     "dynamic-memory": 249,
-    "game-development": 250
+    "game-development": 250,
+    "python-programming": 251,
+    "comments": 252,
+    "pip": 253,
+    "datatypes": 254
   },
   "_version": 3
 }
