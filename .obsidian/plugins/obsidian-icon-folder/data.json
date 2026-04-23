@@ -6,11 +6,11 @@
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
+      "LiCodeSquare",
       "LiTrash",
       "LiCodepen",
       "LiCode",
-      "LiSquareActivity",
-      "LiAxe"
+      "LiSquareActivity"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -54,5 +54,6 @@
   "03_COURSES/99_ARCHIVE": "LiTrash",
   "01_BUET_CSE/99_ARCHIVE": "LiTrash",
   "02_DU_IIT/99_ARCHIVE": "LiTrash",
-  "99_ARCHIVE": "LiTrash"
+  "99_ARCHIVE": "LiTrash",
+  "03_COURSES/03_Python_Programming": "LiCodeSquare"
 }

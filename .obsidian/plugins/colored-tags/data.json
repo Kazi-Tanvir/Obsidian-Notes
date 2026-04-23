@@ -443,7 +443,25 @@
     "python-programming": 251,
     "comments": 252,
     "pip": 253,
-    "datatypes": 254
+    "datatypes": 254,
+    "slicing": 255,
+    "tuples": 256,
+    "dictionary": 257,
+    "sets": 258,
+    "while-loop": 259,
+    "for-loop": 260,
+    "class": 261,
+    "object": 262,
+    "inheritance": 263,
+    "dunder-methods": 264,
+    "exception-handling": 265,
+    "virtual-environment": 266,
+    "lambda": 267,
+    "map-filter-reduce": 268,
+    "games": 269,
+    "virtual-assistant": 270,
+    "chatbot": 271,
+    "automation": 272
   },
   "_version": 3
 }

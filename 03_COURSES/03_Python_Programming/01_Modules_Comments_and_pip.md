@@ -14,36 +14,36 @@ Let's write our very first python program. Create a file called `hello.py` and p
 print("hello world") # print is a function (more later)
 ```
 
-এই ফাইলটি (.py এক্সটেনশন) রান করতে টার্মিনালে `python hello.py` টাইপ করুন, তাহলে স্ক্রিনে 'Hello World' প্রিন্ট হবে।
+To run this file (.py extension), type `python hello.py` in the terminal, and you will see 'Hello World' printed on the screen.
 
 ## Modules
-মডিউল হলো অন্য কারও লেখা কোড (সাধারণত) সম্বলিত একটি ফাইল, যা আমরা আমাদের প্রোগ্রামে ইম্পোর্ট করে ব্যবহার করতে পারি।
+A module is a file containing code written by somebody else (usually) which can be imported and used in our programs.
 
 ### Types of Modules
-পাইথনে দুই ধরনের মডিউল রয়েছে:
-1. **Built in Modules:** এগুলো পাইথনে আগে থেকেই ইনস্টল করা থাকে (যেমন: `os`, `random`)।
-2. **External Modules:** এগুলোকে `pip` ব্যবহার করে ইনস্টল করতে হয় (যেমন: `tensorflow`, `flask`)।
+There are two types of modules in Python:
+1. **Built in Modules:** These are preinstalled in Python (e.g., `os`, `random`).
+2. **External Modules:** These need to be installed using `pip` (e.g., `tensorflow`, `flask`).
 
 ## pip
-pip হলো পাইথনের প্যাকেজ ম্যানেজার। আপনার সিস্টেমে কোনো মডিউল ইনস্টল করতে আপনি pip ব্যবহার করতে পারেন।
+pip is the package manager for python. You can use pip to install a module on your system.
 
 ```bash
 pip install flask # Installs Flask Module
 ```
 
 ## Using python as a calculator
-আমরা টার্মিনালে `python` টাইপ করে এন্টার চাপলে পাইথনকে একটি ক্যালকুলেটর হিসেবে ব্যবহার করতে পারি। এটি REPL (Read Evaluate Print Loop) চালু করে।
+We can use python as a calculator by typing `python` and pressing enter in the terminal. This opens the REPL (Read Evaluate Print Loop).
 
 ## Comments
-কমেন্ট হলো এমন কিছু লেখা যা প্রোগ্রামার এক্সিকিউট করতে চান না। এটি সাধারণত অথরের নাম, তারিখ ইত্যাদি মার্ক করতে ব্যবহার করা হয়।
+Comments are used to write something which the programmer does not want to execute. This can be used to mark author name, date etc.
 
 ### Types of Comments
-পাইথনে দুই ধরনের কমেন্ট আছে:
-1. **Single Line Comments:** এক লাইনের কমেন্ট লিখতে লাইনের শুরুতে `#` ব্যবহার করা হয়।
+There are two types of comments in python:
+1. **Single Line Comments:** To write a single line comment just add a `#` at the start of the line.
 ```python
 # This is a Single-Line Comment
 ```
-2. **Multiline Comments:** একাধিক লাইনের কমেন্ট লিখতে প্রতিটি লাইনে `#` ব্যবহার করা যায়, অথবা মাল্টিলাইন স্ট্রিং (`""" """`) ব্যবহার করা যায়।
+2. **Multiline Comments:** To write multi-line comments you can use `#` at each line or you can use the multiline string (`""" """`).
 ```python
 """This is an amazing
 example of a Multiline

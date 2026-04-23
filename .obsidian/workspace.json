@@ -11,10 +11,14 @@
             "id": "92bb282965b87252",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "03_COURSES/03_Python_Programming/00_Introduction_and_Setup.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "00_Introduction_and_Setup"
             }
           }
         ]
@@ -231,6 +235,16 @@
   },
   "active": "92bb282965b87252",
   "lastOpenFiles": [
+    "01_BUET_CSE/BUET CSE 1-1 Index (খাজানা ১-১).md",
+    "03_COURSES/03_Python_Programming/14_Projects/03_Mega_Project_1_Jarvis.md",
+    "03_COURSES/03_Python_Programming/14_Projects/02_The_Perfect_Guess.md",
+    "03_COURSES/03_Python_Programming/14_Projects/01_Snake_Water_Gun_Game.md",
+    "03_COURSES/03_Python_Programming/05_Dictionary_and_Sets.md",
+    "03_COURSES/03_Python_Programming/04_Lists_and_Tuples.md",
+    "03_COURSES/03_Python_Programming/03_Strings.md",
+    "03_COURSES/03_Python_Programming/02_Variables_and_Datatype.md",
+    "03_COURSES/03_Python_Programming/01_Modules_Comments_and_pip.md",
+    "03_COURSES/03_Python_Programming/00_Introduction_and_Setup.md",
     "01_BUET_CSE/99_ARCHIVE/খাজানা ১-১/CSE103/Term Final Questions and Solutions/(From Seniors) Solutions (16-22)/21-22/103 21-22 TF B Solve.pdf",
     "03_COURSES/01_WEB_DEVELOPMENT/01_HTML/Basic Structure.md",
     "03_COURSES/02_C_PROGRAMMING/The Ultimate C Handbook.pdf",
@@ -253,20 +267,10 @@
     "03_COURSES/02_C_PROGRAMMING/00_Introduction_and_Setup.md",
     "03_COURSES/02_C_PROGRAMMING",
     "The Ultimate C Handbook.pdf",
-    "02_C_Programming/12_Projects/02_Snake_Water_Gun.md",
-    "02_C_Programming/12_Projects/01_Number_Guessing_Game.md",
     "02_C_Programming/12_Projects",
-    "02_C_Programming/11_Dynamic_Memory_Allocation.md",
-    "02_C_Programming/10_File_IO.md",
-    "02_C_Programming/09_Structures.md",
-    "02_C_Programming/08_Strings.md",
-    "02_C_Programming/06_Pointers.md",
-    "02_C_Programming/07_Arrays.md",
-    "02_C_Programming/05_Functions_and_Recursion.md",
     "02_C_Programming",
     "02_DU_IIT/02_LECTURE_SHEET",
     "02_DU_IIT/01_CLASS",
-    "02_DU_IIT/99_ARCHIVE",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "Business/Journal/Technical/Migrated/assets/why-not-jwt.png",

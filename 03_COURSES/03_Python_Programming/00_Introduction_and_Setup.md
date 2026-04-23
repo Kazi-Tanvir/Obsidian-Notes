@@ -8,17 +8,17 @@ tags:
 # Introduction to Python
 
 ## What is Programming?
-প্রোগ্রামিং হলো কম্পিউটারের সাথে যোগাযোগ করার একটি মাধ্যম। ঠিক যেমন আমরা একে অপরের সাথে কথা বলার জন্য বাংলা বা ইংরেজি ব্যবহার করি, তেমনি কম্পিউটারকে বিভিন্ন কাজ করার নির্দেশ দেওয়ার জন্য আমরা পাইথন (Python) এর মতো একটি প্রোগ্রামিং ভাষা ব্যবহার করি।
+Programming is a way to communicate with the computer. Just like we use Bengali or English to communicate with each other, we use a programming language like Python to instruct the computer to perform various tasks.
 
 ## What is Python?
-পাইথন হলো একটি সহজ এবং সহজে বোঝা যায় এমন একটি প্রোগ্রামিং ভাষা, যা পড়তে অনেকটা সাধারণ ইংরেজির মতো মনে হয়। এর 'Pseudo code' প্রকৃতির কারণে এটি নতুনদের জন্য শেখা এবং বোঝা খুব সহজ।
+Python is a simple and easy to understand language which feels like reading simple English. Its 'Pseudo code' nature makes it easy to learn and understandable for beginners.
 
 ## Features of Python
-- **Easy to understand:** এটি বোঝা সহজ, তাই ডেভেলপমেন্টে সময় কম লাগে।
-- **Free and open source:** এটি সম্পূর্ণ ফ্রি এবং ওপেন সোর্স।
-- **High level language:** এটি একটি হাই-লেভেল ল্যাঙ্গুয়েজ।
-- **Portable:** এটি লিনাক্স, উইন্ডোজ এবং ম্যাক সব অপারেটিং সিস্টেমেই কাজ করে।
-- **Fun to work with:** এটি নিয়ে কাজ করা বেশ মজার!
+- **Easy to understand:** It is easy to understand, so it takes less development time.
+- **Free and open source:** It is completely free and open source.
+- **High level language:** It is a high-level language.
+- **Portable:** It works on all operating systems including Linux, Windows, and Mac.
+- **Fun to work with:** It is quite fun to work with!
 
 ## Installation
-পাইথন খুব সহজেই [python.org](https://www.python.org) থেকে ইনস্টল করা যায়। ডাউনলোড বাটনে ক্লিক করে পাইথন ডাউনলোড করার পর, আপনার প্ল্যাটফর্মের জন্য এক্সিকিউটেবল ফাইলটি রান করে সেটআপ সম্পন্ন করলেই পাইথন ইনস্টল হয়ে যাবে।
+Python can be easily installed from [python.org](https://www.python.org). After clicking the download button and downloading Python, you can complete the setup by running the executable file for your platform.
