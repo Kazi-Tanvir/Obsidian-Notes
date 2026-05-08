@@ -13,7 +13,35 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "02_DU_IIT/01_CLASS/CSE 1101 L1.md",
+                "file": "02_DU_IIT/99_ARCHIVE/CSE 1101 L1.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "CSE 1101 L1"
+            }
+          },
+          {
+            "id": "a474e15b074c18de",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "02_DU_IIT/99_ARCHIVE/cse 2202.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "cse 2202"
+            }
+          },
+          {
+            "id": "f04572d686a83e9c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "02_DU_IIT/99_ARCHIVE/CSE 1101 L1.md",
                 "mode": "source",
                 "source": false
               },
@@ -21,7 +49,8 @@
               "title": "CSE 1101 L1"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -172,7 +201,7 @@
             "state": {
               "type": "file-properties",
               "state": {
-                "file": "02_DU_IIT/01_CLASS/CSE 1101 L1.md"
+                "file": "02_DU_IIT/99_ARCHIVE/CSE 1101 L1.md"
               },
               "icon": "lucide-info",
               "title": "File properties for CSE 1101 L1"
@@ -238,8 +267,13 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "92bb282965b87252",
+  "active": "42af4f1ef891900d",
   "lastOpenFiles": [
+    "02_DU_IIT/01_CLASS/New folder",
+    "02_DU_IIT/01_CLASS/CSE 1101L - Structured Programming",
+    "02_DU_IIT/99_ARCHIVE/cse 2202.md",
+    "02_DU_IIT/99_ARCHIVE/CSE 1101 L1.md",
+    "02_DU_IIT/01_CLASS/CSE 1101 - Structured Programming",
     "04_PROJECTS/02_E_Commerce_Microservices_Architecture/01 The Monorepo Infrastructure.md",
     "04_PROJECTS/02_E_Commerce_Microservices_Architecture/08 Admin Dashboard & Mutations.md",
     "04_PROJECTS/E_Commerce_Microservices_Architecture/Untitled.md",
@@ -266,16 +300,11 @@
     "03_COURSES/03_Python_Programming/11_Inheritance_and_more_on_OOPs.md",
     "03_COURSES/03_Python_Programming/10_Object_Oriented_Programming.md",
     "03_COURSES/03_Python_Programming/09_File_IO.md",
-    "03_COURSES/03_Python_Programming/08_Functions_and_Recursions.md",
-    "03_COURSES/03_Python_Programming/07_Loops_in_Python.md",
-    "03_COURSES/03_Python_Programming/05_Dictionary_and_Sets.md",
     "01_BUET_CSE/99_ARCHIVE/খাজানা ১-১/CSE103/Term Final Questions and Solutions/(From Seniors) Solutions (16-22)/21-22/103 21-22 TF B Solve.pdf",
     "03_COURSES/02_C_PROGRAMMING/The Ultimate C Handbook.pdf",
     "03_COURSES/99_ARCHIVE",
     "03_COURSES/02_C_PROGRAMMING/12_Projects",
     "03_COURSES/02_C_PROGRAMMING",
-    "The Ultimate C Handbook.pdf",
-    "02_C_Programming/12_Projects",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "Business/Journal/Technical/Migrated/assets/why-not-jwt.png",
