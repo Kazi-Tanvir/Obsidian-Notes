@@ -116,7 +116,7 @@
       {
         "id": "2fd9a64f0deb3159",
         "type": "tabs",
-        "dimension": 66.60482374768088,
+        "dimension": 66.79035250463822,
         "children": [
           {
             "id": "53f920f8060070a2",
@@ -233,7 +233,7 @@
       {
         "id": "152c4bfc9fa84dd3",
         "type": "tabs",
-        "dimension": 33.39517625231911,
+        "dimension": 33.209647495361786,
         "children": [
           {
             "id": "04477abee950afcf",
@@ -267,9 +267,14 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "42af4f1ef891900d",
+  "active": "9ccc1f1f4daf3b94",
   "lastOpenFiles": [
+    "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering",
+    "02_DU_IIT/01_CLASS/GE 1105 - Sociology",
     "02_DU_IIT/01_CLASS/New folder",
+    "02_DU_IIT/01_CLASS/MATH 1107 - Calculus",
+    "02_DU_IIT/01_CLASS/STAT 1103 - Probability & Stats",
+    "02_DU_IIT/01_CLASS/CSE 1102 - Discrete Mathematics",
     "02_DU_IIT/01_CLASS/CSE 1101L - Structured Programming",
     "02_DU_IIT/99_ARCHIVE/cse 2202.md",
     "02_DU_IIT/99_ARCHIVE/CSE 1101 L1.md",
@@ -300,11 +305,6 @@
     "03_COURSES/03_Python_Programming/11_Inheritance_and_more_on_OOPs.md",
     "03_COURSES/03_Python_Programming/10_Object_Oriented_Programming.md",
     "03_COURSES/03_Python_Programming/09_File_IO.md",
-    "01_BUET_CSE/99_ARCHIVE/খাজানা ১-১/CSE103/Term Final Questions and Solutions/(From Seniors) Solutions (16-22)/21-22/103 21-22 TF B Solve.pdf",
-    "03_COURSES/02_C_PROGRAMMING/The Ultimate C Handbook.pdf",
-    "03_COURSES/99_ARCHIVE",
-    "03_COURSES/02_C_PROGRAMMING/12_Projects",
-    "03_COURSES/02_C_PROGRAMMING",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "Business/Journal/Technical/Migrated/assets/why-not-jwt.png",
