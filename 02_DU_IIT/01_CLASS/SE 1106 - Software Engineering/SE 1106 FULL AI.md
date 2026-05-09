@@ -1,9 +1,5 @@
 ---
 tags:
-  - lab
-  - ubuntu
-  - structured-programming
-  - cli
   - software-engineering
 date: 05/09/2026
 instructor: Zerina Begum
@@ -15,171 +11,257 @@ instructor: Zerina Begum
 
 ## 1. Core Concepts & Definitions
 
-- **Software:** Computer programs and their associated documentation. Software products can be developed for a specific custom client or for a general market.
+**Software:**
+
+- Consists of `computer programs` and their associated `documentation`.
     
-- **Software Engineering (SE):** An engineering discipline concerned with all aspects of software production, from early system specification through to post-deployment maintenance.
+- Products can be built for a `particular customer` or a `general market`.
     
-    - _Engineering Discipline:_ Engineers focus on making things work. They apply theories, methods, and tools selectively, but will also discover solutions when applicable theories are absent. They must always operate within organizational and financial constraints.
+
+**Software Engineering (SE):**
+
+- An `engineering discipline` focused on `all aspects of software production`.
+    
+- Spans from early `system specification` to post-deployment `maintenance`.
+    
+- **Engineering Discipline:** Engineers apply `theories, methods, and tools` selectively to solve problems and make things work. They must operate within `organisational and financial constraints`.
+    
+- **All Aspects:** SE goes beyond technical programming to include `software project management` and the development of `tools, methods, and theories` to support production.
+    
+
+**Discipline Comparisons:**
+
+- **SE vs. Computer Science:**
+    
+    - Computer science deals with `theories and methods` that underlie systems.
         
-    - _All Aspects:_ SE is not limited to technical programming; it includes project management, tool development, and theory creation.
+    - Software engineering deals with the `practical problems of producing software`.
         
-- **SE vs. Computer Science:** Computer science focuses on the underlying theories and fundamentals of computers and software. Software engineering focuses on the practicalities and problems of producing and delivering useful software. Computer science knowledge is essential for a software engineer, much like physics is essential for an electrical engineer.
+- **SE vs. System Engineering:**
     
-- **SE vs. System Engineering:** System engineering covers all aspects of complex computer-based systems development, including hardware, software, process design, policy, and deployment. System engineers define the overall architecture and integrate the parts; they are less concerned with engineering the individual components. SE is just one part of this broader process.
-    
+    - System engineering encompasses the development of complex systems where software plays a role, including `hardware development, policy and process design, and system deployment`.
+        
+    - System engineers focus on defining `overall architecture` and integrating parts, making SE a sub-component of this broader discipline.
+        
+
+---
 
 ## 2. The Software Process & Models
 
-- **Software Process:** A set of activities and associated results whose goal is the development or evolution of a software product. Different types of systems (e.g., real-time aircraft software vs. e-commerce) require different processes, but using an inappropriate process can increase costs or reduce quality.
+**Software Process:**
+
+- A set of `activities and associated results` aimed at producing a `software product`.
     
-- **Four Fundamental Process Activities:**
+
+
+```mermaid
+flowchart LR
+    A[Specification] --> B[Development]
+    B --> C[Validation]
+    C --> D[Evolution]
+```
+
+- **Software Specification:** Defining `what the software will do` (to be produced) and operational `constraints`.
     
-    1. **Software Specification:** Customers and engineers define what the software will do and operational constraints.
-        
-    2. **Software Development:** The software is designed and programmed.
-        
-    3. **Software Validation:** The software is checked to ensure it meets customer requirements.
-        
-    4. **Software Evolution:** The software is modified to adapt to changing customer or market needs.
-        
-- **Software Process Model:** A simplified representation or description of a software process, viewed from a specific perspective. Models include activities, products, and roles.
+- **Software Development:** `Designing and programming` the software.
     
-    - **Workflow Model:** Shows the sequence of activities, inputs, outputs, and dependencies, representing human actions.
-        
-    - **Dataflow / Activity Model:** Represents the process as activities that carry out data transformations (e.g., transforming a specification into a design), carried out by humans or computers.
-        
-    - **Role/Action Model:** Represents the roles of people and the activities they are responsible for.
-        
-- **General Paradigms of Software Development:**
+- **Software Validation:** Checking that the software is what the `customer requires`.
     
-    1. **The Waterfall Approach:** Represents activities as separate, sequential phases (requirements, design, implementation, testing). A stage must be defined and 'signed-off' before the next begins.
-        
-    2. **Iterative Development:** Interleaves specification, development, and validation. An initial abstract system is rapidly developed, refined with customer input, and then either delivered or reimplemented structurally.
-        
-    3. **Component-Based Software Engineering (CBSE):** Assumes parts of the system already exist and focuses on assembling them.
-        
+- **Software Evolution:** Modifying the software to adapt to `changing customer and market requirements`.
+    
+
+**Software Process Models:**
+
+- A `simplified description` of a software process presented from one specific view.
+    
+- **Workflow Model:** Shows the `sequence of activities`, highlighting inputs, outputs, and dependencies representing `human actions`.
+    
+- **Dataflow / Activity Model:** Shows data transformation activities, mapping how an `input transforms to an output` (e.g., specification to design) via people or computers.
+    
+- **Role/Action Model:** Shows the `roles of people` involved and the specific activities for which they are `responsible`.
+    
+
+**Paradigms of Software Development:**
+
+- **Waterfall Approach:** Represents activities as `separate process phases` (requirements, design, implementation, testing) that must be `signed-off` sequentially.
+    
+- **Iterative Development:** `Interleaves the activities` of specification, development, and validation. Rapidly builds an initial system from `abstract specifications` to refine with customer input.
+    
+- **Component-Based (CBSE):** Assumes `parts of the system already exist` to be integrated.
+    
+
+---
 
 ## 3. Costs and Challenges
 
-- **Costs:** Generally, 60% of costs go to development and 40% to testing. For custom software, evolution (maintenance) costs usually exceed development costs. Cost distribution varies heavily based on the software type; for example, real-time software requires much more extensive testing than web-based systems.
+**Costs:**
+
+- Typically split: `60% development costs` and `40% testing costs`.
     
-- **Key Challenges for the 21st Century:**
+- For custom software, `evolution costs often exceed development costs`.
     
-    1. **The Heterogeneity Challenge:** Building dependable, flexible software that can operate as distributed systems across networks, on different computers, and integrate with older legacy systems in varying languages.
-        
-    2. **The Delivery Challenge:** Shortening delivery times for large, complex systems to meet rapidly changing business needs without compromising quality.
-        
-    3. **The Trust Challenge:** Developing techniques to demonstrate that software intertwined with our lives (especially remote/web services) is trustworthy and secure.
-        
+
+**Key Challenges in the 21st Century:**
+
+
+
+```mermaid
+mindmap
+  root((SE Challenges))
+    Heterogeneity
+      Distributed systems across networks
+      Integrating older legacy systems
+    Delivery
+      Reduced delivery times
+      Without compromising system quality
+    Trust
+      Software intertwined with daily life
+      Secure web service interfaces
+```
+
+- **Heterogeneity:** Building dependable software for `distributed systems` and integrating new software with `older legacy systems` across different platforms.
+    
+- **Delivery:** Shortening `delivery times` for complex systems to match rapid business changes without compromising `system quality`.
+    
+- **Trust:** Developing techniques to demonstrate software is `trustworthy`, especially for remote web services.
+    
+
+---
 
 ## 4. Attributes of Good Software
 
-Good software isn't just about services; it involves non-functional attributes that reflect execution behavior, code structure, and documentation quality (e.g., response times, code understandability). Different applications prioritize different attributes (e.g., banks need security, games need responsiveness).
+Attributes reflect the software's execution behavior, code structure, and associated documentation rather than just its services.
 
-- **Maintainability:** Must be written so it can evolve to meet changing customer needs, which is critical due to inevitably changing business environments.
+- **Maintainability:** Must be written to `evolve to meet changing needs`, critical due to a changing business environment.
     
-- **Dependability:** Encompasses reliability, security, and safety. It should not cause physical or economic damage if the system fails.
+- **Dependability:** Encompasses `reliability, security, and safety`; it should not cause physical or economic damage during failure.
     
-- **Efficiency:** Must not waste system resources (memory, processor cycles). Includes responsiveness and processing time.
+- **Efficiency:** Must not make `wasteful use of system resources` (e.g., memory, processor cycles), prioritizing responsiveness and processing time.
     
-- **Usability:** Must be usable without undue effort by its target audience, requiring an appropriate UI and adequate documentation.
+- **Usability:** Must be usable without `undue effort` by its target audience, requiring an `appropriate user interface` and `adequate documentation`.
     
+
+---
 
 ## 5. Software Engineering Methods & CASE
 
-- **Methods:** Structured approaches to facilitate the production of cost-effective, high-quality software.
+**Methods:**
+
+- `Structured approaches` aimed at facilitating the production of high-quality software cost-effectively.
     
-    - _History:_ 1970s saw function-oriented methods like Structured Analysis (DeMarco) and JSD (Jackson). 1980s/90s introduced Object-Oriented (OO) methods by Booch and Rumbaugh. These are now integrated into the Unified Modeling Language (UML). There is no "ideal" method; OO is great for interactive systems but not for strict real-time systems.
-        
-    - _Components of a Method:_
-        
-        - **System model descriptions:** Defines the models to be developed and their notation (e.g., Object models, state machine models).
-            
-        - **Rules:** Constraints that always apply (e.g., "Every entity must have a unique name").
-            
-        - **Recommendations:** Good design practice heuristics (e.g., "No object should have more than 7 sub-objects").
-            
-        - **Process guidance:** Activities to follow to develop the models.
-            
-- **CASE (Computer-Aided Software Engineering):** Automated software systems used to support process activities (analysis, modeling, debugging, testing). Often provides method support via editors, analysis modules to check rules, and report generators for documentation.
+- Different methods have been integrated into the `Unified Modeling Language (UML)`.
     
+- _Components of a Method:_
+    
+    - `System model descriptions:` Descriptions of models to be developed and their notation.
+        
+    - `Rules:` Constraints that always apply to system models.
+        
+    - `Recommendations:` Heuristics characterizing good design practice.
+        
+    - `Process guidance:` Descriptions of activities to follow to develop the models.
+        
+
+**CASE (Computer-Aided Software Engineering):**
+
+- Software systems intended to provide `automated support for software process activities`.
+    
+- Often used for `method support` (e.g., notation editors, analysis modules, report generators).
+    
+
+---
 
 ## 6. A Generic View of Software Engineering
 
-Engineering focuses on answering what the problem is, how it will be solved/constructed, how errors will be uncovered, and how it will be supported. This applies across three generic phases:
 
-- **The Definition Phase (What):** Identifies information to be processed, desired performance, interfaces, design constraints, and validation criteria. Tasks include system/information engineering, project planning, and requirements analysis.
+
+```mermaid
+flowchart TD
+    A[Definition Phase: WHAT] --> B[Development Phase: HOW]
+    B --> C[Support Phase: CHANGE]
+```
+
+- **The Definition Phase (What):** Identifies `what information is to be processed`, desired function, performance, interfaces, design constraints, and validation criteria.
+```mermaid
+flowchart TD
+	A[Definition] --> B[System/Information Engineering] & C[Software Project Plan] & D[Requirment Analysis]
+	
+```
     
-- **The Development Phase (How):** Defines data structures, software architecture, procedural details, and testing parameters. Tasks include software design, code generation, and testing.
+- **The Development Phase (How):** Defines `how data are to be structured`, software architecture implemented, procedural details characterized, and testing performed.
+```mermaid
+flowchart TD
+	A[Development] --> B[Software Design] & C[Code Generation] & D[Software Testing]
+	
+```
     
-- **The Support Phase (Change):** Deals with changes over time, reapplying definition and development steps to existing software. Users also receive continuing support via technical assistants or help desks. The four types of change are:
+- **The Support Phase (Change):** Focuses on change over time, reapplying definition and development steps to existing software. Four types of change include:
     
-    1. **Correction:** Corrective maintenance to fix defects uncovered by the customer.
+    - **Correction:** `Corrective maintenance` to fix defects uncovered by the customer.
         
-    2. **Adaptation:** Adaptive maintenance to modify the software for changes in its external environment (e.g., new CPU or OS).
+    - **Adaptation:** `Adaptive maintenance` to modify the software to accommodate changes to its external environment (e.g., OS, CPU).
         
-    3. **Enhancement:** Perfective maintenance that extends the software beyond original requirements to add beneficial functions.
+    - **Enhancement:** `Perfective maintenance` extending software beyond its original functional requirements for user benefit.
         
-    4. **Prevention:** Software reengineering (preventive maintenance) to alter programs so they don't deteriorate and can be more easily corrected or adapted in the future.
+    - **Prevention:** `Preventive maintenance` (software reengineering) to make future corrections and adaptations easier.
         
 
-### Umbrella Activities
+**Umbrella Activities:** Activities that overlay the entire process, regardless of project size.
 
-A process framework requires a small set of foundational activities overlayed by "umbrella activities" that happen throughout the entire process, regardless of project size. Examples include:
+- Software project `tracking and control`.
+    
+- Formal `technical reviews`.
+    
+- Software `quality assurance`.
+    
+- Software `configuration management`.
+    
+- `Document preparation` and production.
+    
+- `Reusability management`.
+    
+- `Measurement`.
+    
+- `Risk management`.
+    
 
-- Software project tracking and control
-    
-- Formal technical reviews
-    
-- Software quality assurance
-    
-- Software configuration management
-    
-- Document preparation and production
-    
-- Reusability management
-    
-- Measurement
-    
-- Risk management
-    
+---
 
 ## 7. SEI Process Maturity Levels (CMM)
 
-The Software Engineering Institute (SEI) Capability Maturity Model (CMM) measures the global effectiveness of an organization's software practices via an assessment questionnaire distilled into a single grade.
 
-- **Level 1: Initial:** Processes are ad hoc, occasionally chaotic. Success depends on individual effort, not defined processes.
-    
-- **Level 2: Repeatable:** Basic project management processes (cost, schedule, functionality) are in place to repeat earlier successes.
-    
-- **Level 3: Defined:** Both management and engineering processes are documented, standardized, and integrated organization-wide.
-    
-- **Level 4: Managed:** Process and product quality are quantitatively understood and controlled via detailed measures.
-    
-- **Level 5: Optimizing:** Continuous process improvement is driven by quantitative feedback and testing innovative technologies.
-    
 
-### Key Process Areas (KPAs)
+```mermaid
+timeline
+    title SEI Process Maturity Levels
+    Level 1 : Initial : Ad hoc and chaotic : Depends on individual effort
+    Level 2 : Repeatable : Basic project management : Repeat earlier successes
+    Level 3 : Defined : Documented and standardized : Organization wide process
+    Level 4 : Managed : Detailed measures : Quantitatively controlled
+    Level 5 : Optimizing : Continuous process improvement : Quantitative feedback
+```
 
-KPAs are the software engineering functions required to satisfy good practice at each maturity level. Each KPA is described by its:
-
-- **Goals:** Objectives to achieve.
+- **Level 1 (Initial):** Process is `ad hoc and occasionally chaotic`; success depends heavily on `individual effort`.
     
-- **Commitments:** Organizational requirements to achieve goals.
+- **Level 2 (Repeatable):** `Basic project management` tracks cost, schedule, and functionality to `repeat earlier successes` on similar projects.
     
-- **Abilities:** Technical/organizational structures needed to meet commitments.
+- **Level 3 (Defined):** Processes for management and engineering are `documented, standardized, and integrated` organization-wide.
     
-- **Activities:** Specific tasks required.
+- **Level 4 (Managed):** Process and product quality are `quantitatively understood and controlled` using detailed measures.
     
-- **Monitoring/Verifying Methods:** How implementation is tracked and verified.
+- **Level 5 (Optimizing):** Focuses on `continuous process improvement` via quantitative feedback and testing innovative technologies.
     
 
-**KPA Breakdown by Level:**
+**Key Process Areas (KPAs):** Functions that must be present to satisfy good practice at each maturity level. Each KPA is described by:
 
-- **Level 2 KPAs:** Config management, subcontract management, tracking & oversight, planning, requirements management.
+- `Goals:` Overall objectives the KPA must achieve.
     
-- **Level 3 KPAs:** Peer reviews, intergroup coordination, product engineering, integrated management, training, process definition, process focus.
+- `Commitments:` Requirements imposed on the organization to achieve goals.
     
-- **Level 4 KPAs:** Quality management, quantitative process management.
+- `Abilities:` Technical/organizational structures needed to meet commitments.
     
-- **Level 5 KPAs:** Process change management, technology change management, defect prevention.
+- `Activities:` Specific tasks required to achieve the function.
+    
+- `Monitoring methods:` The manner in which activities are monitored.
+    
+- `Verifying methods:` The manner in which proper practice is verified.
