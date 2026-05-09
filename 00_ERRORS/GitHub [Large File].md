@@ -6,11 +6,11 @@ tags:
 ---
 ## Error Due to Large File 
 
->GitHub Can't handle large file [100Mb or 50Mb] so if you add and commit large file , You will be unable to push the file 
+>[!info] GitHub Can't handle large file [100Mb or 50Mb] so if you add and commit large file , You will be unable to push the file 
 >The Timeline of problem 
 >git tried added a snapshot of the timeline you added 
 >when trying to push github saw the large file in the snapshot and started to decline the timeline or commit 
->So need to 
+>So need to to reset the changes so that git takes a new snapshot without the large files 
 
 `Error Message`
 

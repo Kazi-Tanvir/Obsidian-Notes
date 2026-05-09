@@ -31,14 +31,12 @@
             "id": "f04572d686a83e9c",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "pdf",
               "state": {
-                "file": "00_ERRORS/GitHub [Large File].md",
-                "mode": "source",
-                "source": true
+                "file": "02_DU_IIT/02_LECTURE_SHEET/SE 1106 F2.pdf"
               },
-              "icon": "lucide-file",
-              "title": "GitHub [Large File]"
+              "icon": "lucide-file-text",
+              "title": "SE 1106 F2"
             }
           }
         ],
@@ -193,10 +191,10 @@
             "state": {
               "type": "file-properties",
               "state": {
-                "file": "00_ERRORS/GitHub [Large File].md"
+                "file": "02_DU_IIT/02_LECTURE_SHEET/SE 1106 F2.pdf"
               },
               "icon": "lucide-info",
-              "title": "File properties for GitHub [Large File]"
+              "title": "File properties for SE 1106 F2"
             }
           },
           {
@@ -261,8 +259,9 @@
   },
   "active": "f04572d686a83e9c",
   "lastOpenFiles": [
-    "04_PROJECTS/01 PORTFOLIO.md",
+    "README.md",
     "00_ERRORS/GitHub [Large File].md",
+    "04_PROJECTS/01 PORTFOLIO.md",
     "02_DU_IIT/02_LECTURE_SHEET/SE 1106 F.pdf",
     "00_ERRORS/Untitled",
     "00_ERRORS",
