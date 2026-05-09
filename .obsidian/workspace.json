@@ -35,7 +35,8 @@
               "title": "SE 1106 COMPACT AI"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -253,10 +254,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "f04572d686a83e9c",
+  "active": "bfca4037b3f86d32",
   "lastOpenFiles": [
-    "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106 COMPACT AI.md",
     "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106 FULL AI.md",
+    "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106 COMPACT AI.md",
     "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106.md",
     "02_DU_IIT/01_CLASS/CSE 1101L - Structured Programming/CSE 1101 L1.md",
     "02_DU_IIT/03_BOOKS/SE_ZB.pdf",
