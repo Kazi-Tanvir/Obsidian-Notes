@@ -8,39 +8,20 @@
         "type": "tabs",
         "children": [
           {
-            "id": "92bb282965b87252",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "a474e15b074c18de",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
             "id": "f04572d686a83e9c",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "markdown",
               "state": {
-                "file": "02_DU_IIT/02_LECTURE_SHEET/SE 1106 F2.pdf"
+                "file": "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106.md",
+                "mode": "source",
+                "source": true
               },
-              "icon": "lucide-file-text",
-              "title": "SE 1106 F2"
+              "icon": "lucide-file",
+              "title": "SE 1106"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -106,7 +87,7 @@
       {
         "id": "2fd9a64f0deb3159",
         "type": "tabs",
-        "dimension": 66.79035250463822,
+        "dimension": 67.3469387755102,
         "children": [
           {
             "id": "53f920f8060070a2",
@@ -191,10 +172,10 @@
             "state": {
               "type": "file-properties",
               "state": {
-                "file": "02_DU_IIT/02_LECTURE_SHEET/SE 1106 F2.pdf"
+                "file": "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106.md"
               },
               "icon": "lucide-info",
-              "title": "File properties for SE 1106 F2"
+              "title": "File properties for SE 1106"
             }
           },
           {
@@ -223,7 +204,7 @@
       {
         "id": "152c4bfc9fa84dd3",
         "type": "tabs",
-        "dimension": 33.209647495361786,
+        "dimension": 32.6530612244898,
         "children": [
           {
             "id": "04477abee950afcf",
@@ -259,22 +240,25 @@
   },
   "active": "f04572d686a83e9c",
   "lastOpenFiles": [
+    "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106 COMPACT AI.md",
+    "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106.md",
+    "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106 FULL AI.md",
+    "02_DU_IIT/01_CLASS/CSE 1101L - Structured Programming/CSE 1101 L1.md",
+    "02_DU_IIT/03_BOOKS/SE_ZB.pdf",
+    "02_DU_IIT/02_LECTURE_SHEET/SE 1106 F2.pdf",
+    "02_DU_IIT/02_LECTURE_SHEET/SE 1106 F.pdf",
     "README.md",
     "00_ERRORS/GitHub [Large File].md",
     "04_PROJECTS/01 PORTFOLIO.md",
-    "02_DU_IIT/02_LECTURE_SHEET/SE 1106 F.pdf",
     "00_ERRORS/Untitled",
     "00_ERRORS",
     "02_DU_IIT/02_LECTURE_SHEET/GE 1105 F.pdf",
-    "02_DU_IIT/01_CLASS/CSE 1101L - Structured Programming/CSE 1101 L1.md",
     "02_DU_IIT/02_LECTURE_SHEET/STAT 1103 L2.pdf",
     "02_DU_IIT/99_ARCHIVE/cse 2202.md",
     "02_DU_IIT/99_ARCHIVE/SE 1102 L1.md",
     "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering",
     "02_DU_IIT/01_CLASS/GE 1105 - Sociology",
     "02_DU_IIT/01_CLASS/New folder",
-    "02_DU_IIT/01_CLASS/MATH 1107 - Calculus",
-    "02_DU_IIT/01_CLASS/STAT 1103 - Probability & Stats",
     "04_PROJECTS/02_E_Commerce_Microservices_Architecture/01 The Monorepo Infrastructure.md",
     "04_PROJECTS/02_E_Commerce_Microservices_Architecture/08 Admin Dashboard & Mutations.md",
     "04_PROJECTS/E_Commerce_Microservices_Architecture/Untitled.md",
@@ -292,9 +276,6 @@
     "03_COURSES/03_Python_Programming/14_Projects/01_Snake_Water_Gun_Game.md",
     "03_COURSES/03_Python_Programming/14_Projects/03_Mega_Project_1_Jarvis.md",
     "03_COURSES/03_Python_Programming/14_Projects/02_The_Perfect_Guess.md",
-    "03_COURSES/03_Python_Programming/13_Advanced_Python_2.md",
-    "03_COURSES/03_Python_Programming/12_Advanced_Python_1.md",
-    "03_COURSES/03_Python_Programming/11_Inheritance_and_more_on_OOPs.md",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "Business/Journal/Technical/Migrated/assets/why-not-jwt.png",
