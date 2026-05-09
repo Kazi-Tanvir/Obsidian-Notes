@@ -182,19 +182,22 @@ flowchart TD
 ```
 
 - **The Definition Phase (What):** Identifies `what information is to be processed`, desired function, performance, interfaces, design constraints, and validation criteria.
+- <div style="width: 20%; margin: auto;">
 ```mermaid
 flowchart TD
 	A[Definition] --> B[System/Information Engineering] & C[Software Project Plan] & D[Requirment Analysis]
 	
 ```
-    
+</div>
 - **The Development Phase (How):** Defines `how data are to be structured`, software architecture implemented, procedural details characterized, and testing performed.
+ <div style="width: 30%; margin: auto;">
+ 
 ```mermaid
 flowchart TD
 	A[Development] --> B[Software Design] & C[Code Generation] & D[Software Testing]
 	
 ```
-    
+</div>
 - **The Support Phase (Change):** Focuses on change over time, reapplying definition and development steps to existing software. Four types of change include:
     
     - **Correction:** `Corrective maintenance` to fix defects uncovered by the customer.

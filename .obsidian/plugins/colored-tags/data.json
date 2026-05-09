@@ -488,7 +488,9 @@
     "cloudinary": 296,
     "software-engineering": 297,
     "system-models": 298,
-    "process-paradigms": 299
+    "process-paradigms": 299,
+    "exam-revision": 300,
+    "quick-notes": 301
   },
   "_version": 3
 }

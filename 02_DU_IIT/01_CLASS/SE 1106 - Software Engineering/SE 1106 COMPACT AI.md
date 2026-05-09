@@ -1,83 +1,150 @@
 ---
-tags:
-  - software-engineering
-  - system-models
-  - process-paradigms
-date: 05/09/2026
-instructor: Zerina Begum
+tags: [exam-revision, software-engineering, quick-notes]
 ---
 
+# 🚀 Software Engineering: Quick Exam Revision
 
-# Software Engineering Fundamentals
+### 1. Core Distinctions
 
-**Core Distinctions**
-
-- Software Engineering applies theories and tools selectively to discover practical solutions under financial and organizational constraints.
+- **Software:** Computer programs + associated documentation.
     
-- It differs from Computer Science (which focuses on underlying theories) and System Engineering (which encompasses hardware, policy, and system deployment).
+- **Software Engineering (SE):** Engineering discipline for _all_ aspects of software production (technical + management).
     
-
-**Cost Realities**
-
-- Typically, costs are split 60% for development and 40% for testing.
+- **SE vs. CS:** CS = theories and fundamentals; SE = practical problems of producing software.
     
-- For custom systems, the cost to evolve the software generally exceeds the initial development cost.
+- **SE vs. System Engineering:** System engineering includes hardware and policy; SE is a sub-discipline of it.
     
 
-**Attributes of Quality Software**
+---
 
-- **Maintainability:** Capable of evolving to meet changing business requirements.
+### 2. The Software Process
+
+A set of activities to develop or evolve software.
+
+Code snippet
+
+```mermaid
+flowchart LR
+    A[Specification] --> B[Development]
+    B --> C[Validation]
+    C --> D[Evolution]
+```
+
+- **Specification:** Defining what the software must do and its constraints.
     
-- **Dependability:** Reliable, secure, and safe enough to prevent economic or physical damage during failures.
+- **Development:** Designing and programming the system.
     
-- **Efficiency:** Responsive and avoids wasting processor cycles or memory.
+- **Validation:** Checking it meets customer requirements.
     
-- **Usability:** Features an appropriate UI and documentation for its intended users.
+- **Evolution:** Modifying to adapt to changing needs.
     
 
-**Primary Industry Challenges**
+**Process Models (Views):**
 
-- **Heterogeneity:** Integrating new software with legacy systems across distributed, multi-computer networks.
+- **Workflow:** Sequence of _human actions_ and dependencies.
     
-- **Delivery:** Drastically reducing delivery times without sacrificing overall quality.
+- **Dataflow:** How _information transforms_ (e.g., spec $\rightarrow$ design).
     
-- **Trust:** Ensuring security and trustworthiness, heavily vital for web services.
+- **Role/Action:** _Who_ does what.
     
 
-**Generic Software Process Phases**
+**Development Paradigms:**
 
-- **Definition (The "What"):** Identifying required constraints, functions, and validation criteria (Specification).
+- **Waterfall:** Sequential, strict phases ("sign-off" required).
     
-- **Development (The "How"):** Designing architecture, coding, and checking against customer requirements (Validation).
+- **Iterative:** Interleaved phases; rapid abstract build refined by customer input.
     
-- **Support (Evolution):** Managing four change types:
+- **CBSE:** Assembling pre-existing components.
     
-    - _Correction:_ Fixing uncovered defects.
+
+---
+
+### 3. Costs & 21st Century Challenges
+
+- **Costs:** ~60% development, 40% testing. Evolution often exceeds dev costs.
+    
+
+Code snippet
+
+```mermaid
+mindmap
+  root((SE Challenges))
+    Heterogeneity
+      Distributed networks
+      Integrating legacy systems
+    Delivery
+      Faster delivery
+      Maintain high quality
+    Trust
+      Security
+      Dependable web services
+```
+
+---
+
+### 4. Attributes of Good Software (Non-Functional)
+
+- **Maintainability:** Capable of evolving with changing business needs.
+    
+- **Dependability:** Reliable, secure, and safe (no physical/economic damage on failure).
+    
+- **Efficiency:** Does not waste system resources (memory, CPU).
+    
+- **Usability:** Appropriate UI and docs for the target user.
+    
+
+---
+
+### 5. Methods & CASE Tools
+
+- **Methods:** Structured approaches (like UML) containing models, rules, recommendations, and process guidance.
+    
+- **CASE:** _Computer-Aided Software Engineering_. Automated tools to support process activities (editors, debuggers, analysis modules).
+    
+
+---
+
+### 6. Generic View of SE
+
+Code snippet
+
+```mermaid
+flowchart TD
+    A[Definition Phase: WHAT] --> B[Development Phase: HOW]
+    B --> C[Support Phase: CHANGE]
+```
+
+- **Definition:** Identify requirements, constraints, and validation criteria.
+    
+- **Development:** Architecture, data structures, coding, and testing.
+    
+- **Support (4 Types of Change):**
+    
+    - _Correction:_ Fixing bugs/defects.
         
-    - _Adaptation:_ Adjusting to changes in the OS or external environment.
+    - _Adaptation:_ Adjusting to new OS/Hardware.
         
-    - _Enhancement:_ Extending functionality based on user needs.
+    - _Enhancement:_ Adding new features (perfective).
         
-    - _Prevention:_ Reengineering code to make future changes easier.
+    - _Prevention:_ Reengineering to prevent deterioration.
         
-
-**Common Process Paradigms**
-
-- **Waterfall:** Defines distinct, "signed-off" phases moving sequentially from specification to testing.
-    
-- **Iterative:** Rapidly develops abstract specifications into initial systems, refining them via customer input.
-    
-- **Component-Based (CBSE):** Constructs systems by assembling pre-existing software parts.
+- **Umbrella Activities:** Occur throughout the entire project (e.g., Risk management, QA, configuration management).
     
 
-**SEI Process Maturity Levels (CMM)**
+---
 
-- **Level 1 (Initial):** Ad hoc, chaotic; heavily reliant on individual heroics.
-    
-- **Level 2 (Repeatable):** Basic project management tracks schedules; able to repeat similar past successes.
-    
-- **Level 3 (Defined):** Management and engineering processes are documented and standardized organization-wide.
-    
-- **Level 4 (Managed):** Both process and product are quantitatively measured and controlled.
-    
-- **Level 5 (Optimizing):** Focuses on continuous improvement driven by quantitative feedback.
+### 7. SEI CMM (Process Maturity Levels)
+
+Code snippet
+
+```mermaid
+timeline
+    title SEI Process Maturity Levels
+    Level 1: Initial : Ad hoc, chaotic. Depends on individual heroics.
+    Level 2: Repeatable : Basic project management. Can repeat past successes.
+    Level 3: Defined : Standardized, documented process organization-wide.
+    Level 4: Managed : Quantitatively measured and controlled quality.
+    Level 5: Optimizing : Continuous improvement via feedback and new tech.
+```
+
+- **Note on KPAs (Key Process Areas):** Requirements needed to hit each level (Goals, Commitments, Abilities, Activities, Verification).
