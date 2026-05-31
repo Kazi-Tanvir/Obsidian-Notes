@@ -142,7 +142,7 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 8
       }
     ],
     "direction": "vertical"
@@ -186,8 +186,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "279416c7625b4660",
@@ -196,7 +195,7 @@
       {
         "id": "2fd9a64f0deb3159",
         "type": "tabs",
-        "dimension": 19.387755102040817,
+        "dimension": 18.552875695732837,
         "children": [
           {
             "id": "53f920f8060070a2",
@@ -303,7 +302,7 @@
       {
         "id": "e61d82aa24cf76bd",
         "type": "tabs",
-        "dimension": 35.714285714285715,
+        "dimension": 36.54916512059369,
         "children": [
           {
             "id": "2744bd3130960f52",
@@ -378,16 +377,17 @@
       "obsidian-media-db-plugin:Add new Media DB entry": false
     }
   },
-  "active": "09c98166f572d0cb",
+  "active": "f2731d5deb6002bd",
   "lastOpenFiles": [
+    "Mobile Game View.base",
+    "games/Free Fire (2017).md",
+    "Game View.base",
+    "Movie View.base",
     "Series View.base",
     "Manga View.base",
     "Anime Movie View.base",
     "Anime View.base",
-    "Movie View.base",
     "Home.md",
-    "Mobile Game View.base",
-    "Game View.base",
     "movies/Homebound (2025).md",
     "anime/Overflow (2020).md",
     "anime/Nippon Sangoku - The Three Nations of the Crimson Sun (2026).md",
@@ -404,7 +404,6 @@
     "games/Grand Theft Auto IV (2008).md",
     "games/PUBG Mobile (2018).md",
     "games/Hay Day (2012).md",
-    "games/Free Fire (2017).md",
     "games/Clash Royale (2016).md",
     "games/Clash of Clans (2012).md",
     "games/Call of Duty - Mobile (2019).md",
