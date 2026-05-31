@@ -1,0 +1,822 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created by Antigravity Media Vault Exporter -->
+<mymedialist>
+  <myinfo>
+    <user_id>13864737</user_id>
+    <user_name>SENPAI778</user_name>
+    <user_export_type>series</user_export_type>
+    <user_total_items>20</user_total_items>
+    <user_total_completed>16</user_total_completed>
+    <user_total_watching>4</user_total_watching>
+    <user_total_onhold>0</user_total_onhold>
+    <user_total_dropped>0</user_total_dropped>
+    <user_total_plan_to_watch>0</user_total_plan_to_watch>
+  </myinfo>
+  <series>
+    <id><![CDATA[tt31806037]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Adolescence]]></title>
+    <englishTitle><![CDATA[Adolescence]]></englishTitle>
+    <year>2025</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt31806037/]]></url>
+    <plot><![CDATA[When a 13-year-old is accused of the murder of a classmate, his family, therapist and the detective in charge are all left asking what really happened.]]></plot>
+    <duration><![CDATA[N/A]]></duration>
+    <episodes>4</episodes>
+    <onlineRating>8.1</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BNGY1YjBiNzMtYWZhNC00OWViLWE0MzItNjc4YzczOGNiM2I0XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[03/13/2025]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>false</airing>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Crime]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Thriller]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Stephen Graham]]></writer>
+      <writer><![CDATA[Jack Thorne]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Crime]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Thriller]]></tag>
+    </tags>
+  </series>
+  <series>
+    <id><![CDATA[tt3032476]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Better Call Saul]]></title>
+    <englishTitle><![CDATA[Better Call Saul]]></englishTitle>
+    <year><![CDATA[2015–2022]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt3032476/]]></url>
+    <plot><![CDATA[Albuquerque lawyer Jimmy McGill scrapes for clients and respect, but every win drags him closer to shady deals, dangerous players, and the alter ego Saul Goodman.]]></plot>
+    <duration><![CDATA[46 min]]></duration>
+    <episodes>63</episodes>
+    <onlineRating>9.0</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BNDdjNTEzMjMtYjM3Mi00NzQ3LWFlNWMtZjdmYWU3ZDkzMjk1XkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[02/08/2015]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>false</airing>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Crime]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Vince Gilligan]]></writer>
+      <writer><![CDATA[Peter Gould]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Crime]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+    </tags>
+  </series>
+  <series>
+    <id><![CDATA[tt0903747]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Breaking Bad]]></title>
+    <englishTitle><![CDATA[Breaking Bad]]></englishTitle>
+    <year><![CDATA[2008–2013]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt0903747/]]></url>
+    <plot><![CDATA[A chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine with a former student to secure his family's future.]]></plot>
+    <duration><![CDATA[49 min]]></duration>
+    <episodes>62</episodes>
+    <onlineRating>9.5</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BMzU5ZGYzNmQtMTdhYy00OGRiLTg0NmQtYjVjNzliZTg1ZGE4XkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[01/20/2008]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>false</airing>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Crime]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Thriller]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Vince Gilligan]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Crime]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Thriller]]></tag>
+    </tags>
+  </series>
+  <series>
+    <id><![CDATA[tt5753856]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Dark]]></title>
+    <englishTitle><![CDATA[Dark]]></englishTitle>
+    <year><![CDATA[2017–2020]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt5753856/]]></url>
+    <plot><![CDATA[A family saga with a supernatural twist, set in a German town where the disappearance of two young children exposes the relationships among four families.]]></plot>
+    <duration><![CDATA[60 min]]></duration>
+    <episodes>26</episodes>
+    <onlineRating>8.7</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BOWJjMGViY2UtNTAzNS00ZGFjLWFkNTMtMDBiMDMyZTM1NTY3XkEyXkFqcGc@._V1_QL75_UX380_CR0,57,380,562_.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[12/01/2017]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>false</airing>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Crime]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Mystery]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Baran bo Odar]]></writer>
+      <writer><![CDATA[Jantje Friese]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Crime]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Mystery]]></tag>
+    </tags>
+  </series>
+  <series>
+    <id><![CDATA[tt0944947]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Game of Thrones]]></title>
+    <englishTitle><![CDATA[Game of Thrones]]></englishTitle>
+    <year><![CDATA[2011–2019]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt0944947/]]></url>
+    <plot><![CDATA[Nine noble families fight for control over the lands of Westeros, while an ancient enemy returns after being dormant for millennia.]]></plot>
+    <duration><![CDATA[57 min]]></duration>
+    <episodes>73</episodes>
+    <onlineRating>9.2</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BMTNhMDJmNmYtNDQ5OS00ODdlLWE0ZDAtZTgyYTIwNDY3OTU3XkEyXkFqcGc@._V1_QL75_UX380_CR0,3,380,562_.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[04/17/2011]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>false</airing>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[David Benioff]]></writer>
+      <writer><![CDATA[D.B. Weiss]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+    </tags>
+  </series>
+  <series>
+    <id><![CDATA[tt13159924]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Gen V]]></title>
+    <englishTitle><![CDATA[Gen V]]></englishTitle>
+    <year><![CDATA[2023–]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt13159924/]]></url>
+    <plot><![CDATA[From the world of "The Boys" comes "Gen V," which explores the first generation of superheroes to know that their super powers are from Compound V. These heroes put their physical and moral boundaries to the test competing for the...]]></plot>
+    <duration><![CDATA[N/A]]></duration>
+    <episodes>16</episodes>
+    <onlineRating>7.6</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BYWU4YTljYmItYjczNS00MWY0LWI3NjctZjJhYjU3NWNmNWZhXkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[09/29/2023]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>true</airing>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+      <genre><![CDATA[Comedy]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Evan Goldberg]]></writer>
+      <writer><![CDATA[Eric Kripke]]></writer>
+      <writer><![CDATA[Craig Rosenberg]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+      <tag><![CDATA[genre/Comedy]]></tag>
+    </tags>
+  </series>
+  <series>
+    <id><![CDATA[tt2243973]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Hannibal]]></title>
+    <englishTitle><![CDATA[Hannibal]]></englishTitle>
+    <year><![CDATA[2013–2015]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt2243973/]]></url>
+    <plot><![CDATA[Explores the early relationship between renowned psychiatrist Hannibal Lecter and a young FBI criminal profiler who is haunted by his ability to empathize with serial killers.]]></plot>
+    <duration><![CDATA[44 min]]></duration>
+    <episodes>0</episodes>
+    <onlineRating>8.5</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BNjBmYjdiMzItNTEwNi00YTI2LTg4YjctOTRjNDYxNTUxNGQ1XkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[04/04/2013]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>false</airing>
+    <watched>false</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Currently Watching]]></status>
+    <genres>
+      <genre><![CDATA[Crime]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Horror]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Bryan Fuller]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Crime]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Horror]]></tag>
+    </tags>
+  </series>
+  <series>
+    <id><![CDATA[tt11407524]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Hostel Daze]]></title>
+    <englishTitle><![CDATA[Hostel Daze]]></englishTitle>
+    <year><![CDATA[2019–2023]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt11407524/]]></url>
+    <plot><![CDATA[Through the adventures of four friends 'Hostel Daze' captures what goes inside an engineering hostel in India.]]></plot>
+    <duration><![CDATA[159 min]]></duration>
+    <episodes>21</episodes>
+    <onlineRating>8.5</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BZWZlNWMxNDYtNTAzYi00OWFiLThhZDUtZGZkYWMyMzQ5ZGYyXkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[12/13/2019]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>false</airing>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Comedy]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Saurabh Khanna]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Comedy]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+    </tags>
+  </series>
+  <series>
+    <id><![CDATA[tt11198330]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[House of the Dragon]]></title>
+    <englishTitle><![CDATA[House of the Dragon]]></englishTitle>
+    <year><![CDATA[2022–]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt11198330/]]></url>
+    <plot><![CDATA[An internal succession war within House Targaryen at the height of its power, 172 years before the birth of Daenerys Targaryen.]]></plot>
+    <duration><![CDATA[N/A]]></duration>
+    <episodes>26</episodes>
+    <onlineRating>8.3</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BZGM4MTczODQtNGIxOC00Y2U2LTk1YmItNzA2N2VhYmE0Y2YwXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[08/21/2022]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>true</airing>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Ryan J. Condal]]></writer>
+      <writer><![CDATA[George R.R. Martin]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+    </tags>
+  </series>
+  <series>
+    <id><![CDATA[tt9432978]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Kota Factory]]></title>
+    <englishTitle><![CDATA[Kota Factory]]></englishTitle>
+    <year><![CDATA[2019–2021]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt9432978/]]></url>
+    <plot><![CDATA[In a city of coaching centers known to train India’s finest collegiate minds, an earnest but unexceptional student and his friends navigate campus life.]]></plot>
+    <duration><![CDATA[45 min]]></duration>
+    <episodes>15</episodes>
+    <onlineRating>9.0</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BY2U5MjY1NWEtZDI2MS00NTlhLWEyODQtYzE0MzY3NDUyNzE3XkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[08/28/2021]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>false</airing>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Comedy]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Saurabh Khanna]]></writer>
+      <writer><![CDATA[Arunabh Kumar]]></writer>
+      <writer><![CDATA[Raghav Subbu]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Comedy]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+    </tags>
+  </series>
+  <series>
+    <id><![CDATA[tt6473300]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Mirzapur]]></title>
+    <englishTitle><![CDATA[Mirzapur]]></englishTitle>
+    <year><![CDATA[2018–]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt6473300/]]></url>
+    <plot><![CDATA[A shocking incident at a wedding procession ignites a series of events entangling the lives of two families in the lawless city of Mirzapur.]]></plot>
+    <duration><![CDATA[60 min]]></duration>
+    <episodes>29</episodes>
+    <onlineRating>8.4</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BZTFjMzMxZTUtYTMyNy00OWNhLTk4ODQtNGI1NjI1NjJhMzc3XkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[11/15/2018]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>true</airing>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Crime]]></genre>
+      <genre><![CDATA[Thriller]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Puneet Krishna]]></writer>
+      <writer><![CDATA[Karan Anshuman]]></writer>
+      <writer><![CDATA[Apurva Dhar Badgaiyan]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Crime]]></tag>
+      <tag><![CDATA[genre/Thriller]]></tag>
+    </tags>
+  </series>
+  <series>
+    <id><![CDATA[tt2707408]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Narcos]]></title>
+    <englishTitle><![CDATA[Narcos]]></englishTitle>
+    <year><![CDATA[2015–2017]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt2707408/]]></url>
+    <plot><![CDATA[A chronicled look at the criminal exploits of Colombian drug lord Pablo Escobar, as well as the many other drug kingpins who plagued the country through the years.]]></plot>
+    <duration><![CDATA[49 min]]></duration>
+    <episodes>0</episodes>
+    <onlineRating>8.7</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BNzQwOTcwMzIwN15BMl5BanBnXkFtZTgwMjYxMTA0NjE@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[08/28/2015]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>false</airing>
+    <watched>false</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Currently Watching]]></status>
+    <genres>
+      <genre><![CDATA[Biography]]></genre>
+      <genre><![CDATA[Crime]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Carlo Bernard]]></writer>
+      <writer><![CDATA[Chris Brancato]]></writer>
+      <writer><![CDATA[Doug Miro]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Biography]]></tag>
+      <tag><![CDATA[genre/Crime]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+    </tags>
+  </series>
+  <series>
+    <id><![CDATA[tt5071412]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Ozark]]></title>
+    <englishTitle><![CDATA[Ozark]]></englishTitle>
+    <year><![CDATA[2017–2022]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt5071412/]]></url>
+    <plot><![CDATA[A financial advisor drags his family from Chicago to the Missouri Ozarks, where he must launder money to appease a drug boss.]]></plot>
+    <duration><![CDATA[60 min]]></duration>
+    <episodes>0</episodes>
+    <onlineRating>8.4</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BZDk1ZTdjOWItNTJmYS00MGIzLThmY2ItZWNiOGY5MzJlNTA5XkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[07/21/2017]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>false</airing>
+    <watched>false</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Currently Watching]]></status>
+    <genres>
+      <genre><![CDATA[Crime]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Thriller]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Bill Dubuque]]></writer>
+      <writer><![CDATA[Mark Williams]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Crime]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Thriller]]></tag>
+    </tags>
+  </series>
+  <series>
+    <id><![CDATA[tt12004706]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Panchayat]]></title>
+    <englishTitle><![CDATA[Panchayat]]></englishTitle>
+    <year><![CDATA[2020–]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt12004706/]]></url>
+    <plot><![CDATA[A comedy-drama, which captures the journey of an engineering graduate Abhishek, who for lack of a better job option joins as secretary of a Panchayat office in a remote village of Uttar Pradesh.]]></plot>
+    <duration><![CDATA[35 min]]></duration>
+    <episodes>32</episodes>
+    <onlineRating>9.0</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BYzkwZGNkYTctZDc2MS00OWM2LWI2NTUtMTM2ZGMzMTY0N2Q1XkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[03/05/2020]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>true</airing>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Comedy]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Chandan Kumar]]></writer>
+      <writer><![CDATA[Deepak Kumar Mishra]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Comedy]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+    </tags>
+  </series>
+  <series>
+    <id><![CDATA[tt2442560]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Peaky Blinders]]></title>
+    <englishTitle><![CDATA[Peaky Blinders]]></englishTitle>
+    <year><![CDATA[2013–2022]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt2442560/]]></url>
+    <plot><![CDATA[A gangster family epic set in 1919 Birmingham, England; centered on a gang who sew razor blades in the peaks of their caps, and their fierce boss Tommy Shelby.]]></plot>
+    <duration><![CDATA[60 min]]></duration>
+    <episodes>36</episodes>
+    <onlineRating>8.7</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BOGM0NGY3ZmItOGE2ZC00OWIxLTk0N2EtZWY4Yzg3ZDlhNGI3XkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[09/30/2014]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>false</airing>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Crime]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Steven Knight]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Crime]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+    </tags>
+  </series>
+  <series>
+    <id><![CDATA[tt1475582]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Sherlock]]></title>
+    <englishTitle><![CDATA[Sherlock]]></englishTitle>
+    <year><![CDATA[2010–2017]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt1475582/]]></url>
+    <plot><![CDATA[In modern-day London, brilliant but eccentric detective Sherlock Holmes teams with war veteran Dr. John Watson to crack baffling crimes, outwit formidable foes, and aid Scotland Yard with razor-sharp deduction.]]></plot>
+    <duration><![CDATA[88 min]]></duration>
+    <episodes>0</episodes>
+    <onlineRating>9.0</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BNTQzNGZjNDEtOTMwYi00MzFjLWE2ZTYtYzYxYzMwMjZkZDc5XkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[10/24/2010]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>false</airing>
+    <watched>false</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Currently Watching]]></status>
+    <genres>
+      <genre><![CDATA[Crime]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Mystery]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Mark Gatiss]]></writer>
+      <writer><![CDATA[Steven Moffat]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Crime]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Mystery]]></tag>
+    </tags>
+  </series>
+  <series>
+    <id><![CDATA[tt2788316]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Shogun]]></title>
+    <englishTitle><![CDATA[Shogun]]></englishTitle>
+    <year><![CDATA[2024–2026]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt2788316/]]></url>
+    <plot><![CDATA[When a mysterious European ship is found marooned in a nearby Japanese fishing village, Lord Yoshii Toranaga discovers secrets that could tip the scales of power and devastate his enemies.]]></plot>
+    <duration><![CDATA[N/A]]></duration>
+    <episodes>10</episodes>
+    <onlineRating>8.6</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BZmJkMDRjYzEtMWI3Ny00OWE3LWJlNTItMGQ1MTQzMzc3NDY5XkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[02/27/2024]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>false</airing>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[James Clavell (based on the novel by)]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+    </tags>
+  </series>
+  <series>
+    <id><![CDATA[tt4574334]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Stranger Things]]></title>
+    <englishTitle><![CDATA[Stranger Things]]></englishTitle>
+    <year><![CDATA[2016–2025]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt4574334/]]></url>
+    <plot><![CDATA[In 1980s Indiana, a group of young friends witness supernatural forces and secret government exploits. As they search for answers, the children unravel a series of extraordinary mysteries.]]></plot>
+    <duration><![CDATA[51 min]]></duration>
+    <episodes>42</episodes>
+    <onlineRating>8.6</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BNjRiMTA4NWUtNmE0ZC00NGM0LWJhMDUtZWIzMDM5ZDIzNTg3XkEyXkFqcGc@._V1_QL75_UY562_CR35,0,380,562_.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[07/15/2016]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>false</airing>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Fantasy]]></genre>
+      <genre><![CDATA[Horror]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Matt Duffer]]></writer>
+      <writer><![CDATA[Ross Duffer]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Fantasy]]></tag>
+      <tag><![CDATA[genre/Horror]]></tag>
+    </tags>
+  </series>
+  <series>
+    <id><![CDATA[tt1190634]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[The Boys]]></title>
+    <englishTitle><![CDATA[The Boys]]></englishTitle>
+    <year><![CDATA[2019–2026]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt1190634/]]></url>
+    <plot><![CDATA[A group of vigilantes set out to take down corrupt superheroes who abuse their superpowers.]]></plot>
+    <duration><![CDATA[60 min]]></duration>
+    <episodes>40</episodes>
+    <onlineRating>8.6</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BZjU4OWNiYzQtMzc1NS00NjZlLTgyYTctZWY4ZmEzMTkxYjA4XkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[07/26/2019]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>false</airing>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Comedy]]></genre>
+      <genre><![CDATA[Crime]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Eric Kripke]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Comedy]]></tag>
+      <tag><![CDATA[genre/Crime]]></tag>
+    </tags>
+  </series>
+  <series>
+    <id><![CDATA[tt5180504]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[The Witcher]]></title>
+    <englishTitle><![CDATA[The Witcher]]></englishTitle>
+    <year><![CDATA[2019–]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt5180504/]]></url>
+    <plot><![CDATA[Geralt of Rivia, a solitary monster hunter, struggles to find his place in a world where people often prove more wicked than beasts.]]></plot>
+    <duration><![CDATA[60 min]]></duration>
+    <episodes>32</episodes>
+    <onlineRating>7.9</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BOTQzMzNmMzUtODgwNS00YTdhLTg5N2MtOWU1YTc4YWY3NjRlXkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[12/20/2019]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>true</airing>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Lauren Schmidt Hissrich]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+    </tags>
+  </series>
+</mymedialist>

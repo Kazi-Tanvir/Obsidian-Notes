@@ -1,0 +1,425 @@
+{
+  "main": {
+    "id": "77e85f3f970997b1",
+    "type": "split",
+    "children": [
+      {
+        "id": "f11f2bb5f259bb2b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "03ab06d0735701f5",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Home.md",
+                "mode": "preview",
+                "source": false
+              },
+              "pinned": true,
+              "icon": "lucide-file",
+              "title": "Home"
+            }
+          },
+          {
+            "id": "7d4ed1918f753899",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "bases",
+              "state": {
+                "file": "Anime View.base",
+                "viewName": "All Anime"
+              },
+              "pinned": true,
+              "icon": "lucide-layout-grid",
+              "title": "Anime View"
+            }
+          },
+          {
+            "id": "7e6754630fa1aa5d",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "bases",
+              "state": {
+                "file": "Anime Movie View.base",
+                "viewName": "All Anime Movies"
+              },
+              "pinned": true,
+              "icon": "lucide-layout-grid",
+              "title": "Anime Movie View"
+            }
+          },
+          {
+            "id": "76a7d9e5ac61db85",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "bases",
+              "state": {
+                "file": "Manga View.base",
+                "viewName": "All Manga"
+              },
+              "pinned": true,
+              "icon": "lucide-layout-grid",
+              "title": "Manga View"
+            }
+          },
+          {
+            "id": "6ca308cfc6e590d4",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "bases",
+              "state": {
+                "file": "Series View.base",
+                "viewName": "All Series"
+              },
+              "pinned": true,
+              "icon": "lucide-layout-grid",
+              "title": "Series View"
+            }
+          },
+          {
+            "id": "09c98166f572d0cb",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "bases",
+              "state": {
+                "file": "Movie View.base",
+                "viewName": "All Movies"
+              },
+              "pinned": true,
+              "icon": "lucide-layout-grid",
+              "title": "Movie View"
+            }
+          },
+          {
+            "id": "52a195586f96e0e5",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "bases",
+              "state": {
+                "file": "Game View.base",
+                "viewName": "All Games"
+              },
+              "pinned": true,
+              "icon": "lucide-layout-grid",
+              "title": "Game View"
+            }
+          },
+          {
+            "id": "2336b5d04e8eb45f",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "bases",
+              "state": {
+                "file": "Mobile Game View.base",
+                "viewName": "All Mobile Games"
+              },
+              "pinned": true,
+              "icon": "lucide-layout-grid",
+              "title": "Mobile Game View"
+            }
+          },
+          {
+            "id": "2744bd3130960f52",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "graph",
+              "state": {},
+              "pinned": true,
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
+            }
+          },
+          {
+            "id": "f2731d5deb6002bd",
+            "type": "leaf",
+            "state": {
+              "type": "bases",
+              "state": {
+                "file": "Movie View.base",
+                "viewName": "All Movies"
+              },
+              "icon": "lucide-layout-grid",
+              "title": "Movie View"
+            }
+          }
+        ],
+        "currentTab": 9
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "c8c5f79e0527b1b4",
+    "type": "split",
+    "children": [
+      {
+        "id": "d46aecce6a1078b0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8042cedd39507497",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "tag:#genre/Drama",
+                "matchingCase": true,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "d481b69de8ac5693",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "right": {
+    "id": "279416c7625b4660",
+    "type": "split",
+    "children": [
+      {
+        "id": "2fd9a64f0deb3159",
+        "type": "tabs",
+        "dimension": 25.252525252525253,
+        "children": [
+          {
+            "id": "53f920f8060070a2",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "02_DU_IIT/01_CLASS/CSE 1101 L1.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for CSE 1101 L1"
+            }
+          },
+          {
+            "id": "5720a8812050f3b7",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "02_DU_IIT/01_CLASS/CSE 1101 L1.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from CSE 1101 L1"
+            }
+          },
+          {
+            "id": "df102072c4a377ae",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": false,
+                "showSearch": true,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "4c18205f15a43f5d",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "02_DU_IIT/01_CLASS/CSE 1101 L1.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of CSE 1101 L1"
+            }
+          },
+          {
+            "id": "c6412785a0953c64",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "9ccc1f1f4daf3b94",
+            "type": "leaf",
+            "state": {
+              "type": "file-properties",
+              "state": {
+                "file": "Movie View.base"
+              },
+              "icon": "lucide-info",
+              "title": "File properties for Movie View"
+            }
+          },
+          {
+            "id": "d570d18d9af49c18",
+            "type": "leaf",
+            "state": {
+              "type": "footnotes",
+              "state": {},
+              "icon": "lucide-file-signature",
+              "title": "Footnotes"
+            }
+          }
+        ],
+        "currentTab": 5
+      },
+      {
+        "id": "a17a137ae15cfbb3",
+        "type": "tabs",
+        "dimension": 37.121212121212125,
+        "children": [
+          {
+            "id": "42af4f1ef891900d",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          }
+        ]
+      },
+      {
+        "id": "152c4bfc9fa84dd3",
+        "type": "tabs",
+        "dimension": 37.62626262626263,
+        "children": [
+          {
+            "id": "04477abee950afcf",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {},
+              "icon": "calendar-with-checkmark",
+              "title": "Calendar"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 343.5
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "bases:Create new base": false,
+      "markdown-importer:Open format converter": false,
+      "audio-recorder:Start/stop recording": false,
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "omnisearch:Omnisearch": false,
+      "obsidian-importer:Open Importer": false,
+      "obsidian-media-db-plugin:Add new Media DB entry": false
+    }
+  },
+  "active": "f2731d5deb6002bd",
+  "lastOpenFiles": [
+    "movies/Homebound (2025).md",
+    "Movie View.base",
+    "Home.md",
+    "Game View.base",
+    "Anime View.base",
+    "Anime Movie View.base",
+    "Mobile Game View.base",
+    "Series View.base",
+    "Manga View.base",
+    "anime/Overflow (2020).md",
+    "anime/Nippon Sangoku - The Three Nations of the Crimson Sun (2026).md",
+    "anime/Ane wa Yanmama Junyuu-chuu (2020).md",
+    "anime/Bible Black (2001).md",
+    "python/import_hentai.py",
+    "CoMix Wave Films.md",
+    "database/series.txt",
+    "database/movies.txt",
+    "manga/Goodnight Punpun (2007).md",
+    "games/The Witcher 3 - Wild Hunt (2015).md",
+    "games/Genshin Impact (2020).md",
+    "games/Grand Theft Auto V (2013).md",
+    "games/Grand Theft Auto IV (2008).md",
+    "games/PUBG Mobile (2018).md",
+    "games/Hay Day (2012).md",
+    "games/Free Fire (2017).md",
+    "games/Clash Royale (2016).md",
+    "games/Clash of Clans (2012).md",
+    "games/Call of Duty - Mobile (2019).md",
+    "games/Brawl Stars (2018).md",
+    "games/Boom Beach (2014).md",
+    "series/Ozark (2017).md",
+    "series/Hannibal (2013).md",
+    "series/Narcos (2015).md",
+    "series/The Witcher (2019).md",
+    "series/Peaky Blinders (2013).md",
+    "Untitled.canvas",
+    "Untitled 1.canvas",
+    "Business/Journal/Technical/Migrated/assets/why-not-jwt.png",
+    "Business/Journal/Technical/Migrated/assets/original.jpg",
+    "Business/Journal/Technical/Migrated/assets/oYukX.jpg",
+    "Business/Journal/Technical/Migrated/assets/iqueryable-dbcontext-everywhere.jpg",
+    "Business/Journal/Technical/Migrated/assets/image4.png",
+    "Business/Journal/Technical/Migrated/assets/image3.png",
+    "Business/Journal/Technical/Migrated/assets/image2.png",
+    "Business/Journal/Technical/Migrated/assets/image1.png",
+    "Business/Journal/Technical/Migrated/assets/image.jpeg",
+    "Business/Journal/Technical/Migrated/assets/image 2.png",
+    "Business/Journal/Technical/Migrated/Mind Map.canvas",
+    "Journal/Technical/Migrated/Mind Map.canvas",
+    "Technical/Migrated/Mind Map.canvas"
+  ]
+}

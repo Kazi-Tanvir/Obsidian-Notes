@@ -1,0 +1,85 @@
+views:
+  - type: cards
+    name: All Series
+    filters:
+      and:
+        - file.folder == "series"
+    order:
+      - file.name
+    cardSize: 150
+    image: note.image
+    imageAspectRatio: 1.5
+    properties:
+      - episodes
+      - duration
+    fields:
+      - episodes
+      - duration
+  - type: cards
+    name: Plan to Watch
+    filters:
+      and:
+        - file.folder == "series"
+        - status == "Plan to Watch"
+    order:
+      - file.name
+    cardSize: 150
+    image: note.image
+    imageAspectRatio: 1.5
+    properties:
+      - episodes
+      - duration
+    fields:
+      - episodes
+      - duration
+  - type: cards
+    name: Currently Watching
+    filters:
+      and:
+        - file.folder == "series"
+        - status == "Currently Watching"
+    order:
+      - file.name
+    cardSize: 150
+    image: note.image
+    imageAspectRatio: 1.5
+    properties:
+      - episodes
+      - duration
+    fields:
+      - episodes
+      - duration
+  - type: cards
+    name: On Hold
+    filters:
+      and:
+        - file.folder == "series"
+        - status == "On Hold"
+    order:
+      - file.name
+    cardSize: 150
+    image: note.image
+    imageAspectRatio: 1.5
+    properties:
+      - episodes
+      - duration
+    fields:
+      - episodes
+      - duration
+  - type: cards
+    name: Dropped
+    filters:
+      and:
+        - file.folder == "series"
+        - status == "Dropped"
+    order:
+      - file.name
+    cardSize: 150
+    image: note.image
+    imageAspectRatio: 1.5
+    properties:
+      - episodes
+      - duration
+    fields:
+      - episodes
+      - duration

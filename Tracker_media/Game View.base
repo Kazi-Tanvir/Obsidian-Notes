@@ -1,0 +1,56 @@
+views:
+  - type: cards
+    name: All Games
+    filters:
+      and:
+        - file.folder == "games"
+        - subType == "PC/Console"
+    order:
+      - file.name
+    image: note.image
+    imageAspectRatio: 0.5
+    cardSize: 200
+  - type: cards
+    name: Plan to Play
+    filters:
+      and:
+        - file.folder == "games"
+        - subType == "PC/Console"
+        - status == "Plan to Play"
+    order:
+      - file.name
+    image: note.image
+    imageAspectRatio: 0.5
+  - type: cards
+    name: Currently Playing
+    filters:
+      and:
+        - file.folder == "games"
+        - subType == "PC/Console"
+        - status == "Currently Playing"
+    order:
+      - file.name
+    image: note.image
+    imageAspectRatio: 0.5
+  - type: cards
+    name: On Hold
+    filters:
+      and:
+        - file.folder == "games"
+        - subType == "PC/Console"
+        - status == "On Hold"
+    order:
+      - file.name
+    image: note.image
+    imageAspectRatio: 0.5
+  - type: cards
+    name: Dropped
+    filters:
+      and:
+        - file.folder == "games"
+        - subType == "PC/Console"
+        - status == "Dropped"
+    order:
+      - file.name
+    image: note.image
+    imageAspectRatio: 0.5

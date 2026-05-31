@@ -1,0 +1,85 @@
+views:
+  - type: cards
+    name: All Manga
+    filters:
+      and:
+        - file.folder == "manga"
+    order:
+      - file.name
+    cardSize: 150
+    image: note.image
+    imageAspectRatio: 1.5
+    properties:
+      - chapters
+      - volumes
+    fields:
+      - chapters
+      - volumes
+  - type: cards
+    name: Plan to Read
+    filters:
+      and:
+        - file.folder == "manga"
+        - status == "Plan to Read"
+    order:
+      - file.name
+    cardSize: 150
+    image: note.image
+    imageAspectRatio: 1.5
+    properties:
+      - chapters
+      - volumes
+    fields:
+      - chapters
+      - volumes
+  - type: cards
+    name: Currently Reading
+    filters:
+      and:
+        - file.folder == "manga"
+        - status == "Currently Reading"
+    order:
+      - file.name
+    cardSize: 150
+    image: note.image
+    imageAspectRatio: 1.5
+    properties:
+      - chapters
+      - volumes
+    fields:
+      - chapters
+      - volumes
+  - type: cards
+    name: On Hold
+    filters:
+      and:
+        - file.folder == "manga"
+        - status == "On Hold"
+    order:
+      - file.name
+    cardSize: 150
+    image: note.image
+    imageAspectRatio: 1.5
+    properties:
+      - chapters
+      - volumes
+    fields:
+      - chapters
+      - volumes
+  - type: cards
+    name: Dropped
+    filters:
+      and:
+        - file.folder == "manga"
+        - status == "Dropped"
+    order:
+      - file.name
+    cardSize: 150
+    image: note.image
+    imageAspectRatio: 1.5
+    properties:
+      - chapters
+      - volumes
+    fields:
+      - chapters
+      - volumes

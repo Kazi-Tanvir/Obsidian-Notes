@@ -1,0 +1,65 @@
+{
+  "collapse-filter": false,
+  "search": "",
+  "showTags": true,
+  "showAttachments": false,
+  "hideUnresolved": false,
+  "showOrphans": false,
+  "collapse-color-groups": false,
+  "colorGroups": [
+    {
+      "query": "path:anime  ",
+      "color": {
+        "a": 1,
+        "rgb": 14701138
+      }
+    },
+    {
+      "query": "path:\"anime movies\"  ",
+      "color": {
+        "a": 1,
+        "rgb": 1907393
+      }
+    },
+    {
+      "query": "path:games  ",
+      "color": {
+        "a": 1,
+        "rgb": 11657298
+      }
+    },
+    {
+      "query": "path:manga  ",
+      "color": {
+        "a": 1,
+        "rgb": 5431378
+      }
+    },
+    {
+      "query": "path:movies  ",
+      "color": {
+        "a": 1,
+        "rgb": 11016841
+      }
+    },
+    {
+      "query": "path:series  ",
+      "color": {
+        "a": 1,
+        "rgb": 5419488
+      }
+    }
+  ],
+  "collapse-display": false,
+  "showArrow": false,
+  "textFadeMultiplier": 0,
+  "nodeSizeMultiplier": 0.993229166666667,
+  "lineSizeMultiplier": 0.993229166666667,
+  "collapse-forces": false,
+  "centerStrength": 0.40625,
+  "repelStrength": 14.6875,
+  "linkStrength": 1,
+  "linkDistance": 216,
+  "scale": 0.08982763809655124,
+  "close": true
+}

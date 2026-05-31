@@ -1,0 +1,55 @@
+views:
+  - type: cards
+    name: All Mobile Games
+    filters:
+      and:
+        - file.folder == "games"
+        - subType == "Mobile"
+    order:
+      - file.name
+    image: note.image
+    imageAspectRatio: 0.5
+  - type: cards
+    name: Plan to Play
+    filters:
+      and:
+        - file.folder == "games"
+        - subType == "Mobile"
+        - status == "Plan to Play"
+    order:
+      - file.name
+    image: note.image
+    imageAspectRatio: 0.5
+  - type: cards
+    name: Currently Playing
+    filters:
+      and:
+        - file.folder == "games"
+        - subType == "Mobile"
+        - status == "Currently Playing"
+    order:
+      - file.name
+    image: note.image
+    imageAspectRatio: 0.5
+  - type: cards
+    name: On Hold
+    filters:
+      and:
+        - file.folder == "games"
+        - subType == "Mobile"
+        - status == "On Hold"
+    order:
+      - file.name
+    image: note.image
+    imageAspectRatio: 0.5
+  - type: cards
+    name: Dropped
+    filters:
+      and:
+        - file.folder == "games"
+        - subType == "Mobile"
+        - status == "Dropped"
+    order:
+      - file.name
+    image: note.image
+    imageAspectRatio: 0.5

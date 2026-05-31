@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created by Antigravity Media Vault Exporter -->
+<mygamelist>
+  <myinfo>
+    <user_id>13864737</user_id>
+    <user_name>SENPAI778</user_name>
+    <user_export_type>games</user_export_type>
+    <user_total_items>11</user_total_items>
+    <user_total_completed>1</user_total_completed>
+    <user_total_currently_playing>4</user_total_currently_playing>
+    <user_total_onhold>0</user_total_onhold>
+    <user_total_dropped>4</user_total_dropped>
+    <user_total_plan_to_play>2</user_total_plan_to_play>
+  </myinfo>
+  <game>
+    <id><![CDATA[tt1699759]]></id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[PC/Console]]></subType>
+    <title><![CDATA[Assassin's Creed: Brotherhood]]></title>
+    <englishTitle><![CDATA[Assassin's Creed: Brotherhood]]></englishTitle>
+    <year>2010</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt1699759/]]></url>
+    <onlineRating>8.7</onlineRating>
+    <image><![CDATA[https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/48190/header.jpg?t=1681861086]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[11/16/2010]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <developers>
+    </developers>
+    <publishers>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+      <genre><![CDATA[History]]></genre>
+      <genre><![CDATA[Sci-Fi]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+      <tag><![CDATA[genre/History]]></tag>
+      <tag><![CDATA[genre/Sci-Fi]]></tag>
+    </tags>
+  </game>
+  <game>
+    <id>242050</id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[PC/Console]]></subType>
+    <title><![CDATA[Assassin’s Creed® IV Black Flag™]]></title>
+    <englishTitle><![CDATA[Assassin’s Creed® IV Black Flag™]]></englishTitle>
+    <year><![CDATA[NaN]]></year>
+    <dataSource><![CDATA[SteamAPI]]></dataSource>
+    <url><![CDATA[https://store.steampowered.com/app/242050]]></url>
+    <onlineRating>0</onlineRating>
+    <image><![CDATA[https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/242050/header.jpg?t=1777052740]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[unknown]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Currently Playing]]></status>
+    <developers>
+      <developer><![CDATA[Ubisoft Montreal]]></developer>
+    </developers>
+    <publishers>
+      <publisher><![CDATA[Ubisoft]]></publisher>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+    </tags>
+  </game>
+  <game>
+    <id>311560</id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[PC/Console]]></subType>
+    <title><![CDATA[Assassin’s Creed® Rogue]]></title>
+    <englishTitle><![CDATA[Assassin’s Creed® Rogue]]></englishTitle>
+    <year>2015</year>
+    <dataSource><![CDATA[SteamAPI]]></dataSource>
+    <url><![CDATA[https://store.steampowered.com/app/311560]]></url>
+    <onlineRating>74</onlineRating>
+    <image><![CDATA[https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/311560/header.jpg?t=1751968973]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[03/23/2015]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Dropped]]></status>
+    <developers>
+      <developer><![CDATA[Ubisoft Sofia]]></developer>
+      <developer><![CDATA[Ubisoft Kiev]]></developer>
+    </developers>
+    <publishers>
+      <publisher><![CDATA[Ubisoft]]></publisher>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+    </tags>
+  </game>
+  <game>
+    <id>1245620</id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[PC/Console]]></subType>
+    <title><![CDATA[ELDEN RING]]></title>
+    <englishTitle><![CDATA[ELDEN RING]]></englishTitle>
+    <year>2022</year>
+    <dataSource><![CDATA[SteamAPI]]></dataSource>
+    <url><![CDATA[https://store.steampowered.com/app/1245620]]></url>
+    <onlineRating>94</onlineRating>
+    <image><![CDATA[https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1245620/header.jpg?t=1767883716]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[02/25/2022]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Plan to Play]]></status>
+    <publishingStatus><![CDATA[]]></publishingStatus>
+    <developers>
+      <developer><![CDATA[FromSoftware, Inc.]]></developer>
+    </developers>
+    <publishers>
+      <publisher><![CDATA[FromSoftware, Inc.]]></publisher>
+      <publisher><![CDATA[Bandai Namco Entertainment]]></publisher>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[RPG]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/RPG]]></tag>
+    </tags>
+  </game>
+  <game>
+    <id>220240</id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[PC/Console]]></subType>
+    <title><![CDATA[Far Cry 3]]></title>
+    <englishTitle><![CDATA[Far Cry 3]]></englishTitle>
+    <year>2012</year>
+    <dataSource><![CDATA[SteamAPI]]></dataSource>
+    <url><![CDATA[https://store.steampowered.com/app/220240]]></url>
+    <onlineRating>88</onlineRating>
+    <image><![CDATA[https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/220240/header.jpg?t=1752169206]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[11/28/2012]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Dropped]]></status>
+    <developers>
+      <developer><![CDATA[Ubisoft Montreal, Massive Entertainment, and Ubisoft Shanghai]]></developer>
+    </developers>
+    <publishers>
+      <publisher><![CDATA[Ubisoft]]></publisher>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+    </tags>
+  </game>
+  <game>
+    <id>367520</id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[PC/Console]]></subType>
+    <title><![CDATA[Hollow Knight]]></title>
+    <englishTitle><![CDATA[Hollow Knight]]></englishTitle>
+    <year>2017</year>
+    <dataSource><![CDATA[SteamAPI]]></dataSource>
+    <url><![CDATA[https://store.steampowered.com/app/367520]]></url>
+    <onlineRating>87</onlineRating>
+    <image><![CDATA[https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/367520/3c3489495136b26b34f8a9543c7f5645b99d388c/header.jpg?t=1776125684]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[02/24/2017]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Currently Playing]]></status>
+    <developers>
+      <developer><![CDATA[Team Cherry]]></developer>
+    </developers>
+    <publishers>
+      <publisher><![CDATA[Team Cherry]]></publisher>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+      <genre><![CDATA[Indie]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+      <tag><![CDATA[genre/Indie]]></tag>
+    </tags>
+  </game>
+  <game>
+    <id>1030300</id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[PC/Console]]></subType>
+    <title><![CDATA[Hollow Knight: Silksong]]></title>
+    <englishTitle><![CDATA[Hollow Knight: Silksong]]></englishTitle>
+    <year>2025</year>
+    <dataSource><![CDATA[SteamAPI]]></dataSource>
+    <url><![CDATA[https://store.steampowered.com/app/1030300]]></url>
+    <onlineRating>90</onlineRating>
+    <image><![CDATA[https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1030300/7983574d464e6559ac7e24275727f73a8bcca1f3/header.jpg?t=1776125736]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[09/04/2025]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Currently Playing]]></status>
+    <developers>
+      <developer><![CDATA[Team Cherry]]></developer>
+    </developers>
+    <publishers>
+      <publisher><![CDATA[Team Cherry]]></publisher>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+      <genre><![CDATA[Indie]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+      <tag><![CDATA[genre/Indie]]></tag>
+    </tags>
+  </game>
+  <game>
+    <id>2668510</id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[PC/Console]]></subType>
+    <title><![CDATA[Red Dead Redemption]]></title>
+    <englishTitle><![CDATA[Red Dead Redemption]]></englishTitle>
+    <year>2024</year>
+    <dataSource><![CDATA[SteamAPI]]></dataSource>
+    <url><![CDATA[https://store.steampowered.com/app/2668510]]></url>
+    <onlineRating>0</onlineRating>
+    <image><![CDATA[https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2668510/header.jpg?t=1741118459]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[10/29/2024]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Dropped]]></status>
+    <developers>
+      <developer><![CDATA[Rockstar Games]]></developer>
+      <developer><![CDATA[Double Eleven]]></developer>
+    </developers>
+    <publishers>
+      <publisher><![CDATA[Rockstar Games]]></publisher>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+    </tags>
+  </game>
+  <game>
+    <id>1174180</id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[PC/Console]]></subType>
+    <title><![CDATA[Red Dead Redemption 2]]></title>
+    <englishTitle><![CDATA[Red Dead Redemption 2]]></englishTitle>
+    <year>2019</year>
+    <dataSource><![CDATA[SteamAPI]]></dataSource>
+    <url><![CDATA[https://store.steampowered.com/app/1174180]]></url>
+    <onlineRating>93</onlineRating>
+    <image><![CDATA[https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1174180/header.jpg?t=1759502961]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[12/05/2019]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Plan to Play]]></status>
+    <developers>
+      <developer><![CDATA[Rockstar Games]]></developer>
+    </developers>
+    <publishers>
+      <publisher><![CDATA[Rockstar Games]]></publisher>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+    </tags>
+  </game>
+  <game>
+    <id>814380</id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[PC/Console]]></subType>
+    <title><![CDATA[Sekiro™: Shadows Die Twice - GOTY Edition]]></title>
+    <englishTitle><![CDATA[Sekiro™: Shadows Die Twice - GOTY Edition]]></englishTitle>
+    <year>2019</year>
+    <dataSource><![CDATA[SteamAPI]]></dataSource>
+    <url><![CDATA[https://store.steampowered.com/app/814380]]></url>
+    <onlineRating>88</onlineRating>
+    <image><![CDATA[https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/814380/header.jpg?t=1762888662]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[03/21/2019]]></releaseDate>
+    <played>true</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Currently Playing]]></status>
+    <developers>
+      <developer><![CDATA[FromSoftware, Inc.]]></developer>
+    </developers>
+    <publishers>
+      <publisher><![CDATA[Activision (Excluding Japan and Asia)]]></publisher>
+      <publisher><![CDATA[FromSoftware, Inc. (Japan)]]></publisher>
+      <publisher><![CDATA[方块游戏 (Asia)]]></publisher>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+    </tags>
+  </game>
+  <game>
+    <id><![CDATA[tt1937416]]></id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[PC/Console]]></subType>
+    <title><![CDATA[The Witcher 2: Assassins of Kings]]></title>
+    <englishTitle><![CDATA[The Witcher 2: Assassins of Kings]]></englishTitle>
+    <year>2011</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt1937416/]]></url>
+    <onlineRating>8.9</onlineRating>
+    <image><![CDATA[https://images.gog-statics.com/8355e657a19311b158a3553a154e109199d6991c7791a20c3305af1f84d15ed7_product_card_v2_mobile_slider_639.jpg]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[05/17/2011]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Dropped]]></status>
+    <developers>
+    </developers>
+    <publishers>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Fantasy]]></genre>
+      <genre><![CDATA[Mystery]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Fantasy]]></tag>
+      <tag><![CDATA[genre/Mystery]]></tag>
+    </tags>
+  </game>
+</mygamelist>

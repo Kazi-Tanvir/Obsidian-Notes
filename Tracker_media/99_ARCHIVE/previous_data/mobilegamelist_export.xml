@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created by Antigravity Media Vault Exporter -->
+<mygamelist>
+  <myinfo>
+    <user_id>13864737</user_id>
+    <user_name>SENPAI778</user_name>
+    <user_export_type>mobile_games</user_export_type>
+    <user_total_items>8</user_total_items>
+    <user_total_completed>0</user_total_completed>
+    <user_total_currently_playing>1</user_total_currently_playing>
+    <user_total_onhold>0</user_total_onhold>
+    <user_total_dropped>2</user_total_dropped>
+    <user_total_plan_to_play>5</user_total_plan_to_play>
+  </myinfo>
+  <mobile_game>
+    <id>1658</id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[Mobile]]></subType>
+    <title><![CDATA[Boom Beach]]></title>
+    <englishTitle><![CDATA[Boom Beach]]></englishTitle>
+    <year>2014</year>
+    <dataSource><![CDATA[RAWG]]></dataSource>
+    <url><![CDATA[https://rawg.io/games/boom-beach]]></url>
+    <onlineRating>61</onlineRating>
+    <image><![CDATA[https://media.rawg.io/media/screenshots/7ff/7ff2f9307750f3fd47e6683c98f45d62.jpeg]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[03/26/2014]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Dropped]]></status>
+    <publishingStatus><![CDATA[]]></publishingStatus>
+    <developers>
+      <developer><![CDATA[Supercell]]></developer>
+    </developers>
+    <publishers>
+      <publisher><![CDATA[Supercell Oy]]></publisher>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Strategy]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Strategy]]></tag>
+    </tags>
+    <description><![CDATA[Welcome to Boom Beach: come with a plan or leave in defeat!
+Fight the evil Blackguard with brains and brawn in this epic combat strategy game. Attack enemy bases to free enslaved islanders and unlock the secrets of this tropical paradise. Create a Task Force with players around the world to take on the enemy together. Scout, plan, then BOOM THE BEACH!
+PLEASE NOTE! Boom Beach is free to download and play. However, some game items can also be purchased for real money. If you don't want to use this feature, please disable in-app purchases in your device's settings.
+FEATURES
+- Play with millions of other players, raid hundreds of enemy bases for loot
+- Battle for control of precious resources to upgrade your base against enemy attacks
+- Explore a huge tropical archipelago and discover the mysterious power of the Life Crystals
+- Face fearsome Blackguard Bosses and uncover their evil plans
+- Join other players to form an unstoppable Task Force to take on co-op missions
+Under our Terms of Services and Privacy Policy, Boom Beach is allowed for download and play only for persons 13 years or over of age.
+Note: A network connection is required to play.
+Parent's guide:
+http://www.supercell.net/parents
+Privacy Policy:
+http://www.supercell.net/privacy-policy/
+Terms of Service:
+http://www.supercell.net/terms-of-service/
+Extra Builders have arrived! Extra Builders is a monthly subscription service that allows you to build or upgrade two buildings at the same time. Extra Builders cost 2.99 USD/month (or local equivalent).
+Extra Builders subscription will renew automatically unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Account will be charged for renewal within 24-hours prior to the end of the current period. Renewal costs 2.99 USD/month (or local equivalent).
+Subscriptions may be managed by the user and auto-renewal may be turned off by going to the user's Account Settings after purchase. No cancellation of the current subscription is allowed during active subscription period.]]></description>
+  </mobile_game>
+  <mobile_game>
+    <id><![CDATA[tt9480088]]></id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[Mobile]]></subType>
+    <title><![CDATA[Brawl Stars]]></title>
+    <englishTitle><![CDATA[Brawl Stars]]></englishTitle>
+    <year>2018</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt9480088/]]></url>
+    <onlineRating>6.9</onlineRating>
+    <image><![CDATA[https://supercell.com/images/1a5b69311180a4a1c374e10556941f05/hero_bg_brawlstars.a385872a.webp]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[12/01/2018]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Plan to Play]]></status>
+    <developers>
+    </developers>
+    <publishers>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+    </tags>
+  </mobile_game>
+  <mobile_game>
+    <id><![CDATA[tt11049554]]></id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[Mobile]]></subType>
+    <title><![CDATA[Call of Duty: Mobile]]></title>
+    <englishTitle><![CDATA[Call of Duty: Mobile]]></englishTitle>
+    <year>2019</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt11049554/]]></url>
+    <onlineRating>7.6</onlineRating>
+    <image><![CDATA[https://codm.garena.com/static/images/Main-page/P1/main-kv.jpg]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[10/01/2019]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Plan to Play]]></status>
+    <developers>
+    </developers>
+    <publishers>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+    </tags>
+  </mobile_game>
+  <mobile_game>
+    <id><![CDATA[tt6749432]]></id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[Mobile]]></subType>
+    <title><![CDATA[Clash Royale]]></title>
+    <englishTitle><![CDATA[Clash Royale]]></englishTitle>
+    <year>2016</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt6749432/]]></url>
+    <onlineRating>7.1</onlineRating>
+    <image><![CDATA[https://supercell.com/images/8654bffbaa77efb91243d3706b739c25/og_clashroyale.d235f90b.webp]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[03/02/2016]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Plan to Play]]></status>
+    <developers>
+    </developers>
+    <publishers>
+    </publishers>
+    <genres>
+      <genre><![CDATA[N/A]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/N/A]]></tag>
+    </tags>
+  </mobile_game>
+  <mobile_game>
+    <id><![CDATA[tt6318978]]></id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[Mobile]]></subType>
+    <title><![CDATA[Clash of Clans]]></title>
+    <englishTitle><![CDATA[Clash of Clans]]></englishTitle>
+    <year>2012</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt6318978/]]></url>
+    <onlineRating>6.6</onlineRating>
+    <image><![CDATA[https://cdn.thegamesdb.net/images/medium/fanart/20496-1.jpg]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[08/02/2012]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Currently Playing]]></status>
+    <developers>
+    </developers>
+    <publishers>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Fantasy]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Fantasy]]></tag>
+    </tags>
+  </mobile_game>
+  <mobile_game>
+    <id><![CDATA[tt9197514]]></id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[Mobile]]></subType>
+    <title><![CDATA[Free Fire]]></title>
+    <englishTitle><![CDATA[Free Fire]]></englishTitle>
+    <year>2017</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt9197514/]]></url>
+    <onlineRating>5</onlineRating>
+    <image><![CDATA[https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhuNTkGb4Y3ASToFdS8wgDbg--n2Jn3zvSog&s]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[12/04/2017]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Plan to Play]]></status>
+    <developers>
+    </developers>
+    <publishers>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Thriller]]></genre>
+      <genre><![CDATA[War]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Thriller]]></tag>
+      <tag><![CDATA[genre/War]]></tag>
+    </tags>
+  </mobile_game>
+  <mobile_game>
+    <id>1177</id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[Mobile]]></subType>
+    <title><![CDATA[Hay Day]]></title>
+    <englishTitle><![CDATA[Hay Day]]></englishTitle>
+    <year>2012</year>
+    <dataSource><![CDATA[RAWG]]></dataSource>
+    <url><![CDATA[https://rawg.io/games/hay-day]]></url>
+    <onlineRating>72</onlineRating>
+    <image><![CDATA[https://media.rawg.io/media/screenshots/423/423e4613b95924ee000b6883188e3e2e.jpg]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[06/21/2012]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Dropped]]></status>
+    <publishingStatus><![CDATA[]]></publishingStatus>
+    <developers>
+      <developer><![CDATA[Supercell]]></developer>
+    </developers>
+    <publishers>
+      <publisher><![CDATA[Supercell Oy]]></publisher>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Simulation]]></genre>
+      <genre><![CDATA[Casual]]></genre>
+      <genre><![CDATA[Family]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Simulation]]></tag>
+      <tag><![CDATA[genre/Casual]]></tag>
+      <tag><![CDATA[genre/Family]]></tag>
+    </tags>
+    <description><![CDATA[Best. Farm. Ever. Welcome to Hay Day, the most popular farming game on mobiles and tablets, number one in 122 countries.
+Learn the lay of the land, tend to your crops, and trade goods with neighbors and friends. It’s a real special place where the crops never die even though it never rains. Sharing the farm with our quirky animals only makes things more fun!
+PLEASE NOTE! Hay Day is free to download and install. However, some game items can also be purchased for real money. If you don't want to use this feature, please disable in­-app purchases in your device's settings. A network connection is also required.
+~~~~~~~~~~
+FEATURES
+~~~~~~~~~~
+* Grow and customize your farm
+* Trade crops and fresh goods with neighbors and friends through your very own roadside shop
+* Fulfill orders with your truck and even by steamboat
+* Repair your dock and cast your lure to fish the waters
+* Build your own town and welcome visitors
+~~~~~~~~~~~
+MEDIA MENTIONS
+~~~~~~~~~~~
+Hay Day‘s presentation is fairly cinematic for a mobile game. It’s eye candy. The controls are also smooth, non intrusive, and use the iPhone’s touch screen well.
+http://www.gamezebo.com/2012/07/03/hay-day-review/
+Watching your crops grow and your twee factories spew out products is a quietly pleasing experience.
+http://www.pocketgamer.co.uk/r/Multiformat/Hay+Day/review.asp?c=42764
+~~~~~~~~~~~
+PLAYER REVIEWS
+~~~~~~~~~~~
+5/5 The artwork is phenomenal, clear, missing no details and certainly comical.
+5/5 The animals are super cute and nothing ever dies. No pressure if you can’t play for a few days.
+5/5 I love this game I play it everyday to build my farm up. I love how it branches out from just a farm to fishing and mining. Overall very fun game :)
+5/5 Great game. Love the options!! Got this game for my iPad and it out does any other farm game I have played. Wonderful design and thought process.
+5/5 A “happy feel good” game! 6 stars from this girl!
+~~~~~~~~~~
+SUPPORT
+~~~~~~~~~~
+Neighbor, are you having problems? Visit https://supercell.helpshift.com/a/hay-day/?l=en or contact us in game by going to Settings > Help and Support.
+Under our Terms of Services and Privacy Policy, Hay Day is allowed for download and play only for persons 13 years or over of age.
+Privacy Policy:
+http://www.supercell.net/privacy-policy/
+Terms of Service:
+http://www.supercell.net/terms-of-service/
+Parent's Guide:
+http://www.supercell.net/parents/]]></description>
+  </mobile_game>
+  <mobile_game>
+    <id><![CDATA[tt12351468]]></id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[Mobile]]></subType>
+    <title><![CDATA[PUBG Mobile]]></title>
+    <englishTitle><![CDATA[PUBG Mobile]]></englishTitle>
+    <year>2018</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt12351468/]]></url>
+    <onlineRating>6.8</onlineRating>
+    <image><![CDATA[https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJqbvQWD0IX_UXsai31QKFzaOrkEmrO4H5iQ&s]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[03/19/2018]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Plan to Play]]></status>
+    <developers>
+    </developers>
+    <publishers>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+      <genre><![CDATA[Thriller]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+      <tag><![CDATA[genre/Thriller]]></tag>
+    </tags>
+  </mobile_game>
+</mygamelist>

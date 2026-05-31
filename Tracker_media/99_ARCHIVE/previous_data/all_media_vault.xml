@@ -1,0 +1,2829 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created by Antigravity Media Vault Exporter -->
+<mymedialist>
+  <myinfo>
+    <user_id>13864737</user_id>
+    <user_name>SENPAI778</user_name>
+    <user_export_type>all_vault_media</user_export_type>
+    <user_total_items>68</user_total_items>
+    <user_total_completed>46</user_total_completed>
+    <user_total_watching>9</user_total_watching>
+    <user_total_onhold>0</user_total_onhold>
+    <user_total_dropped>6</user_total_dropped>
+    <user_total_plan_to_watch>7</user_total_plan_to_watch>
+  </myinfo>
+  <item>
+    <id><![CDATA[tt0050083]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[12 Angry Men]]></title>
+    <englishTitle><![CDATA[12 Angry Men]]></englishTitle>
+    <year>1957</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt0050083/]]></url>
+    <plot><![CDATA[The jury in a New York City murder trial is frustrated by a single member whose skeptical caution forces them to more carefully consider the evidence before jumping to a hasty verdict.]]></plot>
+    <duration><![CDATA[96 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>9.0</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BYjE4NzdmOTYtYjc5Yi00YzBiLWEzNDEtNTgxZGQ2MWVkN2NiXkEyXkFqcGc@._V1_QL75_UX380_CR0,11,380,562_.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[04/10/1957]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Crime]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Sidney Lumet]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Reginald Rose]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Henry Fonda]]></actor>
+      <actor><![CDATA[Lee J. Cobb]]></actor>
+      <actor><![CDATA[Martin Balsam]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Crime]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt23849204]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[12th Fail]]></title>
+    <englishTitle><![CDATA[12th Fail]]></englishTitle>
+    <year>2023</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt23849204/]]></url>
+    <plot><![CDATA[The real-life story of IPS Officer Manoj Kumar Sharma and IRS Officer Shraddha Joshi.]]></plot>
+    <duration><![CDATA[147 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>8.7</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BNTE3OTIxZDYtNjA0NC00N2YxLTg1NGQtOTYxNmZkMDkwOWNjXkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[10/27/2023]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Biography]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Vidhu Vinod Chopra]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Vidhu Vinod Chopra]]></writer>
+      <writer><![CDATA[Jaskunwar Kohli]]></writer>
+      <writer><![CDATA[Anurag Pathak]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Vikrant Massey]]></actor>
+      <actor><![CDATA[Medha Shankr]]></actor>
+      <actor><![CDATA[Anant Joshi]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Biography]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt1187043]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[3 Idiots]]></title>
+    <englishTitle><![CDATA[3 Idiots]]></englishTitle>
+    <year>2009</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt1187043/]]></url>
+    <plot><![CDATA[Two friends are searching for their long lost companion. They revisit their college days and recall the memories of their friend who inspired them to think differently, even as the rest of the world called them "idiots".]]></plot>
+    <duration><![CDATA[170 min]]></duration>
+    <onlineRating>8.4</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BNzc4ZWQ3NmYtODE0Ny00YTQ4LTlkZWItNTBkMGQ0MmUwMmJlXkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[12/25/2009]]></premiere>
+    <watched>false</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Comedy]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Rajkumar Hirani]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Abhijat Joshi]]></writer>
+      <writer><![CDATA[Rajkumar Hirani]]></writer>
+      <writer><![CDATA[Vidhu Vinod Chopra]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Aamir Khan]]></actor>
+      <actor><![CDATA[Madhavan]]></actor>
+      <actor><![CDATA[Mona Singh]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Comedy]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt6644200]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[A Quiet Place]]></title>
+    <englishTitle><![CDATA[A Quiet Place]]></englishTitle>
+    <year>2018</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt6644200/]]></url>
+    <plot><![CDATA[A family struggles for survival in a world invaded by blind alien creatures with ultra-sensitive hearing.]]></plot>
+    <duration><![CDATA[90 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>7.5</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BMjI0MDMzNTQ0M15BMl5BanBnXkFtZTgwMTM5NzM3NDM@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[04/06/2018]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Horror]]></genre>
+      <genre><![CDATA[Sci-Fi]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[John Krasinski]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Bryan Woods]]></writer>
+      <writer><![CDATA[Scott Beck]]></writer>
+      <writer><![CDATA[John Krasinski]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Emily Blunt]]></actor>
+      <actor><![CDATA[John Krasinski]]></actor>
+      <actor><![CDATA[Millicent Simmonds]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Horror]]></tag>
+      <tag><![CDATA[genre/Sci-Fi]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt0443453]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Borat]]></title>
+    <englishTitle><![CDATA[Borat]]></englishTitle>
+    <year>2006</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt0443453/]]></url>
+    <plot><![CDATA[Kazakh TV talking head Borat is dispatched to the United States to report on the greatest country in the world.]]></plot>
+    <duration><![CDATA[84 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>7.4</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BMTk0MTQ3NDQ4Ml5BMl5BanBnXkFtZTcwOTQ3OTQzMw@@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[11/03/2006]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Comedy]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Larry Charles]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Sacha Baron Cohen]]></writer>
+      <writer><![CDATA[Anthony Hines]]></writer>
+      <writer><![CDATA[Peter Baynham]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Sacha Baron Cohen]]></actor>
+      <actor><![CDATA[Ken Davitian]]></actor>
+      <actor><![CDATA[Luenell]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Comedy]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt13143964]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Borat Subsequent Moviefilm]]></title>
+    <englishTitle><![CDATA[Borat Subsequent Moviefilm]]></englishTitle>
+    <year>2020</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt13143964/]]></url>
+    <plot><![CDATA[Borat returns from Kazakhstan to America, this time to reveal more about its culture, the COVID-19 pandemic, and the political elections.]]></plot>
+    <duration><![CDATA[95 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>6.6</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BOWJmNDcyOTItYTE0ZS00NzAwLThjNGUtYTdhMjBjMTAwNDc4XkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[10/23/2020]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Comedy]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Jason Woliner]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Sacha Baron Cohen]]></writer>
+      <writer><![CDATA[Anthony Hines]]></writer>
+      <writer><![CDATA[Dan Swimer]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Sacha Baron Cohen]]></actor>
+      <actor><![CDATA[Maria Bakalova]]></actor>
+      <actor><![CDATA[Tom Hanks]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Comedy]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt0137523]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Fight Club]]></title>
+    <englishTitle><![CDATA[Fight Club]]></englishTitle>
+    <year>1999</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt0137523/]]></url>
+    <plot><![CDATA[An insomniac office worker and a devil-may-care soap maker form an underground fight club that evolves into much more.]]></plot>
+    <duration><![CDATA[139 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>8.8</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BOTgyOGQ1NDItNGU3Ny00MjU3LTg2YWEtNmEyYjBiMjI1Y2M5XkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[10/15/1999]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Crime]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Thriller]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[David Fincher]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Chuck Palahniuk]]></writer>
+      <writer><![CDATA[Jim Uhls]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Brad Pitt]]></actor>
+      <actor><![CDATA[Edward Norton]]></actor>
+      <actor><![CDATA[Meat Loaf]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Crime]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Thriller]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt4788734]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Homebound]]></title>
+    <englishTitle><![CDATA[Homebound]]></englishTitle>
+    <year>2021</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt4788734/]]></url>
+    <plot><![CDATA[A trip to the countryside turns out to be far from idyllic for a father and his new fiancée when his kids decide the house is a little too crowded.]]></plot>
+    <duration><![CDATA[71 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>4.3</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BNzU4YzhlOTUtZjMyZC00MTYzLTgzNDAtZmNjZmNjNDY1YmMyXkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[05/13/2022]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Horror]]></genre>
+      <genre><![CDATA[Mystery]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Sebastian Godwin]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Sebastian Godwin]]></writer>
+      <writer><![CDATA[Jon Gilbert]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Aisling Loftus]]></actor>
+      <actor><![CDATA[Tom Goodman-Hill]]></actor>
+      <actor><![CDATA[Raffiella Chapman]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Horror]]></tag>
+      <tag><![CDATA[genre/Mystery]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt1375666]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Inception]]></title>
+    <englishTitle><![CDATA[Inception]]></englishTitle>
+    <year>2010</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt1375666/]]></url>
+    <plot><![CDATA[A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a CEO, but his tragic past may doom the project and his team to disaster.]]></plot>
+    <duration><![CDATA[148 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>8.8</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_QL75_UX380_CR0,0,380,562_.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[07/16/2010]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+      <genre><![CDATA[Sci-Fi]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Christopher Nolan]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Christopher Nolan]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Leonardo DiCaprio]]></actor>
+      <actor><![CDATA[Joseph Gordon-Levitt]]></actor>
+      <actor><![CDATA[Elliot Page]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+      <tag><![CDATA[genre/Sci-Fi]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt0816692]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Interstellar]]></title>
+    <englishTitle><![CDATA[Interstellar]]></englishTitle>
+    <year>2014</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt0816692/]]></url>
+    <plot><![CDATA[When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.]]></plot>
+    <duration><![CDATA[169 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>8.7</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BYzdjMDAxZGItMjI2My00ODA1LTlkNzItOWFjMDU5ZDJlYWY3XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[11/07/2014]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Adventure]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Sci-Fi]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Christopher Nolan]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Jonathan Nolan]]></writer>
+      <writer><![CDATA[Christopher Nolan]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Matthew McConaughey]]></actor>
+      <actor><![CDATA[Anne Hathaway]]></actor>
+      <actor><![CDATA[Jessica Chastain]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Adventure]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Sci-Fi]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt24735934]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Memento (2000)]]></title>
+    <englishTitle><![CDATA[Memento (2000)]]></englishTitle>
+    <year>2000</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt24735934/]]></url>
+    <plot><![CDATA[N/A]]></plot>
+    <duration><![CDATA[N/A]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>0</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BMGQ3Y2Q4NjktN2E4Ny00Y2Q2LTliZDUtZTNiNjRhY2I0NGIyXkEyXkFqcGc@._V1_.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[05/18/2015]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[N/A]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[N/A]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[N/A]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[N/A]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/N/A]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt0364569]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Oldboy]]></title>
+    <englishTitle><![CDATA[Oldboy]]></englishTitle>
+    <year>2003</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt0364569/]]></url>
+    <plot><![CDATA[After being kidnapped and imprisoned for fifteen years, Oh Dae-Su is released, only to find that he must track down his captor in five days.]]></plot>
+    <duration><![CDATA[120 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>8.3</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BMTAwNzNjYWItZmI0Ni00ZTcyLWIwNWMtZjlmNGMxZTEyYTJmXkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[11/21/2003]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Mystery]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Park Chan-wook]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Garon Tsuchiya]]></writer>
+      <writer><![CDATA[Nobuaki Minegishi]]></writer>
+      <writer><![CDATA[Park Chan-wook]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Choi Min-sik]]></actor>
+      <actor><![CDATA[Yoo Ji-tae]]></actor>
+      <actor><![CDATA[Kang Hye-jeong]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Mystery]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt15398776]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Oppenheimer]]></title>
+    <englishTitle><![CDATA[Oppenheimer]]></englishTitle>
+    <year>2023</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt15398776/]]></url>
+    <plot><![CDATA[A dramatization of the life story of J. Robert Oppenheimer, the physicist who had a large hand in the development of the atomic bombs that brought an end to World War II.]]></plot>
+    <duration><![CDATA[180 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>8.2</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BN2JkMDc5MGQtZjg3YS00NmFiLWIyZmQtZTJmNTM5MjVmYTQ4XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[07/21/2023]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Biography]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[History]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Christopher Nolan]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Christopher Nolan]]></writer>
+      <writer><![CDATA[Kai Bird]]></writer>
+      <writer><![CDATA[Martin Sherwin]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Cillian Murphy]]></actor>
+      <actor><![CDATA[Emily Blunt]]></actor>
+      <actor><![CDATA[Matt Damon]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Biography]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/History]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt6751668]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Parasite]]></title>
+    <englishTitle><![CDATA[Parasite]]></englishTitle>
+    <year>2019</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt6751668/]]></url>
+    <plot><![CDATA[Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy Park family and the destitute Kim clan.]]></plot>
+    <duration><![CDATA[132 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>8.5</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BYjk1Y2U4MjQtY2ZiNS00OWQyLWI3MmYtZWUwNmRjYWRiNWNhXkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[11/08/2019]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Thriller]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Bong Joon Ho]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Bong Joon Ho]]></writer>
+      <writer><![CDATA[Han Jin-won]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Song Kang-ho]]></actor>
+      <actor><![CDATA[Lee Sun-kyun]]></actor>
+      <actor><![CDATA[Cho Yeo-jeong]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Thriller]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt0449088]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Pirates of the Caribbean: At World's End]]></title>
+    <englishTitle><![CDATA[Pirates of the Caribbean: At World's End]]></englishTitle>
+    <year>2007</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt0449088/]]></url>
+    <plot><![CDATA[Will Turner, Elizabeth Swann, Hector Barbossa, and the crew of the Black Pearl try and rescue Jack from Davy Jones's locker, and prepare to fight Lord Cutler Beckett, who controls Davy Jones and the Flying Dutchman.]]></plot>
+    <duration><![CDATA[169 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>7.2</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BMjIyNjkxNzEyMl5BMl5BanBnXkFtZTYwMjc3MDE3._V1_QL75_UX380_CR0,0,380,562_.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[05/25/2007]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+      <genre><![CDATA[Fantasy]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Gore Verbinski]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Ted Elliott]]></writer>
+      <writer><![CDATA[Terry Rossio]]></writer>
+      <writer><![CDATA[Stuart Beattie]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Johnny Depp]]></actor>
+      <actor><![CDATA[Orlando Bloom]]></actor>
+      <actor><![CDATA[Keira Knightley]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+      <tag><![CDATA[genre/Fantasy]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt0383574]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Pirates of the Caribbean: Dead Man's Chest]]></title>
+    <englishTitle><![CDATA[Pirates of the Caribbean: Dead Man's Chest]]></englishTitle>
+    <year>2006</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt0383574/]]></url>
+    <plot><![CDATA[Jack Sparrow races to recover the heart of Davy Jones to avoid enslaving his soul to Jones' service, as other friends and foes seek the heart for their own agenda as well.]]></plot>
+    <duration><![CDATA[151 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>7.4</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BMTcwODc1MTMxM15BMl5BanBnXkFtZTYwMDg1NzY3._V1_QL75_UX380_CR0,0,380,562_.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[07/07/2006]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+      <genre><![CDATA[Fantasy]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Gore Verbinski]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Ted Elliott]]></writer>
+      <writer><![CDATA[Terry Rossio]]></writer>
+      <writer><![CDATA[Stuart Beattie]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Johnny Depp]]></actor>
+      <actor><![CDATA[Orlando Bloom]]></actor>
+      <actor><![CDATA[Keira Knightley]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+      <tag><![CDATA[genre/Fantasy]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt0325980]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Pirates of the Caribbean: The Curse of the Black Pearl]]></title>
+    <englishTitle><![CDATA[Pirates of the Caribbean: The Curse of the Black Pearl]]></englishTitle>
+    <year>2003</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt0325980/]]></url>
+    <plot><![CDATA[An intrepid blacksmith teams up with an eccentric pirate captain to save his love from an undead pirate crew.]]></plot>
+    <duration><![CDATA[143 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>8.1</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BNDhlMzEyNzItMTA5Mi00YWRhLThlNTktYTQyMTA0MDIyNDEyXkEyXkFqcGc@._V1_QL75_UX380_CR0,2,380,562_.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[07/09/2003]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+      <genre><![CDATA[Fantasy]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Gore Verbinski]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Ted Elliott]]></writer>
+      <writer><![CDATA[Terry Rossio]]></writer>
+      <writer><![CDATA[Stuart Beattie]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Johnny Depp]]></actor>
+      <actor><![CDATA[Geoffrey Rush]]></actor>
+      <actor><![CDATA[Orlando Bloom]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+      <tag><![CDATA[genre/Fantasy]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt28494851]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Stolen]]></title>
+    <englishTitle><![CDATA[Stolen]]></englishTitle>
+    <year>2023</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt28494851/]]></url>
+    <plot><![CDATA[Two urbane brothers witness a baby being kidnapped from an impoverished mother at a railway station in rural India. One guided by moral duty, convinces the other to help the mother and join a perilous investigation to find the baby.]]></plot>
+    <duration><![CDATA[92 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>7.5</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BOThmMTZjMTUtMTE5OC00OTA0LWIzNjktZTA5NTBmZDc4Mjk0XkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[06/04/2025]]></premiere>
+    <watched>false</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Thriller]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Karan Tejpal]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Karan Tejpal]]></writer>
+      <writer><![CDATA[Gaurav Dhingra]]></writer>
+      <writer><![CDATA[Swapnil Salkar]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Abhishek Banerjee]]></actor>
+      <actor><![CDATA[Mia Maelzer]]></actor>
+      <actor><![CDATA[Shubham Vardhan]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Thriller]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt6723592]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Tenet]]></title>
+    <englishTitle><![CDATA[Tenet]]></englishTitle>
+    <year>2020</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt6723592/]]></url>
+    <plot><![CDATA[Armed with only the word "Tenet," and fighting for the survival of the entire world, CIA operative, The Protagonist, journeys through a twilight world of international espionage on a global mission that unfolds beyond real time.]]></plot>
+    <duration><![CDATA[150 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>7.3</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BNTIzNDIxMzktMzlkMi00MmUyLWFmMjQtZDgwMjBmOGJmNTI3XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[09/03/2020]]></premiere>
+    <watched>false</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Sci-Fi]]></genre>
+      <genre><![CDATA[Thriller]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Christopher Nolan]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Christopher Nolan]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[John David Washington]]></actor>
+      <actor><![CDATA[Robert Pattinson]]></actor>
+      <actor><![CDATA[Elizabeth Debicki]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Sci-Fi]]></tag>
+      <tag><![CDATA[genre/Thriller]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt10530176]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[The Call]]></title>
+    <englishTitle><![CDATA[The Call]]></englishTitle>
+    <year>2020</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt10530176/]]></url>
+    <plot><![CDATA[Two people live in different times. Seo-Yeon lives in the present and Young-Sook lives in the past. One phone call connects the two, and their lives are changed irrevocably.]]></plot>
+    <duration><![CDATA[112 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>7.1</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BYzZlOGEyZTMtYmIxYS00NmIxLWIwNjYtMzY3Yjg2OThjODU2XkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[11/27/2020]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Crime]]></genre>
+      <genre><![CDATA[Horror]]></genre>
+      <genre><![CDATA[Mystery]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Chung-Hyun Lee]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Sergio Casci]]></writer>
+      <writer><![CDATA[Chung-Hyun Lee]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Park Shin-hye]]></actor>
+      <actor><![CDATA[Jeon Jong-seo]]></actor>
+      <actor><![CDATA[Kim Sung-ryung]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Crime]]></tag>
+      <tag><![CDATA[genre/Horror]]></tag>
+      <tag><![CDATA[genre/Mystery]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt1645170]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[The Dictator]]></title>
+    <englishTitle><![CDATA[The Dictator]]></englishTitle>
+    <year>2012</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt1645170/]]></url>
+    <plot><![CDATA[The heroic story of a dictator who risked his life to ensure that democracy would never come to the country he so lovingly oppressed.]]></plot>
+    <duration><![CDATA[83 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>6.5</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BM2IwMDM3ZmQtNjQ3NS00OTFiLWI5YzEtYWE3YjI5NTk3YzkwXkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[05/16/2012]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Comedy]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Larry Charles]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Sacha Baron Cohen]]></writer>
+      <writer><![CDATA[Alec Berg]]></writer>
+      <writer><![CDATA[David Mandel]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Sacha Baron Cohen]]></actor>
+      <actor><![CDATA[Anna Faris]]></actor>
+      <actor><![CDATA[John C. Reilly]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Comedy]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt0309987]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[The Dreamers]]></title>
+    <englishTitle><![CDATA[The Dreamers]]></englishTitle>
+    <year>2003</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt0309987/]]></url>
+    <plot><![CDATA[In 1968 Paris, film-loving twins Theo and Isabelle befriend American student Matthew during student protests. While their parents travel, they pull him into a month of sensual exploration, until reality intrudes.]]></plot>
+    <duration><![CDATA[115 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>7.1</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BZmY0Y2YwZTgtZDE2Ny00ZmYzLWFhOTItNDFhZjhjMjAzNWVhXkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[02/20/2004]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Romance]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Bernardo Bertolucci]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Gilbert Adair]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Michael Pitt]]></actor>
+      <actor><![CDATA[Louis Garrel]]></actor>
+      <actor><![CDATA[Eva Green]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Romance]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt2350496]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[The Lunchbox]]></title>
+    <englishTitle><![CDATA[The Lunchbox]]></englishTitle>
+    <year>2013</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt2350496/]]></url>
+    <plot><![CDATA[A mistaken delivery in Mumbai's famously efficient lunchbox delivery system connects a young housewife to an older man in the dusk of his life as they build a fantasy world together through notes in the lunchbox.]]></plot>
+    <duration><![CDATA[104 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>7.8</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BMTUwMzc1NjIzMV5BMl5BanBnXkFtZTgwODUyMTIxMTE@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[09/20/2013]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Romance]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Ritesh Batra]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Ritesh Batra]]></writer>
+      <writer><![CDATA[Vasan Bala]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Irrfan Khan]]></actor>
+      <actor><![CDATA[Nimrat Kaur]]></actor>
+      <actor><![CDATA[Nawazuddin Siddiqui]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Romance]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt0454921]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[The Pursuit of Happyness]]></title>
+    <englishTitle><![CDATA[The Pursuit of Happyness]]></englishTitle>
+    <year>2006</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt0454921/]]></url>
+    <plot><![CDATA[A struggling salesman takes custody of his son as he's poised to begin a life-changing professional career.]]></plot>
+    <duration><![CDATA[117 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>8.0</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[12/15/2006]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Biography]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Gabriele Muccino]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Steve Conrad]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Will Smith]]></actor>
+      <actor><![CDATA[Thandiwe Newton]]></actor>
+      <actor><![CDATA[Jaden Smith]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Biography]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt0111161]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[The Shawshank Redemption]]></title>
+    <englishTitle><![CDATA[The Shawshank Redemption]]></englishTitle>
+    <year>1994</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt0111161/]]></url>
+    <plot><![CDATA[A wrongfully convicted banker forms a close friendship with a hardened convict over a quarter century while retaining his humanity through simple acts of compassion.]]></plot>
+    <duration><![CDATA[142 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>9.3</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BMDAyY2FhYjctNDc5OS00MDNlLThiMGUtY2UxYWVkNGY2ZjljXkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[10/14/1994]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Drama]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Frank Darabont]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Stephen King]]></writer>
+      <writer><![CDATA[Frank Darabont]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Tim Robbins]]></actor>
+      <actor><![CDATA[Morgan Freeman]]></actor>
+      <actor><![CDATA[Bob Gunton]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Drama]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt0120382]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[The Truman Show]]></title>
+    <englishTitle><![CDATA[The Truman Show]]></englishTitle>
+    <year>1998</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt0120382/]]></url>
+    <plot><![CDATA[An insurance salesman begins to suspect that his whole life is actually some sort of reality TV show.]]></plot>
+    <duration><![CDATA[103 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>8.2</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BNzA3ZjZlNzYtMTdjMy00NjMzLTk5ZGYtMTkyYzNiOGM1YmM3XkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[06/05/1998]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Comedy]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Peter Weir]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Andrew Niccol]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Jim Carrey]]></actor>
+      <actor><![CDATA[Ed Harris]]></actor>
+      <actor><![CDATA[Laura Linney]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Comedy]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt0993846]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[The Wolf of Wall Street]]></title>
+    <englishTitle><![CDATA[The Wolf of Wall Street]]></englishTitle>
+    <year>2013</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt0993846/]]></url>
+    <plot><![CDATA[Based on the true story of Jordan Belfort, from his rise to a wealthy stock-broker living the high life to his fall involving crime, corruption and the federal government.]]></plot>
+    <duration><![CDATA[180 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>8.2</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BMjIxMjgxNTk0MF5BMl5BanBnXkFtZTgwNjIyOTg2MDE@._V1_QL75_UX380_CR0,0,380,562_.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[12/25/2013]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Biography]]></genre>
+      <genre><![CDATA[Comedy]]></genre>
+      <genre><![CDATA[Crime]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Martin Scorsese]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Terence Winter]]></writer>
+      <writer><![CDATA[Jordan Belfort]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Leonardo DiCaprio]]></actor>
+      <actor><![CDATA[Jonah Hill]]></actor>
+      <actor><![CDATA[Margot Robbie]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Biography]]></tag>
+      <tag><![CDATA[genre/Comedy]]></tag>
+      <tag><![CDATA[genre/Crime]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt5700672]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Train to Busan]]></title>
+    <englishTitle><![CDATA[Train to Busan]]></englishTitle>
+    <year>2016</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt5700672/]]></url>
+    <plot><![CDATA[While a zombie virus breaks out in South Korea, passengers struggle to survive on the train from Seoul to Busan.]]></plot>
+    <duration><![CDATA[118 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>7.6</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BMTkwOTQ4OTg0OV5BMl5BanBnXkFtZTgwMzQyOTM0OTE@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[07/20/2016]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Horror]]></genre>
+      <genre><![CDATA[Thriller]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Yeon Sang-ho]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Park Joo-suk]]></writer>
+      <writer><![CDATA[Yeon Sang-ho]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Gong Yoo]]></actor>
+      <actor><![CDATA[Jung Yu-mi]]></actor>
+      <actor><![CDATA[Ma Dong-seok]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Horror]]></tag>
+      <tag><![CDATA[genre/Thriller]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt1562872]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Zindagi Na Milegi Dobara]]></title>
+    <englishTitle><![CDATA[Zindagi Na Milegi Dobara]]></englishTitle>
+    <year>2011</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt1562872/]]></url>
+    <plot><![CDATA[Three friends decide to turn their fantasy vacation into reality after one of their friends gets engaged.]]></plot>
+    <duration><![CDATA[155 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>8.2</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BOGIzYzg5NzItNDRkYS00NmIzLTk3NzQtZWYwY2VlZDhiYWQ4XkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[07/15/2011]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Comedy]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Musical]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Zoya Akhtar]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Farhan Akhtar]]></writer>
+      <writer><![CDATA[Reema Kagti]]></writer>
+      <writer><![CDATA[Zoya Akhtar]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Hrithik Roshan]]></actor>
+      <actor><![CDATA[Farhan Akhtar]]></actor>
+      <actor><![CDATA[Abhay Deol]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Comedy]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Musical]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt31806037]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Adolescence]]></title>
+    <englishTitle><![CDATA[Adolescence]]></englishTitle>
+    <year>2025</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt31806037/]]></url>
+    <plot><![CDATA[When a 13-year-old is accused of the murder of a classmate, his family, therapist and the detective in charge are all left asking what really happened.]]></plot>
+    <duration><![CDATA[N/A]]></duration>
+    <episodes>4</episodes>
+    <onlineRating>8.1</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BNGY1YjBiNzMtYWZhNC00OWViLWE0MzItNjc4YzczOGNiM2I0XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[03/13/2025]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>false</airing>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Crime]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Thriller]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Stephen Graham]]></writer>
+      <writer><![CDATA[Jack Thorne]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Crime]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Thriller]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt3032476]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Better Call Saul]]></title>
+    <englishTitle><![CDATA[Better Call Saul]]></englishTitle>
+    <year><![CDATA[2015–2022]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt3032476/]]></url>
+    <plot><![CDATA[Albuquerque lawyer Jimmy McGill scrapes for clients and respect, but every win drags him closer to shady deals, dangerous players, and the alter ego Saul Goodman.]]></plot>
+    <duration><![CDATA[46 min]]></duration>
+    <episodes>63</episodes>
+    <onlineRating>9.0</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BNDdjNTEzMjMtYjM3Mi00NzQ3LWFlNWMtZjdmYWU3ZDkzMjk1XkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[02/08/2015]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>false</airing>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Crime]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Vince Gilligan]]></writer>
+      <writer><![CDATA[Peter Gould]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Crime]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt0903747]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Breaking Bad]]></title>
+    <englishTitle><![CDATA[Breaking Bad]]></englishTitle>
+    <year><![CDATA[2008–2013]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt0903747/]]></url>
+    <plot><![CDATA[A chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine with a former student to secure his family's future.]]></plot>
+    <duration><![CDATA[49 min]]></duration>
+    <episodes>62</episodes>
+    <onlineRating>9.5</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BMzU5ZGYzNmQtMTdhYy00OGRiLTg0NmQtYjVjNzliZTg1ZGE4XkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[01/20/2008]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>false</airing>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Crime]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Thriller]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Vince Gilligan]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Crime]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Thriller]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt5753856]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Dark]]></title>
+    <englishTitle><![CDATA[Dark]]></englishTitle>
+    <year><![CDATA[2017–2020]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt5753856/]]></url>
+    <plot><![CDATA[A family saga with a supernatural twist, set in a German town where the disappearance of two young children exposes the relationships among four families.]]></plot>
+    <duration><![CDATA[60 min]]></duration>
+    <episodes>26</episodes>
+    <onlineRating>8.7</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BOWJjMGViY2UtNTAzNS00ZGFjLWFkNTMtMDBiMDMyZTM1NTY3XkEyXkFqcGc@._V1_QL75_UX380_CR0,57,380,562_.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[12/01/2017]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>false</airing>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Crime]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Mystery]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Baran bo Odar]]></writer>
+      <writer><![CDATA[Jantje Friese]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Crime]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Mystery]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt0944947]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Game of Thrones]]></title>
+    <englishTitle><![CDATA[Game of Thrones]]></englishTitle>
+    <year><![CDATA[2011–2019]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt0944947/]]></url>
+    <plot><![CDATA[Nine noble families fight for control over the lands of Westeros, while an ancient enemy returns after being dormant for millennia.]]></plot>
+    <duration><![CDATA[57 min]]></duration>
+    <episodes>73</episodes>
+    <onlineRating>9.2</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BMTNhMDJmNmYtNDQ5OS00ODdlLWE0ZDAtZTgyYTIwNDY3OTU3XkEyXkFqcGc@._V1_QL75_UX380_CR0,3,380,562_.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[04/17/2011]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>false</airing>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[David Benioff]]></writer>
+      <writer><![CDATA[D.B. Weiss]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt13159924]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Gen V]]></title>
+    <englishTitle><![CDATA[Gen V]]></englishTitle>
+    <year><![CDATA[2023–]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt13159924/]]></url>
+    <plot><![CDATA[From the world of "The Boys" comes "Gen V," which explores the first generation of superheroes to know that their super powers are from Compound V. These heroes put their physical and moral boundaries to the test competing for the...]]></plot>
+    <duration><![CDATA[N/A]]></duration>
+    <episodes>16</episodes>
+    <onlineRating>7.6</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BYWU4YTljYmItYjczNS00MWY0LWI3NjctZjJhYjU3NWNmNWZhXkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[09/29/2023]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>true</airing>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+      <genre><![CDATA[Comedy]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Evan Goldberg]]></writer>
+      <writer><![CDATA[Eric Kripke]]></writer>
+      <writer><![CDATA[Craig Rosenberg]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+      <tag><![CDATA[genre/Comedy]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt2243973]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Hannibal]]></title>
+    <englishTitle><![CDATA[Hannibal]]></englishTitle>
+    <year><![CDATA[2013–2015]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt2243973/]]></url>
+    <plot><![CDATA[Explores the early relationship between renowned psychiatrist Hannibal Lecter and a young FBI criminal profiler who is haunted by his ability to empathize with serial killers.]]></plot>
+    <duration><![CDATA[44 min]]></duration>
+    <episodes>0</episodes>
+    <onlineRating>8.5</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BNjBmYjdiMzItNTEwNi00YTI2LTg4YjctOTRjNDYxNTUxNGQ1XkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[04/04/2013]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>false</airing>
+    <watched>false</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Currently Watching]]></status>
+    <genres>
+      <genre><![CDATA[Crime]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Horror]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Bryan Fuller]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Crime]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Horror]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt11407524]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Hostel Daze]]></title>
+    <englishTitle><![CDATA[Hostel Daze]]></englishTitle>
+    <year><![CDATA[2019–2023]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt11407524/]]></url>
+    <plot><![CDATA[Through the adventures of four friends 'Hostel Daze' captures what goes inside an engineering hostel in India.]]></plot>
+    <duration><![CDATA[159 min]]></duration>
+    <episodes>21</episodes>
+    <onlineRating>8.5</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BZWZlNWMxNDYtNTAzYi00OWFiLThhZDUtZGZkYWMyMzQ5ZGYyXkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[12/13/2019]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>false</airing>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Comedy]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Saurabh Khanna]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Comedy]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt11198330]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[House of the Dragon]]></title>
+    <englishTitle><![CDATA[House of the Dragon]]></englishTitle>
+    <year><![CDATA[2022–]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt11198330/]]></url>
+    <plot><![CDATA[An internal succession war within House Targaryen at the height of its power, 172 years before the birth of Daenerys Targaryen.]]></plot>
+    <duration><![CDATA[N/A]]></duration>
+    <episodes>26</episodes>
+    <onlineRating>8.3</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BZGM4MTczODQtNGIxOC00Y2U2LTk1YmItNzA2N2VhYmE0Y2YwXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[08/21/2022]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>true</airing>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Ryan J. Condal]]></writer>
+      <writer><![CDATA[George R.R. Martin]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt9432978]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Kota Factory]]></title>
+    <englishTitle><![CDATA[Kota Factory]]></englishTitle>
+    <year><![CDATA[2019–2021]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt9432978/]]></url>
+    <plot><![CDATA[In a city of coaching centers known to train India’s finest collegiate minds, an earnest but unexceptional student and his friends navigate campus life.]]></plot>
+    <duration><![CDATA[45 min]]></duration>
+    <episodes>15</episodes>
+    <onlineRating>9.0</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BY2U5MjY1NWEtZDI2MS00NTlhLWEyODQtYzE0MzY3NDUyNzE3XkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[08/28/2021]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>false</airing>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Comedy]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Saurabh Khanna]]></writer>
+      <writer><![CDATA[Arunabh Kumar]]></writer>
+      <writer><![CDATA[Raghav Subbu]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Comedy]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt6473300]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Mirzapur]]></title>
+    <englishTitle><![CDATA[Mirzapur]]></englishTitle>
+    <year><![CDATA[2018–]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt6473300/]]></url>
+    <plot><![CDATA[A shocking incident at a wedding procession ignites a series of events entangling the lives of two families in the lawless city of Mirzapur.]]></plot>
+    <duration><![CDATA[60 min]]></duration>
+    <episodes>29</episodes>
+    <onlineRating>8.4</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BZTFjMzMxZTUtYTMyNy00OWNhLTk4ODQtNGI1NjI1NjJhMzc3XkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[11/15/2018]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>true</airing>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Crime]]></genre>
+      <genre><![CDATA[Thriller]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Puneet Krishna]]></writer>
+      <writer><![CDATA[Karan Anshuman]]></writer>
+      <writer><![CDATA[Apurva Dhar Badgaiyan]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Crime]]></tag>
+      <tag><![CDATA[genre/Thriller]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt2707408]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Narcos]]></title>
+    <englishTitle><![CDATA[Narcos]]></englishTitle>
+    <year><![CDATA[2015–2017]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt2707408/]]></url>
+    <plot><![CDATA[A chronicled look at the criminal exploits of Colombian drug lord Pablo Escobar, as well as the many other drug kingpins who plagued the country through the years.]]></plot>
+    <duration><![CDATA[49 min]]></duration>
+    <episodes>0</episodes>
+    <onlineRating>8.7</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BNzQwOTcwMzIwN15BMl5BanBnXkFtZTgwMjYxMTA0NjE@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[08/28/2015]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>false</airing>
+    <watched>false</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Currently Watching]]></status>
+    <genres>
+      <genre><![CDATA[Biography]]></genre>
+      <genre><![CDATA[Crime]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Carlo Bernard]]></writer>
+      <writer><![CDATA[Chris Brancato]]></writer>
+      <writer><![CDATA[Doug Miro]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Biography]]></tag>
+      <tag><![CDATA[genre/Crime]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt5071412]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Ozark]]></title>
+    <englishTitle><![CDATA[Ozark]]></englishTitle>
+    <year><![CDATA[2017–2022]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt5071412/]]></url>
+    <plot><![CDATA[A financial advisor drags his family from Chicago to the Missouri Ozarks, where he must launder money to appease a drug boss.]]></plot>
+    <duration><![CDATA[60 min]]></duration>
+    <episodes>0</episodes>
+    <onlineRating>8.4</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BZDk1ZTdjOWItNTJmYS00MGIzLThmY2ItZWNiOGY5MzJlNTA5XkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[07/21/2017]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>false</airing>
+    <watched>false</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Currently Watching]]></status>
+    <genres>
+      <genre><![CDATA[Crime]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Thriller]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Bill Dubuque]]></writer>
+      <writer><![CDATA[Mark Williams]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Crime]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Thriller]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt12004706]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Panchayat]]></title>
+    <englishTitle><![CDATA[Panchayat]]></englishTitle>
+    <year><![CDATA[2020–]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt12004706/]]></url>
+    <plot><![CDATA[A comedy-drama, which captures the journey of an engineering graduate Abhishek, who for lack of a better job option joins as secretary of a Panchayat office in a remote village of Uttar Pradesh.]]></plot>
+    <duration><![CDATA[35 min]]></duration>
+    <episodes>32</episodes>
+    <onlineRating>9.0</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BYzkwZGNkYTctZDc2MS00OWM2LWI2NTUtMTM2ZGMzMTY0N2Q1XkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[03/05/2020]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>true</airing>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Comedy]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Chandan Kumar]]></writer>
+      <writer><![CDATA[Deepak Kumar Mishra]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Comedy]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt2442560]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Peaky Blinders]]></title>
+    <englishTitle><![CDATA[Peaky Blinders]]></englishTitle>
+    <year><![CDATA[2013–2022]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt2442560/]]></url>
+    <plot><![CDATA[A gangster family epic set in 1919 Birmingham, England; centered on a gang who sew razor blades in the peaks of their caps, and their fierce boss Tommy Shelby.]]></plot>
+    <duration><![CDATA[60 min]]></duration>
+    <episodes>36</episodes>
+    <onlineRating>8.7</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BOGM0NGY3ZmItOGE2ZC00OWIxLTk0N2EtZWY4Yzg3ZDlhNGI3XkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[09/30/2014]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>false</airing>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Crime]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Steven Knight]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Crime]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt1475582]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Sherlock]]></title>
+    <englishTitle><![CDATA[Sherlock]]></englishTitle>
+    <year><![CDATA[2010–2017]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt1475582/]]></url>
+    <plot><![CDATA[In modern-day London, brilliant but eccentric detective Sherlock Holmes teams with war veteran Dr. John Watson to crack baffling crimes, outwit formidable foes, and aid Scotland Yard with razor-sharp deduction.]]></plot>
+    <duration><![CDATA[88 min]]></duration>
+    <episodes>0</episodes>
+    <onlineRating>9.0</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BNTQzNGZjNDEtOTMwYi00MzFjLWE2ZTYtYzYxYzMwMjZkZDc5XkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[10/24/2010]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>false</airing>
+    <watched>false</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Currently Watching]]></status>
+    <genres>
+      <genre><![CDATA[Crime]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Mystery]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Mark Gatiss]]></writer>
+      <writer><![CDATA[Steven Moffat]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Crime]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Mystery]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt2788316]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Shogun]]></title>
+    <englishTitle><![CDATA[Shogun]]></englishTitle>
+    <year><![CDATA[2024–2026]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt2788316/]]></url>
+    <plot><![CDATA[When a mysterious European ship is found marooned in a nearby Japanese fishing village, Lord Yoshii Toranaga discovers secrets that could tip the scales of power and devastate his enemies.]]></plot>
+    <duration><![CDATA[N/A]]></duration>
+    <episodes>10</episodes>
+    <onlineRating>8.6</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BZmJkMDRjYzEtMWI3Ny00OWE3LWJlNTItMGQ1MTQzMzc3NDY5XkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[02/27/2024]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>false</airing>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[James Clavell (based on the novel by)]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt4574334]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[Stranger Things]]></title>
+    <englishTitle><![CDATA[Stranger Things]]></englishTitle>
+    <year><![CDATA[2016–2025]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt4574334/]]></url>
+    <plot><![CDATA[In 1980s Indiana, a group of young friends witness supernatural forces and secret government exploits. As they search for answers, the children unravel a series of extraordinary mysteries.]]></plot>
+    <duration><![CDATA[51 min]]></duration>
+    <episodes>42</episodes>
+    <onlineRating>8.6</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BNjRiMTA4NWUtNmE0ZC00NGM0LWJhMDUtZWIzMDM5ZDIzNTg3XkEyXkFqcGc@._V1_QL75_UY562_CR35,0,380,562_.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[07/15/2016]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>false</airing>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Fantasy]]></genre>
+      <genre><![CDATA[Horror]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Matt Duffer]]></writer>
+      <writer><![CDATA[Ross Duffer]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Fantasy]]></tag>
+      <tag><![CDATA[genre/Horror]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt1190634]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[The Boys]]></title>
+    <englishTitle><![CDATA[The Boys]]></englishTitle>
+    <year><![CDATA[2019–2026]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt1190634/]]></url>
+    <plot><![CDATA[A group of vigilantes set out to take down corrupt superheroes who abuse their superpowers.]]></plot>
+    <duration><![CDATA[60 min]]></duration>
+    <episodes>40</episodes>
+    <onlineRating>8.6</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BZjU4OWNiYzQtMzc1NS00NjZlLTgyYTctZWY4ZmEzMTkxYjA4XkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[07/26/2019]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>false</airing>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Comedy]]></genre>
+      <genre><![CDATA[Crime]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Eric Kripke]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Comedy]]></tag>
+      <tag><![CDATA[genre/Crime]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt5180504]]></id>
+    <type><![CDATA[series]]></type>
+    <subType><![CDATA[series]]></subType>
+    <title><![CDATA[The Witcher]]></title>
+    <englishTitle><![CDATA[The Witcher]]></englishTitle>
+    <year><![CDATA[2019–]]></year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt5180504/]]></url>
+    <plot><![CDATA[Geralt of Rivia, a solitary monster hunter, struggles to find his place in a world where people often prove more wicked than beasts.]]></plot>
+    <duration><![CDATA[60 min]]></duration>
+    <episodes>32</episodes>
+    <onlineRating>7.9</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BOTQzMzNmMzUtODgwNS00YTdhLTg5N2MtOWU1YTc4YWY3NjRlXkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <airedFrom><![CDATA[12/20/2019]]></airedFrom>
+    <airedTo><![CDATA[unknown]]></airedTo>
+    <airing>true</airing>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+    </genres>
+    <writer>
+      <writer><![CDATA[Lauren Schmidt Hissrich]]></writer>
+    </writer>
+    <studio>
+    </studio>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt1699759]]></id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[PC/Console]]></subType>
+    <title><![CDATA[Assassin's Creed: Brotherhood]]></title>
+    <englishTitle><![CDATA[Assassin's Creed: Brotherhood]]></englishTitle>
+    <year>2010</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt1699759/]]></url>
+    <onlineRating>8.7</onlineRating>
+    <image><![CDATA[https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/48190/header.jpg?t=1681861086]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[11/16/2010]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <developers>
+    </developers>
+    <publishers>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+      <genre><![CDATA[History]]></genre>
+      <genre><![CDATA[Sci-Fi]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+      <tag><![CDATA[genre/History]]></tag>
+      <tag><![CDATA[genre/Sci-Fi]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id>242050</id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[PC/Console]]></subType>
+    <title><![CDATA[Assassin’s Creed® IV Black Flag™]]></title>
+    <englishTitle><![CDATA[Assassin’s Creed® IV Black Flag™]]></englishTitle>
+    <year><![CDATA[NaN]]></year>
+    <dataSource><![CDATA[SteamAPI]]></dataSource>
+    <url><![CDATA[https://store.steampowered.com/app/242050]]></url>
+    <onlineRating>0</onlineRating>
+    <image><![CDATA[https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/242050/header.jpg?t=1777052740]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[unknown]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Currently Playing]]></status>
+    <developers>
+      <developer><![CDATA[Ubisoft Montreal]]></developer>
+    </developers>
+    <publishers>
+      <publisher><![CDATA[Ubisoft]]></publisher>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id>311560</id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[PC/Console]]></subType>
+    <title><![CDATA[Assassin’s Creed® Rogue]]></title>
+    <englishTitle><![CDATA[Assassin’s Creed® Rogue]]></englishTitle>
+    <year>2015</year>
+    <dataSource><![CDATA[SteamAPI]]></dataSource>
+    <url><![CDATA[https://store.steampowered.com/app/311560]]></url>
+    <onlineRating>74</onlineRating>
+    <image><![CDATA[https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/311560/header.jpg?t=1751968973]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[03/23/2015]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Dropped]]></status>
+    <developers>
+      <developer><![CDATA[Ubisoft Sofia]]></developer>
+      <developer><![CDATA[Ubisoft Kiev]]></developer>
+    </developers>
+    <publishers>
+      <publisher><![CDATA[Ubisoft]]></publisher>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id>1245620</id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[PC/Console]]></subType>
+    <title><![CDATA[ELDEN RING]]></title>
+    <englishTitle><![CDATA[ELDEN RING]]></englishTitle>
+    <year>2022</year>
+    <dataSource><![CDATA[SteamAPI]]></dataSource>
+    <url><![CDATA[https://store.steampowered.com/app/1245620]]></url>
+    <onlineRating>94</onlineRating>
+    <image><![CDATA[https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1245620/header.jpg?t=1767883716]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[02/25/2022]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Plan to Play]]></status>
+    <publishingStatus><![CDATA[]]></publishingStatus>
+    <developers>
+      <developer><![CDATA[FromSoftware, Inc.]]></developer>
+    </developers>
+    <publishers>
+      <publisher><![CDATA[FromSoftware, Inc.]]></publisher>
+      <publisher><![CDATA[Bandai Namco Entertainment]]></publisher>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[RPG]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/RPG]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id>220240</id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[PC/Console]]></subType>
+    <title><![CDATA[Far Cry 3]]></title>
+    <englishTitle><![CDATA[Far Cry 3]]></englishTitle>
+    <year>2012</year>
+    <dataSource><![CDATA[SteamAPI]]></dataSource>
+    <url><![CDATA[https://store.steampowered.com/app/220240]]></url>
+    <onlineRating>88</onlineRating>
+    <image><![CDATA[https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/220240/header.jpg?t=1752169206]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[11/28/2012]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Dropped]]></status>
+    <developers>
+      <developer><![CDATA[Ubisoft Montreal, Massive Entertainment, and Ubisoft Shanghai]]></developer>
+    </developers>
+    <publishers>
+      <publisher><![CDATA[Ubisoft]]></publisher>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id>367520</id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[PC/Console]]></subType>
+    <title><![CDATA[Hollow Knight]]></title>
+    <englishTitle><![CDATA[Hollow Knight]]></englishTitle>
+    <year>2017</year>
+    <dataSource><![CDATA[SteamAPI]]></dataSource>
+    <url><![CDATA[https://store.steampowered.com/app/367520]]></url>
+    <onlineRating>87</onlineRating>
+    <image><![CDATA[https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/367520/3c3489495136b26b34f8a9543c7f5645b99d388c/header.jpg?t=1776125684]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[02/24/2017]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Currently Playing]]></status>
+    <developers>
+      <developer><![CDATA[Team Cherry]]></developer>
+    </developers>
+    <publishers>
+      <publisher><![CDATA[Team Cherry]]></publisher>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+      <genre><![CDATA[Indie]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+      <tag><![CDATA[genre/Indie]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id>1030300</id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[PC/Console]]></subType>
+    <title><![CDATA[Hollow Knight: Silksong]]></title>
+    <englishTitle><![CDATA[Hollow Knight: Silksong]]></englishTitle>
+    <year>2025</year>
+    <dataSource><![CDATA[SteamAPI]]></dataSource>
+    <url><![CDATA[https://store.steampowered.com/app/1030300]]></url>
+    <onlineRating>90</onlineRating>
+    <image><![CDATA[https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1030300/7983574d464e6559ac7e24275727f73a8bcca1f3/header.jpg?t=1776125736]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[09/04/2025]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Currently Playing]]></status>
+    <developers>
+      <developer><![CDATA[Team Cherry]]></developer>
+    </developers>
+    <publishers>
+      <publisher><![CDATA[Team Cherry]]></publisher>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+      <genre><![CDATA[Indie]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+      <tag><![CDATA[genre/Indie]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id>2668510</id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[PC/Console]]></subType>
+    <title><![CDATA[Red Dead Redemption]]></title>
+    <englishTitle><![CDATA[Red Dead Redemption]]></englishTitle>
+    <year>2024</year>
+    <dataSource><![CDATA[SteamAPI]]></dataSource>
+    <url><![CDATA[https://store.steampowered.com/app/2668510]]></url>
+    <onlineRating>0</onlineRating>
+    <image><![CDATA[https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2668510/header.jpg?t=1741118459]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[10/29/2024]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Dropped]]></status>
+    <developers>
+      <developer><![CDATA[Rockstar Games]]></developer>
+      <developer><![CDATA[Double Eleven]]></developer>
+    </developers>
+    <publishers>
+      <publisher><![CDATA[Rockstar Games]]></publisher>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id>1174180</id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[PC/Console]]></subType>
+    <title><![CDATA[Red Dead Redemption 2]]></title>
+    <englishTitle><![CDATA[Red Dead Redemption 2]]></englishTitle>
+    <year>2019</year>
+    <dataSource><![CDATA[SteamAPI]]></dataSource>
+    <url><![CDATA[https://store.steampowered.com/app/1174180]]></url>
+    <onlineRating>93</onlineRating>
+    <image><![CDATA[https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1174180/header.jpg?t=1759502961]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[12/05/2019]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Plan to Play]]></status>
+    <developers>
+      <developer><![CDATA[Rockstar Games]]></developer>
+    </developers>
+    <publishers>
+      <publisher><![CDATA[Rockstar Games]]></publisher>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id>814380</id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[PC/Console]]></subType>
+    <title><![CDATA[Sekiro™: Shadows Die Twice - GOTY Edition]]></title>
+    <englishTitle><![CDATA[Sekiro™: Shadows Die Twice - GOTY Edition]]></englishTitle>
+    <year>2019</year>
+    <dataSource><![CDATA[SteamAPI]]></dataSource>
+    <url><![CDATA[https://store.steampowered.com/app/814380]]></url>
+    <onlineRating>88</onlineRating>
+    <image><![CDATA[https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/814380/header.jpg?t=1762888662]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[03/21/2019]]></releaseDate>
+    <played>true</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Currently Playing]]></status>
+    <developers>
+      <developer><![CDATA[FromSoftware, Inc.]]></developer>
+    </developers>
+    <publishers>
+      <publisher><![CDATA[Activision (Excluding Japan and Asia)]]></publisher>
+      <publisher><![CDATA[FromSoftware, Inc. (Japan)]]></publisher>
+      <publisher><![CDATA[方块游戏 (Asia)]]></publisher>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt1937416]]></id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[PC/Console]]></subType>
+    <title><![CDATA[The Witcher 2: Assassins of Kings]]></title>
+    <englishTitle><![CDATA[The Witcher 2: Assassins of Kings]]></englishTitle>
+    <year>2011</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt1937416/]]></url>
+    <onlineRating>8.9</onlineRating>
+    <image><![CDATA[https://images.gog-statics.com/8355e657a19311b158a3553a154e109199d6991c7791a20c3305af1f84d15ed7_product_card_v2_mobile_slider_639.jpg]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[05/17/2011]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Dropped]]></status>
+    <developers>
+    </developers>
+    <publishers>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Fantasy]]></genre>
+      <genre><![CDATA[Mystery]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Fantasy]]></tag>
+      <tag><![CDATA[genre/Mystery]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id>1658</id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[Mobile]]></subType>
+    <title><![CDATA[Boom Beach]]></title>
+    <englishTitle><![CDATA[Boom Beach]]></englishTitle>
+    <year>2014</year>
+    <dataSource><![CDATA[RAWG]]></dataSource>
+    <url><![CDATA[https://rawg.io/games/boom-beach]]></url>
+    <onlineRating>61</onlineRating>
+    <image><![CDATA[https://media.rawg.io/media/screenshots/7ff/7ff2f9307750f3fd47e6683c98f45d62.jpeg]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[03/26/2014]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Dropped]]></status>
+    <publishingStatus><![CDATA[]]></publishingStatus>
+    <developers>
+      <developer><![CDATA[Supercell]]></developer>
+    </developers>
+    <publishers>
+      <publisher><![CDATA[Supercell Oy]]></publisher>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Strategy]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Strategy]]></tag>
+    </tags>
+    <description><![CDATA[Welcome to Boom Beach: come with a plan or leave in defeat!
+Fight the evil Blackguard with brains and brawn in this epic combat strategy game. Attack enemy bases to free enslaved islanders and unlock the secrets of this tropical paradise. Create a Task Force with players around the world to take on the enemy together. Scout, plan, then BOOM THE BEACH!
+PLEASE NOTE! Boom Beach is free to download and play. However, some game items can also be purchased for real money. If you don't want to use this feature, please disable in-app purchases in your device's settings.
+FEATURES
+- Play with millions of other players, raid hundreds of enemy bases for loot
+- Battle for control of precious resources to upgrade your base against enemy attacks
+- Explore a huge tropical archipelago and discover the mysterious power of the Life Crystals
+- Face fearsome Blackguard Bosses and uncover their evil plans
+- Join other players to form an unstoppable Task Force to take on co-op missions
+Under our Terms of Services and Privacy Policy, Boom Beach is allowed for download and play only for persons 13 years or over of age.
+Note: A network connection is required to play.
+Parent's guide:
+http://www.supercell.net/parents
+Privacy Policy:
+http://www.supercell.net/privacy-policy/
+Terms of Service:
+http://www.supercell.net/terms-of-service/
+Extra Builders have arrived! Extra Builders is a monthly subscription service that allows you to build or upgrade two buildings at the same time. Extra Builders cost 2.99 USD/month (or local equivalent).
+Extra Builders subscription will renew automatically unless auto-renew is turned off at least 24-hours before the end of the current period. Payment will be charged to iTunes Account at confirmation of purchase. Account will be charged for renewal within 24-hours prior to the end of the current period. Renewal costs 2.99 USD/month (or local equivalent).
+Subscriptions may be managed by the user and auto-renewal may be turned off by going to the user's Account Settings after purchase. No cancellation of the current subscription is allowed during active subscription period.]]></description>
+  </item>
+  <item>
+    <id><![CDATA[tt9480088]]></id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[Mobile]]></subType>
+    <title><![CDATA[Brawl Stars]]></title>
+    <englishTitle><![CDATA[Brawl Stars]]></englishTitle>
+    <year>2018</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt9480088/]]></url>
+    <onlineRating>6.9</onlineRating>
+    <image><![CDATA[https://supercell.com/images/1a5b69311180a4a1c374e10556941f05/hero_bg_brawlstars.a385872a.webp]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[12/01/2018]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Plan to Play]]></status>
+    <developers>
+    </developers>
+    <publishers>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt11049554]]></id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[Mobile]]></subType>
+    <title><![CDATA[Call of Duty: Mobile]]></title>
+    <englishTitle><![CDATA[Call of Duty: Mobile]]></englishTitle>
+    <year>2019</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt11049554/]]></url>
+    <onlineRating>7.6</onlineRating>
+    <image><![CDATA[https://codm.garena.com/static/images/Main-page/P1/main-kv.jpg]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[10/01/2019]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Plan to Play]]></status>
+    <developers>
+    </developers>
+    <publishers>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt6749432]]></id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[Mobile]]></subType>
+    <title><![CDATA[Clash Royale]]></title>
+    <englishTitle><![CDATA[Clash Royale]]></englishTitle>
+    <year>2016</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt6749432/]]></url>
+    <onlineRating>7.1</onlineRating>
+    <image><![CDATA[https://supercell.com/images/8654bffbaa77efb91243d3706b739c25/og_clashroyale.d235f90b.webp]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[03/02/2016]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Plan to Play]]></status>
+    <developers>
+    </developers>
+    <publishers>
+    </publishers>
+    <genres>
+      <genre><![CDATA[N/A]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/N/A]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt6318978]]></id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[Mobile]]></subType>
+    <title><![CDATA[Clash of Clans]]></title>
+    <englishTitle><![CDATA[Clash of Clans]]></englishTitle>
+    <year>2012</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt6318978/]]></url>
+    <onlineRating>6.6</onlineRating>
+    <image><![CDATA[https://cdn.thegamesdb.net/images/medium/fanart/20496-1.jpg]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[08/02/2012]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Currently Playing]]></status>
+    <developers>
+    </developers>
+    <publishers>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Fantasy]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Fantasy]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id><![CDATA[tt9197514]]></id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[Mobile]]></subType>
+    <title><![CDATA[Free Fire]]></title>
+    <englishTitle><![CDATA[Free Fire]]></englishTitle>
+    <year>2017</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt9197514/]]></url>
+    <onlineRating>5</onlineRating>
+    <image><![CDATA[https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhuNTkGb4Y3ASToFdS8wgDbg--n2Jn3zvSog&s]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[12/04/2017]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Plan to Play]]></status>
+    <developers>
+    </developers>
+    <publishers>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Thriller]]></genre>
+      <genre><![CDATA[War]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Thriller]]></tag>
+      <tag><![CDATA[genre/War]]></tag>
+    </tags>
+  </item>
+  <item>
+    <id>1177</id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[Mobile]]></subType>
+    <title><![CDATA[Hay Day]]></title>
+    <englishTitle><![CDATA[Hay Day]]></englishTitle>
+    <year>2012</year>
+    <dataSource><![CDATA[RAWG]]></dataSource>
+    <url><![CDATA[https://rawg.io/games/hay-day]]></url>
+    <onlineRating>72</onlineRating>
+    <image><![CDATA[https://media.rawg.io/media/screenshots/423/423e4613b95924ee000b6883188e3e2e.jpg]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[06/21/2012]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Dropped]]></status>
+    <publishingStatus><![CDATA[]]></publishingStatus>
+    <developers>
+      <developer><![CDATA[Supercell]]></developer>
+    </developers>
+    <publishers>
+      <publisher><![CDATA[Supercell Oy]]></publisher>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Simulation]]></genre>
+      <genre><![CDATA[Casual]]></genre>
+      <genre><![CDATA[Family]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Simulation]]></tag>
+      <tag><![CDATA[genre/Casual]]></tag>
+      <tag><![CDATA[genre/Family]]></tag>
+    </tags>
+    <description><![CDATA[Best. Farm. Ever. Welcome to Hay Day, the most popular farming game on mobiles and tablets, number one in 122 countries.
+Learn the lay of the land, tend to your crops, and trade goods with neighbors and friends. It’s a real special place where the crops never die even though it never rains. Sharing the farm with our quirky animals only makes things more fun!
+PLEASE NOTE! Hay Day is free to download and install. However, some game items can also be purchased for real money. If you don't want to use this feature, please disable in­-app purchases in your device's settings. A network connection is also required.
+~~~~~~~~~~
+FEATURES
+~~~~~~~~~~
+* Grow and customize your farm
+* Trade crops and fresh goods with neighbors and friends through your very own roadside shop
+* Fulfill orders with your truck and even by steamboat
+* Repair your dock and cast your lure to fish the waters
+* Build your own town and welcome visitors
+~~~~~~~~~~~
+MEDIA MENTIONS
+~~~~~~~~~~~
+Hay Day‘s presentation is fairly cinematic for a mobile game. It’s eye candy. The controls are also smooth, non intrusive, and use the iPhone’s touch screen well.
+http://www.gamezebo.com/2012/07/03/hay-day-review/
+Watching your crops grow and your twee factories spew out products is a quietly pleasing experience.
+http://www.pocketgamer.co.uk/r/Multiformat/Hay+Day/review.asp?c=42764
+~~~~~~~~~~~
+PLAYER REVIEWS
+~~~~~~~~~~~
+5/5 The artwork is phenomenal, clear, missing no details and certainly comical.
+5/5 The animals are super cute and nothing ever dies. No pressure if you can’t play for a few days.
+5/5 I love this game I play it everyday to build my farm up. I love how it branches out from just a farm to fishing and mining. Overall very fun game :)
+5/5 Great game. Love the options!! Got this game for my iPad and it out does any other farm game I have played. Wonderful design and thought process.
+5/5 A “happy feel good” game! 6 stars from this girl!
+~~~~~~~~~~
+SUPPORT
+~~~~~~~~~~
+Neighbor, are you having problems? Visit https://supercell.helpshift.com/a/hay-day/?l=en or contact us in game by going to Settings > Help and Support.
+Under our Terms of Services and Privacy Policy, Hay Day is allowed for download and play only for persons 13 years or over of age.
+Privacy Policy:
+http://www.supercell.net/privacy-policy/
+Terms of Service:
+http://www.supercell.net/terms-of-service/
+Parent's Guide:
+http://www.supercell.net/parents/]]></description>
+  </item>
+  <item>
+    <id><![CDATA[tt12351468]]></id>
+    <type><![CDATA[game]]></type>
+    <subType><![CDATA[Mobile]]></subType>
+    <title><![CDATA[PUBG Mobile]]></title>
+    <englishTitle><![CDATA[PUBG Mobile]]></englishTitle>
+    <year>2018</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt12351468/]]></url>
+    <onlineRating>6.8</onlineRating>
+    <image><![CDATA[https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJqbvQWD0IX_UXsai31QKFzaOrkEmrO4H5iQ&s]]></image>
+    <released>true</released>
+    <releaseDate><![CDATA[03/19/2018]]></releaseDate>
+    <played>false</played>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Plan to Play]]></status>
+    <developers>
+    </developers>
+    <publishers>
+    </publishers>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+      <genre><![CDATA[Thriller]]></genre>
+    </genres>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+      <tag><![CDATA[genre/Thriller]]></tag>
+    </tags>
+  </item>
+</mymedialist>

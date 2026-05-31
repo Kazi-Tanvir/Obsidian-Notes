@@ -1,0 +1,1372 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Created by Antigravity Media Vault Exporter -->
+<mymedialist>
+  <myinfo>
+    <user_id>13864737</user_id>
+    <user_name>SENPAI778</user_name>
+    <user_export_type>movies</user_export_type>
+    <user_total_items>29</user_total_items>
+    <user_total_completed>29</user_total_completed>
+    <user_total_watching>0</user_total_watching>
+    <user_total_onhold>0</user_total_onhold>
+    <user_total_dropped>0</user_total_dropped>
+    <user_total_plan_to_watch>0</user_total_plan_to_watch>
+  </myinfo>
+  <movie>
+    <id><![CDATA[tt0050083]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[12 Angry Men]]></title>
+    <englishTitle><![CDATA[12 Angry Men]]></englishTitle>
+    <year>1957</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt0050083/]]></url>
+    <plot><![CDATA[The jury in a New York City murder trial is frustrated by a single member whose skeptical caution forces them to more carefully consider the evidence before jumping to a hasty verdict.]]></plot>
+    <duration><![CDATA[96 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>9.0</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BYjE4NzdmOTYtYjc5Yi00YzBiLWEzNDEtNTgxZGQ2MWVkN2NiXkEyXkFqcGc@._V1_QL75_UX380_CR0,11,380,562_.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[04/10/1957]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Crime]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Sidney Lumet]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Reginald Rose]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Henry Fonda]]></actor>
+      <actor><![CDATA[Lee J. Cobb]]></actor>
+      <actor><![CDATA[Martin Balsam]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Crime]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+    </tags>
+  </movie>
+  <movie>
+    <id><![CDATA[tt23849204]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[12th Fail]]></title>
+    <englishTitle><![CDATA[12th Fail]]></englishTitle>
+    <year>2023</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt23849204/]]></url>
+    <plot><![CDATA[The real-life story of IPS Officer Manoj Kumar Sharma and IRS Officer Shraddha Joshi.]]></plot>
+    <duration><![CDATA[147 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>8.7</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BNTE3OTIxZDYtNjA0NC00N2YxLTg1NGQtOTYxNmZkMDkwOWNjXkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[10/27/2023]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Biography]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Vidhu Vinod Chopra]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Vidhu Vinod Chopra]]></writer>
+      <writer><![CDATA[Jaskunwar Kohli]]></writer>
+      <writer><![CDATA[Anurag Pathak]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Vikrant Massey]]></actor>
+      <actor><![CDATA[Medha Shankr]]></actor>
+      <actor><![CDATA[Anant Joshi]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Biography]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+    </tags>
+  </movie>
+  <movie>
+    <id><![CDATA[tt1187043]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[3 Idiots]]></title>
+    <englishTitle><![CDATA[3 Idiots]]></englishTitle>
+    <year>2009</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt1187043/]]></url>
+    <plot><![CDATA[Two friends are searching for their long lost companion. They revisit their college days and recall the memories of their friend who inspired them to think differently, even as the rest of the world called them "idiots".]]></plot>
+    <duration><![CDATA[170 min]]></duration>
+    <onlineRating>8.4</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BNzc4ZWQ3NmYtODE0Ny00YTQ4LTlkZWItNTBkMGQ0MmUwMmJlXkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[12/25/2009]]></premiere>
+    <watched>false</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Comedy]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Rajkumar Hirani]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Abhijat Joshi]]></writer>
+      <writer><![CDATA[Rajkumar Hirani]]></writer>
+      <writer><![CDATA[Vidhu Vinod Chopra]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Aamir Khan]]></actor>
+      <actor><![CDATA[Madhavan]]></actor>
+      <actor><![CDATA[Mona Singh]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Comedy]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+    </tags>
+  </movie>
+  <movie>
+    <id><![CDATA[tt6644200]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[A Quiet Place]]></title>
+    <englishTitle><![CDATA[A Quiet Place]]></englishTitle>
+    <year>2018</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt6644200/]]></url>
+    <plot><![CDATA[A family struggles for survival in a world invaded by blind alien creatures with ultra-sensitive hearing.]]></plot>
+    <duration><![CDATA[90 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>7.5</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BMjI0MDMzNTQ0M15BMl5BanBnXkFtZTgwMTM5NzM3NDM@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[04/06/2018]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Horror]]></genre>
+      <genre><![CDATA[Sci-Fi]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[John Krasinski]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Bryan Woods]]></writer>
+      <writer><![CDATA[Scott Beck]]></writer>
+      <writer><![CDATA[John Krasinski]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Emily Blunt]]></actor>
+      <actor><![CDATA[John Krasinski]]></actor>
+      <actor><![CDATA[Millicent Simmonds]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Horror]]></tag>
+      <tag><![CDATA[genre/Sci-Fi]]></tag>
+    </tags>
+  </movie>
+  <movie>
+    <id><![CDATA[tt0443453]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Borat]]></title>
+    <englishTitle><![CDATA[Borat]]></englishTitle>
+    <year>2006</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt0443453/]]></url>
+    <plot><![CDATA[Kazakh TV talking head Borat is dispatched to the United States to report on the greatest country in the world.]]></plot>
+    <duration><![CDATA[84 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>7.4</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BMTk0MTQ3NDQ4Ml5BMl5BanBnXkFtZTcwOTQ3OTQzMw@@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[11/03/2006]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Comedy]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Larry Charles]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Sacha Baron Cohen]]></writer>
+      <writer><![CDATA[Anthony Hines]]></writer>
+      <writer><![CDATA[Peter Baynham]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Sacha Baron Cohen]]></actor>
+      <actor><![CDATA[Ken Davitian]]></actor>
+      <actor><![CDATA[Luenell]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Comedy]]></tag>
+    </tags>
+  </movie>
+  <movie>
+    <id><![CDATA[tt13143964]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Borat Subsequent Moviefilm]]></title>
+    <englishTitle><![CDATA[Borat Subsequent Moviefilm]]></englishTitle>
+    <year>2020</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt13143964/]]></url>
+    <plot><![CDATA[Borat returns from Kazakhstan to America, this time to reveal more about its culture, the COVID-19 pandemic, and the political elections.]]></plot>
+    <duration><![CDATA[95 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>6.6</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BOWJmNDcyOTItYTE0ZS00NzAwLThjNGUtYTdhMjBjMTAwNDc4XkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[10/23/2020]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Comedy]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Jason Woliner]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Sacha Baron Cohen]]></writer>
+      <writer><![CDATA[Anthony Hines]]></writer>
+      <writer><![CDATA[Dan Swimer]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Sacha Baron Cohen]]></actor>
+      <actor><![CDATA[Maria Bakalova]]></actor>
+      <actor><![CDATA[Tom Hanks]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Comedy]]></tag>
+    </tags>
+  </movie>
+  <movie>
+    <id><![CDATA[tt0137523]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Fight Club]]></title>
+    <englishTitle><![CDATA[Fight Club]]></englishTitle>
+    <year>1999</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt0137523/]]></url>
+    <plot><![CDATA[An insomniac office worker and a devil-may-care soap maker form an underground fight club that evolves into much more.]]></plot>
+    <duration><![CDATA[139 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>8.8</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BOTgyOGQ1NDItNGU3Ny00MjU3LTg2YWEtNmEyYjBiMjI1Y2M5XkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[10/15/1999]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Crime]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Thriller]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[David Fincher]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Chuck Palahniuk]]></writer>
+      <writer><![CDATA[Jim Uhls]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Brad Pitt]]></actor>
+      <actor><![CDATA[Edward Norton]]></actor>
+      <actor><![CDATA[Meat Loaf]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Crime]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Thriller]]></tag>
+    </tags>
+  </movie>
+  <movie>
+    <id><![CDATA[tt4788734]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Homebound]]></title>
+    <englishTitle><![CDATA[Homebound]]></englishTitle>
+    <year>2021</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt4788734/]]></url>
+    <plot><![CDATA[A trip to the countryside turns out to be far from idyllic for a father and his new fiancée when his kids decide the house is a little too crowded.]]></plot>
+    <duration><![CDATA[71 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>4.3</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BNzU4YzhlOTUtZjMyZC00MTYzLTgzNDAtZmNjZmNjNDY1YmMyXkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[05/13/2022]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Horror]]></genre>
+      <genre><![CDATA[Mystery]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Sebastian Godwin]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Sebastian Godwin]]></writer>
+      <writer><![CDATA[Jon Gilbert]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Aisling Loftus]]></actor>
+      <actor><![CDATA[Tom Goodman-Hill]]></actor>
+      <actor><![CDATA[Raffiella Chapman]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Horror]]></tag>
+      <tag><![CDATA[genre/Mystery]]></tag>
+    </tags>
+  </movie>
+  <movie>
+    <id><![CDATA[tt1375666]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Inception]]></title>
+    <englishTitle><![CDATA[Inception]]></englishTitle>
+    <year>2010</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt1375666/]]></url>
+    <plot><![CDATA[A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a CEO, but his tragic past may doom the project and his team to disaster.]]></plot>
+    <duration><![CDATA[148 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>8.8</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_QL75_UX380_CR0,0,380,562_.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[07/16/2010]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+      <genre><![CDATA[Sci-Fi]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Christopher Nolan]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Christopher Nolan]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Leonardo DiCaprio]]></actor>
+      <actor><![CDATA[Joseph Gordon-Levitt]]></actor>
+      <actor><![CDATA[Elliot Page]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+      <tag><![CDATA[genre/Sci-Fi]]></tag>
+    </tags>
+  </movie>
+  <movie>
+    <id><![CDATA[tt0816692]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Interstellar]]></title>
+    <englishTitle><![CDATA[Interstellar]]></englishTitle>
+    <year>2014</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt0816692/]]></url>
+    <plot><![CDATA[When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.]]></plot>
+    <duration><![CDATA[169 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>8.7</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BYzdjMDAxZGItMjI2My00ODA1LTlkNzItOWFjMDU5ZDJlYWY3XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[11/07/2014]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Adventure]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Sci-Fi]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Christopher Nolan]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Jonathan Nolan]]></writer>
+      <writer><![CDATA[Christopher Nolan]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Matthew McConaughey]]></actor>
+      <actor><![CDATA[Anne Hathaway]]></actor>
+      <actor><![CDATA[Jessica Chastain]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Adventure]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Sci-Fi]]></tag>
+    </tags>
+  </movie>
+  <movie>
+    <id><![CDATA[tt24735934]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Memento (2000)]]></title>
+    <englishTitle><![CDATA[Memento (2000)]]></englishTitle>
+    <year>2000</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt24735934/]]></url>
+    <plot><![CDATA[N/A]]></plot>
+    <duration><![CDATA[N/A]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>0</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BMGQ3Y2Q4NjktN2E4Ny00Y2Q2LTliZDUtZTNiNjRhY2I0NGIyXkEyXkFqcGc@._V1_.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[05/18/2015]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[N/A]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[N/A]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[N/A]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[N/A]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/N/A]]></tag>
+    </tags>
+  </movie>
+  <movie>
+    <id><![CDATA[tt0364569]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Oldboy]]></title>
+    <englishTitle><![CDATA[Oldboy]]></englishTitle>
+    <year>2003</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt0364569/]]></url>
+    <plot><![CDATA[After being kidnapped and imprisoned for fifteen years, Oh Dae-Su is released, only to find that he must track down his captor in five days.]]></plot>
+    <duration><![CDATA[120 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>8.3</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BMTAwNzNjYWItZmI0Ni00ZTcyLWIwNWMtZjlmNGMxZTEyYTJmXkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[11/21/2003]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Mystery]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Park Chan-wook]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Garon Tsuchiya]]></writer>
+      <writer><![CDATA[Nobuaki Minegishi]]></writer>
+      <writer><![CDATA[Park Chan-wook]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Choi Min-sik]]></actor>
+      <actor><![CDATA[Yoo Ji-tae]]></actor>
+      <actor><![CDATA[Kang Hye-jeong]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Mystery]]></tag>
+    </tags>
+  </movie>
+  <movie>
+    <id><![CDATA[tt15398776]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Oppenheimer]]></title>
+    <englishTitle><![CDATA[Oppenheimer]]></englishTitle>
+    <year>2023</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt15398776/]]></url>
+    <plot><![CDATA[A dramatization of the life story of J. Robert Oppenheimer, the physicist who had a large hand in the development of the atomic bombs that brought an end to World War II.]]></plot>
+    <duration><![CDATA[180 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>8.2</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BN2JkMDc5MGQtZjg3YS00NmFiLWIyZmQtZTJmNTM5MjVmYTQ4XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[07/21/2023]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Biography]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[History]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Christopher Nolan]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Christopher Nolan]]></writer>
+      <writer><![CDATA[Kai Bird]]></writer>
+      <writer><![CDATA[Martin Sherwin]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Cillian Murphy]]></actor>
+      <actor><![CDATA[Emily Blunt]]></actor>
+      <actor><![CDATA[Matt Damon]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Biography]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/History]]></tag>
+    </tags>
+  </movie>
+  <movie>
+    <id><![CDATA[tt6751668]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Parasite]]></title>
+    <englishTitle><![CDATA[Parasite]]></englishTitle>
+    <year>2019</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt6751668/]]></url>
+    <plot><![CDATA[Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy Park family and the destitute Kim clan.]]></plot>
+    <duration><![CDATA[132 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>8.5</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BYjk1Y2U4MjQtY2ZiNS00OWQyLWI3MmYtZWUwNmRjYWRiNWNhXkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[11/08/2019]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Thriller]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Bong Joon Ho]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Bong Joon Ho]]></writer>
+      <writer><![CDATA[Han Jin-won]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Song Kang-ho]]></actor>
+      <actor><![CDATA[Lee Sun-kyun]]></actor>
+      <actor><![CDATA[Cho Yeo-jeong]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Thriller]]></tag>
+    </tags>
+  </movie>
+  <movie>
+    <id><![CDATA[tt0449088]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Pirates of the Caribbean: At World's End]]></title>
+    <englishTitle><![CDATA[Pirates of the Caribbean: At World's End]]></englishTitle>
+    <year>2007</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt0449088/]]></url>
+    <plot><![CDATA[Will Turner, Elizabeth Swann, Hector Barbossa, and the crew of the Black Pearl try and rescue Jack from Davy Jones's locker, and prepare to fight Lord Cutler Beckett, who controls Davy Jones and the Flying Dutchman.]]></plot>
+    <duration><![CDATA[169 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>7.2</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BMjIyNjkxNzEyMl5BMl5BanBnXkFtZTYwMjc3MDE3._V1_QL75_UX380_CR0,0,380,562_.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[05/25/2007]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+      <genre><![CDATA[Fantasy]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Gore Verbinski]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Ted Elliott]]></writer>
+      <writer><![CDATA[Terry Rossio]]></writer>
+      <writer><![CDATA[Stuart Beattie]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Johnny Depp]]></actor>
+      <actor><![CDATA[Orlando Bloom]]></actor>
+      <actor><![CDATA[Keira Knightley]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+      <tag><![CDATA[genre/Fantasy]]></tag>
+    </tags>
+  </movie>
+  <movie>
+    <id><![CDATA[tt0383574]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Pirates of the Caribbean: Dead Man's Chest]]></title>
+    <englishTitle><![CDATA[Pirates of the Caribbean: Dead Man's Chest]]></englishTitle>
+    <year>2006</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt0383574/]]></url>
+    <plot><![CDATA[Jack Sparrow races to recover the heart of Davy Jones to avoid enslaving his soul to Jones' service, as other friends and foes seek the heart for their own agenda as well.]]></plot>
+    <duration><![CDATA[151 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>7.4</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BMTcwODc1MTMxM15BMl5BanBnXkFtZTYwMDg1NzY3._V1_QL75_UX380_CR0,0,380,562_.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[07/07/2006]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+      <genre><![CDATA[Fantasy]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Gore Verbinski]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Ted Elliott]]></writer>
+      <writer><![CDATA[Terry Rossio]]></writer>
+      <writer><![CDATA[Stuart Beattie]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Johnny Depp]]></actor>
+      <actor><![CDATA[Orlando Bloom]]></actor>
+      <actor><![CDATA[Keira Knightley]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+      <tag><![CDATA[genre/Fantasy]]></tag>
+    </tags>
+  </movie>
+  <movie>
+    <id><![CDATA[tt0325980]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Pirates of the Caribbean: The Curse of the Black Pearl]]></title>
+    <englishTitle><![CDATA[Pirates of the Caribbean: The Curse of the Black Pearl]]></englishTitle>
+    <year>2003</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt0325980/]]></url>
+    <plot><![CDATA[An intrepid blacksmith teams up with an eccentric pirate captain to save his love from an undead pirate crew.]]></plot>
+    <duration><![CDATA[143 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>8.1</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BNDhlMzEyNzItMTA5Mi00YWRhLThlNTktYTQyMTA0MDIyNDEyXkEyXkFqcGc@._V1_QL75_UX380_CR0,2,380,562_.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[07/09/2003]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Adventure]]></genre>
+      <genre><![CDATA[Fantasy]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Gore Verbinski]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Ted Elliott]]></writer>
+      <writer><![CDATA[Terry Rossio]]></writer>
+      <writer><![CDATA[Stuart Beattie]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Johnny Depp]]></actor>
+      <actor><![CDATA[Geoffrey Rush]]></actor>
+      <actor><![CDATA[Orlando Bloom]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Adventure]]></tag>
+      <tag><![CDATA[genre/Fantasy]]></tag>
+    </tags>
+  </movie>
+  <movie>
+    <id><![CDATA[tt28494851]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Stolen]]></title>
+    <englishTitle><![CDATA[Stolen]]></englishTitle>
+    <year>2023</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt28494851/]]></url>
+    <plot><![CDATA[Two urbane brothers witness a baby being kidnapped from an impoverished mother at a railway station in rural India. One guided by moral duty, convinces the other to help the mother and join a perilous investigation to find the baby.]]></plot>
+    <duration><![CDATA[92 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>7.5</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BOThmMTZjMTUtMTE5OC00OTA0LWIzNjktZTA5NTBmZDc4Mjk0XkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[06/04/2025]]></premiere>
+    <watched>false</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Thriller]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Karan Tejpal]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Karan Tejpal]]></writer>
+      <writer><![CDATA[Gaurav Dhingra]]></writer>
+      <writer><![CDATA[Swapnil Salkar]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Abhishek Banerjee]]></actor>
+      <actor><![CDATA[Mia Maelzer]]></actor>
+      <actor><![CDATA[Shubham Vardhan]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Thriller]]></tag>
+    </tags>
+  </movie>
+  <movie>
+    <id><![CDATA[tt6723592]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Tenet]]></title>
+    <englishTitle><![CDATA[Tenet]]></englishTitle>
+    <year>2020</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt6723592/]]></url>
+    <plot><![CDATA[Armed with only the word "Tenet," and fighting for the survival of the entire world, CIA operative, The Protagonist, journeys through a twilight world of international espionage on a global mission that unfolds beyond real time.]]></plot>
+    <duration><![CDATA[150 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>7.3</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BNTIzNDIxMzktMzlkMi00MmUyLWFmMjQtZDgwMjBmOGJmNTI3XkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[09/03/2020]]></premiere>
+    <watched>false</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Sci-Fi]]></genre>
+      <genre><![CDATA[Thriller]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Christopher Nolan]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Christopher Nolan]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[John David Washington]]></actor>
+      <actor><![CDATA[Robert Pattinson]]></actor>
+      <actor><![CDATA[Elizabeth Debicki]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Sci-Fi]]></tag>
+      <tag><![CDATA[genre/Thriller]]></tag>
+    </tags>
+  </movie>
+  <movie>
+    <id><![CDATA[tt10530176]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[The Call]]></title>
+    <englishTitle><![CDATA[The Call]]></englishTitle>
+    <year>2020</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt10530176/]]></url>
+    <plot><![CDATA[Two people live in different times. Seo-Yeon lives in the present and Young-Sook lives in the past. One phone call connects the two, and their lives are changed irrevocably.]]></plot>
+    <duration><![CDATA[112 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>7.1</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BYzZlOGEyZTMtYmIxYS00NmIxLWIwNjYtMzY3Yjg2OThjODU2XkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[11/27/2020]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Crime]]></genre>
+      <genre><![CDATA[Horror]]></genre>
+      <genre><![CDATA[Mystery]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Chung-Hyun Lee]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Sergio Casci]]></writer>
+      <writer><![CDATA[Chung-Hyun Lee]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Park Shin-hye]]></actor>
+      <actor><![CDATA[Jeon Jong-seo]]></actor>
+      <actor><![CDATA[Kim Sung-ryung]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Crime]]></tag>
+      <tag><![CDATA[genre/Horror]]></tag>
+      <tag><![CDATA[genre/Mystery]]></tag>
+    </tags>
+  </movie>
+  <movie>
+    <id><![CDATA[tt1645170]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[The Dictator]]></title>
+    <englishTitle><![CDATA[The Dictator]]></englishTitle>
+    <year>2012</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt1645170/]]></url>
+    <plot><![CDATA[The heroic story of a dictator who risked his life to ensure that democracy would never come to the country he so lovingly oppressed.]]></plot>
+    <duration><![CDATA[83 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>6.5</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BM2IwMDM3ZmQtNjQ3NS00OTFiLWI5YzEtYWE3YjI5NTk3YzkwXkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[05/16/2012]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Comedy]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Larry Charles]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Sacha Baron Cohen]]></writer>
+      <writer><![CDATA[Alec Berg]]></writer>
+      <writer><![CDATA[David Mandel]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Sacha Baron Cohen]]></actor>
+      <actor><![CDATA[Anna Faris]]></actor>
+      <actor><![CDATA[John C. Reilly]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Comedy]]></tag>
+    </tags>
+  </movie>
+  <movie>
+    <id><![CDATA[tt0309987]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[The Dreamers]]></title>
+    <englishTitle><![CDATA[The Dreamers]]></englishTitle>
+    <year>2003</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt0309987/]]></url>
+    <plot><![CDATA[In 1968 Paris, film-loving twins Theo and Isabelle befriend American student Matthew during student protests. While their parents travel, they pull him into a month of sensual exploration, until reality intrudes.]]></plot>
+    <duration><![CDATA[115 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>7.1</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BZmY0Y2YwZTgtZDE2Ny00ZmYzLWFhOTItNDFhZjhjMjAzNWVhXkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[02/20/2004]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Romance]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Bernardo Bertolucci]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Gilbert Adair]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Michael Pitt]]></actor>
+      <actor><![CDATA[Louis Garrel]]></actor>
+      <actor><![CDATA[Eva Green]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Romance]]></tag>
+    </tags>
+  </movie>
+  <movie>
+    <id><![CDATA[tt2350496]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[The Lunchbox]]></title>
+    <englishTitle><![CDATA[The Lunchbox]]></englishTitle>
+    <year>2013</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt2350496/]]></url>
+    <plot><![CDATA[A mistaken delivery in Mumbai's famously efficient lunchbox delivery system connects a young housewife to an older man in the dusk of his life as they build a fantasy world together through notes in the lunchbox.]]></plot>
+    <duration><![CDATA[104 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>7.8</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BMTUwMzc1NjIzMV5BMl5BanBnXkFtZTgwODUyMTIxMTE@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[09/20/2013]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Romance]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Ritesh Batra]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Ritesh Batra]]></writer>
+      <writer><![CDATA[Vasan Bala]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Irrfan Khan]]></actor>
+      <actor><![CDATA[Nimrat Kaur]]></actor>
+      <actor><![CDATA[Nawazuddin Siddiqui]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Romance]]></tag>
+    </tags>
+  </movie>
+  <movie>
+    <id><![CDATA[tt0454921]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[The Pursuit of Happyness]]></title>
+    <englishTitle><![CDATA[The Pursuit of Happyness]]></englishTitle>
+    <year>2006</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt0454921/]]></url>
+    <plot><![CDATA[A struggling salesman takes custody of his son as he's poised to begin a life-changing professional career.]]></plot>
+    <duration><![CDATA[117 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>8.0</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BMTQ5NjQ0NDI3NF5BMl5BanBnXkFtZTcwNDI0MjEzMw@@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[12/15/2006]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Biography]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Gabriele Muccino]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Steve Conrad]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Will Smith]]></actor>
+      <actor><![CDATA[Thandiwe Newton]]></actor>
+      <actor><![CDATA[Jaden Smith]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Biography]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+    </tags>
+  </movie>
+  <movie>
+    <id><![CDATA[tt0111161]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[The Shawshank Redemption]]></title>
+    <englishTitle><![CDATA[The Shawshank Redemption]]></englishTitle>
+    <year>1994</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt0111161/]]></url>
+    <plot><![CDATA[A wrongfully convicted banker forms a close friendship with a hardened convict over a quarter century while retaining his humanity through simple acts of compassion.]]></plot>
+    <duration><![CDATA[142 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>9.3</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BMDAyY2FhYjctNDc5OS00MDNlLThiMGUtY2UxYWVkNGY2ZjljXkEyXkFqcGc@._V1_QL75_UX380_CR0,4,380,562_.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[10/14/1994]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Drama]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Frank Darabont]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Stephen King]]></writer>
+      <writer><![CDATA[Frank Darabont]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Tim Robbins]]></actor>
+      <actor><![CDATA[Morgan Freeman]]></actor>
+      <actor><![CDATA[Bob Gunton]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Drama]]></tag>
+    </tags>
+  </movie>
+  <movie>
+    <id><![CDATA[tt0120382]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[The Truman Show]]></title>
+    <englishTitle><![CDATA[The Truman Show]]></englishTitle>
+    <year>1998</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt0120382/]]></url>
+    <plot><![CDATA[An insurance salesman begins to suspect that his whole life is actually some sort of reality TV show.]]></plot>
+    <duration><![CDATA[103 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>8.2</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BNzA3ZjZlNzYtMTdjMy00NjMzLTk5ZGYtMTkyYzNiOGM1YmM3XkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[06/05/1998]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Comedy]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Peter Weir]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Andrew Niccol]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Jim Carrey]]></actor>
+      <actor><![CDATA[Ed Harris]]></actor>
+      <actor><![CDATA[Laura Linney]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Comedy]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+    </tags>
+  </movie>
+  <movie>
+    <id><![CDATA[tt0993846]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[The Wolf of Wall Street]]></title>
+    <englishTitle><![CDATA[The Wolf of Wall Street]]></englishTitle>
+    <year>2013</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt0993846/]]></url>
+    <plot><![CDATA[Based on the true story of Jordan Belfort, from his rise to a wealthy stock-broker living the high life to his fall involving crime, corruption and the federal government.]]></plot>
+    <duration><![CDATA[180 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>8.2</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BMjIxMjgxNTk0MF5BMl5BanBnXkFtZTgwNjIyOTg2MDE@._V1_QL75_UX380_CR0,0,380,562_.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[12/25/2013]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Biography]]></genre>
+      <genre><![CDATA[Comedy]]></genre>
+      <genre><![CDATA[Crime]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Martin Scorsese]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Terence Winter]]></writer>
+      <writer><![CDATA[Jordan Belfort]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Leonardo DiCaprio]]></actor>
+      <actor><![CDATA[Jonah Hill]]></actor>
+      <actor><![CDATA[Margot Robbie]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Biography]]></tag>
+      <tag><![CDATA[genre/Comedy]]></tag>
+      <tag><![CDATA[genre/Crime]]></tag>
+    </tags>
+  </movie>
+  <movie>
+    <id><![CDATA[tt5700672]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Train to Busan]]></title>
+    <englishTitle><![CDATA[Train to Busan]]></englishTitle>
+    <year>2016</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt5700672/]]></url>
+    <plot><![CDATA[While a zombie virus breaks out in South Korea, passengers struggle to survive on the train from Seoul to Busan.]]></plot>
+    <duration><![CDATA[118 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>7.6</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BMTkwOTQ4OTg0OV5BMl5BanBnXkFtZTgwMzQyOTM0OTE@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[07/20/2016]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Action]]></genre>
+      <genre><![CDATA[Horror]]></genre>
+      <genre><![CDATA[Thriller]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Yeon Sang-ho]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Park Joo-suk]]></writer>
+      <writer><![CDATA[Yeon Sang-ho]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Gong Yoo]]></actor>
+      <actor><![CDATA[Jung Yu-mi]]></actor>
+      <actor><![CDATA[Ma Dong-seok]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Action]]></tag>
+      <tag><![CDATA[genre/Horror]]></tag>
+      <tag><![CDATA[genre/Thriller]]></tag>
+    </tags>
+  </movie>
+  <movie>
+    <id><![CDATA[tt1562872]]></id>
+    <type><![CDATA[movie]]></type>
+    <subType><![CDATA[]]></subType>
+    <title><![CDATA[Zindagi Na Milegi Dobara]]></title>
+    <englishTitle><![CDATA[Zindagi Na Milegi Dobara]]></englishTitle>
+    <year>2011</year>
+    <dataSource><![CDATA[OMDbAPI]]></dataSource>
+    <url><![CDATA[https://www.imdb.com/title/tt1562872/]]></url>
+    <plot><![CDATA[Three friends decide to turn their fantasy vacation into reality after one of their friends gets engaged.]]></plot>
+    <duration><![CDATA[155 min]]></duration>
+    <episodes>1</episodes>
+    <onlineRating>8.2</onlineRating>
+    <image><![CDATA[https://m.media-amazon.com/images/M/MV5BOGIzYzg5NzItNDRkYS00NmIzLTk3NzQtZWYwY2VlZDhiYWQ4XkEyXkFqcGc@._V1_SX300.jpg]]></image>
+    <released>true</released>
+    <premiere><![CDATA[07/15/2011]]></premiere>
+    <watched>true</watched>
+    <lastWatched><![CDATA[]]></lastWatched>
+    <personalRating>0</personalRating>
+    <status><![CDATA[Completed]]></status>
+    <genres>
+      <genre><![CDATA[Comedy]]></genre>
+      <genre><![CDATA[Drama]]></genre>
+      <genre><![CDATA[Musical]]></genre>
+    </genres>
+    <director>
+      <director><![CDATA[Zoya Akhtar]]></director>
+    </director>
+    <writer>
+      <writer><![CDATA[Farhan Akhtar]]></writer>
+      <writer><![CDATA[Reema Kagti]]></writer>
+      <writer><![CDATA[Zoya Akhtar]]></writer>
+    </writer>
+    <studio>
+      <studio><![CDATA[N/A]]></studio>
+    </studio>
+    <actors>
+      <actor><![CDATA[Hrithik Roshan]]></actor>
+      <actor><![CDATA[Farhan Akhtar]]></actor>
+      <actor><![CDATA[Abhay Deol]]></actor>
+    </actors>
+    <streamingServices>
+    </streamingServices>
+    <tags>
+      <tag><![CDATA[genre/Comedy]]></tag>
+      <tag><![CDATA[genre/Drama]]></tag>
+      <tag><![CDATA[genre/Musical]]></tag>
+    </tags>
+  </movie>
+</mymedialist>
