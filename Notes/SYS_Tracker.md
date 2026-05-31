@@ -147,109 +147,58 @@ The current project is a single Next.js app (`imdb-gemini`) that handles everyth
 ### 3.1 High-Level System Architecture
 
   
-
 ```mermaid
-
 graph TB
+    subgraph Client ["🖥️ Client Layer"]
+        Browser["Browser"]
+    end
 
-    subgraph Client["🖥️ Client Layer"]
+    subgraph Apps ["📦 Apps (Turborepo)"]
+        Web["web<br/>Next.js Frontend<br/>:3000"]
+        Gateway["api-gateway<br/>Hono/Express<br/>:4000"]
+    end
 
-        Browser["Browser"]
+    subgraph Services ["⚙️ Microservices"]
+        Auth["auth-service<br/>:4001"]
+        Tracker["tracker-service<br/>:4002"]
+        User["user-service<br/>:4003"]
+        Search["search-service<br/>:4004"]
+    end
 
-    end
+    subgraph Data ["🗄️ Data Layer"]
+        DB[("PostgreSQL<br/>Primary Database")]
+        Redis[("Redis<br/>Session Cache<br/>+ Search Cache")]
+    end
 
-  
+    subgraph External ["🌐 External APIs"]
+        AniList["AniList<br/>GraphQL API"]
+        TMDB["TMDB<br/>REST API"]
+        RAWG["RAWG<br/>REST API"]
+    end
 
-    subgraph Apps["📦 Apps (Turborepo)"]
+    Browser -->|"HTTPS"| Web
+    Web -->|"API Calls"| Gateway
+    Gateway -->|"/auth/*"| Auth
+    Gateway -->|"/media/*"| Tracker
+    Gateway -->|"/users/*"| User
+    Gateway -->|"/search/*"| Search
 
-        Web["web<br/>Next.js Frontend<br/>:3000"]
+    Auth --> DB
+    Auth --> Redis
+    Tracker --> DB
+    User --> DB
+    Search --> Redis
+    Search --> AniList
+    Search --> TMDB
+    Search --> RAWG
 
-        Gateway["api-gateway<br/>Hono/Express<br/>:4000"]
+    style Client fill:#1a1a2e,stroke:#e94560,color:#eee
+    style Apps fill:#16213e,stroke:#0f3460,color:#eee
+    style Services fill:#0f3460,stroke:#533483,color:#eee
+    style Data fill:#1a1a2e,stroke:#e94560,color:#eee
+    style External fill:#1a1a2e,stroke:#533483,color:#eee
 
-    end
-
-  
-
-    subgraph Services["⚙️ Microservices"]
-
-        Auth["auth-service<br/>:4001"]
-
-        Tracker["tracker-service<br/>:4002"]
-
-        User["user-service<br/>:4003"]
-
-        Search["search-service<br/>:4004"]
-
-    end
-
-  
-
-    subgraph Data["🗄️ Data Layer"]
-
-        DB[("PostgreSQL<br/>Primary Database")]
-
-        Redis[("Redis<br/>Session Cache<br/>+ Search Cache")]
-
-    end
-
-  
-
-    subgraph External["🌐 External APIs"]
-
-        AniList["AniList<br/>GraphQL API"]
-
-        TMDB["TMDB<br/>REST API"]
-
-        RAWG["RAWG<br/>REST API"]
-
-    end
-
-  
-
-    Browser -->|"HTTPS"| Web
-
-    Web -->|"API Calls"| Gateway
-
-    Gateway -->|"/auth/*"| Auth
-
-    Gateway -->|"/media/*"| Tracker
-
-    Gateway -->|"/users/*"| User
-
-    Gateway -->|"/search/*"| Search
-
-  
-
-    Auth --> DB
-
-    Auth --> Redis
-
-    Tracker --> DB
-
-    User --> DB
-
-    Search --> Redis
-
-    Search --> AniList
-
-    Search --> TMDB
-
-    Search --> RAWG
-
-  
-
-    style Client fill:#1a1a2e,stroke:#e94560,color:#eee
-
-    style Apps fill:#16213e,stroke:#0f3460,color:#eee
-
-    style Services fill:#0f3460,stroke:#533483,color:#eee
-
-    style Data fill:#1a1a2e,stroke:#e94560,color:#eee
-
-    style External fill:#1a1a2e,stroke:#533483,color:#eee
-
-```
-
+    ```
   
 
 ### 3.2 Request Flow — "User Adds a Media Entry"

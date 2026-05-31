@@ -28,8 +28,8 @@
               "type": "markdown",
               "state": {
                 "file": "SYS_Tracker.md",
-                "mode": "source",
-                "source": false
+                "mode": "preview",
+                "source": true
               },
               "icon": "lucide-file",
               "title": "SYS_Tracker"
@@ -111,7 +111,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "279416c7625b4660",
