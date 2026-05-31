@@ -129,18 +129,6 @@
             }
           },
           {
-            "id": "2744bd3130960f52",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "graph",
-              "state": {},
-              "pinned": true,
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
-            }
-          },
-          {
             "id": "f2731d5deb6002bd",
             "type": "leaf",
             "state": {
@@ -154,7 +142,7 @@
             }
           }
         ],
-        "currentTab": 9
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -208,7 +196,7 @@
       {
         "id": "2fd9a64f0deb3159",
         "type": "tabs",
-        "dimension": 25.252525252525253,
+        "dimension": 19.387755102040817,
         "children": [
           {
             "id": "53f920f8060070a2",
@@ -293,10 +281,10 @@
             "state": {
               "type": "file-properties",
               "state": {
-                "file": "Movie View.base"
+                "file": "Manga View.base"
               },
               "icon": "lucide-info",
-              "title": "File properties for Movie View"
+              "title": "File properties for Manga View"
             }
           },
           {
@@ -313,9 +301,28 @@
         "currentTab": 5
       },
       {
+        "id": "e61d82aa24cf76bd",
+        "type": "tabs",
+        "dimension": 35.714285714285715,
+        "children": [
+          {
+            "id": "2744bd3130960f52",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "graph",
+              "state": {},
+              "pinned": true,
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
+            }
+          }
+        ]
+      },
+      {
         "id": "a17a137ae15cfbb3",
         "type": "tabs",
-        "dimension": 37.121212121212125,
+        "dimension": 18.552875695732837,
         "children": [
           {
             "id": "42af4f1ef891900d",
@@ -335,14 +342,16 @@
       {
         "id": "152c4bfc9fa84dd3",
         "type": "tabs",
-        "dimension": 37.62626262626263,
+        "dimension": 26.34508348794063,
         "children": [
           {
             "id": "04477abee950afcf",
             "type": "leaf",
+            "pinned": true,
             "state": {
               "type": "calendar",
               "state": {},
+              "pinned": true,
               "icon": "calendar-with-checkmark",
               "title": "Calendar"
             }
@@ -369,17 +378,17 @@
       "obsidian-media-db-plugin:Add new Media DB entry": false
     }
   },
-  "active": "f2731d5deb6002bd",
+  "active": "76a7d9e5ac61db85",
   "lastOpenFiles": [
-    "movies/Homebound (2025).md",
-    "Movie View.base",
-    "Home.md",
-    "Game View.base",
-    "Anime View.base",
-    "Anime Movie View.base",
-    "Mobile Game View.base",
-    "Series View.base",
     "Manga View.base",
+    "Home.md",
+    "Anime View.base",
+    "Mobile Game View.base",
+    "Game View.base",
+    "Movie View.base",
+    "Series View.base",
+    "Anime Movie View.base",
+    "movies/Homebound (2025).md",
     "anime/Overflow (2020).md",
     "anime/Nippon Sangoku - The Three Nations of the Crimson Sun (2026).md",
     "anime/Ane wa Yanmama Junyuu-chuu (2020).md",
