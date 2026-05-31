@@ -186,7 +186,7 @@ graph TB
     Auth --> DB
     Auth --> Redis
     Tracker --> DB
-    User --> DB
+	    User --> DB
     Search --> Redis
     Search --> AniList
     Search --> TMDB
@@ -198,7 +198,7 @@ graph TB
     style Data fill:#1a1a2e,stroke:#e94560,color:#eee
     style External fill:#1a1a2e,stroke:#533483,color:#eee
 
-    ```
+```
   
 
 ### 3.2 Request Flow — "User Adds a Media Entry"
