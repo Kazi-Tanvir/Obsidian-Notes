@@ -141,8 +141,7 @@
               "title": "Movie View"
             }
           }
-        ],
-        "currentTab": 8
+        ]
       }
     ],
     "direction": "vertical"
@@ -161,7 +160,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#genre/Drama",
+                "query": "tag:#genre/Adventure",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -182,7 +181,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -279,11 +279,9 @@
             "type": "leaf",
             "state": {
               "type": "file-properties",
-              "state": {
-                "file": "Movie View.base"
-              },
+              "state": {},
               "icon": "lucide-info",
-              "title": "File properties for Movie View"
+              "title": "File properties"
             }
           },
           {
@@ -377,17 +375,17 @@
       "obsidian-media-db-plugin:Add new Media DB entry": false
     }
   },
-  "active": "f2731d5deb6002bd",
+  "active": "d481b69de8ac5693",
   "lastOpenFiles": [
+    "Home.md",
+    "Movie View.base",
     "Mobile Game View.base",
     "games/Free Fire (2017).md",
     "Game View.base",
-    "Movie View.base",
     "Series View.base",
     "Manga View.base",
     "Anime Movie View.base",
     "Anime View.base",
-    "Home.md",
     "movies/Homebound (2025).md",
     "anime/Overflow (2020).md",
     "anime/Nippon Sangoku - The Three Nations of the Crimson Sun (2026).md",
