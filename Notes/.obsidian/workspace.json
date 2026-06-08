@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "SYS_Tracker.md",
-                "mode": "source",
+                "file": "03_COURSES/01_WEB_DEVELOPMENT/08_Database (SQL)/03. Core CRUD Operations.md",
+                "mode": "preview",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "SYS_Tracker"
+              "title": "03. Core CRUD Operations"
             }
           }
         ],
@@ -274,8 +274,10 @@
   },
   "active": "12de058b85b7df48",
   "lastOpenFiles": [
-    "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106 FULL AI.md",
+    "03_COURSES/01_WEB_DEVELOPMENT/08_Database (SQL)/02. Schema Definition & Table Management.md",
+    "03_COURSES/01_WEB_DEVELOPMENT/08_Database (SQL)/01. Database Fundamentals & Setup.md",
     "SYS_Tracker.md",
+    "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106 FULL AI.md",
     "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106 COMPACT AI.md",
     "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106.md",
     "02_DU_IIT/01_CLASS/CSE 1101L - Structured Programming/CSE 1101 L1.md",
@@ -308,8 +310,6 @@
     "03_COURSES/02_C_PROGRAMMING/07_Arrays.md",
     "03_COURSES/02_C_PROGRAMMING/02_Instructions_and_Operators.md",
     "03_COURSES/02_C_PROGRAMMING/00_Introduction_and_Setup.md",
-    "03_COURSES/03_Python_Programming/14_Projects/01_Snake_Water_Gun_Game.md",
-    "03_COURSES/03_Python_Programming/14_Projects/03_Mega_Project_1_Jarvis.md",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "Business/Journal/Technical/Migrated/assets/why-not-jwt.png",
