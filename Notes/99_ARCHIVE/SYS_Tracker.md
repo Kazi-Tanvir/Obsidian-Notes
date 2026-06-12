@@ -130,7 +130,7 @@ sequenceDiagram
     participant S as search-service
     participant DB as PostgreSQL
 
-    B->>W: User searches 'Steins;Gate'
+    B->>W: "User searches 'Steins;Gate'"
     W->>G: "GET /search?q=steins;gate&type=anime"
     G->>A: Validate JWT token
     A-->>G: "✅ Token valid (userId: xyz)"
