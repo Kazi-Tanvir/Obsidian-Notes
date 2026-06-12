@@ -130,11 +130,11 @@ sequenceDiagram
     participant S as search-service
     participant DB as PostgreSQL
 
-    B->>W: "User searches 'Steins;Gate'"
-    W->>G: "GET /search?q=steins;gate&type=anime"
+    B->>W: User searches 'Steins&#59;Gate'
+    W->>G: GET /search?q=steins&#59;gate&type=anime
     G->>A: Validate JWT token
-    A-->>G: "✅ Token valid (userId: xyz)"
-    G->>S: "GET /search?q=steins;gate&type=anime"
+    A-->>G: ✅ Token valid (userId: xyz)
+    G->>S: GET /search?q=steins&#59;gate&type=anime
     S->>S: Check Redis cache
     S-->>G: Return AniList + TMDB results
     G-->>W: Search results
@@ -144,7 +144,7 @@ sequenceDiagram
     W->>G: POST /media/entries
     G->>A: Validate JWT token
     A-->>G: ✅ Token valid
-    G->>T: "POST /entries {title, type, status...}"
+    G->>T: POST /entries {title, type, status...}
     T->>DB: INSERT INTO media_entries
     DB-->>T: ✅ Created
     T-->>G: 201 Created
