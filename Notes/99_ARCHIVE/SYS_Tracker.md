@@ -1,4 +1,4 @@
-﻿# SYS_TRACKER — Turborepo Monorepo Architecture
+# SYS_TRACKER — Turborepo Monorepo Architecture
 
 > Migrating the current Next.js monolith into a **Turborepo-powered monorepo** with clear service boundaries, shared packages, and a microservices-ready backend.
 
@@ -130,11 +130,11 @@ sequenceDiagram
     participant S as search-service
     participant DB as PostgreSQL
 
-    B->>W: User searches "Steins;Gate"
-    W->>G: GET /search?q=steins;gate&type=anime
+    B->>W: User searches 'Steins;Gate'
+    W->>G: "GET /search?q=steins;gate&type=anime"
     G->>A: Validate JWT token
-    A-->>G: ✅ Token valid (userId: xyz)
-    G->>S: GET /search?q=steins;gate&type=anime
+    A-->>G: "✅ Token valid (userId: xyz)"
+    G->>S: "GET /search?q=steins;gate&type=anime"
     S->>S: Check Redis cache
     S-->>G: Return AniList + TMDB results
     G-->>W: Search results
@@ -144,7 +144,7 @@ sequenceDiagram
     W->>G: POST /media/entries
     G->>A: Validate JWT token
     A-->>G: ✅ Token valid
-    G->>T: POST /entries {title, type, status...}
+    G->>T: "POST /entries {title, type, status...}"
     T->>DB: INSERT INTO media_entries
     DB-->>T: ✅ Created
     T-->>G: 201 Created
@@ -165,20 +165,20 @@ sequenceDiagram
 
     B->>W: Navigate to /friends
     W->>G: GET /users/friends
-    G->>U: GET /friends (userId from JWT)
+    G->>U: "GET /friends (userId from JWT)"
     U->>DB: SELECT friends for userId
     DB-->>U: Friend list
-    U-->>G: [{friendId, username, avatar}...]
+    U-->>G: "[{friendId, username, avatar}...]"
     G-->>W: Friends data
     W-->>B: Render friends list
 
-    B->>W: Click on friend "SENPAI_09"
+    B->>W: Click on friend 'SENPAI_09'
     W->>G: GET /users/senpai_09/profile
     G->>U: GET /profile/senpai_09
     U->>DB: SELECT user profile
     U-->>G: Profile data
 
-    G->>T: GET /entries?userId=senpai_09&status=watching
+    G->>T: "GET /entries?userId=senpai_09&status=watching"
     T->>DB: SELECT media_entries
     T-->>G: Currently watching list
 
