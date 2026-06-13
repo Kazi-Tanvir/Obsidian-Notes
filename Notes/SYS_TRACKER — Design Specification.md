@@ -148,7 +148,6 @@ The stat cards on the dashboard use **thick colored top borders** (3-4px) with t
 | System banner subtitle        | 12px    | 400    | uppercase | 2px            | Mono |
 | Dashboard stat numbers        | 48-56px | 700    | none      | -1px           | Mono |
 | Section header labels         | 14px    | 600    | uppercase | 2px            | Mono |
-
 | Stat labels `[RECORDS_LOGGED]` | 11px | 400 | uppercase | 1.5px | Mono |
 | Status messages | 12px | 400 | uppercase | 1px | Mono |
 | Card titles (media names) | 13px | 500 | none | 0 | Sans |
