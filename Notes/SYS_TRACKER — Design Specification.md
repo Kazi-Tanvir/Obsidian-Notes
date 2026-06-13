@@ -425,14 +425,14 @@ All 5 media category pages share an identical layout structure with only the con
 └──────────────────────────┘
 ```
 
-| Property | Value |
-|----------|-------|
-| Border | `1px solid {accent-color @ 40%}` |
-| Border-top | `3px solid {accent-color}` |
-| Background | `#111118` |
-| Border-radius | `4px` |
-| Padding | `20px 24px` |
-| Number font-size | `48px` |
+| Property         | Value                            |
+| ---------------- | -------------------------------- |
+| Border           | `1px solid {accent-color @ 40%}` |
+| Border-top       | `3px solid {accent-color}`       |
+| Background       | `#111118`                        |
+| Border-radius    | `4px`                            |
+| Padding          | `20px 24px`                      |
+| Number font-size | `48px`                           |
 
 | Number font-weight | `700` |
 
@@ -458,23 +458,15 @@ All 5 media category pages share an identical layout structure with only the con
 
 ```
 
-| Property | Value |
-
-|----------|-------|
-
-| Aspect ratio | 2:3 |
-
-| Border-radius | `4px` |
-
-| Overflow | hidden |
-
-| Hover effect | Subtle brightness increase or scale(1.02) |
-
-| Title font-size | `13px` |
-
-| Title truncation | `text-overflow: ellipsis`, single line |
-
-| Title color | `#8888a0` (cyan/muted) |
+| Property         | Value                                     |
+| ---------------- | ----------------------------------------- |
+| Aspect ratio     | 2:3                                       |
+| Border-radius    | `4px`                                     |
+| Overflow         | hidden                                    |
+| Hover effect     | Subtle brightness increase or scale(1.02) |
+| Title font-size  | `13px`                                    |
+| Title truncation | `text-overflow: ellipsis`, single line    |
+| Title color      | `#8888a0` (cyan/muted)                    |
 
 ### 7.3 Section Header Badge
 
@@ -486,81 +478,51 @@ All 5 media category pages share an identical layout structure with only the con
 
 ```
 
-| Property | Value |
-
-|----------|-------|
-
-| Border | `1px solid {accent-color}` |
-
-| Background | Transparent |
-
-| Border-radius | `4px` |
-
-| Padding | `6px 16px` |
-
-| Font | Mono, 14px, 600, uppercase |
-
-| Letter-spacing | `2px` |
-
-| Icon | Left of text |
+| Property       | Value                      |
+| -------------- | -------------------------- |
+| Border         | `1px solid {accent-color}` |
+| Background     | Transparent                |
+| Border-radius  | `4px`                      |
+| Padding        | `6px 16px`                 |
+| Font           | Mono, 14px, 600, uppercase |
+| Letter-spacing | `2px`                      |
+| Icon           | Left of text               |
 
 ### 7.4 Filter Pill
 
-| State | Background | Border | Text Color |
+| State    | Background          | Border                     | Text Color |
+| -------- | ------------------- | -------------------------- | ---------- |
+| Active   | `{accent-color}`    | `1px solid {accent-color}` | White      |
+| Inactive | Transparent         | `1px solid #2a2a3a`        | `#8888a0`  |
+| Hover    | `rgba(accent, 0.1)` | `1px solid {accent-color}` | `#e8e8f0`  |
 
-|-------|-----------|--------|------------|
-
-| Active | `{accent-color}` | `1px solid {accent-color}` | White |
-
-| Inactive | Transparent | `1px solid #2a2a3a` | `#8888a0` |
-
-| Hover | `rgba(accent, 0.1)` | `1px solid {accent-color}` | `#e8e8f0` |
-
-| Property | Value |
-
-|----------|-------|
-
-| Border-radius | `4px` |
-
-| Padding | `6px 16px` |
-
-| Font | Mono, 12px, 500, uppercase |
-
-| Cursor | pointer |
-
-| Transition | `all 0.2s ease` |
+| Property      | Value                      |
+| ------------- | -------------------------- |
+| Border-radius | `4px`                      |
+| Padding       | `6px 16px`                 |
+| Font          | Mono, 12px, 500, uppercase |
+| Cursor        | pointer                    |
+| Transition    | `all 0.2s ease`            |
 
 ### 7.5 Navigation Item
 
-| State | Style |
-
-|-------|-------|
-
-| Default | Icon + label, `#8888a0` text |
-
-| Hover | `#e8e8f0` text, subtle background |
-
-| Active | Bordered pill/box outline, white text, icon highlighted |
+| State   | Style                                                   |
+| ------- | ------------------------------------------------------- |
+| Default | Icon + label, `#8888a0` text                            |
+| Hover   | `#e8e8f0` text, subtle background                       |
+| Active  | Bordered pill/box outline, white text, icon highlighted |
 
 ### 7.6 System Banner Card
 
-| Property | Value |
-
-|----------|-------|
-
-| Background | `#111118` |
-
-| Border | `1px solid #2a2a3a` |
-
-| Border-radius | `6px` |
-
-| Padding | `16px 24px` |
-
-| Layout | Flex, space-between |
-
-| Left content | System title (20px mono bold) + subtitle (12px mono) |
-
-| Right content | Node state label + Session badge |
+| Property      | Value                                                |
+| ------------- | ---------------------------------------------------- |
+| Background    | `#111118`                                            |
+| Border        | `1px solid #2a2a3a`                                  |
+| Border-radius | `6px`                                                |
+| Padding       | `16px 24px`                                          |
+| Layout        | Flex, space-between                                  |
+| Left content  | System title (20px mono bold) + subtitle (12px mono) |
+| Right content | Node state label + Session badge                     |
 
 ### 7.7 Session Badge
 
@@ -570,19 +532,13 @@ All 5 media category pages share an identical layout structure with only the con
 
 ```
 
-| Property | Value |
-
-|----------|-------|
-
-| Background | `#ef4444` (red) |
-
-| Text | White, mono, 12px, uppercase |
-
-| Border-radius | `4px` |
-
-| Padding | `4px 12px` |
-
-| Animation | Subtle pulse glow |
+| Property      | Value                        |
+| ------------- | ---------------------------- |
+| Background    | `#ef4444` (red)              |
+| Text          | White, mono, 12px, uppercase |
+| Border-radius | `4px`                        |
+| Padding       | `4px 12px`                   |
+| Animation     | Subtle pulse glow            |
 
 ### 7.8 User Role Badge
 
@@ -592,38 +548,27 @@ All 5 media category pages share an identical layout structure with only the con
 
 ```
 
-| Property | Value |
-
-|----------|-------|
-
-| Background | Transparent |
-
-| Border | `1px solid #a78bfa` (lavender) |
-
-| Text | Lavender, mono, 11px |
-
-| Border-radius | `2px` |
-
-| Padding | `2px 8px` |
+| Property      | Value                          |
+| ------------- | ------------------------------ |
+| Background    | Transparent                    |
+| Border        | `1px solid #a78bfa` (lavender) |
+| Text          | Lavender, mono, 11px           |
+| Border-radius | `2px`                          |
+| Padding       | `2px 8px`                      |
 
 ### 7.9 Status Dot Indicator
 
 Small colored dots (8px diameter) used in statistics breakdown:
 
 - `●` Green = Watching/Reading/Playing
-
 - `●` Blue = Completed  
-
 - `●` Gray = Plan to Watch/Read
-
 - `●` Yellow = On-Hold
-
 - `●` Red = Dropped
 
 ### 7.10 Activity Entry (Last Updates)
 
 ```
-
 ┌────────────────────────────────────────────────────────┐
 │  [thumb]  [Oshi No Ko]                                 │
 │           Watching • Progress 8/11 EP • Scored 7.8     │
@@ -804,8 +749,8 @@ Toolbar items (`Sort`, `Filter`, `Properties`, `Search`, `+ New`):
   --accent-session: #ef4444;
 
   /* ── Typography ── */
-  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
-  --font-sans: 'Inter', 'Outfit', system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
+  --font-sans: "Inter", "Outfit", system-ui, -apple-system, sans-serif;
 
   /* ── Spacing Scale ── */
   --space-1: 4px;
@@ -854,6 +799,7 @@ Toolbar items (`Sort`, `Filter`, `Properties`, `Search`, `+ New`):
   --poster-columns: 7;
   --poster-aspect-ratio: 2 / 3;
 }
+```
 
 ---
 
@@ -862,29 +808,33 @@ Toolbar items (`Sort`, `Filter`, `Properties`, `Search`, `+ New`):
 The design was prototyped as a fully functional HTML/CSS page. Key visual references:
 
 ### Dashboard View
+
 - Deep black background with terminal-inspired system banner
 - Color-coded stat cards with thick accent borders
 - Per-media-type statistics sections with dot-based status breakdowns
 
 ### Media Grid View
+
 - Clean 7-column poster grid, minimal chrome
 - Category-specific filter pills with accent colors
 - Toolbar with sort, filter, properties, search, and new buttons
 
 ### Design Language Summary
 
-| Attribute | Decision |
-|-----------|----------|
-| Mode | Dark only |
-| Personality | System operator / terminal console |
-| Typography | Monospace for labels, sans-serif for content |
-| Borders | 1px solid, colored accents on top edges |
-| Rounded corners | Minimal (2-6px), no heavy rounding |
-| Shadows | Near-zero, replaced by subtle glow effects |
-| Content density | High — data-forward, numbers prominent |
-| Media display | Poster-centric grids, minimal card decoration |
-| Text casing | Uppercase for all system/UI text |
+| Attribute       | Decision                                      |
+| --------------- | --------------------------------------------- |
+| Mode            | Dark only                                     |
+| Personality     | System operator / terminal console            |
+| Typography      | Monospace for labels, sans-serif for content  |
+| Borders         | 1px solid, colored accents on top edges       |
+| Rounded corners | Minimal (2-6px), no heavy rounding            |
+| Shadows         | Near-zero, replaced by subtle glow effects    |
+| Content density | High — data-forward, numbers prominent        |
+| Media display   | Poster-centric grids, minimal card decoration |
+| Text casing     | Uppercase for all system/UI text              |
 
 ---
+
 > **This document should serve as the single source of truth for implementing the SYS_Tracker frontend. All components, colors, typography, and layout decisions are derived from the working prototype.**
-```
+
+---
