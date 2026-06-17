@@ -535,7 +535,8 @@
     "genre/Family": 32,
     "genre/Sci-Fi-and-Fantasy": 33,
     "genre/Action-and-Adventure": 34,
-    "genre/Hentai": 35
+    "genre/Hentai": 35,
+    "genre/Science-Fiction": 36
   },
   "_version": 3
 }
