@@ -233,10 +233,10 @@
             "state": {
               "type": "file-properties",
               "state": {
-                "file": "02_DU_IIT/00_ADD/BSSE17 Facebook Account List.md"
+                "file": "00_ERRORS/GitHub [Large File].md"
               },
               "icon": "lucide-info",
-              "title": "File properties for BSSE17 Facebook Account List"
+              "title": "File properties for GitHub [Large File]"
             }
           },
           {
@@ -300,7 +300,7 @@
       "markdown-table-editor:Open Markdown Table Editor": false
     }
   },
-  "active": "42af4f1ef891900d",
+  "active": "ed602bd46240d55d",
   "lastOpenFiles": [
     "02_DU_IIT/00_ADD/BSSE16 Facebook Account List.md",
     "02_DU_IIT/00_ADD/BSSE17 Facebook Account List.md",
