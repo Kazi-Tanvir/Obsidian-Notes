@@ -4,145 +4,49 @@
     "type": "split",
     "children": [
       {
-        "id": "f11f2bb5f259bb2b",
+        "id": "600039c20928e499",
         "type": "tabs",
         "children": [
           {
-            "id": "03ab06d0735701f5",
+            "id": "f04572d686a83e9c",
             "type": "leaf",
-            "pinned": true,
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Home.md",
+                "file": "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106 FULL AI.md",
                 "mode": "preview",
-                "source": false
+                "source": true
               },
-              "pinned": true,
               "icon": "lucide-file",
-              "title": "Home"
+              "title": "SE 1106 FULL AI"
             }
           },
           {
-            "id": "7d4ed1918f753899",
+            "id": "12de058b85b7df48",
             "type": "leaf",
-            "pinned": true,
             "state": {
-              "type": "bases",
+              "type": "markdown",
               "state": {
-                "file": "Anime View.base",
-                "viewName": "All Anime"
+                "file": "SYS_Tracker.md",
+                "mode": "preview",
+                "source": true
               },
-              "pinned": true,
-              "icon": "lucide-layout-grid",
-              "title": "Anime View"
+              "icon": "lucide-file",
+              "title": "SYS_Tracker"
             }
           },
           {
-            "id": "7e6754630fa1aa5d",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "bases",
-              "state": {
-                "file": "Anime Movie View.base",
-                "viewName": "All Anime Movies"
-              },
-              "pinned": true,
-              "icon": "lucide-layout-grid",
-              "title": "Anime Movie View"
-            }
-          },
-          {
-            "id": "76a7d9e5ac61db85",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "bases",
-              "state": {
-                "file": "Manga View.base",
-                "viewName": "All Manga"
-              },
-              "pinned": true,
-              "icon": "lucide-layout-grid",
-              "title": "Manga View"
-            }
-          },
-          {
-            "id": "6ca308cfc6e590d4",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "bases",
-              "state": {
-                "file": "Series View.base",
-                "viewName": "All Series"
-              },
-              "pinned": true,
-              "icon": "lucide-layout-grid",
-              "title": "Series View"
-            }
-          },
-          {
-            "id": "09c98166f572d0cb",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "bases",
-              "state": {
-                "file": "Movie View.base",
-                "viewName": "All Movies"
-              },
-              "pinned": true,
-              "icon": "lucide-layout-grid",
-              "title": "Movie View"
-            }
-          },
-          {
-            "id": "52a195586f96e0e5",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "bases",
-              "state": {
-                "file": "Game View.base",
-                "viewName": "All Games"
-              },
-              "pinned": true,
-              "icon": "lucide-layout-grid",
-              "title": "Game View"
-            }
-          },
-          {
-            "id": "2336b5d04e8eb45f",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "bases",
-              "state": {
-                "file": "Mobile Game View.base",
-                "viewName": "All Mobile Games"
-              },
-              "pinned": true,
-              "icon": "lucide-layout-grid",
-              "title": "Mobile Game View"
-            }
-          },
-          {
-            "id": "f2731d5deb6002bd",
+            "id": "ceab0ef11075e7d1",
             "type": "leaf",
             "state": {
-              "type": "bases",
-              "state": {
-                "file": "Movie View.base",
-                "viewName": "All Movies"
-              },
-              "icon": "lucide-layout-grid",
-              "title": "Movie View"
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
             }
           }
         ],
-        "currentTab": 8
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -154,15 +58,29 @@
       {
         "id": "d46aecce6a1078b0",
         "type": "tabs",
+        "dimension": 66.8918918918919,
         "children": [
+          {
+            "id": "42af4f1ef891900d",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
           {
             "id": "8042cedd39507497",
             "type": "leaf",
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#genre/Adventure",
-                "matchingCase": true,
+                "query": "",
+                "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
                 "extraContext": false,
@@ -182,8 +100,24 @@
               "title": "Bookmarks"
             }
           }
-        ],
-        "currentTab": 1
+        ]
+      },
+      {
+        "id": "feb92c4d55145aab",
+        "type": "tabs",
+        "dimension": 33.108108108108105,
+        "children": [
+          {
+            "id": "bfca4037b3f86d32",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
+            }
+          }
+        ]
       }
     ],
     "direction": "horizontal",
@@ -196,7 +130,7 @@
       {
         "id": "2fd9a64f0deb3159",
         "type": "tabs",
-        "dimension": 18.552875695732837,
+        "dimension": 67.3469387755102,
         "children": [
           {
             "id": "53f920f8060070a2",
@@ -280,11 +214,9 @@
             "type": "leaf",
             "state": {
               "type": "file-properties",
-              "state": {
-                "file": "Movie View.base"
-              },
+              "state": {},
               "icon": "lucide-info",
-              "title": "File properties for Movie View"
+              "title": "File properties"
             }
           },
           {
@@ -296,62 +228,31 @@
               "icon": "lucide-file-signature",
               "title": "Footnotes"
             }
+          },
+          {
+            "id": "cffdb6a6bd990540",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "lucide-ghost",
+              "title": "git-view"
+            }
           }
         ],
         "currentTab": 5
       },
       {
-        "id": "e61d82aa24cf76bd",
-        "type": "tabs",
-        "dimension": 36.54916512059369,
-        "children": [
-          {
-            "id": "2744bd3130960f52",
-            "type": "leaf",
-            "pinned": true,
-            "state": {
-              "type": "graph",
-              "state": {},
-              "pinned": true,
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
-            }
-          }
-        ]
-      },
-      {
-        "id": "a17a137ae15cfbb3",
-        "type": "tabs",
-        "dimension": 18.552875695732837,
-        "children": [
-          {
-            "id": "42af4f1ef891900d",
-            "type": "leaf",
-            "state": {
-              "type": "file-explorer",
-              "state": {
-                "sortOrder": "alphabetical",
-                "autoReveal": false
-              },
-              "icon": "lucide-folder-closed",
-              "title": "Files"
-            }
-          }
-        ]
-      },
-      {
         "id": "152c4bfc9fa84dd3",
         "type": "tabs",
-        "dimension": 26.345083487940634,
+        "dimension": 32.6530612244898,
         "children": [
           {
             "id": "04477abee950afcf",
             "type": "leaf",
-            "pinned": true,
             "state": {
               "type": "calendar",
               "state": {},
-              "pinned": true,
               "icon": "calendar-with-checkmark",
               "title": "Calendar"
             }
@@ -360,8 +261,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 343.5,
-    "collapsed": true
+    "width": 343.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -376,46 +276,48 @@
       "command-palette:Open command palette": false,
       "omnisearch:Omnisearch": false,
       "obsidian-importer:Open Importer": false,
-      "obsidian-media-db-plugin:Add new Media DB entry": false
+      "obsidian-git:Open Git source control": false,
+      "markdown-table-editor:Open Markdown Table Editor": false
     }
   },
-  "active": "f2731d5deb6002bd",
+  "active": "bfca4037b3f86d32",
   "lastOpenFiles": [
-    "Mobile Game View.base",
-    "Game View.base",
-    "Movie View.base",
-    "movies/Gone Girl (2014).md",
-    "movies/लापता लेडीज़ (2024).md",
-    "Home.md",
-    "games/Free Fire (2017).md",
-    "Series View.base",
-    "Manga View.base",
-    "Anime Movie View.base",
-    "Anime View.base",
-    "movies/Homebound (2025).md",
-    "anime/Overflow (2020).md",
-    "anime/Nippon Sangoku - The Three Nations of the Crimson Sun (2026).md",
-    "anime/Ane wa Yanmama Junyuu-chuu (2020).md",
-    "anime/Bible Black (2001).md",
-    "python/import_hentai.py",
-    "CoMix Wave Films.md",
-    "database/series.txt",
-    "database/movies.txt",
-    "manga/Goodnight Punpun (2007).md",
-    "games/The Witcher 3 - Wild Hunt (2015).md",
-    "games/Genshin Impact (2020).md",
-    "games/Grand Theft Auto V (2013).md",
-    "games/Grand Theft Auto IV (2008).md",
-    "games/PUBG Mobile (2018).md",
-    "games/Hay Day (2012).md",
-    "games/Clash Royale (2016).md",
-    "games/Clash of Clans (2012).md",
-    "games/Call of Duty - Mobile (2019).md",
-    "games/Brawl Stars (2018).md",
-    "games/Boom Beach (2014).md",
-    "series/Ozark (2017).md",
-    "series/Hannibal (2013).md",
-    "series/Narcos (2015).md",
+    "02_DU_IIT/00_ADD/BSSE16 Facebook Account List.md",
+    "02_DU_IIT/00_ADD/BSSE17 Facebook Account List.md",
+    "02_DU_IIT/00_ADD/BSSE17_FB - Sheet1.csv",
+    "00_ERRORS/TERMUX SETUP FOR PYTHON.md",
+    "99_ARCHIVE/SYS_TRACKER — Design Specification.md",
+    "00_ERRORS/GitHub [Large File].md",
+    "02_DU_IIT/01_CLASS/CSE 1101L - Structured Programming/CSE 1101 L1.md",
+    "SYS_TRACKER — Design Specification.md",
+    "99_ARCHIVE/SYS_Tracker.md",
+    "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106 FULL AI.md",
+    "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106 COMPACT AI.md",
+    "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106.md",
+    "01_BUET_CSE/BUET CSE 1-1 Index (খাজানা ১-১).md",
+    "04_PROJECTS/01 PORTFOLIO.md",
+    "03_COURSES/01_WEB_DEVELOPMENT/08_Database (SQL)/03. Core CRUD Operations.md",
+    "03_COURSES/01_WEB_DEVELOPMENT/08_Database (SQL)/02. Schema Definition & Table Management.md",
+    "03_COURSES/01_WEB_DEVELOPMENT/08_Database (SQL)/01. Database Fundamentals & Setup.md",
+    "02_DU_IIT/03_BOOKS/SE_ZB.pdf",
+    "02_DU_IIT/02_LECTURE_SHEET/SE 1106 F2.pdf",
+    "02_DU_IIT/02_LECTURE_SHEET/SE 1106 F.pdf",
+    "README.md",
+    "00_ERRORS/Untitled",
+    "00_ERRORS",
+    "02_DU_IIT/02_LECTURE_SHEET/GE 1105 F.pdf",
+    "02_DU_IIT/02_LECTURE_SHEET/STAT 1103 L2.pdf",
+    "02_DU_IIT/99_ARCHIVE/cse 2202.md",
+    "02_DU_IIT/99_ARCHIVE/SE 1102 L1.md",
+    "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering",
+    "02_DU_IIT/01_CLASS/GE 1105 - Sociology",
+    "04_PROJECTS/02_E_Commerce_Microservices_Architecture/01 The Monorepo Infrastructure.md",
+    "04_PROJECTS/02_E_Commerce_Microservices_Architecture/08 Admin Dashboard & Mutations.md",
+    "04_PROJECTS/E_Commerce_Microservices_Architecture/Untitled.md",
+    "04_PROJECTS/02_E_Commerce_Microservices_Architecture/07 Next.js Client Integration (State & Data Fetching).md",
+    "04_PROJECTS/02_E_Commerce_Microservices_Architecture/06 Payment Gateway Integration (Stripe & Webhooks).md",
+    "04_PROJECTS/02_E_Commerce_Microservices_Architecture/05 Event-Driven Communication & Kafka Setup.md",
+    "04_PROJECTS/02_E_Commerce_Microservices_Architecture/04 Core CRUD & Polyglot API Design.md",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "Business/Journal/Technical/Migrated/assets/why-not-jwt.png",
