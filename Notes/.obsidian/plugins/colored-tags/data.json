@@ -500,7 +500,11 @@
     "BSSE16": 308,
     "profile-links": 309,
     "Facebook": 310,
-    "BSSE17": 311
+    "BSSE17": 311,
+    "file-edit": 312,
+    "index": 313,
+    "page": 314,
+    "authorization": 315
   },
   "_version": 3
 }
