@@ -60,9 +60,12 @@ This endpoint handles administrator-only operations to create, edit, list, and d
 
 ---
 
-## 4. Source Code
+## 4. Implementation Code Breakdown
 
-Here is the complete implementation of `src/app/api/admin/announcements/route.ts`:
+The source code in `src/app/api/admin/announcements/route.ts` contains the following REST operations:
+
+### Phase 1: GET Request (Fetch Announcements)
+Returns all recorded system announcements, sorted by creation date.
 
 ```typescript
 import { NextRequest, NextResponse } from 'next/server';
@@ -70,7 +73,6 @@ import { requireAdmin } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { normalizeTag } from '@/lib/utils';
 
-// GET: List all announcements (admin view — shows all including expired)
 export async function GET() {
   try {
     await requireAdmin();
@@ -91,8 +93,14 @@ export async function GET() {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+```
 
-// POST: Create or update an announcement
+---
+
+### Phase 2: POST Request (Create or Update Announcement)
+Validates fields, normalizes targeting tags, and upserts the announcement record.
+
+```typescript
 export async function POST(req: NextRequest) {
   try {
     await requireAdmin();
@@ -107,6 +115,7 @@ export async function POST(req: NextRequest) {
     const normCourse = courseName ? normalizeTag(courseName) : null;
 
     if (id) {
+      // Update existing announcement
       const updated = await prisma.announcement.update({
         where: { id: parseInt(id) },
         data: {
@@ -119,6 +128,7 @@ export async function POST(req: NextRequest) {
       });
       return NextResponse.json(updated);
     } else {
+      // Create new announcement
       const created = await prisma.announcement.create({
         data: {
           title,
@@ -141,8 +151,14 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+```
 
-// DELETE: Remove an announcement
+---
+
+### Phase 3: DELETE Request (Remove Announcement)
+Deletes the target announcement record from the database.
+
+```typescript
 export async function DELETE(req: NextRequest) {
   try {
     await requireAdmin();
@@ -168,3 +184,4 @@ export async function DELETE(req: NextRequest) {
   }
 }
 ```
+

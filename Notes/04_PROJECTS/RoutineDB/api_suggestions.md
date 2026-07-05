@@ -36,16 +36,18 @@ This endpoint manages student-initiated suggestions for modifying global templat
 
 ---
 
-## 3. Source Code
+## 3. Implementation Code Breakdown
 
-Here is the complete implementation of `src/app/api/suggestions/route.ts`:
+The source code in `src/app/api/suggestions/route.ts` is divided into three key steps:
+
+### Phase 1: GET Request (Fetch Student's Suggestions)
+Pulls suggestions that include the active user's ID within the `suggestedByUserIds` JSON array, limiting results to 50 items.
 
 ```typescript
 import { NextRequest, NextResponse } from 'next/server';
 import { getAuthenticatedUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
-// GET: Fetch the user's own suggestions
 export async function GET() {
   try {
     const user = await getAuthenticatedUser();
@@ -72,8 +74,14 @@ export async function GET() {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+```
 
-// POST: Create or add to a suggestion (subject-wise, keyed by globalCourse + date)
+---
+
+### Phase 2: POST Request - Course Verification Gate
+Validates that suggestions are only allowed for admin-managed courses, translating local courses to global blueprints.
+
+```typescript
 export async function POST(req: NextRequest) {
   try {
     const user = await getAuthenticatedUser();
@@ -83,15 +91,18 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Missing required fields: date, suggestedStatus' }, { status: 400 });
     }
 
+    // Find the global course corresponding to this user's admin course
     let globalCourse = null;
 
     if (subjectId) {
+      // Find by subjectId directly
       globalCourse = await prisma.globalCourse.findFirst({
         where: { subjectId },
       });
     }
 
     if (!globalCourse && courseId) {
+      // Fallback: find user's local course, get its subjectId, then find global course template
       const localCourse = await prisma.course.findFirst({
         where: { id: parseInt(courseId), userId: user.id, source: 'admin' },
       });
@@ -108,7 +119,15 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
+```
 
+---
+
+### Phase 3: POST Request - Vote Consolidation Upsert
+If a suggestion for this course and date already exists, appends the user details and reasons, consolidates the status, and updates the row. Otherwise, creates a new suggestion.
+
+```typescript
+    // Check if a suggestion already exists for this globalCourse + date
     const existing = await prisma.classSuggestion.findUnique({
       where: {
         globalCourseId_date: {
@@ -119,6 +138,7 @@ export async function POST(req: NextRequest) {
     });
 
     if (existing) {
+      // Add this user to the suggestion if not already present
       const existingUserIds: number[] = JSON.parse(existing.suggestedByUserIds);
       const existingNames: string[] = JSON.parse(existing.suggestedByNames);
 
@@ -131,6 +151,7 @@ export async function POST(req: NextRequest) {
           data: {
             suggestedByUserIds: JSON.stringify(existingUserIds),
             suggestedByNames: JSON.stringify(existingNames),
+            // Update reason (append new user comment)
             reason: reason
               ? (existing.reason ? `${existing.reason} | ${user.name}: ${reason}` : `${user.name}: ${reason}`)
               : existing.reason,
@@ -145,6 +166,7 @@ export async function POST(req: NextRequest) {
 
         return NextResponse.json(updated);
       } else {
+        // User already suggested this — update their reason
         const updated = await prisma.classSuggestion.update({
           where: { id: existing.id },
           data: {
@@ -162,6 +184,7 @@ export async function POST(req: NextRequest) {
         return NextResponse.json(updated);
       }
     } else {
+      // Create new suggestion
       const suggestion = await prisma.classSuggestion.create({
         data: {
           globalCourseId: globalCourse.id,

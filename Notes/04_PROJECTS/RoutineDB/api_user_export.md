@@ -38,16 +38,18 @@ To ensure backups are portable across different student accounts (or restorable 
 
 ---
 
-## 3. Source Code
+## 3. Implementation Code Breakdown
 
-Here is the complete implementation of `src/app/api/user/export/route.ts`:
+The source code in `src/app/api/user/export/route.ts` is divided into three key steps:
+
+### Phase 1: Parallel Database Loading
+Authenticates the user and fetches all user courses, slots, overrides, attendance logs, vacations, and secondary tag configurations concurrently.
 
 ```typescript
 import { NextRequest, NextResponse } from 'next/server';
 import { getAuthenticatedUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
-// GET: Export the authenticated user's full data as a JSON blob
 export async function GET(req: NextRequest) {
   try {
     const user = await getAuthenticatedUser();
@@ -79,14 +81,21 @@ export async function GET(req: NextRequest) {
           where: { userId: user.id },
         }),
       ]);
+```
 
+---
+
+### Phase 2: Relational ID Reference Map Builders
+Constructs maps converting foreign keys like `courseId` and `weeklySlotId` into logical string keys.
+
+```typescript
     // Build a map from courseId → subjectId for cross-referencing
     const courseIdToSubjectId = new Map<number, string>();
     for (const c of courses) {
       courseIdToSubjectId.set(c.id, c.subjectId);
     }
 
-    // Build a map from weeklySlotId → { subjectId, dayOfWeek, startTime } for cross-referencing
+    // Build a map from weeklySlotId → { subjectId, dayOfWeek, startTime }
     const slotIdToRef = new Map<number, { subjectId: string; dayOfWeek: string; startTime: string }>();
     for (const s of weeklySlots) {
       slotIdToRef.set(s.id, {
@@ -95,7 +104,14 @@ export async function GET(req: NextRequest) {
         startTime: s.startTime,
       });
     }
+```
 
+---
+
+### Phase 3: JSON Serialization & Data Streaming
+Converts relational schemas into the backup format structure and sets JSON download file headers.
+
+```typescript
     const exportData = {
       version: '1.0',
       exportType: 'user',
@@ -128,7 +144,6 @@ export async function GET(req: NextRequest) {
       })),
 
       weeklySlots: weeklySlots.map(s => ({
-        // Reference by subjectId instead of courseId so import works across accounts
         subjectId: courseIdToSubjectId.get(s.courseId) || '',
         dayOfWeek: s.dayOfWeek,
         startTime: s.startTime,
@@ -142,7 +157,6 @@ export async function GET(req: NextRequest) {
 
       dailyClasses: dailyClasses.map(d => ({
         subjectId: courseIdToSubjectId.get(d.courseId) || '',
-        // Reference slot by subjectId+dayOfWeek+startTime (enough to find it during import)
         weeklySlotRef: d.weeklySlotId ? slotIdToRef.get(d.weeklySlotId) || null : null,
         date: d.date,
         startTime: d.startTime,
@@ -158,9 +172,7 @@ export async function GET(req: NextRequest) {
         subjectId: courseIdToSubjectId.get(a.courseId) || '',
         date: a.date,
         status: a.status,
-        // Reference slot by subjectId+dayOfWeek+startTime
         weeklySlotRef: a.weeklySlotId ? slotIdToRef.get(a.weeklySlotId) || null : null,
-        // dailyClassId will be re-resolved during import
       })),
 
       vacations: vacations.map(v => ({
@@ -189,3 +201,4 @@ export async function GET(req: NextRequest) {
   }
 }
 ```
+

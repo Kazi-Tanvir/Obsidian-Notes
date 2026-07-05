@@ -42,16 +42,18 @@ This endpoint enables administrators to inspect modification proposals suggested
 
 ---
 
-## 3. Source Code
+## 3. Implementation Code Breakdown
 
-Here is the complete implementation of `src/app/api/admin/suggestions/route.ts`:
+The source code in `src/app/api/admin/suggestions/route.ts` is divided into three key steps:
+
+### Phase 1: GET Request (Fetch Suggestions)
+Pulls all suggestions, sorting by pending items first and then descending by creation date.
 
 ```typescript
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdmin } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
-// GET: List all suggestions (pending first, then recent)
 export async function GET(req: NextRequest) {
   try {
     await requireAdmin();
@@ -96,8 +98,14 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+```
 
-// POST: Approve or reject a suggestion
+---
+
+### Phase 2: POST Request - Validation and Rejection Decisions
+Verifies administrator authorization, validates inputs, and processes simple rejections directly.
+
+```typescript
 export async function POST(req: NextRequest) {
   try {
     await requireAdmin();
@@ -136,8 +144,15 @@ export async function POST(req: NextRequest) {
       });
       return NextResponse.json({ success: true, suggestion: updated, action: 'rejected' });
     }
+```
 
-    // === APPROVE ===
+---
+
+### Phase 3: POST Request - Approvals & Student Overrides Propagation
+Upserts the `GlobalDailyOverride` record based on suggestion parameters and propagates updates to student diaries.
+
+```typescript
+    // === APPROVE FLOW ===
     const overrideStatus = suggestion.suggestedStatus;
     const override = await prisma.globalDailyOverride.upsert({
       where: {
@@ -164,6 +179,7 @@ export async function POST(req: NextRequest) {
       },
     });
 
+    // Find subscribed student course copies
     const userCourses = await prisma.course.findMany({
       where: {
         subjectId: suggestion.globalCourse.subjectId,
@@ -250,3 +266,4 @@ export async function POST(req: NextRequest) {
   }
 }
 ```
+

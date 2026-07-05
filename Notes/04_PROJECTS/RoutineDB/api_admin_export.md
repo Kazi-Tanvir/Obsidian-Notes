@@ -35,16 +35,18 @@ The generated JSON object contains:
 
 ---
 
-## 3. Source Code
+## 3. Implementation Code Breakdown
 
-Here is the complete implementation of `src/app/api/admin/export/route.ts`:
+The source code in `src/app/api/admin/export/route.ts` is divided into three key steps:
+
+### Phase 1: Authentication and Parallel Database Queries
+Validates administrative permissions, and queries all template tables concurrently using `Promise.all()`.
 
 ```typescript
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdmin } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
-// GET: Export all global admin data as a JSON blob
 export async function GET(req: NextRequest) {
   try {
     await requireAdmin();
@@ -66,7 +68,14 @@ export async function GET(req: NextRequest) {
       prisma.semester.findMany({ orderBy: { startDate: 'asc' } }),
       prisma.announcement.findMany({ orderBy: { createdAt: 'asc' } }),
     ]);
+```
 
+---
+
+### Phase 2: Serialization of Global Course Blueprint Templates
+Constructs the backup payload structure and maps courses, recurring template weekly slots, and template date overrides.
+
+```typescript
     const exportData = {
       version: '1.0',
       exportType: 'admin',
@@ -98,7 +107,14 @@ export async function GET(req: NextRequest) {
           description: o.description,
         })),
       })),
+```
 
+---
+
+### Phase 3: Metadata Serialization and Download Streaming
+Maps holidays, active terms, and system broadcasts, converting the object to a string format and returning file attachment download headers.
+
+```typescript
       globalVacations: globalVacations.map(v => ({
         date: v.date,
         type: v.type,
@@ -147,3 +163,4 @@ export async function GET(req: NextRequest) {
   }
 }
 ```
+

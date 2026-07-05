@@ -94,16 +94,18 @@ graph TD
 
 ---
 
-## 4. Source Code
+## 4. Implementation Code Breakdown
 
-Here is the complete implementation of `src/app/api/admin/global-overrides/route.ts`:
+The source code in `src/app/api/admin/global-overrides/route.ts` is split into the following phases:
+
+### Phase 1: GET Request (Fetch Overrides)
+Fetches all global overrides from the database, incorporating course blueprints details.
 
 ```typescript
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdmin } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
-// GET: List all global overrides
 export async function GET(req: NextRequest) {
   try {
     await requireAdmin();
@@ -136,8 +138,14 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+```
 
-// POST: Create a global override (cancel/reschedule for all matching students)
+---
+
+### Phase 2: POST Request - Global Override Record Upsert
+Checks permissions and upserts the `GlobalDailyOverride` record storing the change.
+
+```typescript
 export async function POST(req: NextRequest) {
   try {
     await requireAdmin();
@@ -150,7 +158,7 @@ export async function POST(req: NextRequest) {
 
     const overrideStatus = status || 'CANCELLED';
 
-    // Create the global override record
+    // Create/update the global override record
     const override = await prisma.globalDailyOverride.upsert({
       where: {
         globalCourseId_date: {
@@ -175,8 +183,14 @@ export async function POST(req: NextRequest) {
         description: description || null,
       },
     });
+```
 
-    // Get the global course to find its subjectId
+---
+
+### Phase 3: POST Request - Real-time Calendars Propagation
+Identifies all students currently subscribed to the course template and inserts/updates a personalized override (`DailyClass`) record in their calendars.
+
+```typescript
     const globalCourse = await prisma.globalCourse.findUnique({
       where: { id: parseInt(globalCourseId) },
     });
@@ -185,7 +199,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Global course not found' }, { status: 404 });
     }
 
-    // Find all user-level courses that match this global course's subjectId AND source is admin
+    // Find all student course copies
     const userCourses = await prisma.course.findMany({
       where: {
         subjectId: globalCourse.subjectId,
@@ -197,7 +211,6 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    // Determine day of week for the given date
     const dateObj = new Date(date + 'T00:00:00');
     const dayNames = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
     const dayOfWeek = dayNames[dateObj.getDay()];
@@ -205,11 +218,10 @@ export async function POST(req: NextRequest) {
     let overridesApplied = 0;
 
     for (const course of userCourses) {
-      // Find weekly slots for this day (only admin-source slots — personal slots are protected)
+      // Find matching slots on this weekday (excluding personal custom slots)
       const matchingSlots = course.weeklySlots.filter(s => s.dayOfWeek === dayOfWeek && s.source !== 'personal');
 
       for (const slot of matchingSlots) {
-        // Check if a DailyClass override already exists (admin override wins)
         const existing = await prisma.dailyClass.findFirst({
           where: {
             userId: course.userId,
@@ -220,7 +232,7 @@ export async function POST(req: NextRequest) {
         });
 
         if (existing) {
-          // Update existing override (admin wins)
+          // Update student override (admin values take priority)
           await prisma.dailyClass.update({
             where: { id: existing.id },
             data: {
@@ -232,7 +244,7 @@ export async function POST(req: NextRequest) {
             },
           });
         } else {
-          // Create new DailyClass override
+          // Create new student override record
           await prisma.dailyClass.create({
             data: {
               userId: course.userId,
@@ -270,8 +282,14 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+```
 
-// DELETE: Remove a global override
+---
+
+### Phase 4: DELETE Request (Remove Global Override)
+Deletes the global override settings record.
+
+```typescript
 export async function DELETE(req: NextRequest) {
   try {
     await requireAdmin();

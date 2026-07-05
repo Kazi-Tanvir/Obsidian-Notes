@@ -76,16 +76,18 @@ This endpoint manages the weekly recurring schedules templates assigned to cours
 
 ---
 
-## 4. Source Code
+## 4. Implementation Code Breakdown
 
-Here is the complete implementation of `src/app/api/weekly-slots/route.ts`:
+The backend implementation at `src/app/api/weekly-slots/route.ts` is divided into three parts:
+
+### Phase 1: GET Request (Fetch Slots)
+Fetches all weekly slot entries for the student and incorporates course meta objects.
 
 ```typescript
 import { NextResponse } from 'next/server';
 import { getAuthenticatedUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
-// GET: Fetch weekly slots for the authenticated user
 export async function GET() {
   try {
     const user = await getAuthenticatedUser();
@@ -106,8 +108,14 @@ export async function GET() {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+```
 
-// POST: Create or edit a weekly slot for the authenticated user
+---
+
+### Phase 2: POST Request (Create/Edit Slot Template)
+Validates ownership rules and updates or creates a slot. When editing a slot, cleans up `DailyClass` records depending on the value of the `updateMode` parameter (`all` vs `future`).
+
+```typescript
 export async function POST(request: Request) {
   try {
     const user = await getAuthenticatedUser();
@@ -171,6 +179,7 @@ export async function POST(request: Request) {
 
       return NextResponse.json(updatedSlot);
     } else {
+      // Create new weekly slot template
       const newSlot = await prisma.weeklySlot.create({
         data: {
           userId: user.id,
@@ -194,8 +203,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+```
 
-// DELETE: Remove a weekly slot (verify ownership)
+---
+
+### Phase 3: DELETE Request (Remove Slot)
+Deletes the weekly template slot by checking student ownership rules.
+
+```typescript
 export async function DELETE(request: Request) {
   try {
     const user = await getAuthenticatedUser();
@@ -206,6 +221,7 @@ export async function DELETE(request: Request) {
       return NextResponse.json({ error: 'Missing slot ID' }, { status: 400 });
     }
 
+    // Verify slot ownership
     const slot = await prisma.weeklySlot.findFirst({
       where: { id: parseInt(id), userId: user.id },
     });
@@ -227,3 +243,4 @@ export async function DELETE(request: Request) {
   }
 }
 ```
+

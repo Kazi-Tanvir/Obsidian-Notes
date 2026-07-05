@@ -47,17 +47,18 @@ This endpoint allows students to pull and synchronize global template schedules 
 
 ---
 
-## 4. Source Code
+## 4. Implementation Code Breakdown
 
-Here is the complete implementation of `src/app/api/user/sync-template/route.ts`:
+The synchronization process in `src/app/api/user/sync-template/route.ts` is divided into four key stages:
+
+### Phase 1: Tag Extraction and Validation Gate
+Gathers the user's primary tags and queries the secondary subscriptions table, verifying that at least one tag is set.
 
 ```typescript
 import { NextResponse } from 'next/server';
 import { getAuthenticatedUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
-// POST: Sync/Import global courses and slots template to the authenticated user's profile
-// Only syncs courses matching the user's primary + secondary tags
 export async function POST() {
   try {
     const user = await getAuthenticatedUser();
@@ -78,7 +79,14 @@ export async function POST() {
         { status: 400 }
       );
     }
+```
 
+---
+
+### Phase 2: Template Courses Queries
+Constructs matching conditions based on the extracted tags, including universal courses, and queries the database for global blueprints.
+
+```typescript
     // Build OR conditions to match global courses by any of the user's tags
     const orConditions = userTags.map(tag => {
       const condition: any = {};
@@ -107,7 +115,14 @@ export async function POST() {
 
     let coursesSynced = 0;
     let slotsSynced = 0;
+```
 
+---
+
+### Phase 3: User Course Registrations Synchronization Loop
+Processes matching global templates. Wipes archived status values, updates instructor details, and registers the course under the user profile if it doesn't already exist.
+
+```typescript
     for (const gc of globalCourses) {
       // Check if user already has this course
       let localCourse = await prisma.course.findUnique({
@@ -154,7 +169,14 @@ export async function POST() {
         });
         coursesSynced++;
       }
+```
 
+---
+
+### Phase 4: Weekly Slot Templates Merging
+Compares the global weekly slots to existing student slots. Upserts slot data and room numbers, and returns sync statistics.
+
+```typescript
       // Sync weekly slots for this course (merge mode — add missing, update existing)
       for (const gs of gc.weeklySlots) {
         const existingSlot = await prisma.weeklySlot.findFirst({
@@ -209,3 +231,4 @@ export async function POST() {
   }
 }
 ```
+

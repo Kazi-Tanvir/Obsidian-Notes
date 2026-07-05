@@ -63,9 +63,12 @@ This endpoint handles administrator-only term scheduling operations (declaring s
 
 ---
 
-## 4. Source Code
+## 4. Implementation Code Breakdown
 
-Here is the complete implementation of `src/app/api/admin/semesters/route.ts`:
+The source code in `src/app/api/admin/semesters/route.ts` is divided into three key REST operations:
+
+### Phase 1: GET Request (Fetch Semesters)
+Lists semesters, with optional tag filters for `university` and `courseName`.
 
 ```typescript
 import { NextRequest, NextResponse } from 'next/server';
@@ -73,7 +76,6 @@ import { requireAdmin } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { normalizeTag } from '@/lib/utils';
 
-// GET: List all semesters (optionally filtered by tag)
 export async function GET(req: NextRequest) {
   try {
     await requireAdmin();
@@ -103,8 +105,14 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+```
 
-// POST: Create or update a semester
+---
+
+### Phase 2: POST Request (Create/Edit Semester)
+Validates that `startDate <= endDate`, normalizes tags, and handles compound index collision checks.
+
+```typescript
 export async function POST(req: NextRequest) {
   try {
     await requireAdmin();
@@ -123,6 +131,7 @@ export async function POST(req: NextRequest) {
     const normCourse = normalizeTag(courseName);
 
     if (id) {
+      // Update existing semester configuration
       const updated = await prisma.semester.update({
         where: { id: parseInt(id) },
         data: {
@@ -136,6 +145,7 @@ export async function POST(req: NextRequest) {
       });
       return NextResponse.json(updated);
     } else {
+      // Create new semester configuration
       const created = await prisma.semester.create({
         data: {
           name,
@@ -156,14 +166,21 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
     if (error.code === 'P2002') {
+      // Handles compound key collisions gracefully
       return NextResponse.json({ error: 'A semester with this name and tags already exists' }, { status: 400 });
     }
     console.error('Error saving semester:', error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+```
 
-// DELETE: Remove a semester
+---
+
+### Phase 3: DELETE Request (Remove Semester)
+Removes the semester calendar boundaries block.
+
+```typescript
 export async function DELETE(req: NextRequest) {
   try {
     await requireAdmin();

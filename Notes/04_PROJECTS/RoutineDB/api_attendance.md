@@ -50,9 +50,12 @@ Returns:
 
 ---
 
-## 3. Source Code
+## 3. Implementation Code Breakdown
 
-Here is the complete implementation of `src/app/api/attendance/route.ts`:
+The source code in `src/app/api/attendance/route.ts` is divided into logical phases:
+
+### Phase 1: Imports & Weekday Helper
+Imports ORM modules and handles date conversion to day name strings.
 
 ```typescript
 import { NextResponse } from 'next/server';
@@ -66,8 +69,14 @@ function getDayOfWeek(dateStr: string): string {
   const days = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
   return days[date.getDay()];
 }
+```
 
-// GET: Calculate attendance statistics for the authenticated user
+---
+
+### Phase 2: GET Request - Student Information and Date Ranges Capping
+Pulls user configurations and sets date range filters. Checks that the calculations end date does not extend past today, preventing future classes from affecting stats.
+
+```typescript
 export async function GET(request: Request) {
   try {
     const user = await getAuthenticatedUser();
@@ -91,7 +100,6 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
-    // Fetch semesters and global courses for matching admin-pushed templates
     const secondaryTags = await prisma.userSecondaryTag.findMany({
       where: { userId: user.id }
     });
@@ -138,7 +146,7 @@ export async function GET(request: Request) {
       }
     });
 
-    // Date range
+    // Date range preparation
     let startStr = startDateStr;
     let endStr = endDateStr;
     if (!startStr || !endStr) {
@@ -149,7 +157,7 @@ export async function GET(request: Request) {
       startStr = oneMonthAgo.toISOString().split('T')[0];
     }
 
-    // Cap endDate to today — future classes should NOT be counted in attendance averages
+    // CAP END DATE TO TODAY (No future class metrics allowed)
     const todayStr = new Date().toISOString().split('T')[0];
     if (endStr > todayStr) {
       endStr = todayStr;
@@ -159,12 +167,19 @@ export async function GET(request: Request) {
     if (startStr && endStr) {
       whereClause.date = { gte: startStr, lte: endStr };
     }
+```
 
+---
+
+### Phase 3: GET Request - Database Records Loading & Vacation Maps Builder
+Pulls vacations, overrides, and logs, then builds holiday indexes.
+
+```typescript
     const vacations = await prisma.vacation.findMany({ where: whereClause });
     const dailyClasses = await prisma.dailyClass.findMany({ where: whereClause });
     const attendances = await prisma.attendance.findMany({ where: whereClause });
 
-    // Also fetch global vacations that apply to this user
+    // Global vacations from admin
     const globalVacations = await prisma.globalVacation.findMany({
       where: {
         date: { gte: startStr, lte: endStr },
@@ -182,7 +197,6 @@ export async function GET(request: Request) {
       }
     });
 
-    // Generate dates in range
     const start = new Date(startStr);
     const end = new Date(endStr);
     const dates: string[] = [];
@@ -192,24 +206,22 @@ export async function GET(request: Request) {
       temp.setDate(temp.getDate() + 1);
     }
 
-    // Build vacation map (personal + global)
+    // Build vacation map (personal overrides global)
     const vacationMap = new Map<string, string>();
     globalVacations.forEach(v => vacationMap.set(v.date, v.type));
     vacations.forEach(v => vacationMap.set(v.date, v.type));
 
-    // Pagination params for class history
+    // Pagination configuration
     const page = parseInt(searchParams.get('page') || '1');
     const pageSize = parseInt(searchParams.get('pageSize') || '50');
 
-    // Stats
+    // Initialize stats
     let totalClassesHeld = 0;
     let totalPresent = 0;
     let totalAbsent = 0;
     let totalCancelled = 0;
 
     const courseStats: Record<string, { held: number; present: number; absent: number; cancelled: number; courseId: number; subjectName: string; subjectCode: string }> = {};
-    
-    // Build a lookup map for courses by ID for class history
     const courseMap = new Map<number, { subjectName: string; subjectCode: string; subjectId: string }>();
     student.courses.forEach(c => {
       courseStats[c.id] = {
@@ -219,7 +231,6 @@ export async function GET(request: Request) {
       courseMap.set(c.id, { subjectName: c.subjectName, subjectCode: c.subjectCode, subjectId: c.subjectId });
     });
 
-    // Collect all class history entries (before pagination)
     const allClassHistory: Array<{
       date: string;
       courseId: number;
@@ -228,10 +239,17 @@ export async function GET(request: Request) {
       startTime: string;
       endTime: string;
       room: string | null;
-      status: string; // PRESENT, ABSENT, CANCELLED, UNMARKED
+      status: string;
       isExtra: boolean;
     }> = [];
+```
 
+---
+
+### Phase 4: GET Request - Date Iterations Loop (Template slots & overrides)
+Resolves every date in the range, applying filters for semesters, archived courses, holiday types, and cancellation overrides.
+
+```typescript
     for (const dateStr of dates) {
       const dayName = getDayOfWeek(dateStr);
       const dayVacationType = vacationMap.get(dateStr);
@@ -241,7 +259,6 @@ export async function GET(request: Request) {
       const dayTemplates = student.courses.flatMap(c => {
         if (c.archivedAt && dateStr > c.archivedAt) return [];
 
-        // Check if course is admin-pushed and has semester restrictions
         if (c.source === 'admin') {
           const tags = courseTagMap.get(c.id);
           if (tags) {
@@ -276,7 +293,7 @@ export async function GET(request: Request) {
 
         const courseInfo = courseMap.get(slot.courseId);
 
-        // Check if class is cancelled (via override status)
+        // Check if class is cancelled via override status
         if (status === 'CANCELLED') {
           totalCancelled++;
           courseStats[slot.courseId].cancelled++;
@@ -305,6 +322,7 @@ export async function GET(request: Request) {
           if (att) attStatus = att.status;
         }
 
+        // Treat class as cancelled if attendance record is CANCELLED
         if (attStatus === 'CANCELLED') {
           totalCancelled++;
           courseStats[slot.courseId].cancelled++;
@@ -340,7 +358,15 @@ export async function GET(request: Request) {
           isExtra: false,
         });
       }
+```
 
+---
+
+### Phase 5: GET Request - Extra Classes Resolution, Sorting, & Pagination
+Processes custom extra class instances, sorts histories chronologically, and returns paginated statistics.
+
+```typescript
+      // Process extra classes
       const extraClasses = dateOverrides.filter(o => o.isExtra);
       for (const extra of extraClasses) {
         if (!courseStats[extra.courseId]) continue;
@@ -410,6 +436,7 @@ export async function GET(request: Request) {
       }
     }
 
+    // Compile metrics and averages
     const overallPercentage = totalClassesHeld > 0 ? Math.round((totalPresent / totalClassesHeld) * 100) : 100;
 
     const subjectsData = Object.values(courseStats).map(s => ({
@@ -417,12 +444,14 @@ export async function GET(request: Request) {
       percentage: s.held > 0 ? Math.round((s.present / s.held) * 100) : 100
     }));
 
+    // Sort by date descending
     allClassHistory.sort((a, b) => {
       const dateCmp = b.date.localeCompare(a.date);
       if (dateCmp !== 0) return dateCmp;
       return a.startTime.localeCompare(b.startTime);
     });
 
+    // Paginate response data
     const totalHistoryItems = allClassHistory.length;
     const totalPages = Math.ceil(totalHistoryItems / pageSize);
     const startIdx = (page - 1) * pageSize;
@@ -444,7 +473,14 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+```
 
+---
+
+### Phase 6: POST Request - Toggle Attendance Logger
+Upserts the database log row storing whether the student attended a specific session.
+
+```typescript
 export async function POST(request: Request) {
   try {
     const user = await getAuthenticatedUser();

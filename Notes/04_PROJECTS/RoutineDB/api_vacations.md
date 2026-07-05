@@ -60,9 +60,12 @@ This endpoint manages student personal sick leave blocks and holiday periods, lo
 
 ---
 
-## 4. Source Code
+## 4. Implementation Code Breakdown
 
-Here is the complete implementation of `src/app/api/vacations/route.ts`:
+The source code in `src/app/api/vacations/route.ts` is divided into three REST handler parts:
+
+### Phase 1: Range Helper & GET Request (Fetch Holidays)
+Computes dates lists inside ranges, and fetches active vacations for the student.
 
 ```typescript
 import { NextResponse } from 'next/server';
@@ -82,7 +85,6 @@ function getDatesInRange(startStr: string, endStr: string): string[] {
   return dates;
 }
 
-// GET: Fetch personal vacations for the authenticated user
 export async function GET() {
   try {
     const user = await getAuthenticatedUser();
@@ -101,8 +103,14 @@ export async function GET() {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+```
 
-// POST: Create/update personal vacation for the authenticated user
+---
+
+### Phase 2: POST Request (Create Vacation Block)
+Processes updates for a range of dates. If `type === 'NONE'`, removes vacation days, else upserts vacation metadata dates in loop parameters.
+
+```typescript
 export async function POST(request: Request) {
   try {
     const user = await getAuthenticatedUser();
@@ -116,11 +124,11 @@ export async function POST(request: Request) {
     const startStr = date;
     const endStr = endDate || date;
     const dates = getDatesInRange(startStr, endStr);
-
     const results = [];
 
     for (const currentDate of dates) {
       if (type === 'NONE' || !type) {
+        // Clear vacation dates
         const existing = await prisma.vacation.findUnique({
           where: {
             userId_date: {
@@ -133,6 +141,7 @@ export async function POST(request: Request) {
           await prisma.vacation.delete({ where: { id: existing.id } });
         }
       } else {
+        // Upsert vacation properties
         const vacation = await prisma.vacation.upsert({
           where: {
             userId_date: {
@@ -161,8 +170,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+```
 
-// DELETE: Remove a personal vacation
+---
+
+### Phase 3: DELETE Request (Remove Vacation Entry)
+Deletes a vacation record by checking student ownership details.
+
+```typescript
 export async function DELETE(request: Request) {
   try {
     const user = await getAuthenticatedUser();
@@ -173,6 +188,7 @@ export async function DELETE(request: Request) {
       return NextResponse.json({ error: 'Missing vacation ID' }, { status: 400 });
     }
 
+    // Verify ownership
     const vacation = await prisma.vacation.findFirst({
       where: { id: parseInt(id), userId: user.id },
     });
@@ -191,3 +207,4 @@ export async function DELETE(request: Request) {
   }
 }
 ```
+

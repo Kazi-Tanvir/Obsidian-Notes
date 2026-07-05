@@ -64,9 +64,12 @@ This endpoint handles administrator-only configurations to manage global and bat
 
 ---
 
-## 4. Source Code
+## 4. Implementation Code Breakdown
 
-Here is the complete implementation of `src/app/api/admin/global-vacations/route.ts`:
+The source code in `src/app/api/admin/global-vacations/route.ts` is divided into three key parts:
+
+### Phase 1: Range Helper & GET Request (Fetch Holidays)
+Computes dates list parameters, and lists all registered global holidays.
 
 ```typescript
 import { NextResponse } from 'next/server';
@@ -87,7 +90,6 @@ function getDatesInRange(startStr: string, endStr: string): string[] {
   return dates;
 }
 
-// GET: Fetch all global vacations
 export async function GET() {
   try {
     await requireAdmin();
@@ -102,8 +104,14 @@ export async function GET() {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+```
 
-// POST: Create/update a global vacation
+---
+
+### Phase 2: POST Request (Create/Edit Holiday template)
+Normalizes tags, computes range bounds, and inserts or updates vacations matching specific date combinations.
+
+```typescript
 export async function POST(request: Request) {
   try {
     await requireAdmin();
@@ -118,6 +126,7 @@ export async function POST(request: Request) {
     const normCourseName = courseName ? normalizeTag(courseName) : null;
 
     if (id) {
+      // Update existing vacation record
       const updated = await prisma.globalVacation.update({
         where: { id: parseInt(id) },
         data: {
@@ -130,13 +139,14 @@ export async function POST(request: Request) {
       });
       return NextResponse.json(updated);
     } else {
+      // Create new vacation (supports range insertions)
       const startStr = date;
       const endStr = endDate || date;
       const dates = getDatesInRange(startStr, endStr);
 
       const results = [];
       for (const currentDate of dates) {
-        // Find if vacation with same date/univ/course combination already exists
+        // Find duplicate dates targeted to the same tags
         const existing = await prisma.globalVacation.findFirst({
           where: {
             date: currentDate,
@@ -176,11 +186,18 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+```
 
-// DELETE: Delete a global vacation
+---
+
+### Phase 3: DELETE Request (Remove Holiday)
+Deletes the holiday record from the system.
+
+```typescript
 export async function DELETE(request: Request) {
   try {
-    await requireAdmin();    const { searchParams } = new URL(request.url);
+    await requireAdmin();
+    const { searchParams } = new URL(request.url);
     const id = searchParams.get('id');
     if (!id) return NextResponse.json({ error: 'Missing ID' }, { status: 400 });
 
@@ -196,3 +213,4 @@ export async function DELETE(request: Request) {
   }
 }
 ```
+

@@ -49,9 +49,12 @@ This endpoint handles personal profile retrievals and customization settings, lo
 
 ---
 
-## 3. Source Code
+## 3. Implementation Code Breakdown
 
-Here is the complete implementation of `src/app/api/user/route.ts`:
+The source code in `src/app/api/user/route.ts` is divided into two key handlers:
+
+### Phase 1: GET Request (Fetch Profile Settings)
+Returns user metadata alongside their active, non-archived courses.
 
 ```typescript
 import { NextResponse } from 'next/server';
@@ -59,7 +62,6 @@ import { getAuthenticatedUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { normalizeTag } from '@/lib/utils';
 
-// GET: Return the current authenticated user's profile
 export async function GET() {
   try {
     const user = await getAuthenticatedUser();
@@ -82,8 +84,14 @@ export async function GET() {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+```
 
-// POST: Update the current user's profile settings
+---
+
+### Phase 2: POST Request (Update Profile Configurations)
+Normalizes primary tags, filters updated settings fields, and updates the database record.
+
+```typescript
 export async function POST(request: Request) {
   try {
     const user = await getAuthenticatedUser();
@@ -112,3 +120,4 @@ export async function POST(request: Request) {
   }
 }
 ```
+

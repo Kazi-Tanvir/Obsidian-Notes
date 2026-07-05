@@ -54,17 +54,18 @@ graph TD
 
 ---
 
-## 3. Source Code
+## 3. Implementation Code Breakdown
 
-Here is the complete implementation of `src/app/api/user/import/route.ts`:
+The source code in `src/app/api/user/import/route.ts` is divided into logical execution phases:
+
+### Phase 1: Authentication and Header Validation
+Verify user credentials and validate the import file header type and versions.
 
 ```typescript
 import { NextRequest, NextResponse } from 'next/server';
 import { getAuthenticatedUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
-// POST: Import user data from a previously exported JSON
-// ?mode=merge (default) or ?mode=replace
 export async function POST(req: NextRequest) {
   try {
     const user = await getAuthenticatedUser();
@@ -73,7 +74,7 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json();
 
-    // Validate export file
+    // Validate export file type
     if (body.exportType !== 'user') {
       return NextResponse.json(
         { error: 'Invalid export file: exportType must be "user". Did you mean to use the admin import?' },
@@ -92,7 +93,7 @@ export async function POST(req: NextRequest) {
       dailyClasses: exportedDailyClasses = [],
       attendance: exportedAttendance = [],
       vacations: exportedVacations = [],
-      importProfile = false, // optional flag: whether to also overwrite profile fields
+      importProfile = false,
     } = body;
 
     const counts = {
@@ -103,7 +104,14 @@ export async function POST(req: NextRequest) {
       vacations: 0,
       secondaryTags: 0,
     };
+```
 
+---
+
+### Phase 2: Timeline Reset (Replace Mode)
+If `mode === 'replace'`, deletes user-scoped schedule tables (with cascading FK deletions) before writing the imported data.
+
+```typescript
     if (mode === 'replace') {
       // Delete all existing user data (cascades via FK constraints)
       await prisma.attendance.deleteMany({ where: { userId: user.id } });
@@ -113,8 +121,15 @@ export async function POST(req: NextRequest) {
       await prisma.vacation.deleteMany({ where: { userId: user.id } });
       await prisma.userSecondaryTag.deleteMany({ where: { userId: user.id } });
     }
+```
 
-    // Optionally update profile fields (name, color, university, courseName, courseStartDate)
+---
+
+### Phase 3: Profile Settings & Secondary Tags Import
+Saves user metadata (name, start dates) and tags mapping.
+
+```typescript
+    // Optionally update profile fields
     if (importProfile && profile) {
       await prisma.user.update({
         where: { id: user.id },
@@ -144,9 +159,16 @@ export async function POST(req: NextRequest) {
       });
       counts.secondaryTags++;
     }
+```
 
+---
+
+### Phase 4: Courses Import and Key Mapping Cache
+Upsert course data and record the mapping from `subjectId` to the newly assigned database course ID.
+
+```typescript
     // Import courses — upsert by (userId, subjectId)
-    // Build a local map subjectId → new DB id for subsequent slot/class resolution
+    // Build a local map subjectId -> new DB id for subsequent slot/class resolution
     const subjectIdToNewCourseId = new Map<string, number>();
 
     for (const c of exportedCourses) {
@@ -190,9 +212,16 @@ export async function POST(req: NextRequest) {
       }
       subjectIdToNewCourseId.set(c.subjectId, courseRecord.id);
     }
+```
 
+---
+
+### Phase 5: Weekly Slots Sync & Slot Cache Mapping
+Maps exported weekly slots to resolved course IDs, inserts them, and tracks references.
+
+```typescript
     // Import weekly slots — deduplicate by (userId, courseId, dayOfWeek, startTime)
-    // Build a local map (subjectId+dayOfWeek+startTime) → new DB slot id
+    // Build a local map (subjectId+dayOfWeek+startTime) -> new DB slot id
     const slotRefToNewSlotId = new Map<string, number>();
 
     for (const s of exportedSlots) {
@@ -245,13 +274,20 @@ export async function POST(req: NextRequest) {
       slotRefToNewSlotId.set(slotKey, slotRecord.id);
     }
 
-    // Helper: resolve a weeklySlotRef object → new slot ID
+    // Helper: resolve a weeklySlotRef object -> new slot ID
     const resolveSlotRef = (ref: any): number | null => {
       if (!ref) return null;
       const key = `${ref.subjectId}|${ref.dayOfWeek}|${ref.startTime}`;
       return slotRefToNewSlotId.get(key) || null;
     };
+```
 
+---
+
+### Phase 6: Daily Overrides & Attendance Logs Synchronization
+Resolves overrides and attendance records, mapping slot IDs from the cache maps.
+
+```typescript
     // Import daily classes — deduplicate by (userId, courseId, date, weeklySlotId)
     for (const d of exportedDailyClasses) {
       if (!d.subjectId || !d.date) continue;
@@ -295,7 +331,7 @@ export async function POST(req: NextRequest) {
       if (!courseId) continue;
       const weeklySlotId = resolveSlotRef(a.weeklySlotRef);
 
-      // Resolve dailyClassId: find matching DailyClass for this date/course/slot
+      // Resolve dailyClassId
       let dailyClassId: number | null = null;
       if (weeklySlotId) {
         const dc = await prisma.dailyClass.findFirst({
@@ -334,10 +370,17 @@ export async function POST(req: NextRequest) {
         }
         counts.attendance++;
       } catch {
-        // Skip duplicate attendance records gracefully
+        // Skip duplicate records gracefully
       }
     }
+```
 
+---
+
+### Phase 7: Vacations Import & Final Return
+Upserts vacation days and returns the processed synchronization count object.
+
+```typescript
     // Import vacations — upsert by (userId, date)
     for (const v of exportedVacations) {
       if (!v.date || !v.type) continue;
@@ -371,3 +414,4 @@ export async function POST(req: NextRequest) {
   }
 }
 ```
+

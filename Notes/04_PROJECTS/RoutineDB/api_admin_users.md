@@ -56,16 +56,18 @@ This endpoint allows administrators to manage registered user accounts, allocate
 
 ---
 
-## 4. Source Code
+## 4. Implementation Code Breakdown
 
-Here is the complete implementation of `src/app/api/admin/users/route.ts`:
+The source code in `src/app/api/admin/users/route.ts` is divided into three key operations:
+
+### Phase 1: GET Request (Fetch Users List)
+Lists all registered user accounts sorted by ID.
 
 ```typescript
 import { NextResponse } from 'next/server';
 import { requireAdmin } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
-// GET: List all users
 export async function GET() {
   try {
     await requireAdmin();
@@ -80,8 +82,14 @@ export async function GET() {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+```
 
-// POST: Update user role, tags, etc.
+---
+
+### Phase 2: POST Request (Update student metadata/roles)
+Processes promotions/demotions and edits student batch tags.
+
+```typescript
 export async function POST(request: Request) {
   try {
     await requireAdmin();
@@ -111,8 +119,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+```
 
-// DELETE: Delete a user
+---
+
+### Phase 3: DELETE Request (Remove Student Account)
+Wipes a student account from the system registry. Cascade foreign keys will automatically delete all courses, slots, overrides, and attendance logs.
+
+```typescript
 export async function DELETE(request: Request) {
   try {
     await requireAdmin();
@@ -132,3 +146,4 @@ export async function DELETE(request: Request) {
   }
 }
 ```
+

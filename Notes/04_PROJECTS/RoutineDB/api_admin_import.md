@@ -41,24 +41,24 @@ To prevent duplicate key collisions, records are imported using Prisma `upsert` 
 
 ---
 
-## 3. Source Code
+## 3. Implementation Code Breakdown
 
-Here is the complete implementation of `src/app/api/admin/import/route.ts`:
+The source code in `src/app/api/admin/import/route.ts` is divided into the following phases:
+
+### Phase 1: Authentication and Header Validation
+Verifies admin permission checks and validates backup file export metadata formats.
 
 ```typescript
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdmin } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
-// POST: Import admin data from a previously exported JSON
-// ?mode=merge (default) or ?mode=replace
 export async function POST(req: NextRequest) {
   try {
     await requireAdmin();
 
     const { searchParams } = new URL(req.url);
     const mode = searchParams.get('mode') === 'replace' ? 'replace' : 'merge';
-
     const body = await req.json();
 
     // Validate export file
@@ -87,21 +87,34 @@ export async function POST(req: NextRequest) {
       semesters: 0,
       announcements: 0,
     };
+```
 
+---
+
+### Phase 2: Dependency-Ordered Cleanups (Replace Mode)
+If `mode === 'replace'`, deletes global courses, vacations, semesters, and announcements. The deletions in `globalCourse` cascade to nested slots and overrides.
+
+```typescript
     if (mode === 'replace') {
       // Delete everything in dependency order
-      // GlobalDailyOverride and GlobalWeeklySlot cascade from GlobalCourse deletion
       await prisma.globalCourse.deleteMany({});
       await prisma.globalVacation.deleteMany({});
       await prisma.semester.deleteMany({});
       await prisma.announcement.deleteMany({});
     }
+```
 
+---
+
+### Phase 3: Global Courses & Nested Templates Import
+Upserts courses using compound target keys `(subjectId, university, courseName)`, then imports slots and date overrides nested under the resolved course.
+
+```typescript
     // Import global courses (with nested slots and overrides)
     for (const c of exportedCourses) {
       if (!c.subjectId || !c.university || c.courseName === undefined) continue;
 
-      // Upsert the global course by its unique key (subjectId, university, courseName)
+      // Upsert the global course by its unique key
       const course = await prisma.globalCourse.upsert({
         where: {
           subjectId_university_courseName: {
@@ -132,7 +145,7 @@ export async function POST(req: NextRequest) {
       });
       counts.courses++;
 
-      // Import nested weekly slots — deduplicate by (globalCourseId, dayOfWeek, startTime)
+      // Import weekly slots
       for (const s of (c.slots || [])) {
         if (!s.dayOfWeek || !s.startTime) continue;
         const existingSlot = await prisma.globalWeeklySlot.findFirst({
@@ -157,7 +170,7 @@ export async function POST(req: NextRequest) {
         }
       }
 
-      // Import nested overrides — upsert by (globalCourseId, date)
+      // Import nested overrides
       for (const o of (c.overrides || [])) {
         if (!o.date || !o.status) continue;
         await prisma.globalDailyOverride.upsert({
@@ -187,7 +200,14 @@ export async function POST(req: NextRequest) {
         counts.overrides++;
       }
     }
+```
 
+---
+
+### Phase 4: Global Vacations, Semesters & Broadcasts Import
+Restores remaining metadata tables, and returns counts of imported entries.
+
+```typescript
     // Import global vacations — upsert by (date, university, courseName)
     for (const v of exportedVacations) {
       if (!v.date || !v.type) continue;
@@ -242,11 +262,10 @@ export async function POST(req: NextRequest) {
       counts.semesters++;
     }
 
-    // Import announcements — always create new (no natural unique key)
+    // Import announcements — deduplicate by title and tags
     for (const a of exportedAnnouncements) {
       if (!a.title || !a.body) continue;
 
-      // Deduplicate by (title, university, courseName) in merge mode
       const existing = await prisma.announcement.findFirst({
         where: {
           title: a.title,
@@ -286,3 +305,4 @@ export async function POST(req: NextRequest) {
   }
 }
 ```
+

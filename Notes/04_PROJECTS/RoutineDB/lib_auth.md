@@ -33,24 +33,18 @@ This utility module handles authentication session verification, automatic syste
 
 ---
 
-## 2. Source Code
+## 2. Implementation Code Breakdown
 
-Here is the complete implementation of `src/lib/auth.ts`:
+The source code in `src/lib/auth.ts` is divided into two key components:
+
+### Phase 1: `getAuthenticatedUser()` (Profile Sync & Register)
+Retrieves the session token, handles lazy student account creation on first login (promoting the first user in the database to admin), and keeps role assignments in sync with Clerk metadata.
 
 ```typescript
 import { cache } from 'react';
 import { auth, currentUser } from '@clerk/nextjs/server';
 import { prisma } from './prisma';
 
-/**
- * Get the authenticated user from Clerk + find/create in our DB.
- * Auto-creates a User record on first sign-in.
- * First user ever is auto-promoted to admin.
- * 
- * Wrapped with React.cache() so that within a single server request,
- * multiple calls resolve to the same cached result (no duplicate
- * Clerk API roundtrips or Prisma queries).
- */
 export const getAuthenticatedUser = cache(async () => {
   const { userId } = await auth();
   if (!userId) {
@@ -111,7 +105,14 @@ export const getAuthenticatedUser = cache(async () => {
 
   return user;
 });
+```
 
+---
+
+### Phase 2: Authorization Helpers
+Includes `requireAdmin` to enforce admin-level middleware checks, and `getClerkUserId` to verify login status.
+
+```typescript
 /**
  * Require admin role. Throws if user is not admin.
  */
@@ -134,3 +135,4 @@ export async function getClerkUserId(): Promise<string> {
   return userId;
 }
 ```
+

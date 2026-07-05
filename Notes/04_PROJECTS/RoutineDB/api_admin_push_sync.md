@@ -107,9 +107,12 @@ sequenceDiagram
 
 ---
 
-## 4. Source Code
+## 4. Implementation Code Breakdown
 
-Here is the complete implementation of `src/app/api/admin/push-sync/route.ts`:
+The source code in `src/app/api/admin/push-sync/route.ts` is divided into logical components:
+
+### Phase 1: POST Request - Course Target Resolution
+Authenticates the admin and filters target courses based on query tags.
 
 ```typescript
 import { NextRequest, NextResponse } from 'next/server';
@@ -117,16 +120,15 @@ import { requireAdmin } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { normalizeTag } from '@/lib/utils';
 
-// POST: Admin pushes global course templates to all matching students
 export async function POST(req: NextRequest) {
   try {
     await requireAdmin();
 
     const body = await req.json();
     const { globalCourseId, university, courseName, updateMode, userIds } = body;
-    const syncMode = updateMode || 'merge'; // 'merge' (default) or 'replace'
+    const syncMode = updateMode || 'merge';
 
-    // Build filter for global courses
+    // Filter courses based on batch tags
     const courseFilter: any = {};
     if (globalCourseId) {
       courseFilter.id = globalCourseId;
@@ -138,7 +140,6 @@ export async function POST(req: NextRequest) {
       courseFilter.courseName = normalizeTag(courseName);
     }
 
-    // Fetch matching global courses
     const globalCourses = await prisma.globalCourse.findMany({
       where: courseFilter,
       include: { weeklySlots: true },
@@ -151,8 +152,16 @@ export async function POST(req: NextRequest) {
     let totalUsersSynced = 0;
     let totalCoursesSynced = 0;
     let totalSlotsSynced = 0;
+```
 
+---
+
+### Phase 2: POST Request - Students Tag-Matching & Course Upserts
+Finds students matching university/course tags (including secondary tag entries) and creates/updates their course settings records.
+
+```typescript
     for (const gc of globalCourses) {
+      // Resolve student IDs
       let matchingUsers;
       if (userIds && Array.isArray(userIds) && userIds.length > 0) {
         matchingUsers = await prisma.user.findMany({
@@ -173,6 +182,7 @@ export async function POST(req: NextRequest) {
         });
 
         if (!localCourse) {
+          // Create new course record
           localCourse = await prisma.course.create({
             data: {
               userId: user.id,
@@ -189,6 +199,7 @@ export async function POST(req: NextRequest) {
           });
           totalCoursesSynced++;
         } else {
+          // Update details (admin template values take priority)
           localCourse = await prisma.course.update({
             where: { id: localCourse.id },
             data: {
@@ -205,14 +216,21 @@ export async function POST(req: NextRequest) {
           });
           totalCoursesSynced++;
         }
+```
 
+---
+
+### Phase 3: POST Request - Slots Sync & Future Overrides Deletes
+Executes slot templates replication. In `replace` mode, queries existing slots and deletes future overrides to protect past attendance history records.
+
+```typescript
         // Sync weekly slots
         if (syncMode === 'replace') {
           const existingSlots = await prisma.weeklySlot.findMany({
             where: { userId: user.id, courseId: localCourse.id },
           });
 
-          // Delete future DailyClass records linked to these slots
+          // Delete future overrides only (past overrides are preserved for attendance stats integrity)
           const todayStr = new Date().toISOString().split('T')[0];
           for (const es of existingSlots) {
             await prisma.dailyClass.deleteMany({
@@ -224,12 +242,12 @@ export async function POST(req: NextRequest) {
             });
           }
 
-          // Delete all existing weekly slots for this course
+          // Delete existing student slots
           await prisma.weeklySlot.deleteMany({
             where: { userId: user.id, courseId: localCourse.id },
           });
 
-          // Recreate from global template
+          // Recreate slots from global course template
           for (const gs of gc.weeklySlots) {
             await prisma.weeklySlot.create({
               data: {
@@ -273,6 +291,7 @@ export async function POST(req: NextRequest) {
               });
               totalSlotsSynced++;
             } else {
+              // Update existing classroom details
               await prisma.weeklySlot.update({
                 where: { id: existingSlot.id },
                 data: {
@@ -306,8 +325,14 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+```
 
-// GET: Preview how many students will be affected by a push
+---
+
+### Phase 4: GET Request - Push Target Preview
+Lists target students matching filter parameters.
+
+```typescript
 export async function GET(req: NextRequest) {
   try {
     await requireAdmin();
@@ -339,11 +364,19 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+```
 
+---
+
+### Phase 5: Student Accounts Tag Search Resolver
+Finds all users whose primary or secondary batch tag structures match targeting parameters.
+
+```typescript
 async function findMatchingUsers(university: string, courseName: string) {
   const normUni = normalizeTag(university);
   const normCourse = normalizeTag(courseName);
 
+  // Primary tag match
   const primaryWhere: any = { role: 'user' };
   if (normUni) primaryWhere.university = normUni;
   if (normCourse) primaryWhere.courseName = normCourse;
@@ -352,6 +385,7 @@ async function findMatchingUsers(university: string, courseName: string) {
     where: primaryWhere,
   });
 
+  // Secondary tags match
   const secondaryTagWhere: any = {};
   if (normUni) secondaryTagWhere.university = normUni;
   if (normCourse) secondaryTagWhere.courseName = normCourse;
@@ -361,6 +395,7 @@ async function findMatchingUsers(university: string, courseName: string) {
     include: { user: true },
   });
 
+  // Merge and deduplicate student rows
   const userMap = new Map<number, any>();
   for (const u of primaryUsers) {
     userMap.set(u.id, u);
@@ -374,3 +409,4 @@ async function findMatchingUsers(university: string, courseName: string) {
   return Array.from(userMap.values());
 }
 ```
+

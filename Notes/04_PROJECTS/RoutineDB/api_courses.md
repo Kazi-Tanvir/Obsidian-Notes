@@ -66,16 +66,18 @@ This endpoint handles personal courses (subjects) configuration, updates, and so
 
 ---
 
-## 4. Source Code
+## 4. Implementation Code Breakdown
 
-Here is the complete implementation of `src/app/api/courses/route.ts`:
+The backend implementation at `src/app/api/courses/route.ts` is divided into three REST operations:
+
+### Phase 1: GET Request (Active Courses List)
+Fetches all non-archived courses for the student, sorted alphabetically by code index.
 
 ```typescript
 import { NextResponse } from 'next/server';
 import { getAuthenticatedUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
-// GET: Fetch courses for the authenticated user
 export async function GET() {
   try {
     const user = await getAuthenticatedUser();
@@ -94,8 +96,14 @@ export async function GET() {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+```
 
-// POST: Create or edit a course for the authenticated user
+---
+
+### Phase 2: POST Request (Create, Edit or Restore)
+Handles creating new courses, updates fields for existing courses, and automatically un-archives matching soft-deleted courses if they are re-registered.
+
+```typescript
 export async function POST(request: Request) {
   try {
     const user = await getAuthenticatedUser();
@@ -138,7 +146,7 @@ export async function POST(request: Request) {
       });
       return NextResponse.json(updatedCourse);
     } else {
-      // Create new course
+      // Create new course — check duplicate subjectId first
       const existing = await prisma.course.findUnique({
         where: {
           userId_subjectId: {
@@ -150,7 +158,7 @@ export async function POST(request: Request) {
 
       if (existing) {
         if (existing.isArchived) {
-          // Unarchive the course instead of creating a duplicate
+          // Unarchive the course instead of creating a duplicate row
           const restored = await prisma.course.update({
             where: { id: existing.id },
             data: {
@@ -191,8 +199,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+```
 
-// DELETE: Soft-delete (archive) a course — preserves historical data
+---
+
+### Phase 3: DELETE Request (Soft vs Hard Deletions)
+Handles course soft-deletion (setting `isArchived: true` to preserve historic records for attendance reports) or hard-deletion (fully purging the database records).
+
+```typescript
 export async function DELETE(request: Request) {
   try {
     const user = await getAuthenticatedUser();
@@ -204,7 +218,7 @@ export async function DELETE(request: Request) {
       return NextResponse.json({ error: 'Missing course ID' }, { status: 400 });
     }
 
-    // Verify ownership
+    // Verify course ownership
     const course = await prisma.course.findFirst({
       where: { id: parseInt(id), userId: user.id },
     });
@@ -213,12 +227,12 @@ export async function DELETE(request: Request) {
     }
 
     if (hardDelete) {
-      // Hard delete — removes everything including historical data
+      // Hard delete — removes everything including historical database relations
       await prisma.course.delete({
         where: { id: parseInt(id) },
       });
     } else {
-      // Soft delete — archive the course, preserve historical data
+      // Soft delete — archive the course, preserving historical data
       const today = new Date();
       const dateStr = today.toISOString().split('T')[0];
       
@@ -241,3 +255,4 @@ export async function DELETE(request: Request) {
   }
 }
 ```
+

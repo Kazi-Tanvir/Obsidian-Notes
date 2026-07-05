@@ -36,23 +36,25 @@ The API supports updating notes for both pre-existing overrides and default temp
 
 ---
 
-## 3. Source Code
+## 3. Implementation Code Breakdown
 
-Here is the complete implementation of `src/app/api/daily-class/description/route.ts`:
+The source code in `src/app/api/daily-class/description/route.ts` is split into two logical paths:
+
+### Phase 1: Existing Overrides Updates
+If `dailyClassId` is present in the request body, parses prefixes and updates the record directly after validating ownership checks.
 
 ```typescript
 import { NextResponse } from 'next/server';
 import { getAuthenticatedUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
-// POST: Add or update a description for a specific class instance
 export async function POST(request: Request) {
   try {
     const user = await getAuthenticatedUser();
     const body = await request.json();
     const { dailyClassId, weeklySlotId, courseId, date, description } = body;
 
-    // 1. If dailyClassId is specified, directly update it
+    // Case 1. If dailyClassId is specified, directly update it
     if (dailyClassId) {
       const dbId = typeof dailyClassId === 'string' && dailyClassId.startsWith('override-')
         ? parseInt(dailyClassId.replace('override-', ''))
@@ -75,8 +77,15 @@ export async function POST(request: Request) {
 
       return NextResponse.json(updated);
     }
+```
 
-    // 2. If weeklySlotId and date are specified, find or create the override
+---
+
+### Phase 2: Template Slots Promotion & Notes Saving
+If `dailyClassId` is missing but `weeklySlotId`, `courseId`, and `date` are present, promotes the recurring template slot to a concrete database override record and attaches the description.
+
+```typescript
+    // Case 2. If weeklySlotId and date are specified, find or create the override
     if (weeklySlotId && date && courseId) {
       const slotId = parseInt(weeklySlotId);
       const cId = parseInt(courseId);
@@ -98,7 +107,7 @@ export async function POST(request: Request) {
         return NextResponse.json(updated);
       }
 
-      // Fetch weekly slot to copy attributes
+      // Fetch weekly slot properties
       const slot = await prisma.weeklySlot.findFirst({
         where: { id: slotId, userId: user.id },
       });
@@ -107,7 +116,7 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: 'Weekly slot not found' }, { status: 404 });
       }
 
-      // Create new override DailyClass
+      // Promote slot to DailyClass override record and attach description
       const created = await prisma.dailyClass.create({
         data: {
           userId: user.id,
@@ -137,3 +146,4 @@ export async function POST(request: Request) {
   }
 }
 ```
+

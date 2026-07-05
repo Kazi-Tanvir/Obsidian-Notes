@@ -89,9 +89,12 @@ This endpoint resolves the active timetable schedule for any date range, expandi
 
 ---
 
-## 3. Source Code
+## 3. Implementation Code Breakdown
 
-Here is the complete implementation of `src/app/api/calendar/route.ts`:
+The source code in `src/app/api/calendar/route.ts` is structured as follows:
+
+### Phase 1: Imports and Date-Weekday Helper
+Imports dependencies and translates date strings to Day Name strings (e.g. `"MONDAY"`), matching template days in local timezone contexts.
 
 ```typescript
 import { NextResponse } from 'next/server';
@@ -106,7 +109,14 @@ function getDayOfWeek(dateStr: string): string {
   const days = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
   return days[date.getDay()];
 }
+```
 
+---
+
+### Phase 2: GET Request - Initialization and Database Queries
+Queries user configuration parameters, vacations (personal & global), slots, overrides, and attendance logs.
+
+```typescript
 export async function GET(request: Request) {
   try {
     const user = await getAuthenticatedUser();
@@ -119,7 +129,6 @@ export async function GET(request: Request) {
     }
 
     const userId = user.id;
-
     const start = new Date(startDateStr);
     const end = new Date(endDateStr);
     
@@ -166,16 +175,13 @@ export async function GET(request: Request) {
       where: {
         date: { gte: startDateStr, lte: endDateStr },
         OR: [
-          // Applies to everyone (no tag filters)
           { university: null, courseName: null },
           { university: '', courseName: '' },
           { university: '', courseName: null },
           { university: null, courseName: '' },
-          // Matches user's university (any course within it)
           ...(user.university ? [
             { university: user.university, courseName: null },
             { university: user.university, courseName: '' },
-            // Matches user's exact university + courseName
             ...(user.courseName ? [{ university: user.university, courseName: user.courseName }] : []),
           ] : []),
         ]
@@ -188,21 +194,24 @@ export async function GET(request: Request) {
         date: { gte: startDateStr, lte: endDateStr }
       }
     });
+```
 
-    // Build vacation map (personal + global merged)
+---
+
+### Phase 3: GET Request - Tag Resolution & Active Semester Filtering
+Gathers secondary department tags to find matching admin semester term boundaries.
+
+```typescript
+    // Merge personal & global vacations (personal takes precedence)
     const vacationMap = new Map<string, { type: string; description?: string | null }>();
-    
-    // Global vacations first (can be overridden by personal)
     globalVacations.forEach(v => {
       vacationMap.set(v.date, { type: v.type, description: v.description });
     });
-    
-    // Personal vacations override globals
     vacations.forEach(v => {
       vacationMap.set(v.date, { type: v.type, description: v.description });
     });
 
-    // Fetch semesters and global courses for matching admin-pushed templates
+    // Fetch active semesters matching user primary/secondary tags
     const secondaryTags = await prisma.userSecondaryTag.findMany({
       where: { userId }
     });
@@ -266,7 +275,14 @@ export async function GET(request: Request) {
       semesters,
       dates: {} as Record<string, any>
     };
+```
 
+---
+
+### Phase 4: GET Request - Calendar Grid Resolution Loop
+Iterates through all dates in the range, checks template boundaries, applies semester rules, overrides metadata, and checks attendance details.
+
+```typescript
     // Resolve for each date
     for (const dateStr of dates) {
       const dayName = getDayOfWeek(dateStr);
@@ -282,9 +298,7 @@ export async function GET(request: Request) {
         return true;
       });
 
-      // Filter overrides for this date
       const dateOverrides = overrides.filter(o => o.date === dateStr);
-
       const activeClasses: any[] = [];
 
       // Process template slots
@@ -401,7 +415,7 @@ export async function GET(request: Request) {
         activeClasses.push(classItem);
       }
 
-      // Sort chronologically
+      // Sort classes chronologically
       activeClasses.sort((a, b) => a.startTime.localeCompare(b.startTime));
 
       responseData.dates[dateStr] = {
@@ -421,7 +435,14 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+```
 
+---
+
+### Phase 5: POST Request - Schedule Overrides & Attendance Sync
+Inserts or updates a local class override (`DailyClass`). If the class is cancelled, automatically inserts/updates a matching `Attendance` record with status `"CANCELLED"`.
+
+```typescript
 export async function POST(request: Request) {
   try {
     const user = await getAuthenticatedUser();
@@ -534,3 +555,4 @@ export async function POST(request: Request) {
   }
 }
 ```
+

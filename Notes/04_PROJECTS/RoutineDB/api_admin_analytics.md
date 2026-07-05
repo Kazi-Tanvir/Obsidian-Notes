@@ -43,16 +43,18 @@ This endpoint compiles database attendance statistics for administrators to audi
 
 ---
 
-## 3. Source Code
+## 3. Implementation Code Breakdown
 
-Here is the complete implementation of `src/app/api/admin/analytics/route.ts`:
+The source code in `src/app/api/admin/analytics/route.ts` is divided into three execution sections:
+
+### Phase 1: Authentication and Query Parameters Initialization
+Validates administrator access, filters students by department tags, and queries the database for target records.
 
 ```typescript
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdmin } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
-// GET: Admin attendance analytics — aggregate or per-student
 export async function GET(req: NextRequest) {
   try {
     await requireAdmin();
@@ -62,19 +64,18 @@ export async function GET(req: NextRequest) {
     const courseName = searchParams.get('courseName') || '';
     const startDate = searchParams.get('startDate') || '';
     const endDate = searchParams.get('endDate') || '';
-    const view = searchParams.get('view') || 'aggregate'; // 'aggregate' or 'per-student'
+    const view = searchParams.get('view') || 'aggregate';
     const courseSubjectId = searchParams.get('subjectId') || '';
 
     if (!startDate || !endDate) {
       return NextResponse.json({ error: 'startDate and endDate are required' }, { status: 400 });
     }
 
-    // Build user filter based on tags
+    // Filter users based on batch tags
     const userFilter: any = {};
     if (university) userFilter.university = university;
     if (courseName) userFilter.courseName = courseName;
 
-    // Find matching users
     const users = await prisma.user.findMany({
       where: { ...userFilter, role: 'user' },
       select: { id: true, name: true, email: true, university: true, courseName: true },
@@ -91,13 +92,12 @@ export async function GET(req: NextRequest) {
       });
     }
 
-    // Build attendance filter
+    // Fetch attendance records
     const attendanceFilter: any = {
       userId: { in: userIds },
       date: { gte: startDate, lte: endDate },
     };
 
-    // Get all attendance records
     const attendanceRecords = await prisma.attendance.findMany({
       where: attendanceFilter,
       include: {
@@ -106,13 +106,18 @@ export async function GET(req: NextRequest) {
       },
     });
 
-    // Optionally filter by specific course
     const filteredRecords = courseSubjectId
       ? attendanceRecords.filter(a => a.course.subjectId === courseSubjectId)
       : attendanceRecords;
+```
 
+---
+
+### Phase 2: GET Request - Aggregate View Builder
+Groups attendance records by course subject, calculating totals and attendance rates across the batch.
+
+```typescript
     if (view === 'aggregate') {
-      // Group by course — compute aggregate stats
       const courseMap = new Map<string, { 
         subjectId: string; 
         subjectName: string; 
@@ -164,8 +169,16 @@ export async function GET(req: NextRequest) {
         dateRange: { startDate, endDate },
         courses,
       });
-    } else {
-      // Per-student view
+    }
+```
+
+---
+
+### Phase 3: GET Request - Per-Student View Builder
+Groups attendance records by student user ID, compiling subject rate tables and overall percentage rates.
+
+```typescript
+    else {
       const studentMap = new Map<number, {
         id: number;
         name: string;
@@ -250,3 +263,4 @@ export async function GET(req: NextRequest) {
   }
 }
 ```
+

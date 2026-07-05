@@ -58,9 +58,12 @@ This endpoint handles secondary subscription tags matching additional courses or
 
 ---
 
-## 4. Source Code
+## 4. Implementation Code Breakdown
 
-Here is the complete implementation of `src/app/api/user/secondary-tags/route.ts`:
+The source code in `src/app/api/user/secondary-tags/route.ts` is split into three key handlers:
+
+### Phase 1: GET Request (Fetch Secondary Tags List)
+Lists all secondary tag subscriptions for the authenticated student.
 
 ```typescript
 import { NextRequest, NextResponse } from 'next/server';
@@ -68,7 +71,6 @@ import { getAuthenticatedUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { normalizeTag } from '@/lib/utils';
 
-// GET: Fetch current user's secondary tags
 export async function GET() {
   try {
     const user = await getAuthenticatedUser();
@@ -87,8 +89,14 @@ export async function GET() {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+```
 
-// POST: Add a secondary tag
+---
+
+### Phase 2: POST Request (Subscribe to Additional Tag Pair)
+Checks that the tag is not already primary, normalizes casing rules, and creates a secondary tag subscription entry.
+
+```typescript
 export async function POST(req: NextRequest) {
   try {
     const user = await getAuthenticatedUser();
@@ -125,8 +133,14 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+```
 
-// DELETE: Remove a secondary tag
+---
+
+### Phase 3: DELETE Request (Remove Tag Subscription)
+Validates record ownership, and deletes the secondary tag record.
+
+```typescript
 export async function DELETE(req: NextRequest) {
   try {
     const user = await getAuthenticatedUser();
@@ -160,3 +174,4 @@ export async function DELETE(req: NextRequest) {
   }
 }
 ```
+

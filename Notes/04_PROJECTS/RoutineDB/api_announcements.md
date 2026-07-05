@@ -34,16 +34,18 @@ Rather than showing all system messages to every student, the controller filters
 
 ---
 
-## 3. Source Code
+## 3. Implementation Code Breakdown
 
-Here is the complete implementation of `src/app/api/announcements/route.ts`:
+The source code in `src/app/api/announcements/route.ts` is divided into two logical segments:
+
+### Phase 1: GET Request - Consolidate Targeting Tags
+Extracts the student's primary batch tags and queries secondary tag mapping relationships to assemble targeting criteria.
 
 ```typescript
 import { NextResponse } from 'next/server';
 import { getAuthenticatedUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
-// GET: Fetch announcements matching the current user's tags (non-expired only)
 export async function GET() {
   try {
     const user = await getAuthenticatedUser();
@@ -54,7 +56,7 @@ export async function GET() {
       where: { userId: user.id },
     });
 
-    // Build all tag pairs for the user
+    // Build all targeting tag pairs for the user
     const tagPairs: Array<{ university: string; courseName: string }> = [];
     if (user.university && user.courseName) {
       tagPairs.push({ university: user.university, courseName: user.courseName });
@@ -62,10 +64,17 @@ export async function GET() {
     for (const tag of secondaryTags) {
       tagPairs.push({ university: tag.university, courseName: tag.courseName });
     }
+```
 
+---
+
+### Phase 2: GET Request - DB Query with Expiration Filters
+Runs a combined logical OR match comparing announcements metadata to targeting tag pairs, filtering out expired notices.
+
+```typescript
     // Build OR conditions for tag matching
     const tagConditions: any[] = [
-      // Global announcements (no targeting)
+      // Global announcements (no targeting filters)
       { university: null, courseName: null },
     ];
 
@@ -103,3 +112,4 @@ export async function GET() {
   }
 }
 ```
+

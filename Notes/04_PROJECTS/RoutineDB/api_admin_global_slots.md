@@ -60,16 +60,18 @@ This endpoint handles administrator-only operations to configure weekly slots in
 
 ---
 
-## 4. Source Code
+## 4. Implementation Code Breakdown
 
-Here is the complete implementation of `src/app/api/admin/global-slots/route.ts`:
+The source code in `src/app/api/admin/global-slots/route.ts` is divided into three parts:
+
+### Phase 1: GET Request (Fetch Slots)
+Queries all global slots, with an optional filter for `globalCourseId`.
 
 ```typescript
 import { NextResponse } from 'next/server';
 import { requireAdmin } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 
-// GET: Fetch global weekly slots. If globalCourseId query param is provided, filter by it.
 export async function GET(request: Request) {
   try {
     await requireAdmin();
@@ -91,8 +93,14 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+```
 
-// POST: Create/update a global weekly slot
+---
+
+### Phase 2: POST Request (Create/Edit Slot Template)
+Validates fields and inserts or updates a global weekly slot template.
+
+```typescript
 export async function POST(request: Request) {
   try {
     await requireAdmin();
@@ -113,12 +121,14 @@ export async function POST(request: Request) {
     };
 
     if (id) {
+      // Update existing slot template
       const updated = await prisma.globalWeeklySlot.update({
         where: { id: parseInt(id) },
         data: slotData,
       });
       return NextResponse.json(updated);
     } else {
+      // Create new slot template
       const created = await prisma.globalWeeklySlot.create({
         data: slotData,
       });
@@ -131,8 +141,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+```
 
-// DELETE: Remove a global weekly slot
+---
+
+### Phase 3: DELETE Request (Remove Slot Blueprint)
+Deletes the weekly template slot from the database.
+
+```typescript
 export async function DELETE(request: Request) {
   try {
     await requireAdmin();
@@ -152,3 +168,4 @@ export async function DELETE(request: Request) {
   }
 }
 ```
+
