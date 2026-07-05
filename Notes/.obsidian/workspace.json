@@ -41,44 +41,16 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "99_ARCHIVE/SYS_Tracker.md",
+                "file": "02_DU_IIT/1st Year/1-1/SE 1106 - Software Engineering/Books/SE 1106 3.1 BOOK COPY.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "SYS_Tracker"
-            }
-          },
-          {
-            "id": "ed602bd46240d55d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "00_ERRORS/GitHub [Large File].md",
-                "mode": "preview",
-                "source": true
-              },
-              "icon": "lucide-file",
-              "title": "GitHub [Large File]"
-            }
-          },
-          {
-            "id": "bfca4037b3f86d32",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "04_PROJECTS/RoutineDB/api_admin_export.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "api_admin_export"
+              "title": "SE 1106 3.1 BOOK COPY"
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -129,6 +101,22 @@
               "state": {},
               "icon": "lucide-bookmark",
               "title": "Bookmarks"
+            }
+          }
+        ]
+      },
+      {
+        "id": "db866edffdaf09c6",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ed602bd46240d55d",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
             }
           }
         ]
@@ -229,10 +217,10 @@
             "state": {
               "type": "file-properties",
               "state": {
-                "file": "04_PROJECTS/RoutineDB/api_admin_export.md"
+                "file": "04_PROJECTS/01 PORTFOLIO.md"
               },
               "icon": "lucide-info",
-              "title": "File properties for api_admin_export"
+              "title": "File properties for 01 PORTFOLIO"
             }
           },
           {
@@ -251,12 +239,12 @@
             "state": {
               "type": "git-view",
               "state": {},
-              "icon": "lucide-ghost",
-              "title": "git-view"
+              "icon": "git-pull-request",
+              "title": "Source Control"
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 7
       },
       {
         "id": "152c4bfc9fa84dd3",
@@ -285,7 +273,6 @@
       "markdown-importer:Open format converter": false,
       "audio-recorder:Start/stop recording": false,
       "switcher:Open quick switcher": false,
-      "graph:Open graph view": false,
       "canvas:Create new canvas": false,
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
@@ -293,47 +280,48 @@
       "omnisearch:Omnisearch": false,
       "obsidian-importer:Open Importer": false,
       "obsidian-git:Open Git source control": false,
-      "markdown-table-editor:Open Markdown Table Editor": false
+      "markdown-table-editor:Open Markdown Table Editor": false,
+      "graph:Open graph view": false
     }
   },
-  "active": "bfca4037b3f86d32",
+  "active": "ceab0ef11075e7d1",
   "lastOpenFiles": [
-    "04_PROJECTS/RoutineDB/api_admin_announcements.md",
-    "04_PROJECTS/RoutineDB/admin_page.md",
-    "04_PROJECTS/RoutineDB/signup_page.md",
-    "04_PROJECTS/RoutineDB/signin_page.md",
-    "04_PROJECTS/RoutineDB/SCHEMA.md",
-    "04_PROJECTS/RoutineDB/proxy_middleware.md",
-    "04_PROJECTS/RoutineDB/lib_utils.md",
-    "04_PROJECTS/RoutineDB/lib_prisma.md",
-    "04_PROJECTS/RoutineDB/lib_auth.md",
-    "04_PROJECTS/RoutineDB/layout.md",
-    "04_PROJECTS/RoutineDB/index.md",
-    "04_PROJECTS/RoutineDB/home_page.md",
-    "04_PROJECTS/RoutineDB/DESIGN.md",
-    "04_PROJECTS/RoutineDB/component_setup_view.md",
-    "04_PROJECTS/RoutineDB/component_modals.md",
-    "04_PROJECTS/RoutineDB/component_dashboard_view.md",
-    "04_PROJECTS/RoutineDB/component_calendar_view.md",
-    "04_PROJECTS/RoutineDB/component_analytics_view.md",
-    "04_PROJECTS/RoutineDB/component_admin_panel.md",
-    "04_PROJECTS/RoutineDB/ARCHITECTURE.md",
-    "04_PROJECTS/RoutineDB/api_weekly_slots.md",
-    "04_PROJECTS/RoutineDB/api_vacations.md",
-    "04_PROJECTS/RoutineDB/api_user_sync_template.md",
-    "04_PROJECTS/RoutineDB/api_user_secondary_tags.md",
-    "04_PROJECTS/RoutineDB/api_user_import.md",
-    "04_PROJECTS/RoutineDB/api_user_export.md",
-    "04_PROJECTS/RoutineDB",
-    "02_DU_IIT/00_ADD/BSSE17_FB - Sheet1.csv",
-    "02_DU_IIT/03_BOOKS/SE_ZB.pdf",
-    "02_DU_IIT/02_LECTURE_SHEET/SE 1106 F2.pdf",
-    "02_DU_IIT/02_LECTURE_SHEET/SE 1106 F.pdf",
-    "00_ERRORS/Untitled",
-    "00_ERRORS",
-    "02_DU_IIT/02_LECTURE_SHEET/GE 1105 F.pdf",
-    "02_DU_IIT/02_LECTURE_SHEET/STAT 1103 L2.pdf",
-    "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering",
+    "02_DU_IIT/1st Year/1-1/SE 1106 - Software Engineering/Books/SE 1106 3.4 BOOK COPY.md",
+    "02_DU_IIT/1st Year/1-1/SE 1106 - Software Engineering/Books/SE 1106 3.3 BOOK COPY.md",
+    "02_DU_IIT/1st Year/1-1/SE 1106 - Software Engineering/Books/SE 1106 3.1 BOOK COPY.md",
+    "02_DU_IIT/1st Year/1-1/SE 1106 - Software Engineering/Books/SE 1106 3.2 BOOK COPY.md",
+    "04_PROJECTS/01 PORTFOLIO.md",
+    "99_ARCHIVE/SYS_Tracker.md",
+    "02_DU_IIT/Resources & Info/BSSE17_FB - Sheet1.csv",
+    "02_DU_IIT/Resources & Info/BSSE17 Facebook Account List.md",
+    "02_DU_IIT/Resources & Info/BSSE16 Facebook Account List.md",
+    "02_DU_IIT/Resources & Info/BSSE16 Facebook Account List - Sheet1.csv",
+    "02_DU_IIT/Resources & Info",
+    "02_DU_IIT/4th Year",
+    "02_DU_IIT/3rd Year",
+    "02_DU_IIT/2nd Year",
+    "02_DU_IIT/1st Year/1-1/SE 1106 - Software Engineering/Notes/SE 1106 3.4 FULL NOTE.md",
+    "02_DU_IIT/1st Year/1-1/SE 1106 - Software Engineering/Notes/SE 1106 3.4 COMPACT NOTE.md",
+    "02_DU_IIT/1st Year/1-1/SE 1106 - Software Engineering/Notes/SE 1106 3.3 FULL NOTE.md",
+    "02_DU_IIT/1st Year/1-1/SE 1106 - Software Engineering/Notes/SE 1106 3.3 COMPACT NOTE.md",
+    "02_DU_IIT/1st Year/1-1/SE 1106 - Software Engineering/Notes/SE 1106 3.2 FULL NOTE.md",
+    "02_DU_IIT/1st Year/1-1/SE 1106 - Software Engineering/Notes/SE 1106 3.2 COMPACT NOTE.md",
+    "02_DU_IIT/1st Year/1-1/SE 1106 - Software Engineering/Notes/SE 1106 3.1 FULL NOTE.md",
+    "02_DU_IIT/1st Year/1-1/SE 1106 - Software Engineering/Notes/SE 1106 3.1 COMPACT NOTE.md",
+    "02_DU_IIT/1st Year/1-1/CSE 1101L - Structured Programming/Notes/CSE 1101 L1.md",
+    "02_DU_IIT/1st Year/1-1/STAT 1103 - Probability & Stats/Notes",
+    "02_DU_IIT/1st Year/1-1/STAT 1103 - Probability & Stats/Lecture Sheets",
+    "02_DU_IIT/1st Year/1-1/STAT 1103 - Probability & Stats/Books",
+    "02_DU_IIT/1st Year/1-1/SE 1106 - Software Engineering/Lecture Sheets",
+    "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106 3.1 BOOK COPY.md",
+    "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106 3.1 COMPACT NOTE.md",
+    "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106 3.1 FULL NOTE.md",
+    "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106 3.2 BOOK COPY.md",
+    "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106 3.3 BOOK COPY.md",
+    "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106 3.4 BOOK COPY.md",
+    "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106 3.4 FULL NOTE.md",
+    "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106 3.4 COMPACT NOTE.md",
+    "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106 3.2 FULL NOTE.md",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "Business/Journal/Technical/Migrated/assets/why-not-jwt.png",

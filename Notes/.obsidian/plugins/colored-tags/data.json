@@ -591,7 +591,16 @@
     "normalization": 399,
     "matcher": 400,
     "models": 401,
-    "relations": 402
+    "relations": 402,
+    "SE1106": 403,
+    "chapter3": 404,
+    "book-copy": 405,
+    "people": 406,
+    "full-note": 407,
+    "management-spectrum": 408,
+    "compact-note": 409,
+    "product": 410,
+    "process": 411
   },
   "_version": 3
 }
