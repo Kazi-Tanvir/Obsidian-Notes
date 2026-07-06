@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "02_DU_IIT/1st Year/1-1/SE 1106 - Software Engineering/Books/SE 1106 3.1 BOOK COPY.md",
+                "file": "02_DU_IIT/1st Year/1-1/CSE 1102 - Discrete Mathematics/Books/CSE 1102 5.5 BOOK COPY.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "SE 1106 3.1 BOOK COPY"
+              "title": "CSE 1102 5.5 BOOK COPY"
             }
           }
         ],
@@ -286,9 +286,13 @@
   },
   "active": "ceab0ef11075e7d1",
   "lastOpenFiles": [
+    "02_DU_IIT/1st Year/1-1/CSE 1102 - Discrete Mathematics/Books/CSE 1102 5.2 BOOK COPY.md",
+    "02_DU_IIT/1st Year/1-1/CSE 1102 - Discrete Mathematics/Books/CSE 1102 5.5 BOOK COPY.md",
+    "02_DU_IIT/1st Year/1-1/CSE 1102 - Discrete Mathematics/Books/CSE 1102 5.4 BOOK COPY.md",
+    "02_DU_IIT/1st Year/1-1/CSE 1102 - Discrete Mathematics/Books/CSE 1102 5.1 BOOK COPY.md",
+    "02_DU_IIT/1st Year/1-1/SE 1106 - Software Engineering/Books/SE 1106 3.1 BOOK COPY.md",
     "02_DU_IIT/1st Year/1-1/SE 1106 - Software Engineering/Books/SE 1106 3.4 BOOK COPY.md",
     "02_DU_IIT/1st Year/1-1/SE 1106 - Software Engineering/Books/SE 1106 3.3 BOOK COPY.md",
-    "02_DU_IIT/1st Year/1-1/SE 1106 - Software Engineering/Books/SE 1106 3.1 BOOK COPY.md",
     "02_DU_IIT/1st Year/1-1/SE 1106 - Software Engineering/Books/SE 1106 3.2 BOOK COPY.md",
     "04_PROJECTS/01 PORTFOLIO.md",
     "99_ARCHIVE/SYS_Tracker.md",
@@ -318,10 +322,6 @@
     "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106 3.1 FULL NOTE.md",
     "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106 3.2 BOOK COPY.md",
     "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106 3.3 BOOK COPY.md",
-    "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106 3.4 BOOK COPY.md",
-    "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106 3.4 FULL NOTE.md",
-    "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106 3.4 COMPACT NOTE.md",
-    "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106 3.2 FULL NOTE.md",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "Business/Journal/Technical/Migrated/assets/why-not-jwt.png",
