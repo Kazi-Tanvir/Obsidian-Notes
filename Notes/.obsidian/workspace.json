@@ -25,32 +25,14 @@
             "id": "12de058b85b7df48",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "SYS_Tracker.md",
-                "mode": "preview",
-                "source": true
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "SYS_Tracker"
-            }
-          },
-          {
-            "id": "ceab0ef11075e7d1",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "02_DU_IIT/1st Year/1-1/CSE 1102 - Discrete Mathematics/Books/CSE 1102 5.5 BOOK COPY.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "CSE 1102 5.5 BOOK COPY"
+              "title": "New tab"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -101,22 +83,6 @@
               "state": {},
               "icon": "lucide-bookmark",
               "title": "Bookmarks"
-            }
-          }
-        ]
-      },
-      {
-        "id": "db866edffdaf09c6",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "ed602bd46240d55d",
-            "type": "leaf",
-            "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
             }
           }
         ]
@@ -284,10 +250,11 @@
       "graph:Open graph view": false
     }
   },
-  "active": "ceab0ef11075e7d1",
+  "active": "12de058b85b7df48",
   "lastOpenFiles": [
-    "02_DU_IIT/1st Year/1-1/CSE 1102 - Discrete Mathematics/Books/CSE 1102 5.2 BOOK COPY.md",
+    "04_PROJECTS/RoutineDB/index.md",
     "02_DU_IIT/1st Year/1-1/CSE 1102 - Discrete Mathematics/Books/CSE 1102 5.5 BOOK COPY.md",
+    "02_DU_IIT/1st Year/1-1/CSE 1102 - Discrete Mathematics/Books/CSE 1102 5.2 BOOK COPY.md",
     "02_DU_IIT/1st Year/1-1/CSE 1102 - Discrete Mathematics/Books/CSE 1102 5.4 BOOK COPY.md",
     "02_DU_IIT/1st Year/1-1/CSE 1102 - Discrete Mathematics/Books/CSE 1102 5.1 BOOK COPY.md",
     "02_DU_IIT/1st Year/1-1/SE 1106 - Software Engineering/Books/SE 1106 3.1 BOOK COPY.md",
@@ -321,7 +288,6 @@
     "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106 3.1 COMPACT NOTE.md",
     "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106 3.1 FULL NOTE.md",
     "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106 3.2 BOOK COPY.md",
-    "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106 3.3 BOOK COPY.md",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "Business/Journal/Technical/Migrated/assets/why-not-jwt.png",
