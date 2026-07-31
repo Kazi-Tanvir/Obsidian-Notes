@@ -4,25 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "600039c20928e499",
+        "id": "5c8d8a55d193ee8d",
         "type": "tabs",
         "children": [
           {
-            "id": "f04572d686a83e9c",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106 FULL AI.md",
-                "mode": "preview",
-                "source": true
-              },
-              "icon": "lucide-file",
-              "title": "SE 1106 FULL AI"
-            }
-          },
-          {
-            "id": "12de058b85b7df48",
+            "id": "686605982e476559",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -31,8 +17,7 @@
               "title": "New tab"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -250,7 +235,7 @@
       "graph:Open graph view": false
     }
   },
-  "active": "12de058b85b7df48",
+  "active": "686605982e476559",
   "lastOpenFiles": [
     "04_PROJECTS/RoutineDB/index.md",
     "02_DU_IIT/1st Year/1-1/CSE 1102 - Discrete Mathematics/Books/CSE 1102 5.5 BOOK COPY.md",
