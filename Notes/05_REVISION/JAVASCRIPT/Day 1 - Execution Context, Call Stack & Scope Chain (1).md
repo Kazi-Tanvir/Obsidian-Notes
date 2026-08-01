@@ -9,15 +9,13 @@ tags:
 date: 2026-08-01
 ---
 
-# \#javascript \#execution-context \#call-stack \#hoisting \#scope-chain \#v8
-
-# Day 1 \- Execution Context, Call Stack & Scope Chain
+# Day 1 - Execution Context, Call Stack & Scope Chain
 
 ---
 
 ## SECTION 1: IN-DEPTH THEORY & SYNTAX
 
-### 1\. The JavaScript Execution Engine & Execution Context (EC)
+### 1. The JavaScript Execution Engine & Execution Context (EC)
 
 JavaScript is a single-threaded, synchronous language at its core. Everything in JavaScript happens inside an **Execution Context**. Think of an Execution Context as a containerized environment where JavaScript code is evaluated and executed.
 
@@ -32,39 +30,32 @@ An Execution Context consists of two primary phases:
    - The `this` keyword binding is established.  
    - The outer lexical environment reference (`OuterEnv`) is set up.
 
-   
-
 2. **Execution Phase (Code Execution)**:  
      
    - Code is executed line-by-line.  
    - Variables are assigned their actual values.  
    - Function invocations create new **Function Execution Contexts (FEC)** on top of the **Global Execution Context (GEC)**.
 
+```js
 // Example: Execution Context Breakdown
-
 console.log(a); // Output: undefined (hoisted var)
-
 // console.log(b); // Throws ReferenceError: Cannot access 'b' before initialization (TDZ)
 
-var a \= 10;
-
-let b \= 20;
+var a = 10;
+let b = 20;
 
 function multiply(x, y) {
-
-  var result \= x \* y;
-
+  var result = x * y;
   return result;
-
 }
 
-var res \= multiply(a, b);
-
+var res = multiply(a, b);
 console.log(res); // 200
+```
 
 ---
 
-### 2\. The Call Stack & V8 Mechanics
+### 2. The Call Stack & V8 Mechanics
 
 The **Call Stack** (or Execution Context Stack) is a LIFO (Last In, First Out) data structure that tracks the current execution point of the script.
 
@@ -73,45 +64,33 @@ The **Call Stack** (or Execution Context Stack) is a LIFO (Last In, First Out) d
 - When a function returns or finishes executing, its context is popped off the stack, and control returns to the underlying context.  
 - **Stack Overflow**: Exceeding maximum stack size due to unbounded recursion.
 
+```js
 // Call Stack Visualization
-
 function first() {
-
   console.log("Inside first");
-
   second();
-
   console.log("Exiting first");
-
 }
 
 function second() {
-
   console.log("Inside second");
-
 }
 
 first();
 
-/\*
-
+/*
 Call Stack Trajectory:
-
-1\. Push Global Execution Context
-
-2\. Push first() EC
-
-3\. Push second() EC \-\> console.log \-\> Pop second() EC
-
-4\. Resume first() \-\> console.log \-\> Pop first() EC
-
-5\. Global Execution Context remains until window/process closes.
-
-\*/
+1. Push Global Execution Context
+2. Push first() EC
+3. Push second() EC -> console.log -> Pop second() EC
+4. Resume first() -> console.log -> Pop first() EC
+5. Global Execution Context remains until window/process closes.
+*/
+```
 
 ---
 
-### 3\. Hoisting, Lexical Scope & Scope Chain
+### 3. Hoisting, Lexical Scope & Scope Chain
 
 - **Hoisting**: The behavior where variable and function declarations are moved to the top of their containing scope during the Creation Phase.  
   - **Function Declarations** are fully hoisted.  
@@ -119,21 +98,18 @@ Call Stack Trajectory:
 - **Lexical Environment**: Local memory plus reference to the parent's (outer) lexical environment.  
 - **Scope Chain**: The hierarchy of lexical environments used to resolve identifier names. If a variable is not found in the local scope, the JS engine searches up the Scope Chain until it reaches the Global Scope. If not found there, a `ReferenceError` is thrown.
 
+```js
 // Pitfall & Edge Case: Shadowing & TDZ
-
-const x \= "global";
+const x = "global";
 
 function scopeTest() {
-
-  // console.log(x); // ReferenceError\! 'x' is shadowed by local 'let x' which is in TDZ here\!
-
-  let x \= "local";
-
+  // console.log(x); // ReferenceError! 'x' is shadowed by local 'let x' which is in TDZ here!
+  let x = "local";
   console.log(x); // 'local'
-
 }
 
 scopeTest();
+```
 
 ---
 
@@ -161,21 +137,18 @@ scopeTest();
 
 Predict the exact console output of the code snippet below and explain why each line produces its specific output based on Hoisting and Scope Chain rules.
 
-var a \= 1;
+```js
+var a = 1;
 
 function b() {
-
-  a \= 10;
-
+  a = 10;
   return;
-
   function a() {}
-
 }
 
 b();
-
 console.log(a);
+```
 
 *Hint*: Consider how `function a() {}` inside `b()` is hoisted relative to assignment `a = 10`.
 
@@ -188,17 +161,14 @@ The following loop attempts to output indices `0, 1, 2` after a delay of 100ms, 
 1. Fix using modern block-scoping (`let`).  
 2. Fix using an IIFE (Immediately Invoked Function Expression) maintaining `var`.
 
+```js
 // Buggy Code
-
-for (var i \= 0; i \< 3; i++) {
-
+for (var i = 0; i < 3; i++) {
   setTimeout(function() {
-
-    console.log("Index: " \+ i);
-
+    console.log("Index: " + i);
   }, 100);
-
 }
+```
 
 *Hint*: Explain how closure and scope chain binding cause the original bug.
 

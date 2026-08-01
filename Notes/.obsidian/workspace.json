@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "05_REVISION/Day 1 - Client-Server Architecture & RESTful API Design.md",
+                "file": "05_REVISION/WEB DEVELOPMENT/Day 1 - Client-Server Architecture & RESTful API Design.md",
                 "mode": "preview",
                 "source": true
               },
@@ -241,11 +241,13 @@
       "graph:Open graph view": false
     }
   },
-  "active": "41125d2dba3cc8d9",
+  "active": "42af4f1ef891900d",
   "lastOpenFiles": [
+    "05_REVISION/WEB DEVELOPMENT",
+    "05_REVISION/JAVASCRIPT",
+    "05_REVISION/JAVASCRIPT/Day 1 - Execution Context, Call Stack & Scope Chain (1).md",
+    "05_REVISION/WEB DEVELOPMENT/Day 1 - Client-Server Architecture & RESTful API Design.md",
     "05_REVISION/Day 1 - Execution Context, Call Stack & Scope Chain.md",
-    "05_REVISION/Day 1 - Execution Context, Call Stack & Scope Chain (1).md",
-    "05_REVISION/Day 1 - Client-Server Architecture & RESTful API Design.md",
     "05_REVISION/Unconfirmed 341912.crdownload",
     "05_REVISION/Unconfirmed 952796.crdownload",
     "04_PROJECTS/RoutineDB/index.md",
@@ -277,8 +279,6 @@
     "02_DU_IIT/1st Year/1-1/SE 1106 - Software Engineering/Notes/SE 1106 3.1 COMPACT NOTE.md",
     "02_DU_IIT/1st Year/1-1/CSE 1101L - Structured Programming/Notes/CSE 1101 L1.md",
     "02_DU_IIT/1st Year/1-1/STAT 1103 - Probability & Stats/Notes",
-    "02_DU_IIT/1st Year/1-1/STAT 1103 - Probability & Stats/Lecture Sheets",
-    "02_DU_IIT/01_CLASS/SE 1106 - Software Engineering/SE 1106 3.1 BOOK COPY.md",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "Business/Journal/Technical/Migrated/assets/why-not-jwt.png",
