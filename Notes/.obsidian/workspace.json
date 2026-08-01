@@ -80,7 +80,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "279416c7625b4660",
@@ -222,7 +223,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 343.5
+    "width": 343.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -241,7 +243,7 @@
       "graph:Open graph view": false
     }
   },
-  "active": "42af4f1ef891900d",
+  "active": "41125d2dba3cc8d9",
   "lastOpenFiles": [
     "05_REVISION/WEB DEVELOPMENT",
     "05_REVISION/JAVASCRIPT",
