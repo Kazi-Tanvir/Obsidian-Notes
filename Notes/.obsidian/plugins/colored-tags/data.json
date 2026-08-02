@@ -625,7 +625,12 @@
     "scope-chain": 433,
     "api-design": 434,
     "http": 435,
-    "rest": 436
+    "rest": 436,
+    "closures": 437,
+    "garbage-collection": 438,
+    "event-loop": 439,
+    "async-io": 440,
+    "libuv": 441
   },
   "_version": 3
 }
