@@ -630,7 +630,9 @@
     "garbage-collection": 438,
     "event-loop": 439,
     "async-io": 440,
-    "libuv": 441
+    "libuv": 441,
+    "v8-heap": 442,
+    "worker-threads": 443
   },
   "_version": 3
 }

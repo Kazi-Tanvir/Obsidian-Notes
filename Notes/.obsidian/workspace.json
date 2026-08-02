@@ -11,14 +11,10 @@
             "id": "41125d2dba3cc8d9",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "05_REVISION/JAVASCRIPT/Day 1 - Execution Context, Call Stack & Scope Chain (1).md",
-                "mode": "preview",
-                "source": true
-              },
-              "icon": "lucide-file",
-              "title": "Day 1 - Execution Context, Call Stack & Scope Chain (1)"
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
             }
           }
         ]
@@ -80,8 +76,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "279416c7625b4660",
@@ -245,10 +240,12 @@
   },
   "active": "41125d2dba3cc8d9",
   "lastOpenFiles": [
+    "05_REVISION/JAVASCRIPT/Day 2 - Closures, Memory Management & Garbage Collection.md",
+    "05_REVISION/WEB DEVELOPMENT/Day 2 - Advanced Node.js Event Loop, Asynchronous I_O & Worker Threads.md",
+    "05_REVISION/JAVASCRIPT/Day 1 - Execution Context, Call Stack & Scope Chain (1).md",
     "05_REVISION/WEB DEVELOPMENT/Day 1 - Client-Server Architecture & RESTful API Design.md",
     "05_REVISION/WEB DEVELOPMENT",
     "05_REVISION/JAVASCRIPT",
-    "05_REVISION/JAVASCRIPT/Day 1 - Execution Context, Call Stack & Scope Chain (1).md",
     "05_REVISION/Day 1 - Execution Context, Call Stack & Scope Chain.md",
     "05_REVISION/Unconfirmed 341912.crdownload",
     "05_REVISION/Unconfirmed 952796.crdownload",
@@ -279,7 +276,6 @@
     "02_DU_IIT/1st Year/1-1/SE 1106 - Software Engineering/Notes/SE 1106 3.2 COMPACT NOTE.md",
     "02_DU_IIT/1st Year/1-1/SE 1106 - Software Engineering/Notes/SE 1106 3.1 FULL NOTE.md",
     "02_DU_IIT/1st Year/1-1/SE 1106 - Software Engineering/Notes/SE 1106 3.1 COMPACT NOTE.md",
-    "02_DU_IIT/1st Year/1-1/CSE 1101L - Structured Programming/Notes/CSE 1101 L1.md",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "Business/Journal/Technical/Migrated/assets/why-not-jwt.png",
