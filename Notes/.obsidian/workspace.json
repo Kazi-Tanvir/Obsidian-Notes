@@ -16,8 +16,23 @@
               "icon": "lucide-git-fork",
               "title": "Graph view"
             }
+          },
+          {
+            "id": "c2d130de4dddc1d6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Untitled.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Untitled"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -238,8 +253,9 @@
       "graph:Open graph view": false
     }
   },
-  "active": "41125d2dba3cc8d9",
+  "active": "c2d130de4dddc1d6",
   "lastOpenFiles": [
+    "Untitled.md",
     "05_REVISION/JAVASCRIPT/Day 2 - Closures, Memory Management & Garbage Collection.md",
     "05_REVISION/WEB DEVELOPMENT/Day 2 - Advanced Node.js Event Loop, Asynchronous I_O & Worker Threads.md",
     "05_REVISION/JAVASCRIPT/Day 1 - Execution Context, Call Stack & Scope Chain (1).md",
@@ -275,7 +291,6 @@
     "02_DU_IIT/1st Year/1-1/SE 1106 - Software Engineering/Notes/SE 1106 3.2 FULL NOTE.md",
     "02_DU_IIT/1st Year/1-1/SE 1106 - Software Engineering/Notes/SE 1106 3.2 COMPACT NOTE.md",
     "02_DU_IIT/1st Year/1-1/SE 1106 - Software Engineering/Notes/SE 1106 3.1 FULL NOTE.md",
-    "02_DU_IIT/1st Year/1-1/SE 1106 - Software Engineering/Notes/SE 1106 3.1 COMPACT NOTE.md",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "Business/Journal/Technical/Migrated/assets/why-not-jwt.png",
