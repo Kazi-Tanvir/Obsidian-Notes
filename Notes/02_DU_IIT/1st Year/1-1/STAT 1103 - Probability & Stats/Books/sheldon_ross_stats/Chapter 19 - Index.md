@@ -1,0 +1,1396 @@
+# Index
+
+## A
+- Acceptance, of hypothesis, *see* Hypothesis testing
+- Additive property, of chi-square random variables, 273
+- Algebra of events, 66, 66f, 67, 67f
+- Analysis, of residuals, 395, 396f, 397
+- Analysis of variance (ANOVA), 453–487
+  - introduction, 453, 454
+  - one-way, 454, 456–463, 463t, 464–469
+    - multiple comparisons of sample means, 466–468
+    - with unequal sample sizes, 468, 469
+  - overview, 454–456
+  - two-way, 454
+    - hypothesis testing for, 474–479
+    - interaction, 479–487
+    - introduction and parameter estimation, 470–473
+- ANOVA, *see* Analysis of variance
+- Approximately normal, 33, 34f
+- Assessment, of models, 395, 396f, 397
+- Assignable cause, 555
+- Association, causation v., 41
+- Associative law, 66, 67
+- Averaging notation, in two-way analysis of variance, 471, 472
+
+## B
+- Balanced case, in one-way analysis of variance, 469
+- Bandit problems, 650, 664, 666
+- Bar graph, 12, 12t, 13f
+- Bayes approach, naive, 649, 652
+- Bayes estimator, 246, 287–292
+- Bayes’ formula, 79, 79f, 80–86
+- Bayes theorem, 649, 651
+- Bayesian approach, 246, 606, 607
+- Behrens-Fisher problem, 333
+- Bernoulli, Jacob, 6
+- Bernoulli, James, 151
+- Bernoulli density function, 427
+- Bernoulli parameter, maximum likelihood estimator of, 247–250
+- Bernoulli populations
+  - hypothesis testing in, 339–345
+  - testing equality of parameters in two of, 342–345
+- Bernoulli random variables, 151–153, 153f, 154–158
+  - confidence interval for mean of, 275–279, 279t
+  - generation of, 640
+  - hypergeometric random variables and, 167–169
+  - sign test and, 529
+  - signed rank test and, 533, 534
+- Beta distribution, 289
+- Between samples sum of squares, 459–461, 463t, 469
+- Bias, of estimators, 281
+- Big data, 649–666
+- Bimodal data set, 36, 36f
+- Binary output data, logistic regression models for, 425, 426, 426f, 427, 428
+- Binomial distribution, hypothesis testing in, 339–345
+- Binomial random variables, 151–153, 153f, 154–158
+  - central limit theorem and, 226, 227, 227f
+  - generation of, 640, 641
+  - hypergeometric random variables and, 169–171, 236, 237
+  - Poisson random variables and, 160–163
+  - sign test and, 530
+  - with parameters, 157
+- Bootstrap method, 623–631
+  - mean square error and, 627, 628
+  - population mean and, 623, 624, 628–631
+  - population variance and, 623–625
+  - probability and, 629–631
+  - random variable generation, 627
+- Box plot, 29, 29f
+- Box-Muller method, 643
+
+## C
+- Categorical data analysis, goodness of fit tests and, 499–521
+  - critical region determination by simulation, 506–508
+  - dummy variables for, 424, 425
+  - introduction, 499
+  - Kolmogorov–Smirnov goodness of fit test for continuous data, 517–519, 519f, 520, 521
+  - tests of independence in contingency tables, 510–514
+  - tests of independence in contingency tables having fixed marginal totals, 514–517
+  - tests when all parameters are specified, 499–507
+  - tests when some parameters are unspecified, 508–510
+- Causation, association v., 41
+- Central limit theorem, 224–227, 227f, 228–230
+  - approximate distribution of sample mean, 227–229
+  - binomial random variables and, 226, 227, 227f
+  - defined, 224
+  - independent random variables, 237, 238
+  - Monte Carlo study and, 644
+  - probability mass function and, 226, 227, 227f
+  - sample size needed, 230, 230f
+- Chance variation, 555
+- Channel noise disturbance, 184
+- Characterizing vector, 649–663
+  - historical, 662
+  - quantitative, 662
+- Chebyshev’s inequality, 29–31, 31t
+  - one-sided, 32, 33
+  - random variables and, 139, 142
+  - weak law of large numbers, 141
+- Chi-square approximation, 508
+- Chi-square density function, 201–203, 203f, 204, 205, 205f, 206
+- Chi-square distribution, 201–203, 203f, 204, 205, 205f, 206, 336, 597
+  - gamma random variables and, 204, 205, 205f
+  - $t$-distribution and, 206, 206f, 207, 207f, 208, 208f
+- Chi-square goodness of fit tests, history of, 6
+- Chi-square probabilities, 203
+- Chi-square random variables, 203, 203f
+  - additive property of, 273
+  - estimators of variance from, 455, 456
+  - $F$-distribution and, 208, 209, 209f
+  - mean and variance of, 206
+  - sample mean and variance distribution with, 233
+- Choosing, of normal prior, 290, 291
+- Class boundaries, 16, 17, 18f
+- Class intervals, 16, 17, 18f
+- Coefficient of determination, sample correlation coefficient and, 392–395
+- Coefficient of multiple determination, 419
+- Column factors
+  - hypothesis testing for, 474–479
+  - in two-way analysis of variance, 470
+    - deviation from grand mean due to, 472
+    - row factor interaction with, 479–487
+- Column sum of squares, 477
+- Combinations, permutations and, 74
+- Combining, of unbiased estimators, 282–284
+- Common density function, independent random variables and, 112, 113
+- Commutative law, 66, 66f, 67
+- Comparison, of sample means, 466–468
+- Complement
+  - in sample space, 64
+  - in Venn diagram, 66, 66f, 67
+- Component weighted distances, 659, 660
+- Composite hypothesis, 306
+- Computational identity, of sum of squares of residuals, 375
+- Conditional densities, 116
+- Conditional distributions, 114–116, 342–345
+  - random numbers and, 174, 175, 175t, 176, 177
+- Conditional probability, 75–77, 77f, 78, 79, 115, 649, 651
+  - independent events and, 86–89
+  - Poisson random variables and, 163–165
+- Conditional probability density function, 287–289
+- Conditional probability mass function, 114, 115
+- Confidence, 245
+- Confidence interval
+  - for difference in means of two normal distributions, 270, 271, 271t, 272–275
+  - for difference in population means, 466–468
+  - for estimating unknown mean, 257–262
+  - for exponential distribution in life testing, 596, 597
+  - for mean of Bernoulli random variable, 275–279, 279t
+  - for mean of exponential distribution, 280
+  - for normal mean with unknown variance, 265, 266, 268, 269
+  - for regression parameters $\alpha$, 386; $\beta$, 381
+  - for unknown probability, 275, 276, 276t, 277–279
+  - for variance of normal distribution, 269, 270, 271t
+  - in sequential testing for exponential distribution in life testing, 599–603
+  - one-sided lower, 259, 260, 279
+  - one-sided upper, 259–261, 265, 279
+  - prediction interval v., 391
+  - two-sided, 258, 260–268, 272, 275, 279, 295, 296
+- Confidence interval estimators
+  - for mean of exponential distribution, 280
+  - of difference in means of two normal distributions, 270–275
+  - of mean response, 386–389, 420, 421
+- Contingency tables
+  - tests of independence in, 510–514
+  - with fixed marginal totals, tests of independence in, 514–517
+- Continuous data, Kolmogorov–Smirnov goodness of fit test for, 517–519, 519f, 520, 521
+- Continuous random variables, 101, 103–105, 641–644
+- Control charts, 555
+  - for population mean, 573–583
+  - moving-average, 573–575
+  - fraction defective, 567–569
+  - mean, 556–558, 558f, 559–564, 566f
+  - case of unknown, 559–564
+  - number of defect, 569–572
+  - variance, 564–566, 566f, 567
+- Control group, 174
+- Control limits
+  - for fraction defective, 568, 569
+  - for mean control charts, 556–558, 558f, 559
+  - for moving-average, 573–575, 575f
+  - for variance control charts, 565, 566, 566f, 567
+- Controls, 345
+- Correlation analysis, history of, 6
+- Counting
+  - basic principles of, 70–73
+  - notation and terminology, 73–75
+- Covariance, 132, 133
+- Critical region, 306, 308
+  - for goodness of fit tests when all parameters are specified, 500, 501
+  - one-sided, 315
+  - simulation for determination of, 506–508
+- Cumulative distribution function, 101–103, 103f, 104, 106
+  - exponential random variables and, 190
+  - probability density function and, 103, 104, 104f, 105
+- Cumulative sum control charts, 581–583
+
+## D
+- Data collection, descriptive statistics and, 1, 2
+- Data sets
+  - describing, 12–19
+  - frequency tables and graphs, 12, 12t, 13f, 14
+  - grouped data, histograms, ogives, and stem and leaf plots, 16–18, 18f, 19
+  - relative frequency tables and graphs, 12, 13, 13f, 14, 14f, 15
+  - normal and skewed, 33, 33f, 34, 34f, 35, 36
+  - summarizing, 19–29
+    - sample mean, sample median, and sample mode, 19–24
+    - sample percentiles and box plots, 26–28, 28t, 29, 29f
+    - sample variance and sample standard deviation, 24–26
+- Defects, probability of, 339–346
+- DeMorgan’s laws, 67
+- Density, mode of, 291
+- Density function, *see also* Probability density function
+  - Bernoulli, 427
+  - chi-square, 201–203, 203f, 204, 205, 205f, 206
+  - common, 112, 113
+  - conditional probability, 287–289
+  - $F$, 208, 209, 209f
+  - gamma distribution and, 199–201
+  - joint, 246, 247, 251, 254
+  - joint probability, 109, 110
+  - normal, 179, 179f, 203, 203f
+  - of logistics distribution, 209
+  - of standard normal, 189
+  - posterior, 287, 291
+  - random variables and, 122
+  - Rayleigh, 593
+  - $t$, 206, 206f, 263, 263f
+  - Weibull, 609, 610f
+- Dependent events, 86–88, 88f, 89
+- Dependent variable, *see* Response variable
+- DES, *see* Diethylstilbestrol
+- Descriptive statistics
+  - Chebyshev’s inequality, 29–31, 31t
+  - data collection and, 1, 2
+  - describing data sets, 12–19
+  - frequency tables and graphs, 12, 12t, 13f, 14f
+  - grouped data, histograms, ogives, and stem and leaf plots, 16–18, 18f, 19
+  - relative frequency tables and graphs, 14–16
+  - history of, 7
+  - normal data sets, 33, 33f, 34, 34f, 35, 36
+  - paired data sets and the sample correlation coefficient, 36, 37, 37t, 38, 38f, 39, 40, 40f, 41–43
+  - summarizing data sets, 19–29
+    - sample mean, sample median, and sample mode, 19–24
+    - sample percentiles and box plots, 26–28, 28t, 29, 29f
+    - sample variance and sample standard deviation, 24–26
+- Deviation from the grand mean due to column $j$, 472
+- Deviation from the grand mean due to row $i$, 472
+- Diethylstilbestrol (DES), 344
+- Difference, in means of two normal distributions, 270–275
+- Discrete inverse transform method, 640, 641
+- Discrete random variables, 101, 102
+  - expectation and, 117
+  - generation of, 639–641
+  - probability mass function and, 102, 103, 639–641
+- Dispersion parameter, 210
+- Distance weighted method, 658
+- Distribution
+  - binomial, hypothesis testing in, 339–345
+  - chi-square, 201–203, 203f, 204, 205, 205f, 206, 336, 597
+  - conditional, 346–348
+  - exponential, confidence interval for mean of, 280
+  - $F$, 338
+  - gamma, 597, 606, 607
+  - hypothesis testing for determining equality of $m$ population distributions, 516, 517
+  - life, 255–257
+  - multivariate normal, 414
+  - normal
+    - confidence interval for variance of, 269, 270, 271t
+    - estimation of difference in means of, 270–275
+    - of least squares estimators, 371–377, 377f
+    - of sample, goodness of fit tests for, 499–508
+  - Poisson
+    - goodness of fit tests for, 508–510
+    - hypothesis testing concerning mean of, 345–348
+    - variance in, 405, 406
+  - prior, 287–292, 606, 607
+  - probability, of estimator of mean response, 387, 388
+  - rate of, 592
+  - uniform, estimating mean of, 254, 255
+- Distribution function, *see also* Cumulative distribution function; Probability distribution function
+  - empirical, 624–626
+  - moment generating function and, 139
+  - of continuous random variable, 641
+  - of normal random variables, 181, 182
+  - of rank sum test, 539
+  - Poisson, number of defects and, 569–572
+  - probability and, 101
+  - random variables and, 101, 102, 624
+  - signed rank test for, 533
+  - two-sample problem and, 538
+- Distribution results, summary of, 392
+- Distributions in R, 210, 211
+- Distributive law, 66, 67, 67f
+- Doll, R., 19
+- Dot notation, in two-way analysis of variance, 471, 472
+- Double-blind test, 174
+- Dummy variables, for categorical data, 424, 425
+
+## E
+- Effect of column $j$, 480
+- Effect of row $i$, 480
+- Empirical distribution function, 624–626
+- Empirical rule, 35
+- Entropy, 120
+- Equal variance, testing equality of means of two normal populations with, 333, 334t
+- Equality
+  - of means of two normal populations, 326–330, 330f, 331–334, 334t, 335
+    - case of known variance, 326–328
+    - case of unknown and equal variance, 333, 334t
+    - case of unknown variance, 328–330, 330f, 331–333
+  - of $m$ population distributions, hypothesis testing for, 516, 517
+  - of parameters in two Bernoulli populations, 342–345
+  - of population means, hypothesis testing of, 454, 456–469
+  - of variance, of two normal populations, 337, 338
+- Error
+  - mean square error of point estimators, 281–287
+  - type I, 306, 307
+  - type II, 306, 310, 313
+- Error sum of squares, 475, 477
+- Estimates
+  - defined, 246
+  - interval, 245, 257–270
+    - confidence interval for normal mean with unknown variance, 262, 263, 263f, 264–269
+    - confidence interval for variance of normal distribution, 269, 270, 271t
+    - for unknown mean, 257–262
+    - hypothesis testing v., 318
+    - prediction, 268, 269
+- Estimation
+  - of life distributions, 255–257
+  - of mean of uniform distribution, 254, 255
+  - of mean response, 420–423
+  - of parameters, 245–292
+    - approximate confidence interval for mean of Bernoulli random variable, 275–279, 279t
+    - Bayes estimator, 246, 287–292
+    - confidence interval for mean of exponential distribution, 280
+    - for two-way analysis of variance, 470–473
+    - interval estimates, 245, 257–270, 318
+    - introduction, 245, 246
+    - maximum likelihood estimators, 245–257, 271, 291, 509
+    - of difference in means of two normal distributions, 270–275
+    - of life distributions, 255–257
+    - point estimator evaluation, 281–287
+- Estimators
+  - Bayes, 246, 287–292
+  - bias of, 281
+  - confidence interval
+    - for mean of exponential distribution, 280
+    - of difference in means of two normal distributions, 270–275
+    - of mean response, 386–389, 420, 421
+  - defined, 246
+  - least squares, 395
+    - distribution of, 371–377, 377f
+    - for Weibull distribution in life testing, 611–613
+    - in multiple linear regressions, 410–419, 421
+    - in polynomial regression, 406–409
+    - of regression parameters, 367–370
+  - maximum likelihood, 245–257, 271, 291
+    - evaluation of, 285–287
+    - for exponential distribution in life testing, 595, 596, 601–605
+    - for life distributions, 255–257
+    - for mean of exponential distribution, 280
+    - for Weibull distribution in life testing, 609–611
+    - in logistic regression models, 425
+    - in sequential testing for exponential distribution in life testing, 601, 602
+    - least squares estimators as, 374, 402
+    - of Bernoulli parameter, 247–250
+    - of difference in means of two normal distributions, 270
+    - of normal population, 251–254
+    - of Poisson parameter, 250, 251
+    - weighted least squares estimators as, 402
+  - of deviance from grand mean, 472, 473
+  - of grand mean, 472, 473
+  - of variance, 455, 456
+    - for one-way analysis of variance, 454, 456–469
+    - for two-way analysis of variance, 474–479
+    - for two-way analysis of variance with interaction, 479–487
+    - weighted least squares, 400–406
+  - point
+    - evaluation of, 281–287
+    - for hypothesis testing, 307, 308
+    - of mean response, 386, 420
+  - pooled, 275, 303, 329
+  - unbiased, 281–287
+- Evaluation, of point estimator, 281–287
+- Events
+  - algebra of, 66, 66f, 67, 67f
+  - independent, 86–88, 88f, 89
+  - odds of, 69
+- Expectation, 117–121, 121f
+  - of a random variable function, 123, 124
+  - of sums of random variables, 124–128
+  - properties of, 121–128
+- Expected value, *see* Expectation
+- Exponential distribution
+  - confidence interval for mean of, 280
+  - gamma distribution and, 201
+  - in life testing, 594–607
+    - Bayesian approach, 606, 607
+    - sequential testing, 599–603
+    - sequential testing with stopping at $r$th failure, 594–599
+    - simulation testing with stopping by fixed time, 603–605
+  - Poisson process and, 193–196
+- Exponential random variables, 190–194, 194f, 195–199
+  - generation of, 642
+  - memoryless, 191
+  - moment generating functions and, 190
+  - Poisson process, 193, 194, 194f, 195, 196
+  - probability and, 190, 192
+  - sample means for, 230
+- Exponentially weighted moving-average control charts, 576, 577, 577f, 578–580, 580f
+
+## F
+- $F$-density function, 208, 209, 209f
+- $F$-distribution, 208, 209, 209f, 338
+- $F$-statistic, in two-way analysis of variance with interaction, 485–487
+- Failure rate, *see* Hazard rate
+- Finite populations, sampling distributions from, 234–238
+- First quartile, 27–29
+- Fisher, Ronald A., 6
+- Fisher-Irwin test, 343
+- Fixed margins, contingency tables with, tests of independence in, 514–517
+- Flight of interest, 649
+- Fraction defective control charts, 567–569
+- Frequency interpretation
+  - of expectations, 117
+  - probability, 63
+- Frequency tables and graphs, 12, 12t, 13f, 14, 14f
+  - frequency histogram, 16
+  - frequency polygon, 12, 14, 14f
+  - relative, 14, 15, 15f, 16
+  - sample mean and, 21, 23
+  - sample median and, 22–24
+  - sample mode and, 23, 24
+- Friendship network, 130, 130f
+- Friendship paradox, 130, 131
+- Future response, prediction interval of, 389–391
+  - in multiple linear regression, 420, 422, 424
+
+## G
+- Galton, Francis, 6, 381, 382
+- Gamma density, 201, 202f
+- Gamma distribution, 199, 597, 606, 607
+- Gamma function, 199, 200
+- Gamma random variables, 201, 202f
+  - chi-square distribution and, 204, 205, 205f
+- Gauss, Karl Friedrich, 6
+- Generation
+  - of random numbers, 619–622
+  - of random variables, 507, 627, 639–641
+- Gini index, 43–48, 48f
+- Goodness of fit tests, 499–521
+  - critical region determination by simulation, 506–508
+  - introduction, 499
+  - Kolmogorov–Smirnov goodness of fit test for continuous data, 517–519, 519f, 520, 521
+  - tests of independence in contingency tables, 510–514
+  - tests of independence in contingency tables having fixed marginal totals, 514–517
+  - tests when all parameters are specified, 500–508
+  - tests when some parameters are unspecified, 508–510
+- Gosset, W.S., 6
+- Grand mean, 472, 473, 480
+- Graunt, John, 4, 5
+- Grouped data, 16–18, 18f, 19, 20
+
+## H
+- Halley, Edmund, 5
+- Hardy’s lemma, 38
+- Hazard rate, 591
+- Hazard rate functions, 591–594
+- Hill, A.B., 19
+- Histograms, 16, 17, 18f
+  - normal, 33, 33f, 34–36, 36f
+- Historical data, 649, 650, 654, 655, 658, 662
+  - base, 649, 651, 654, 655, 657, 658, 660, 661
+  - flights, 651–653, 659
+  - values, 649, 658, 662
+- Hypergeometric random variables, 167–171
+  - Bernoulli random variables and, 168
+  - binomial random variables and, 170, 171, 236, 237
+  - mean and variance of, 167–169
+- Hypothesis testing, 305–348
+  - for two-way analysis of variance, 474–479
+  - in Bernoulli populations, 339–345
+  - interval estimates v., 318
+  - introduction, 305
+  - multiple linear regression and, 418, 419
+  - of equality of means of two normal populations, 326–335
+    - case of known variance, 326–328
+    - case of unknown and unequal variance, 333, 334t
+    - case of unknown variance, 328–330, 330f, 331–333
+  - of equality of $m$ population distributions, 516, 517
+  - of equality of population means, 454, 456–469
+  - of equality of variance of two normal populations, 337, 338
+  - of independence in contingency tables, 510–514
+  - of independence in contingency tables having fixed marginal totals, 514–517
+  - of independence of characteristics of population member, 510–514
+  - of mean of normal population, 307–326
+    - case of known variance, 307–319
+    - case of unknown variance, 319–326
+  - of mean of Poisson distribution, 345–348
+  - of multiple population means, 454
+  - of probability distribution of sample, 499–508
+  - of regression parameters $\alpha$, 386; $\beta$, 379, 380
+  - of regression to mean, 382, 383
+  - of row and column interaction, 479–487
+  - of variance of normal population, 336–338
+  - paired $t$-test, 333–335
+  - robustness of, 318
+  - significance levels, 306, 307
+
+## I
+- Independence, tests of
+  - in contingency tables, 510–514
+  - in contingency tables having fixed marginal totals, 514–517
+- Independent events, 86–88, 88f, 89
+- Independent increment assumption, 194, 196
+- Independent random variables, 111–114
+  - central limit theorem, 224–230, 237
+  - moment generating functions of, 138, 139
+  - sample mean and variance distribution with, 233
+  - signed rank test and, 534
+- Independent variable, *see* Input variable
+- Indicator random variable, 100, 101
+  - covariance of, 133
+  - expectation for, 118
+  - variance of, 129, 130
+- Individual moment generating functions, 138, 139
+- Individual probability mass function, joint and, 106–109
+- Inferential statistics
+  - history of, 4–7
+  - probability models and, 2, 3
+- Inheritance, regression to mean and, 381, 382, 382f, 383, 384, 384f
+- Input variable, 365
+  - variation in response to, 392–395, 400–404, 404f, 405, 406
+- Interaction, two-way analysis of variance with, 455, 479–487
+- Intersection
+  - in Venn diagram, 66, 66f
+  - of sample space, 65
+- Interval estimates, 245, 257–270
+  - confidence interval for normal mean with unknown variance, 262–268
+  - confidence interval for variance of normal distribution, 269–271
+  - for unknown mean, 257–262
+  - hypothesis testing v., 318
+  - prediction, 268, 269
+- Inverse transformation method, 640, 641
+- $i$th order statistic, 596
+
+## J
+- Joint cumulative probability distribution function, 105, 113, 114
+- Joint density
+  - conditional densities and, 116
+  - random numbers and, 178, 179
+- Joint probability density function, 109, 110, 246, 247, 251, 254
+- Joint probability mass function
+  - conditional probability mass function and, 115
+  - individual and, 106–109
+- Jointly continuous, 109, 110, 112, 113
+- Jointly distributed random variables, 105–116
+  - conditional distributions, 114–116
+  - independent, 111–114
+
+## K
+- $k$-nearest neighbor rule, 657, 662
+- Kolmogorov–Smirnov goodness of fit test, for continuous data, 517–519, 519f, 520, 521
+- Kolmogorov–Smirnov test statistic, 517–519, 519f, 520, 521
+- Kolmogorov’s law of fragmentation, 253
+- Kruskal–Wallis test, 543
+
+## L
+- Laplace, Pierre-Simon, 6
+- Lateness probability, 649, 651, 657, 659–661
+- Least squares estimators, 367–428
+  - distribution of, 371–377, 377f
+  - for Weibull distribution in life testing, 611–613
+  - in multiple linear regression, 410–416, 421, 422
+  - in polynomial regression, 406–409
+  - of regression parameters, 367–370
+  - weighted, 400–404, 404f, 405, 406
+- Left-end inclusion convention, 16
+- Level of significance, *see* Significance level
+- Levels, in two-way analysis of variance, 470
+- Life distributions, estimation of, 255–257
+- Life testing, 591–613
+  - exponential distribution in, 594–607
+    - Bayesian approach, 606, 607
+    - sequential testing, 599–603
+    - simulation testing with stopping at $r$th failure, 594–599
+    - simulation testing with stopping by fixed time, 603–605
+  - hazard rate functions, 591–594
+  - introduction, 591
+  - two-sample problem, 607–609
+  - Weibull distribution in, 609, 610, 610f, 611–613
+- Likelihood function, 247
+- Line graph, 12, 13f
+- Linear regression equation, 365–367
+  - assessment of, 395, 396f, 397
+- Linearity, transforming to, 396–398, 398f, 399, 400
+- Logarithms, for transforming to linearity, 396–398, 398f, 399, 400
+- Logistic regression models, for binary output data, 425, 426, 426f, 427, 428
+- Logistics distribution, of random variables, 209, 210
+- Logistics random variable, 209
+- Logistics regression, 663, 664
+- Logistics regression function, 426, 426f
+- Logit, 427
+- Lognormal distribution, 253
+- Lorenz curve, 43, 44, 44f, 45, 45f, 46, 46f, 47, 48
+- Lower confidence interval
+  - for difference in means of two normal distributions, 270–275
+  - for normal mean with unknown variance, 266–268
+  - for unknown mean, 262
+  - for unknown probability, 275, 276
+  - for variance of normal distribution, 276
+- Lower control limits
+  - for exponentially weighted moving-average, 578–580, 580f
+  - for fraction defective, 568, 569
+  - for mean control charts, 557–559
+  - for moving-average, 574, 575, 575f
+  - for number of defects, 569–572
+  - for variance control charts, 565, 566, 566f, 567
+
+## M
+- Machine learning, 649–666
+  - assessing the approaches, 660, 661
+  - choosing best probability, bandit problem, 664–666
+  - distance based estimators, $k$-nearest neighbors rule, 657–660
+  - introduction to, 649, 650
+  - late flight probabilities, 650, 651
+  - naive Bayes approach, 651–657
+    - variation of, 654–657
+  - quantitative characterizing vectors, 662–664
+- Mann-Whitney test, *see* Rank sum test
+- Marginal probability mass function, 108
+- Markov’s inequality, random variables and, 139–141
+- Mass function, *see* Probability mass function
+- Matrix notation
+  - for multiple linear regression, 411, 412
+  - for polynomial regression, 409
+- Maximum likelihood estimators, 245–257, 271, 291, 509
+  - evaluation of, 285–287
+  - for exponential distribution in life testing, 595, 596, 603–605
+  - for life distributions, 255–257
+  - for mean of exponential distribution, 280
+  - for Weibull distribution in life testing, 609–611
+  - in logistic regression models, 427
+  - in sequential testing for exponential distribution in life testing, 601, 602
+  - least squares estimators as, 374, 375
+  - of Bernoulli parameter, 247–250
+  - of difference in means of two normal distributions, 231
+  - of normal population, 251–254
+  - of Poisson parameter, 250, 251
+  - weighted least squares estimators as, 402
+- Mean, *see also* Population means; Sample mean
+  - confidence interval estimators of mean response, 386–389, 420–422
+  - estimation of difference in means of two normal distributions, 270–275
+  - for exponentially weighted moving-average, 576
+  - for moving-average, 574
+  - grand, 472, 473, 480
+  - normal, confidence intervals for, 262, 263, 263f, 264–268
+  - of Bernoulli random variable, confidence interval for, 275–279
+  - of chi-square random variable, 205
+  - of exponential distribution, confidence interval for, 280
+  - of hypergeometric random variables, 167–169
+  - of least squares estimators, 371, 372
+  - of normal population, hypothesis testing concerning, 307–309, 309f, 310–326
+    - case of known variance, 307–319
+    - case of unknown variance, 319–326
+  - of normal random variables, 180–182
+  - of Poisson distribution, hypothesis testing for, 345–348
+  - of uniform distribution, 254, 255
+  - of uniform random variables, 173
+  - permutation tests and, 635
+  - Poisson distribution with unknown value of, goodness of fit tests for, 508–510
+  - population, 222, 223, 223f
+  - regression to, 381, 382, 382f, 383, 384, 384f, 385, 385f, 386
+  - testing equality of means of two normal populations, 326–330, 330f, 331–335
+    - case of known variance, 326–328
+    - case of unknown and equal variance, 333, 334
+    - case of unknown variance, 328–330, 330f, 331–333
+    - paired $t$-test, 333–335
+  - unknown
+    - confidence intervals for normal mean with unknown variance, 262–269
+    - control charts for, 559–564
+    - estimates of, 257–262
+- Mean control chart, 556–558, 558f, 559–564
+  - case of unknown, 559–564
+  - recursive formula and, 561, 562
+- Mean life, maximum likelihood estimator of, 605
+- Mean response
+  - estimation of, 420, 421
+  - statistical inferences concerning, 386–389
+- Mean square error
+  - bootstrap method and, 627, 628
+  - of point estimators, 281–287
+- Median, sign test for, 531, 532, 532f
+- Memoryless, exponential random variables, 191
+- Modal values, 23
+- Mode, of density, 291
+- Models, assessment of, 395, 396f, 397
+- Moment generating functions
+  - chi-square distribution, 201
+  - chi-square random variable, 201–203, 203f, 204
+  - exponential random variables and, 190
+  - gamma distribution and, 199–201
+  - normal random variables and, 186
+  - of Poisson random variables, 159–161
+  - of random variables, 138, 139
+- Monte Carlo simulation, 267, 622, 623
+  - determining runs in, 644, 645
+- Moving-average control charts, 573–575, 575f
+  - exponentially weighted, 576, 577, 577f, 578–580, 580f
+- Multidimensional integrals, simulation of, 267, 268
+- Multiple comparisons, of sample means, 466–468
+- Multiple linear regression, 410–424
+- Multiple probability distributions, equality testing of, 541–543
+- Multiple regression equation, 366
+- Multivariate normal distribution, 414
+- Mutually exclusive, in sample space, 65
+
+## N
+- Naive Bayes approach, 649, 652, 654
+- Naive Bayes estimated probability, 654
+- *Natural and Political Observations Made upon the Bills of Mortality*, 4, 5
+- Natural estimator, 651
+- Nearest neighbor rules, 649, 662
+- Negatively correlated, 39
+- Neyman, Jerzy, 7
+- 90 Percent prediction interval
+  - for variance of normal distribution, 270
+  - of difference in means of two normal distributions, 290, 291
+- 95 Percent confidence interval
+  - for estimating unknown mean, 257–262
+  - for mean of exponential distribution, 280
+  - for normal mean with unknown variance, 264–268
+  - for regression parameters, 381
+  - for unknown probability, 277, 278
+  - of difference in means of two normal distributions, 270–275
+  - of mean response, 388
+- 99 Percent prediction interval, 424
+- 99 Percent confidence interval
+  - for estimating unknown mean, 261
+  - for unknown probability, 266
+- Nonparametric hypothesis tests, 529–547
+  - introduction to, 529
+  - runs test for randomness, 544–547
+  - sign test, 529–532, 532f, 533
+  - signed rank test, 533, 534, 534f, 535–538
+  - two-sample problem, 538–543
+  - testing the equality of multiple probability distributions, 541–543
+- Nonparametric inference, 221, 222
+- Nonrandom sample, 3
+- Normal approximations, in permutation tests, 634–637
+- Normal data sets, 33, 34, 34f, 35
+- Normal density function, 179, 179f
+- Normal distribution
+  - confidence interval for variance of, 269–271
+  - estimation of difference in means of, 270–275
+- Normal equations
+  - in multiple linear regression, 411, 412
+  - in polynomial regression, 407
+  - of regressions, 367, 368
+- Normal histograms, 17, 33
+- Normal mean, with unknown variance, confidence intervals for, 262–269
+- Normal populations
+  - maximum likelihood estimator of, 251–253
+  - mean of
+    - hypothesis testing concerning, 307–309, 309f, 310–321, 321f, 322–326
+    - testing equality of means of two normal populations, 326–330, 330f, 331–335
+  - sampling distributions from, 231–234
+    - joint distribution, 232–234
+    - sample mean distribution, 232
+  - variance of, hypothesis testing for, 336–338
+- Normal prior, choosing of, 290, 291
+- Normal random variables, 179–183, 183f, 184–188, 188f, 189
+  - chi-square distribution, 201–203, 203f, 204, 205, 205f, 206
+  - generation of, 643, 644
+  - mean and variance of, 181
+  - normal density function, 179, 179f
+  - standard normal distribution and, 182, 183, 183f
+  - $t$-distribution, 206, 206f, 207, 207f, 208, 208f
+- Notation
+  - dot, in two-way analysis of variance, 471, 472
+  - for least squares estimators, 375
+  - matrix
+    - for polynomial regression, 409
+    - in multiple linear regression, 411, 412
+- Null hypothesis, 306, 383
+  - permutation tests and, 631–634
+- Number of defect control charts, 569–572
+
+## O
+- Observational study, 344, 345
+- OC curve, *see* Operating characteristic curve
+- Odds for success, 426
+- Odds of events, 69
+- Ogives, 16–18, 18f, 19
+- $100(1 - \alpha)$ Percent confidence interval
+  - of difference in means of two normal distributions, 272–274, 276t
+  - for estimating unknown mean, 260–262
+  - for exponential distribution in life testing, 597
+  - for mean of exponential distribution, 280
+  - for normal mean with unknown variance, 263–268
+  - for regression parameters $\alpha$, 386; $\beta$, 380, 381
+  - for unknown probability, 276–278
+  - for variance of normal distribution, 271
+  - in sequential testing for exponential distribution in life testing, 601, 602
+  - of mean response, 388
+- $100(1 - \alpha)$ Percent confidence region, 276
+- $100(1 - \alpha)$ Percent prediction interval, 391, 423
+- One-sided Chebyshev’s inequality, 32, 33
+- One-sided critical region, 315
+- One-sided hypothesis tests
+  - for mean of normal population, case of known variance, 314–317
+  - for testing equality of means of two normal populations, 330
+- One-sided lower confidence interval
+  - for normal mean with unknown variance, 265–268
+  - for unknown mean, 259–261
+  - for unknown probability, 279
+  - for variance of normal distribution, 271
+  - of difference in means of two normal distributions, 270–275
+- One-sided null hypothesis, sign test and, 532, 533
+- One-sided $t$-tests, for mean of normal population with unknown variance, 323–326
+- One-sided upper confidence interval
+  - for unknown mean, 259–261
+  - for unknown probability, 279
+  - for variance of normal distribution, 271
+- One-way analysis of variance, 454, 456–469
+  - multiple comparisons of sample means, 466–468
+  - with unequal sample sizes, 468, 469
+- Operating characteristic (OC) curve, 311, 312f
+  - for one-sided hypothesis testing for mean of normal population, 315, 316
+- Out of control, 555, 557, 558, 558f, 559
+- Overlook probabilities, 85
+
+## P
+- $p$-value
+  - for determining independence of characteristics of population member, 512–514
+  - for goodness of fit tests when all parameters are specified, 501, 502, 508
+  - for goodness of fit tests when some parameters are unspecified, 509, 510
+  - for hypothesis testing
+    - in Bernoulli populations, 339–342, 344
+    - of equality of population means, 460
+    - of mean of normal population, 310, 315, 318, 319, 321–324, 326
+    - of mean of Poisson distribution, 346, 347
+    - of regression parameters $\beta$, 378–380
+    - of regression to mean, 383, 384, 384f
+    - of variance of normal population, 336–338
+    - with multiple linear regression, 419
+  - for Kolmogorov–Smirnov goodness of fit test, 519, 520
+  - for one-sided hypothesis testing for mean of normal population, 315–318
+  - for testing equality of means of two normal populations, 330–335
+  - in sequential testing for exponential distribution in life testing, 603
+  - in two-way analysis of variance, 477, 479, 483–487
+  - permutation tests for, 631–639
+    - normal approximations in, 634–637
+    - two sample, 637–639
+  - rank sum test and, 541
+  - signed rank test for, 535, 538
+  - simulation for approximation of, 506, 507
+- Paired data sets, 36–38
+  - sample correlation coefficient and, 38–43
+- Paired $t$-test, 333–335, 531
+- Parameter estimation, 245–292
+  - approximate confidence interval for mean of Bernoulli random variable, 275–279
+  - Bayes estimator, 246, 287–292
+  - confidence interval for mean of exponential distribution, 280
+  - for two-way analysis of variance, 470–473
+  - for Weibull distribution in life testing, 611, 612
+  - interval estimates, 245, 257–270, 318
+  - introduction, 245, 246
+  - maximum likelihood estimators, 246–257, 271, 291
+  - of difference in means of two normal distributions, 270–275
+  - of life distributions, 255–257
+  - point estimator evaluation, 281–287
+- Parametric inference, 221, 222
+- Pearson, Egon, 6
+- The Pareto Distribution, 196–199
+- Pearson, Karl, 6, 382, 506
+- Permutation, 71–73
+- Permutation tests, 631–639
+  - implementation of, 631, 632
+  - normal approximations in, 634–637
+  - null hypothesis and, 631–634
+  - two sample, 637–639
+- Pie chart, 14, 15f
+- Point estimates, 245
+- Point estimators
+  - evaluation of, 281–287
+  - for hypothesis testing, 307, 308
+  - of mean response, 386, 420
+- Point prediction, 423
+- Poisson, S.D., 159
+- Poisson distribution
+  - hypothesis testing concerning mean of, 345–348
+  - number of defects and, 569–572
+  - variance in, 405, 406
+  - with unknown mean, goodness of fit tests for, 508–510
+- Poisson parameters
+  - maximum likelihood estimator of, 250, 251
+  - testing of relationship between, 346–348
+- Poisson probability mass function, 159, 159f, 160, 161, 164, 165
+- Poisson process, exponential random variables and, 193, 194, 194f, 195, 196
+- Poisson random variables, 158–165
+  - binomial random variables and, 160–163
+  - conditional probability and, 163–165
+  - moment generating functions of, 159, 160
+  - probability mass function and, 158, 159, 159f, 160, 161, 164, 165
+- Polynomial regression, 406–408, 408f, 409, 409f
+- Pooled estimator, 275, 303, 329
+- Population distributions
+  - empirical distribution and, 624
+  - equality of, hypothesis testing for, 516, 517
+- Population means, 222, 223, 223f
+  - bootstrap method and, 623, 624, 628–631
+  - confidence interval for difference in, 466–468
+  - control charts for, 573–583
+    - cumulative sum, 581–583
+    - exponentially weighted moving-average, 576, 577, 577f, 578–580, 580f
+    - moving-average, 573–575, 575f
+  - hypothesis testing of equality of, 454, 456–469
+  - multiple, hypothesis testing of, 454–456
+- Population median, sign test for, 531, 532, 532f
+- Population variance, 222, 223
+  - bootstrap method and, 623–625
+- Populations
+  - definition of, 221
+  - samples and, 3
+  - sampling distributions from
+    - finite, 234–238
+    - normal, 231–234
+- Positively correlated, 39
+- Posterior density function, 287, 291
+- Power-function, of hypothesis test, 312
+- Prediction interval
+  - confidence interval v., 391
+  - of future response, 389–391
+  - of response at input level $x_0$, 391
+  - of response in multiple linear regression, 420–424
+- Prior distributions, 287–292, 606, 607
+- Probability, 63–89
+  - axioms of, 67–69, 69f, 70
+  - Bayes’ formula, 79, 79f, 80–86
+  - Bernoulli random variables, 151–158
+  - binomial random variables, 152–157
+  - bootstrap method and, 629–631
+  - central limit theorem, 224–227, 227f, 228–230, 230f
+  - chi-square distribution and, 203
+  - conditional, 75–77, 77f, 78, 79, 115
+  - continuous random variable and, 104
+  - counting and, 70–75
+  - distribution function and, 101
+  - events, 64–66
+    - independent, 86–89
+  - expectation, 117–121, 121f
+  - exponential random variables and, 190, 192
+  - fraction defective, 567, 568
+  - introduction to, 63, 64
+  - of defects, 339–346
+  - of lateness, 649, 651, 657, 659–661
+  - of random variables, 99, 100
+  - of uniform random variables, 171, 172, 172f
+  - overlook, 85
+  - Poisson random variables and, 158, 159, 159f, 160–166
+  - rank sum tests, 540, 541
+  - sample space, 64–66
+    - with equally likely outcomes, 70–75
+  - signed rank test and, 535–537
+  - unknown, confidence interval for, 275–279
+  - Venn diagram and algebra of events, 66, 66f, 67
+- Probability density function, 103, 104f, 105
+  - cumulative distribution function and, 104, 104f, 105
+  - exponential random variables and, 190
+  - joint, 109, 110
+  - of uniform random variables, 171, 172, 172f
+  - updated, 287
+- Probability distribution
+  - of estimator of mean response, 387, 388
+  - of sample, goodness of fit tests for, 499–508
+- Probability distribution function
+  - joint cumulative, 105, 113, 114
+  - of populations, 221
+  - Poisson, 158–166
+  - random variable and expectation, 121–123
+- Probability mass function, 102, 102f, 103, 103f, 255–257
+  - Bernoulli random variables, 151–153, 153f
+  - binomial random variables, 151–153, 153f
+  - central limit theorem and, 227f
+  - conditional, 114–116
+  - discrete random variables, 102, 103, 639–641
+  - expectation of, 117, 118
+  - hypergeometric random variables, 167, 168
+  - individual and joint, 106, 108, 109
+  - marginal, 108
+  - Poisson, 158, 159, 159f, 160, 161
+  - Poisson random variables, 158, 159, 159f, 160, 161
+- Probability models, inferential statistics and, 2, 3
+- Probability theory, statistics and, 6
+- Probit model, 428
+- Prototypical model, 649
+- Pseudo random numbers, 267, 620
+
+## Q
+- Quality control, 555–583
+  - fraction defective control charts, 567–569
+  - introduction to, 555, 556
+  - mean control chart, 556–558, 558f, 559–564
+  - number of defect control charts, 569–572
+  - population mean control charts, 573–583
+    - cumulative sum, 581–583
+    - exponentially weighted moving-average, 576, 577f, 580, 580f
+    - moving-average, 573–575, 575f
+  - variance control chart, 564–566, 566f, 567
+
+## R
+- R, command, 50, 51, 203, 211, 266, 335, 336, 338, 344, 378, 381, 393, 460, 464, 465, 505
+- R, use of, 48–52, 184, 189, 203, 204, 208, 209, 225, 234, 237, 266, 267, 270–275, 322–335, 368–423, 461–478, 504–510, 530, 537, 541, 663, 665
+  - for calculating binomial probabilities, 157, 158
+  - for calculating hypergeometric probabilities, 171
+  - for calculating Poisson probabilities, 166
+  - for computing Gini index, 51, 52
+  - for plotting binomial probabilities, 157
+  - for plotting Poisson mass functions, 166
+  - in $t$-test, 322, 325, 330–332
+- Random error, in response to input variable, 365, 366, 371
+- Random numbers, 619–623
+  - definition of, 174, 175
+  - generation of, 619–622
+  - Monte Carlo simulation approach, 622, 623
+  - pseudo, 620
+  - use of, 175–177, 177f
+- Random sample, 4, 221, 234
+  - runs test for, 544–547
+- Random variables, 99–101
+  - Bernoulli and binomial, 151–153, 153f, 154–158
+  - central limit theorem, 224–227, 227f, 228–230, 230f
+  - Chebyshev’s inequality, 139–142
+  - continuous, 103, 104, 641–644
+  - density function and, 122
+  - discrete, 101, 639–641
+  - distribution function and, 101, 624
+  - entropy of, 120
+  - expectation of function of, corollary of, 123, 124
+  - expected value of sums of, 124–128
+  - exponential, 190–194, 194f, 195, 642
+  - gamma distribution of, 199–201, 202f
+  - generation of, 507, 627, 639–641
+  - hypergeometric, 167–171
+  - independent, 111–114
+  - indicator, 100, 101
+  - jointly distributed, 105–116
+    - conditional distributions, 114–116
+    - independent, 111–114
+  - logistics distribution, 209, 210
+  - Markov’s inequality and, 139–141
+  - moment generating functions, 138, 139
+  - normal, 179–183, 183f, 184–188, 188f, 189, 643, 644
+    - chi-square distribution, 201–205, 205f, 206
+    - $F$-distribution, 208
+    - $t$-distribution, 206, 206f, 207, 207f, 208, 208f, 209, 209f
+  - Poisson, 158, 159, 159f, 160–166
+  - probability distribution function and expectation, 121–123
+  - types of, 102, 102f, 103, 103f, 104, 104f, 105
+  - uniform, 171, 172, 172f, 173–179
+  - variance of, 128, 129, 173, 180–182, 206, 233, 455, 456
+  - variance of a sum of, 132–137
+  - weak law of large numbers, 141
+- Rank sum test, 529, 538–543
+  - distribution function of, 538
+  - Kruskal–Wallis test, 543
+  - $p$-value and, 541
+  - probability and, 540, 541
+- Rate of distribution, 592
+- Rayleigh density function, 593
+- Recursive formula, mean control chart and, 561, 562
+- Referents, 345
+- Regression, 365–429
+  - analysis of residuals and assessing models, 395, 396f, 397
+  - coefficient of determination and sample correlation coefficient, 392–395
+  - distribution of least squares estimators, 371–377, 377f
+  - history of, 6
+  - introduction, 365, 366, 366f, 367
+  - least squares estimators of regression parameters, 367–370
+  - logistic regression models for binary output data, 425, 426, 426f, 427–429
+  - multiple linear, 410–424
+    - predicting future responses, 420–424
+  - polynomial, 406–408, 408f, 409, 409f
+  - statistical inferences about regression parameters, 377–382, 382f, 383, 384, 384f, 385, 385f, 386–392
+    - $\alpha$, 386
+    - $\beta$, 377–382, 382f, 383, 384, 384f, 385, 385f, 386
+    - mean response, 386–389
+    - prediction interval of future response, 389–391
+    - summary of distribution results, 392
+  - to mean, 381, 382, 382f, 383, 384, 384f, 385, 385f, 386
+  - transforming to linearity, 396–398, 398f, 399, 399f, 400
+  - use of dummy variables, 424, 425
+  - weighted least squares, 400–404, 404f, 405, 406
+- Regression coefficients, 365, 407
+- Regression fallacy, 386
+- Regression parameters
+  - least squares estimators of, 367–370
+  - prediction interval of future response, 389–391
+  - statistical inferences about, 377, 379, 382f, 384f, 385, 385f, 391, 392
+    - $\alpha$, 386
+    - $\beta$, 377–382, 382f, 383, 384, 384f, 385, 385f, 386
+    - mean response, 386–389
+    - summary of distribution results, 392
+- Rejection, of hypothesis, *see* Hypothesis testing
+- Relative frequency histogram, 16
+- Relative frequency tables and graphs, 14, 15, 15f
+- Residual standard error, 380, 419
+- Residuals, 373–375
+  - analysis of, 395, 396f, 397
+  - in multiple linear regression, 416, 417, 419
+  - standardized, 395, 396f, 397
+- Response variable, 365–367
+  - prediction interval of future response, 389–391
+    - in multiple linear regression, 420–424
+  - variation in, 392–395
+    - with input variable, 400–404, 404f, 405, 406
+- Robustness, of hypothesis test, 318
+- Row factors
+  - hypothesis testing for, 474–479
+  - in two-way analysis of variance, 470
+    - column factor interaction with, 454, 479–487
+    - deviation from grand mean due to, 472
+- Row sum of squares, 476, 477
+- Run, 544
+- Runs test for randomness, 529, 544–547
+
+## S
+- Sample
+  - definition of, 221
+  - populations and, 3
+- Sample $100p$ percentile, 26, 27
+- Sample correlation coefficient, 38–40, 40f, 41–43, 49
+  - association v. causation, 41–43
+  - coefficient of determination and, 392–395
+  - properties of, 39, 40, 42
+- Sample mean, 19–24, 34, 48, 49, 662
+  - central limit theorem for, 227–229
+  - distribution of, with chi-square random variables, 233
+  - for exponential random variables, 230, 230f
+  - for normal population, 231, 232
+  - multiple comparisons of, 466–468
+  - of normal data set, 33
+  - sample variance distribution with, 232–234
+- Sample median, 22–24, 27, 33, 34, 49
+- Sample mode, 23
+- Sample percentiles, 26, 27
+- Sample quartiles, 27–29, 29f
+- Sample size, one-way analysis of variance with unequal sample sizes, 468, 469
+- Sample spaces, 64–66
+  - having equally likely outcomes, 70–75
+- Sample standard deviation, 26, 231
+- Sample variance, 24–26, 48, 230, 231, 662
+  - from normal population, 231
+  - sample mean distribution with, 232–234
+- Sampling, 221
+  - from finite populations, 234–238
+  - from normal populations, 231–234
+    - joint distribution, 232–234
+    - sample mean distribution, 232
+- Scatter diagram, 36–38, 38f, 49, 366, 366f, 370, 382, 382f, 385f, 395, 396f, 397, 407
+- Second quartile, 27–29, 29f
+- Selection, of normal prior, 290–292
+- Sequence of interarrival times, 195
+- Sequential testing, for exponential distribution in life testing, 599, 600, 600f, 601–603
+- Sign test, 529–532, 532f, 533
+  - Bernoulli random variables, 530
+  - binomial random variables, 530
+  - for population median, 531, 532, 532f
+  - one-sided null hypothesis and, 531–533
+  - paired $t$-test v., 531
+- Signed rank test, 529, 533, 534, 534f, 535–538
+  - for distribution function, 533–538
+  - for $p$-value, 535–538
+- Significance level, 306, 307
+- Significance level $\alpha$ test
+  - for hypothesis testing
+    - of mean of normal population, 319, 326
+    - for testing equality of means of two normal populations, 334
+    - in two-way analysis of variance, 477, 486
+    - for determining independence of characteristics of population member, 512–514
+    - in Bernoulli populations, 339–342
+    - of equality of population means, 460, 469
+    - of mean of normal population, 308–311, 315–317, 320, 323, 324
+    - of mean of Poisson distribution, 345, 346
+    - of variance of normal population, 338
+  - for Kolmogorov–Smirnov goodness of fit test, 521
+  - for testing equality of means of two normal populations, 327–330, 333
+  - in two-way analysis of variance, 477, 483–485
+- Simple hypothesis, 306
+- Simple regression equation, 366
+  - assessment of, 395, 396f, 397
+- Simulation
+  - for determination of critical region, 506–508
+  - of single and multidimensional integrals, 261–263
+- Simulation run, 623
+  - in Monte Carlo study, 644, 645
+- Simulation testing, for exponential distribution in life testing, 594–599, 603–605
+- Single integrals, simulation of, 267, 268
+- Skewed data set, 33, 34f
+- Skewed random variables, 152, 153f
+- Standard deviation
+  - definition of, 132
+  - mean control chart and, 563, 564
+  - variance control chart, 564, 565
+- Standard logistic, 210
+- Standard normal distribution, 182, 183, 183f, 187, 188, 188f, 189
+  - central limit theorem and, 228
+  - of mean control chart, 557
+  - $t$-distribution and, 206, 206f, 207, 207f, 208, 208f
+- Standard normal distribution function, 665
+- Standard normal random variable, 232
+  - central limit theorem and, 224, 227, 228
+- Standardized residuals, 395, 396f, 397
+- Stationary increment assumption, 194, 196
+- Statistical analysis, 1
+- Statistical inferences, about regression parameters, 377–382, 382f, 383, 384, 384f, 385, 385f, 386–392
+  - $\alpha$, 386
+  - $\beta$, 377–382, 382f, 383, 384, 384f, 385, 385f, 386
+  - mean response, 386–389
+  - prediction interval of future response, 389–391
+  - summary of distribution results, 392
+- Statistical theory, 1
+- Statistics
+  - application of, 6, 7
+  - definition of, 1, 6, 7, 221
+  - descriptive, 1, 2
+  - history of, 4–7
+  - inferential, 2, 3
+  - introduction to, 1–7
+- Stem and leaf plots, 18, 19
+  - of normal data set, 35
+  - sample mean and, 23
+  - sample median and, 23
+- Subjective interpretation, probability, 63
+- Success, odds for, 426
+- Sum of squares
+  - between samples, 459, 460, 463
+  - column, 477
+  - error, 475, 477
+  - in two-way analysis of variance with interaction, 481–487
+  - row, 476, 477
+  - within samples, 458, 461, 463, 469
+- Sum of squares identity, 460
+- Sum of squares of residuals, 373–375, 416, 417, 419
+- Survival rate, 255, 256
+
+## T
+- $t$-density function, 206, 206f, 207, 263, 263f
+- $t$-distribution, 206, 206f, 207, 207f, 208, 208f, 234
+- T-method, 466–468
+- $t$-random variable, 263
+- $t$-tests, 319–321, 321f, 322–326
+  - one-sided, 323–326
+  - paired, 333–335
+  - two-sided, 321, 321f
+  - use of R in, 322, 325, 330–332
+- Test statistic
+  - for determining independence of characteristics of population member, 512–514
+  - for goodness of fit tests when all parameters are specified, 500–502, 504–507
+  - for goodness of fit tests when some parameters are unspecified, 509, 510
+  - for hypothesis testing
+    - in Bernoulli population, 339
+    - of equality of population means, 459–461
+    - of mean of normal population, 309, 310, 315, 317, 319, 321, 322, 324, 326
+    - of regression parameters, 378
+    - of regression to mean, 383
+    - of variance of normal population, 336, 338
+  - for one-sided hypothesis testing for mean of normal population, 315, 317
+  - for testing equality of means of two normal populations, 328–330, 333–335
+  - for testing independence in contingency tables, 514–516
+  - in two-way analysis of variance, 477
+  - Kolmogorov–Smirnov, 517–519, 519f, 520, 521
+- Test vector, 656
+- Testing, *see* Goodness of fit tests; Hypothesis testing; Life testing
+- Testing set, 660
+- Tests of independence
+  - in contingency tables, 510–514
+  - in contingency tables having fixed marginal totals, 514–517
+- Third quartile, 27–29
+- Threshold model, 428
+- Ties, rank sum test and, 539
+- Total-time-on-test statistic, 596–605, 607
+- Transformation, to linearity, 396–398, 398f, 399, 400
+- Treatment group, 174
+- Tree diagram, random numbers of, 177, 177f
+- Two-sample permutation tests, 637–639
+- Two-sample problem, 529, 538–543
+  - distribution function of, 538
+  - in life testing, 607–609
+  - $p$-value and, 541
+  - probability and, 540, 541
+- Two-sided confidence interval, 258, 261, 267
+  - for normal mean with unknown variance, 266, 267
+  - for unknown probability, 279
+  - of difference in means of two normal distributions, 272–275
+- Two-sided $t$-tests, for mean of normal population with unknown variance, 319–321, 321f
+- Two-way analysis of variance, 454
+  - hypothesis testing for, 474–479
+  - introduction and parameter estimation, 470–473
+  - with interaction, 455, 479–487
+- Type I errors, 306, 307
+- Type II errors, 306, 310–312, 312f, 313
+
+## U
+- Unbalanced case, in one-way analysis of variance, 469
+- Unbiased estimator, 281–287
+- Uniform distribution, estimating mean of, 254, 255
+- Uniform random variables, 171, 172, 172f, 173–179, 661, 665
+  - mean and variance of, 173
+  - probability density function of, 171, 172, 172f
+  - random numbers, 177–179
+- Union
+  - in Venn diagram, 66, 66f, 67, 67f
+  - of sample space, 65
+- Unit normal distribution, *see* Standard normal distribution
+- Unknown mean
+  - confidence intervals for normal mean with unknown variance, 262–268
+  - estimates of, 257–262
+- Unknown parameters, *see* Parameter estimation
+- Unknown probability, confidence interval for, 275–279
+- Unknown variance
+  - confidence intervals for normal mean with, 262–268
+  - hypothesis testing for mean of normal population with, 319–321, 321f, 322–326
+  - testing equality of means of two normal populations with, 328–330, 330f, 331–334
+- Updated probability density function, 287
+- Upper confidence interval
+  - for difference in means of two normal distributions, 265
+  - for normal mean with unknown variance, 265, 266
+  - for unknown mean, 259, 260
+  - for unknown probability, 279
+  - for variance of normal distribution, 271
+- Upper control limits
+  - for exponentially weighted moving-average, 578–580, 580f
+  - for fraction defective, 568, 569
+  - for mean control charts, 557–559
+  - for moving-average, 574, 575, 575f
+  - for number of defects, 569–572
+  - for variance control charts, 565, 566, 566f, 567
+- Use of R, 48–52, 184, 189, 203, 204, 208, 209, 225, 234, 237, 266, 267, 270–275, 322–335, 368–423, 461–478, 504–510, 530, 537, 541, 663, 665
+  - for calculating binomial probabilities, 157, 158
+  - for calculating hypergeometric probabilities, 171
+  - for calculating Poisson probabilities, 166
+  - for computing Gini index, 51, 52
+  - for plotting binomial probabilities, 157
+  - for plotting Poisson mass functions, 166
+  - in $t$-test, 322, 325, 330–332
+
+## V
+- Variance, 128–132, *see also* Analysis of variance; Population variance; Sample variance
+  - confidence intervals for normal mean with, 262–268
+  - covariance, 132, 133
+  - definition of, 128
+  - distribution of, with chi-square random variables, 233
+  - estimators of, 455, 456
+    - for one-way analysis of variance, 454, 456–469
+    - in two-way analysis of variance, 474–477
+    - in two-way analysis of variance with interaction, 479–487
+  - for exponentially weighted moving-average, 577, 578
+  - for moving-average, 574
+  - in response to input variable, 392–395, 400–404, 404f, 405, 406
+  - known
+    - equality of means of two normal populations with, 326–328
+    - hypothesis testing for mean of normal population with, 307–309, 309f, 310–312, 312f, 313–319
+  - of a sum of random variables, 132–137
+  - of chi-square random variable, 205, 233, 455, 456
+  - of hypergeometric random variables, 167–169
+  - of independent random variables, 233
+  - of indicator random variable, 129
+  - of least squares estimators, 371–373, 414–416
+  - of normal distribution, confidence interval for, 269–271
+  - of normal population, hypothesis testing for, 336–338
+  - of normal random variables, 180–182
+  - of random variables, 128–132, 134–137, 173, 180–182, 206, 233, 455, 456
+  - of uniform random variables, 173
+  - permutation tests and, 635
+  - population, 222, 223
+  - sample, 24–26, 230, 231
+  - unknown
+    - equality of means of two normal populations with, 328–330, 330f, 331–333
+    - hypothesis testing for mean of normal population with, 319–321, 321f, 322–326
+    - unknown and equal, testing equality of means of two normal populations with, 333, 334
+- Variance control chart, 564–566, 566f, 567
+- Venn diagram, 66, 66f, 67, 67f, 68–70
+  - probability axioms and, 67–69, 69f, 70
+
+## W
+- Weak law of large numbers, 141
+- Weibull density function, 609, 610f
+- Weibull distribution, in life testing, 609, 610, 610f, 611–613
+- Weighted average, 21, 22
+- Weighted least squares estimators, 400–406
+- Wilcoxon rank sum test, 541
+- Wilcoxon signed rank test, 537, 538
+- Within samples sum of squares, 458, 461, 463, 469
