@@ -633,7 +633,19 @@
     "libuv": 441,
     "v8-heap": 442,
     "worker-threads": 443,
-    "MeToo": 444
+    "MeToo": 444,
+    "define": 445,
+    "include": 446,
+    "if": 447,
+    "endif": 448,
+    "else": 449,
+    "elif": 450,
+    "ifdef": 451,
+    "ifndef": 452,
+    "error": 453,
+    "undef": 454,
+    "line": 455,
+    "pragma": 456
   },
   "_version": 3
 }

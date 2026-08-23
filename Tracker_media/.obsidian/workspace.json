@@ -177,7 +177,10 @@
             "type": "leaf",
             "state": {
               "type": "bookmarks",
-              "state": {},
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
               "icon": "lucide-bookmark",
               "title": "Bookmarks"
             }
@@ -331,7 +334,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -381,18 +386,18 @@
   },
   "active": "f2731d5deb6002bd",
   "lastOpenFiles": [
-    "anime movies/Tonari no Totoro (1988).md",
     "Mobile Game View.base",
     "Game View.base",
-    "Movie View.base",
-    "movies/Gone Girl (2014).md",
-    "movies/लापता लेडीज़ (2024).md",
-    "Home.md",
-    "games/Free Fire (2017).md",
     "Series View.base",
     "Manga View.base",
     "Anime Movie View.base",
     "Anime View.base",
+    "Movie View.base",
+    "anime movies/Tonari no Totoro (1988).md",
+    "movies/Gone Girl (2014).md",
+    "movies/लापता लेडीज़ (2024).md",
+    "Home.md",
+    "games/Free Fire (2017).md",
     "movies/Homebound (2025).md",
     "anime/Overflow (2020).md",
     "anime/Nippon Sangoku - The Three Nations of the Crimson Sun (2026).md",
@@ -416,7 +421,6 @@
     "games/Boom Beach (2014).md",
     "series/Ozark (2017).md",
     "series/Hannibal (2013).md",
-    "series/Narcos (2015).md",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "Business/Journal/Technical/Migrated/assets/why-not-jwt.png",
