@@ -645,7 +645,16 @@
     "error": 453,
     "undef": 454,
     "line": 455,
-    "pragma": 456
+    "pragma": 456,
+    "responsive-chart": 457,
+    "vin": 458,
+    "batteryCapacity": 459,
+    "privateField": 460,
+    "balance": 461,
+    "ssn": 462,
+    "data-table": 463,
+    "dynamic-container": 464,
+    "message-list": 465
   },
   "_version": 3
 }
