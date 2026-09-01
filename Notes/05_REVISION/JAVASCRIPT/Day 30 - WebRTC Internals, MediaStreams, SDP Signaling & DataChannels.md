@@ -1,20 +1,15 @@
+---
 tags:
-
 - javascript
-
 - webrtc
-
 - p2p
-
 - media-streams
-
 - sdp
-
 - data-channel
-
 - networking
-
-- realtime date: 2026-08-30
+- realtime
+date: 2026-08-30
+---
 
 # Day 30 - WebRTC Internals, MediaStreams, SDP Signaling & DataChannels
 
@@ -72,7 +67,7 @@ tags:
 
 #### The 3 Core Pillars of NAT Traversal:
 
-1.  **STUN (Session Traversal Utilities for NAT)**: A lightweight server that reflects the client\'s public IP address and port mapping.
+1.  **STUN (Session Traversal Utilities for NAT)**: A lightweight server that reflects the client's public IP address and port mapping.
 
 2.  **TURN (Traversal Using Relays around NAT)**: A relay fallback server used when direct P2P connection fails (e.g. both peers behind Symmetric NATs). Media packets are relayed through the TURN server.
 
@@ -82,153 +77,118 @@ tags:
 
 The **Session Description Protocol (SDP)** describes media capabilities, codecs (Opus, VP8, VP9, AV1), transport protocols, and encryption parameters (DTLS-SRTP fingerprints).
 
+```javascript
 // Complete Signaling & P2P Setup
-
 const configuration = {
+```
 
-iceServers: \[
+iceServers: [
 
-{ urls: \'stun:stun.l.google.com:19302\' },
+{ urls: 'stun:stun.l.google.com:19302' },
 
+```javascript
 {
+```
 
-urls: \'turn:turn.example.com:3478\',
+urls: 'turn:turn.example.com:3478',
 
-username: \'user123\',
+username: 'user123',
 
-credential: \'secretPassword\',
+credential: 'secretPassword',
 
 },
 
-\],
+],
 
+```javascript
 };
-
 const peerConnection = new RTCPeerConnection(configuration);
-
 // 1. Listen for local ICE candidates and send them to remote peer
+```
 
-peerConnection.onicecandidate = (event) =\> {
+peerConnection.onicecandidate = (event) => {
 
+```javascript
 if (event.candidate) {
-
-signalingChannel.send({ type: \'candidate\', candidate: event.candidate });
-
+signalingChannel.send({ type: 'candidate', candidate: event.candidate });
 }
-
 };
-
 // 2. Sender: Create and set local Offer SDP
-
 async function initiateCall() {
-
 const offer = await peerConnection.createOffer({
+```
 
 offerToReceiveAudio: true,
 
 offerToReceiveVideo: true,
 
+```javascript
 });
-
 await peerConnection.setLocalDescription(offer);
-
-signalingChannel.send({ type: \'offer\', sdp: offer });
-
+signalingChannel.send({ type: 'offer', sdp: offer });
 }
-
 // 3. Receiver: Handle incoming Offer and generate Answer SDP
-
 async function handleRemoteOffer(remoteOffer) {
-
 await peerConnection.setRemoteDescription(new RTCSessionDescription(remoteOffer));
-
 const answer = await peerConnection.createAnswer();
-
 await peerConnection.setLocalDescription(answer);
-
-signalingChannel.send({ type: \'answer\', sdp: answer });
-
+signalingChannel.send({ type: 'answer', sdp: answer });
 }
-
 // 4. Handle incoming Answer on Caller
-
 async function handleRemoteAnswer(remoteAnswer) {
-
 await peerConnection.setRemoteDescription(new RTCSessionDescription(remoteAnswer));
-
 }
-
 // 5. Add incoming ICE candidates as they trickle in
-
 async function handleRemoteCandidate(candidate) {
-
 try {
-
 await peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
-
 } catch (error) {
-
-console.error(\'Error adding received ICE candidate\', error);
-
+console.error('Error adding received ICE candidate', error);
 }
-
 }
+```
 
 ### 3. MediaStreams & Track Manipulation Without Renegotiation
 
 Acquiring local media via getUserMedia and dynamically swapping video sources (e.g. switching between Webcam and Screen Sharing) without triggering an expensive SDP renegotiation:
 
+```javascript
 // Capture Webcam Media
-
 const localStream = await navigator.mediaDevices.getUserMedia({
+```
 
 audio: { echoCancellation: true, noiseSuppression: true },
 
 video: { width: { ideal: 1280 }, height: { ideal: 720 }, frameRate: { max: 30 } },
 
+```javascript
 });
-
 // Add tracks to Peer Connection
-
-localStream.getTracks().forEach((track) =\> {
-
+localStream.getTracks().forEach((track) => {
 peerConnection.addTrack(track, localStream);
-
 });
-
 // Seamless Screen Share Switching via replaceTrack (Zero SDP Renegotiation)
-
 async function switchToScreenShare() {
-
 const screenStream = await navigator.mediaDevices.getDisplayMedia({ video: true });
-
-const newVideoTrack = screenStream.getVideoTracks()\[0\];
-
+const newVideoTrack = screenStream.getVideoTracks()[0];
 // Find the video sender
-
 const videoSender = peerConnection
-
 .getSenders()
-
-.find((sender) =\> sender.track && sender.track.kind === \'video\');
-
+.find((sender) => sender.track && sender.track.kind === 'video');
 if (videoSender) {
-
 await videoSender.replaceTrack(newVideoTrack); // Seamless hardware swap!
-
 }
-
 // Restore webcam when screen share stops
+```
 
-newVideoTrack.onended = async () =\> {
+newVideoTrack.onended = async () => {
 
-const webcamTrack = localStream.getVideoTracks()\[0\];
-
+```javascript
+const webcamTrack = localStream.getVideoTracks()[0];
 if (videoSender) await videoSender.replaceTrack(webcamTrack);
-
 };
-
 }
+```
 
 ### 4. RTCDataChannel: High-Throughput Binary Data & Backpressure
 
@@ -238,83 +198,63 @@ RTCDataChannel runs over **SCTP (Stream Control Transmission Protocol)** encapsu
 
 - **Unreliable & Out-of-Order** (UDP-like behavior): Configurable via maxRetransmits: 0 or ordered: false for multiplayer gaming, live cursor sync, and telemetry.
 
+```javascript
 // Creating a low-latency UDP-like DataChannel for Gaming
-
-const dataChannel = peerConnection.createDataChannel(\'gameSync\', {
+const dataChannel = peerConnection.createDataChannel('gameSync', {
+```
 
 ordered: false, // Disables head-of-line blocking
 
 maxRetransmits: 0, // Never retransmit dropped packets
 
+```javascript
 });
-
-dataChannel.binaryType = \'arraybuffer\';
-
+dataChannel.binaryType = 'arraybuffer';
 // Handling Backpressure in High-Throughput File Streaming
-
-dataChannel.bufferedAmountLowThreshold = 64 \* 1024; // 64 KB low-water mark
-
+dataChannel.bufferedAmountLowThreshold = 64 * 1024; // 64 KB low-water mark
 function sendChunkWithBackpressure(chunk, queue) {
-
-// If buffer is saturated (\> 1 MB), pause transmission until drain
-
-if (dataChannel.bufferedAmount \> 1024 \* 1024) {
-
+// If buffer is saturated (> 1 MB), pause transmission until drain
+if (dataChannel.bufferedAmount > 1024 * 1024) {
 queue.push(chunk);
+```
 
-dataChannel.onbufferedamountlow = () =\> {
+dataChannel.onbufferedamountlow = () => {
 
+```javascript
 dataChannel.onbufferedamountlow = null; // Unbind
-
-while (queue.length \> 0 && dataChannel.bufferedAmount \<= 1024 \* 1024) {
-
+while (queue.length > 0 && dataChannel.bufferedAmount <= 1024 * 1024) {
 dataChannel.send(queue.shift());
-
 }
-
 };
-
 return;
-
 }
-
 dataChannel.send(chunk);
-
 }
+```
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 
 ### WebRTC Connection State Lifecycle:
 
-  -----------------------------------------------------------------------------------------------------------------------------
-  **State Property**      **Key Values**                                             **Meaning**
-  ----------------------- ---------------------------------------------------------- ------------------------------------------
-  signalingState          stable, have-local-offer, have-remote-offer                Tracks local/remote SDP exchange phase
-
-  iceGatheringState       new, gathering, complete                                   STUN/TURN endpoint discovery status
-
-  iceConnectionState      checking, connected, completed, failed, disconnected       Underlying transport connectivity
-
-  connectionState         new, connecting, connected, disconnected, failed, closed   Overall composite peer connection status
-  -----------------------------------------------------------------------------------------------------------------------------
+| **State Property** | **Key Values** | **Meaning** |
+| --- | --- | --- |
+| signalingState | stable, have-local-offer, have-remote-offer | Tracks local/remote SDP exchange phase |
+| iceGatheringState | new, gathering, complete | STUN/TURN endpoint discovery status |
+| iceConnectionState | checking, connected, completed, failed, disconnected | Underlying transport connectivity |
+| connectionState | new, connecting, connected, disconnected, failed, closed | Overall composite peer connection status |
 
 ### RTCDataChannel Configuration Options:
 
+```typescript
 interface RTCDataChannelInit {
-
 ordered?: boolean; // true = in-order delivery; false = out-of-order
-
 maxPacketLifeTime?: number; // Max time in ms before packet expires
-
 maxRetransmits?: number; // Max retransmission attempts before dropping
-
 protocol?: string; // Sub-protocol name
-
 negotiated?: boolean; // true = out-of-band pre-negotiated channel ID
-
 id?: number; // 0-65534 channel ID (used if negotiated: true)
-
 }
+```
 
 ## SECTION 3: PRACTICAL PROBLEMS
 
@@ -322,23 +262,17 @@ id?: number; // 0-65534 channel ID (used if negotiated: true)
 
 Predict the failure in the following code snippet and explain how to fix it:
 
+```javascript
 // Remote ICE candidate arrives before setRemoteDescription completes
-
-signaling.on(\'candidate\', async (candidate) =\> {
-
+signaling.on('candidate', async (candidate) => {
 await peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
-
 });
-
-signaling.on(\'offer\', async (offer) =\> {
-
+signaling.on('offer', async (offer) => {
 // Simulating async delay before setting remote description
-
 await delay(200);
-
 await peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
-
 });
+```
 
 *Problem Statement*: Why does addIceCandidate throw InvalidStateError: Cannot add ICE candidate before remote description is set? How do you implement an asynchronous ICE candidate buffer queue to guarantee zero candidate drops?
 
@@ -348,13 +282,12 @@ await peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
 
 Refactor the following naive audio mute implementation into an energy-efficient pattern that preserves battery and stops microphone hardware access:
 
+```javascript
 // Naive Mute: Zeroes out audio data but keeps hardware recording active!
-
 function naiveMute(audioTrack) {
-
 audioTrack.enabled = false; // Still consumes battery and CPU!
-
 }
+```
 
 *Task*: Refactor this function to completely release the microphone hardware when muted, and cleanly re-acquire and replace the audio track on RTCRtpSender when unmuted without tearing down the peer connection.
 

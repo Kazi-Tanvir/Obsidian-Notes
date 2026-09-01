@@ -1,18 +1,14 @@
+---
 tags:
-
 - backend
-
 - websockets
-
 - sse
-
 - redis
-
 - realtime
-
 - socket-io
-
-- system-design date: 2026-08-17
+- system-design
+date: 2026-08-17
+---
 
 # Day 17 - Real-Time Architecture: WebSockets, Socket.io, SSE & Redis Pub-Sub Scaling
 
@@ -22,19 +18,13 @@ tags:
 
 Choosing the right communication protocol depends on data directionality, binary data needs, and firewall traversal.
 
-  --------------------------------------------------------------------------------------------------------------------------------------------------
-  **Protocol Characteristic**   **Server-Sent Events (SSE)**                             **WebSockets (ws://, wss://)**
-  ----------------------------- -------------------------------------------------------- -----------------------------------------------------------
-  **Directionality**            Unidirectional (Server -\> Client only)                  Full-Duplex (Bidirectional Client \<-\> Server)
-
-  **Transport Protocol**        Standard HTTP/1.1 or HTTP/2                              Upgraded TCP connection (101 Switching Protocols)
-
-  **Data Format**               UTF-8 Text only (text/event-stream)                      Text (UTF-8) and Binary (ArrayBuffer, Blob)
-
-  **Reconnection & IDs**        Built-in native browser auto-reconnect (Last-Event-ID)   Manual application-level heartbeat & reconnection
-
-  **Best Use Cases**            Stock tickers, AI LLM token streaming, notifications     Live chat, multi-player gaming, collaborative whiteboards
-  --------------------------------------------------------------------------------------------------------------------------------------------------
+| **Protocol Characteristic** | **Server-Sent Events (SSE)** | **WebSockets (ws://, wss://)** |
+| --- | --- | --- |
+| **Directionality** | Unidirectional (Server -> Client only) | ull-Duplex (Bidirectional Client <-> Server) |
+| **Transport Protocol** | Standard HTTP/1.1 or HTTP/2 | Upgraded TCP connection (101 Switching Protocols) |
+| **Data Format** | UTF-8 Text only (text/event-stream) | Text (UTF-8) and Binary (ArrayBuffer, Blob) |
+| **Reconnection & IDs** | Built-in native browser auto-reconnect (Last-Event-ID) | Manual application-level heartbeat & reconnection |
+| **Best Use Cases** | Stock tickers, AI LLM token streaming, notifications | Live chat, multi-player gaming, collaborative whiteboards |
 
 ### 2. Scaling WebSockets Horizontally with Redis Pub/Sub
 
@@ -42,7 +32,7 @@ WebSockets establish persistent, stateful TCP sockets tied to a specific server 
 
 #### Multi-Node Cluster Architecture with Redis Adapter:
 
-\[ Client A \] \[ Client B \]
+[ Client A ] [ Client B ]
 
 │ │
 
@@ -56,11 +46,11 @@ WebSockets establish persistent, stateful TCP sockets tied to a specific server 
 
 │ ▲
 
-▼ (PUBLISH \'room:101\') │ (SUBSCRIBE \'room:101\')
+▼ (PUBLISH 'room:101') │ (SUBSCRIBE 'room:101')
 
 ═════════════════════════════════════════
 
-\[ Redis Pub/Sub \]
+[ Redis Pub/Sub ]
 
 ═════════════════════════════════════════
 
@@ -76,59 +66,39 @@ WebSockets establish persistent, stateful TCP sockets tied to a specific server 
 
 Mobile networks and NAT routers silently drop idle TCP sockets without sending FIN packets, creating **Zombie Sockets** that consume server memory and file descriptors.
 
+```typescript
 // Production WebSocket Heartbeat & Dead Socket Termination
-
-import { WebSocketServer, WebSocket } from \'ws\';
-
+import { WebSocketServer, WebSocket } from 'ws';
 interface ExtendedWebSocket extends WebSocket {
-
 isAlive: boolean;
-
 userId?: string;
-
 }
-
 const wss = new WebSocketServer({ port: 8080 });
-
-wss.on(\'connection\', (ws: ExtendedWebSocket) =\> {
-
+wss.on('connection', (ws: ExtendedWebSocket) => {
 ws.isAlive = true;
-
-// Client responds with \'pong\' when pinged
-
-ws.on(\'pong\', () =\> {
-
+// Client responds with 'pong' when pinged
+ws.on('pong', () => {
 ws.isAlive = true;
-
 });
-
 });
-
 // Periodic Heartbeat Interval (Runs every 30 seconds)
+const interval = setInterval(() => {
+```
 
-const interval = setInterval(() =\> {
+wss.clients.forEach((client) => {
 
-wss.clients.forEach((client) =\> {
-
+```javascript
 const ws = client as ExtendedWebSocket;
-
 if (!ws.isAlive) {
-
-console.log(\'\[WebSocket\]: Terminating unresponsive zombie socket.\');
-
+console.log('[WebSocket]: Terminating unresponsive zombie socket.');
 return ws.terminate(); // Force close broken connection
-
 }
-
 ws.isAlive = false;
-
 ws.ping(); // Send ping frame to client
-
 });
-
 }, 30000);
-
-wss.on(\'close\', () =\> clearInterval(interval));
+wss.on('close', () => clearInterval(interval));
+```
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 
@@ -150,27 +120,25 @@ event: price-update
 
 id: 10492
 
-data: {\"symbol\": \"NVDA\", \"price\": 142.50}
+data: {"symbol": "NVDA", "price": 142.50}
 
 ### Socket.io Redis Adapter Setup:
 
-import { Server } from \'socket.io\';
-
-import { createAdapter } from \'@socket.io/redis-adapter\';
-
-import { createClient } from \'redis\';
-
-const pubClient = createClient({ url: \'redis://localhost:6379\' });
-
+```javascript
+import { Server } from 'socket.io';
+import { createAdapter } from '@socket.io/redis-adapter';
+import { createClient } from 'redis';
+const pubClient = createClient({ url: 'redis://localhost:6379' });
 const subClient = pubClient.duplicate();
-
-await Promise.all(\[pubClient.connect(), subClient.connect()\]);
-
+await Promise.all([pubClient.connect(), subClient.connect()]);
 const io = new Server(3000, {
+```
 
 adapter: createAdapter(pubClient, subClient)
 
+```javascript
 });
+```
 
 ## SECTION 3: WEEKLY SYSTEM DESIGN & CODING PROBLEMS
 

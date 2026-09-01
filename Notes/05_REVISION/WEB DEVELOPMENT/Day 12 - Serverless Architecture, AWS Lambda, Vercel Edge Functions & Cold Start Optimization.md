@@ -1,16 +1,13 @@
+---
 tags:
-
 - devops
-
 - serverless
-
 - aws-lambda
-
 - vercel-edge
-
 - cloud-architecture
-
-- performance date: 2026-08-12
+- performance
+date: 2026-08-12
+---
 
 # Day 12 - Serverless Architecture, AWS Lambda, Vercel Edge Functions & Cold Start Optimization
 
@@ -22,19 +19,13 @@ Serverless compute replaces long-running VM instances with event-driven executio
 
 #### Node.js Container Runtimes (e.g. AWS Lambda) vs. V8 Isolates (e.g. Vercel Edge Functions / Cloudflare Workers):
 
-  -------------------------------------------------------------------------------------------------------------------------------------
-  **Dimension**             **AWS Lambda (Node.js Container)**                **Vercel Edge / Cloudflare Workers (V8 Isolates)**
-  ------------------------- ------------------------------------------------- ---------------------------------------------------------
-  **Execution Sandbox**     MicroVM / Container (Firecracker)                 Lightweight V8 Isolate Context
-
-  **Cold Start Duration**   200ms -- 2000ms                                   0ms -- 10ms (Near Zero Cold Start)
-
-  **Memory Allocation**     128MB to 10,240MB                                 Limited (\~128MB)
-
-  **Node.js Native APIs**   Full Node.js ecosystem (fs, child_process, net)   Web Standard APIs (fetch, Request, Response, WebCrypto)
-
-  **Max Execution Time**    15 minutes                                        30 seconds
-  -------------------------------------------------------------------------------------------------------------------------------------
+| **Dimension** | **AWS Lambda (Node.js Container)** | **Vercel Edge / Cloudflare Workers (V8 Isolates)** |
+| --- | --- | --- |
+| **Execution Sandbox** | MicroVM / Container (Firecracker) | Lightweight V8 Isolate Context |
+| **Cold Start Duration** | 200ms -- 2000ms | 0ms -- 10ms (Near Zero Cold Start) |
+| **Memory Allocation** | 128MB to 10,240MB | Limited (~128MB) |
+| **Node.js Native APIs** | Full Node.js ecosystem (fs, child_process, net) | Web Standard APIs (fetch, Request, Response, WebCrypto) |
+| **Max Execution Time** | 15 minutes | 30 seconds |
 
 ### 2. Cold Start Mechanics & Optimization Techniques
 
@@ -58,143 +49,115 @@ A **Cold Start** occurs when an incoming request hits an idle or un-provisioned 
 
 - **HTTP Keep-Alive Reuse**: Enable TCP connection reuse for outgoing HTTP calls.
 
+```javascript
 // lambda-handler.ts - Cold-Start Optimized AWS Lambda Function
-
-import { APIGatewayProxyEvent, APIGatewayProxyResult } from \'aws-lambda\';
-
-import { PrismaClient } from \'@prisma/client\';
-
+import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
+import { PrismaClient } from '@prisma/client';
 // Global Scope Initialization: Persists across warm execution contexts!
-
 const globalForPrisma = global as unknown as { prisma: PrismaClient };
-
-const prisma = globalForPrisma.prisma \|\| new PrismaClient({ log: \[\'error\'\] });
-
-if (process.env.NODE_ENV !== \'production\') globalForPrisma.prisma = prisma;
-
-export const handler = async (event: APIGatewayProxyEvent): Promise\<APIGatewayProxyResult\> =\> {
-
+const prisma = globalForPrisma.prisma || new PrismaClient({ log: ['error'] });
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
+export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
 try {
-
 const userId = event.pathParameters?.id;
-
 if (!userId) {
-
 return {
+```
 
 statusCode: 400,
 
-headers: { \'Content-Type\': \'application/json\' },
+headers: { 'Content-Type': 'application/json' },
 
-body: JSON.stringify({ error: \'Missing user ID\' }),
+body: JSON.stringify({ error: 'Missing user ID' }),
 
+```javascript
 };
-
 }
-
 // Warm execution reuses database connection pool instantly!
-
 const user = await prisma.user.findUnique({ where: { id: userId } });
-
 if (!user) {
-
 return {
+```
 
 statusCode: 404,
 
-headers: { \'Content-Type\': \'application/json\' },
+headers: { 'Content-Type': 'application/json' },
 
-body: JSON.stringify({ error: \'User not found\' }),
+body: JSON.stringify({ error: 'User not found' }),
 
+```javascript
 };
-
 }
-
 return {
+```
 
 statusCode: 200,
 
 headers: {
 
-\'Content-Type\': \'application/json\',
+'Content-Type': 'application/json',
 
-\'Cache-Control\': \'s-maxage=60, stale-while-revalidate\',
+'Cache-Control': 's-maxage=60, stale-while-revalidate',
 
 },
 
 body: JSON.stringify({ success: true, data: user }),
 
+```javascript
 };
-
 } catch (error) {
-
-console.error(\'\[Lambda Exception\]:\', error);
-
+console.error('[Lambda Exception]:', error);
 return {
+```
 
 statusCode: 500,
 
-body: JSON.stringify({ error: \'Internal Server Error\' }),
+body: JSON.stringify({ error: 'Internal Server Error' }),
 
+```javascript
 };
-
 }
-
 };
+```
 
 ### 3. Vercel Edge Middleware Architecture
 
 Edge functions execute at CDN PoPs (Points of Presence) closest to the end user.
 
+```javascript
 // middleware.ts - Vercel Edge Middleware Geolocation Routing
-
-import { NextResponse } from \'next/server\';
-
-import type { NextRequest } from \'next/server\';
-
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 export const config = {
+```
 
-matcher: \'/dashboard/:path\*\',
+matcher: '/dashboard/:path*',
 
-runtime: \'edge\', // Explicit V8 Isolate Runtime
+runtime: 'edge', // Explicit V8 Isolate Runtime
 
+```javascript
 };
-
 export function middleware(request: NextRequest) {
-
-const country = request.geo?.country \|\| \'US\';
-
-const token = request.cookies.get(\'session-token\')?.value;
-
+const country = request.geo?.country || 'US';
+const token = request.cookies.get('session-token')?.value;
 if (!token) {
-
-return NextResponse.redirect(new URL(\'/login\', request.url));
-
+return NextResponse.redirect(new URL('/login', request.url));
 }
-
 const response = NextResponse.next();
-
-response.headers.set(\'x-user-country\', country);
-
+response.headers.set('x-user-country', country);
 return response;
-
 }
+```
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 
-  --------------------------------------------------------------------------------------------------------------------------------------
-  **Runtime / Tool**            **Target Config / Handler**                               **Characteristic / Usage**
-  ----------------------------- --------------------------------------------------------- ----------------------------------------------
-  **AWS Lambda Handler**        export const handler = async (event) =\> {}               Container-based serverless handler
-
-  **Vercel Edge Runtime**       export const config = { runtime: \'edge\' }               V8 Isolate runtime for Next.js routes
-
-  **Prisma Accelerate**         prisma = new PrismaClient().\$extends(withAccelerate())   Serverless connection pooler & cache
-
-  **Provisioned Concurrency**   aws lambda put-provisioned-concurrency-config             Pre-warms instances to eliminate cold starts
-
-  **Edge Middleware**           NextResponse.next() / NextResponse.redirect()             Geo-routing & token guards at CDN edge
-  --------------------------------------------------------------------------------------------------------------------------------------
+| **Runtime / Tool** | **Target Config / Handler** | **Characteristic / Usage** |
+| --- | --- | --- |
+| **AWS Lambda Handler** | export const handler = async (event) => {} | ontainer-based serverless handler |
+| **Vercel Edge Runtime** | export const config = { runtime: 'edge' }               V | Isolate runtime for Next.js routes |
+| **Prisma Accelerate** | prisma = new PrismaClient().$extends(withAccelerate()) | erverless connection pooler & cache |
+| **Provisioned Concurrency** | aws lambda put-provisioned-concurrency-config | Pre-warms instances to eliminate cold starts |
+| **Edge Middleware** | NextResponse.next() / NextResponse.redirect() | Geo-routing & token guards at CDN edge |
 
 ## SECTION 3: WEEKLY SYSTEM DESIGN & CODING PROBLEMS
 

@@ -1,20 +1,15 @@
+---
 tags:
-
 - devops
-
 - ci-cd
-
 - github-actions
-
 - turborepo
-
 - monorepo
-
 - docker
-
 - automation
-
-- cloud date: 2026-08-31
+- cloud
+date: 2026-08-31
+---
 
 # Day 31 - Continuous Integration & Deployment (CI/CD) for Monorepos: GitHub Actions, Turborepo Remote Caching & Docker Pipelines
 
@@ -28,15 +23,15 @@ In a large monorepo with multiple applications (apps/web, apps/api, apps/admin) 
 
 │ │
 
-│ Naive Approach: Build Everything on Every Commit ──► 45 min build time (\$\$\$ CI compute waste) │
+│ Naive Approach: Build Everything on Every Commit ──► 45 min build time ($$$ CI compute waste) │
 
 │ │
 
 │ Optimized Approach: │
 
-│ 1. Affected Package Graph Filtering: turbo run build \--filter=\...\[origin/main\] │
+│ 1. Affected Package Graph Filtering: turbo run build --filter=...[origin/main] │
 
-│ 2. Remote Caching (Turborepo + S3 / Vercel): Replays build outputs if source code hasn\'t changed │
+│ 2. Remote Caching (Turborepo + S3 / Vercel): Replays build outputs if source code hasn't changed │
 
 │ 3. Docker Pruning (turbo prune): Isolates only target app dependencies for minimal container layers │
 
@@ -82,7 +77,7 @@ Turborepo calculates a cryptographic SHA hash of all inputs (source files, depen
 
 ### 3. Production GitHub Actions Matrix Pipeline for Monorepos
 
-\# .github/workflows/ci.yml
+# .github/workflows/ci.yml
 
 name: Monorepo CI/CD Pipeline
 
@@ -90,15 +85,15 @@ on:
 
 push:
 
-branches: \[main\]
+branches: [main]
 
 pull_request:
 
-branches: \[main\]
+branches: [main]
 
 concurrency:
 
-group: \${{ github.workflow }}-\${{ github.ref }}
+group: ${{ github.workflow }}-${{ github.ref }}
 
 cancel-in-progress: true
 
@@ -112,21 +107,21 @@ runs-on: ubuntu-latest
 
 env:
 
-TURBO_TOKEN: \${{ secrets.TURBO_TOKEN }}
+TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
 
-TURBO_TEAM: \${{ vars.TURBO_TEAM }}
+TURBO_TEAM: ${{ vars.TURBO_TEAM }}
 
 steps:
 
-\- name: Checkout Codebase
+- name: Checkout Codebase
 
 uses: actions/checkout@v4
 
 with:
 
-fetch-depth: 2 \# Required for git diff comparisons against previous commit
+fetch-depth: 2 # Required for git diff comparisons against previous commit
 
-\- name: Setup pnpm Package Manager
+- name: Setup pnpm Package Manager
 
 uses: pnpm/action-setup@v3
 
@@ -134,7 +129,7 @@ with:
 
 version: 9
 
-\- name: Setup Node.js Environment
+- name: Setup Node.js Environment
 
 uses: actions/setup-node@v4
 
@@ -142,23 +137,23 @@ with:
 
 node-version: 20
 
-cache: \'pnpm\'
+cache: 'pnpm'
 
-\- name: Install Monorepo Dependencies
+- name: Install Monorepo Dependencies
 
-run: pnpm install \--frozen-lockfile
+run: pnpm install --frozen-lockfile
 
-\- name: Run Quality Checks on Affected Packages Only
+- name: Run Quality Checks on Affected Packages Only
 
-run: pnpm turbo run lint typecheck test \--filter=\...\[origin/main\]
+run: pnpm turbo run lint typecheck test --filter=...[origin/main]
 
 ### 4. Docker Microservice Containerization with turbo prune
 
-A common mistake is copying the entire monorepo into the Docker build context, invalidating Docker layer caches on unrelated package changes. turbo prune \--scope=\<app-name\> \--docker generates an isolated sub-monorepo containing **only** the target app and its transitive workspace dependencies.
+A common mistake is copying the entire monorepo into the Docker build context, invalidating Docker layer caches on unrelated package changes. turbo prune --scope=<app-name> --docker generates an isolated sub-monorepo containing **only** the target app and its transitive workspace dependencies.
 
-\# apps/api/Dockerfile
+# apps/api/Dockerfile
 
-\# Phase 1: Prune monorepo to isolate API dependencies
+# Phase 1: Prune monorepo to isolate API dependencies
 
 FROM node:20-alpine AS pruner
 
@@ -168,9 +163,9 @@ RUN npm install -g turbo
 
 COPY . .
 
-RUN turbo prune \--scope=@repo/api \--docker
+RUN turbo prune --scope=@repo/api --docker
 
-\# Phase 2: Install dependencies with cached pnpm store
+# Phase 2: Install dependencies with cached pnpm store
 
 FROM node:20-alpine AS installer
 
@@ -178,23 +173,23 @@ WORKDIR /app
 
 RUN npm install -g pnpm
 
-\# Copy package.json files from pruner (enables layer caching!)
+# Copy package.json files from pruner (enables layer caching!)
 
-COPY \--from=pruner /app/out/json/ .
+COPY --from=pruner /app/out/json/ .
 
-COPY \--from=pruner /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
+COPY --from=pruner /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
 
-RUN pnpm install \--frozen-lockfile
+RUN pnpm install --frozen-lockfile
 
-\# Copy full source code of pruned packages
+# Copy full source code of pruned packages
 
-COPY \--from=pruner /app/out/full/ .
+COPY --from=pruner /app/out/full/ .
 
-\# Build application
+# Build application
 
-RUN pnpm turbo run build \--filter=@repo/api\...
+RUN pnpm turbo run build --filter=@repo/api...
 
-\# Phase 3: Production Runner (Ultra-lean 90MB Distroless/Alpine image)
+# Phase 3: Production Runner (Ultra-lean 90MB Distroless/Alpine image)
 
 FROM node:20-alpine AS runner
 
@@ -204,35 +199,29 @@ ENV NODE_ENV=production
 
 USER node
 
-COPY \--from=installer \--chown=node:node /app/apps/api/dist ./dist
+COPY --from=installer --chown=node:node /app/apps/api/dist ./dist
 
-COPY \--from=installer \--chown=node:node /app/node_modules ./node_modules
+COPY --from=installer --chown=node:node /app/node_modules ./node_modules
 
 EXPOSE 8080
 
-CMD \[\"node\", \"dist/server.js\"\]
+CMD ["node", "dist/server.js"]
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 
 ### Turborepo Filter Command Reference:
 
-  ---------------------------------------------------------------------------------------------
-  **Filter Flag**                     **Target Scope**
-  ----------------------------------- ---------------------------------------------------------
-  \--filter=@repo/web                 Targets \@repo/web only
-
-  \--filter=@repo/web\...             Targets \@repo/web AND all its internal dependencies
-
-  \--filter=\...@repo/web             Targets \@repo/web AND all packages that depend on it
-
-  \--filter=\...\[origin/main\]       Targets all packages changed in current branch vs. main
-
-  \--filter=!@repo/docs               Explicitly excludes \@repo/docs from the execution
-  ---------------------------------------------------------------------------------------------
+| **Filter Flag** | **Target Scope** |
+| --- | --- |
+| --filter=@repo/web | argets \@repo/web only |
+| --filter=@repo/web...             T | rgets \@repo/web AND all its internal dependencies |
+| --filter=...@repo/web             T | rgets \@repo/web AND all packages that depend on it |
+| --filter=...[origin/main]       Tar | ets all packages changed in current branch vs. main |
+| --filter=!@repo/docs | xplicitly excludes \@repo/docs from the execution |
 
 ### GitHub Actions Layer Caching with Buildx:
 
-\- name: Build and Push Docker Image with GHA Layer Cache
+- name: Build and Push Docker Image with GHA Layer Cache
 
 uses: docker/build-push-action@v5
 
@@ -244,7 +233,7 @@ file: apps/api/Dockerfile
 
 push: true
 
-tags: ghcr.io/my-org/api:\${{ github.sha }}
+tags: ghcr.io/my-org/api:${{ github.sha }}
 
 cache-from: type=gha
 
@@ -268,7 +257,7 @@ Design a high-scale CI/CD and deployment pipeline for a financial trading organi
 
 2.  **Production Release Pipeline**:
 
-    - Zero-Downtime **Canary Rollout** strategy (10% -\> 50% -\> 100%) on Kubernetes with automated Prometheus metrics verification (p99 latency \$\< 150\\text{ms}\$, HTTP 5xx error rate \$\< 0.1%\$).
+    - Zero-Downtime **Canary Rollout** strategy (10% -> 50% -> 100%) on Kubernetes with automated Prometheus metrics verification (p99 latency $< 150\text{ms}$, HTTP 5xx error rate $< 0.1%$).
 
     - Automated rollback trigger if error budget thresholds are breached.
 

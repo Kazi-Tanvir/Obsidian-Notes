@@ -1,16 +1,13 @@
+---
 tags:
-
 - devops
-
 - monorepo
-
 - turborepo
-
 - pnpm
-
 - build-system
-
-- architecture date: 2026-08-10
+- architecture
+date: 2026-08-10
+---
 
 # Day 10 - Monorepos with Turborepo, Workspace Package Management & Build Caching
 
@@ -24,63 +21,64 @@ A **Monorepo** consolidates multiple applications (e.g. Next.js Web App, Next.js
 
 - **Hard Links & Symlinks**: pnpm uses a global content-addressable store and symlinks node_modules, saving gigabytes of disk space and preventing duplicate dependencies.
 
-- **Workspace Protocol (workspace:\*)**: Ensures internal packages (@repo/ui, \@repo/database) reference local workspace source code directly without npm registry publishes.
+- **Workspace Protocol (workspace:*)**: Ensures internal packages (@repo/ui, \@repo/database) reference local workspace source code directly without npm registry publishes.
 
-\# pnpm-workspace.yaml
+# pnpm-workspace.yaml
 
 packages:
 
-\- \'apps/\*\'
+- 'apps/*'
 
-\- \'packages/\*\'
+- 'packages/*'
 
 ### 2. Turborepo Task Pipeline (turbo.json)
 
 Turborepo is a high-performance build system for JavaScript/TypeScript monorepos. It creates an internal **Directed Acyclic Graph (DAG)** of tasks and caches outputs (build artifacts, dist folders) based on source file hashes.
 
+```javascript
 // turbo.json
-
 {
+```
 
-\"\$schema\": \"https://turbo.build/schema.json\",
+"$schema": "https://turbo.build/schema.json",
 
-\"globalEnv\": \[\"NODE_ENV\", \"DATABASE_URL\"\],
+"globalEnv": ["NODE_ENV", "DATABASE_URL"],
 
-\"tasks\": {
+"tasks": {
 
-\"build\": {
+"build": {
 
-\"dependsOn\": \[\"\^build\"\], // Build dependencies in packages/ before building apps/
+"dependsOn": ["\^build"], // Build dependencies in packages/ before building apps/
 
-\"inputs\": \[\"\$TURBO_DEFAULT\$\", \".env\*\"\],
+"inputs": ["$TURBO_DEFAULT$", ".env*"],
 
-\"outputs\": \[\".next/\*\*\", \"!-next/cache/\*\*\", \"dist/\*\*\"\]
-
-},
-
-\"lint\": {
-
-\"dependsOn\": \[\]
+"outputs": [".next/**", "!-next/cache/**", "dist/**"]
 
 },
 
-\"dev\": {
+"lint": {
 
-\"cache\": false, // Disable caching for persistent dev servers
+"dependsOn": []
 
-\"persistent\": true
+},
 
+"dev": {
+
+"cache": false, // Disable caching for persistent dev servers
+
+"persistent": true
+
+```javascript
 }
-
 }
-
 }
+```
 
 ### 3. Remote Caching & CI/CD Optimization
 
 Turborepo calculates a hash for each task input (source code + dependencies + env variables + turbo.json).
 
-- **Local Cache**: Saved in node_modules/.cache/turbo. If files haven\'t changed, turbo run build completes in milliseconds (**FULL TURBO**).
+- **Local Cache**: Saved in node_modules/.cache/turbo. If files haven't changed, turbo run build completes in milliseconds (**FULL TURBO**).
 
 - **Remote Cache**: Shares build artifacts across team members and CI/CD pipelines (Vercel / S3 custom cache server).
 
@@ -88,19 +86,13 @@ Turborepo calculates a hash for each task input (source code + dependencies + en
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 
-  -----------------------------------------------------------------------------------------------------------------------
-  **CLI / Configuration**   **Command / File**                   **Purpose**
-  ------------------------- ------------------------------------ --------------------------------------------------------
-  **pnpm-workspace.yaml**   Root configuration file              Defines workspace directories (apps/\*, packages/\*)
-
-  **Workspace Protocol**    \"@repo/ui\": \"workspace:\*\"       Adds internal package dependency in package.json
-
-  **Run Monorepo Task**     pnpm turbo run build                 Executes pipeline graph concurrently across workspaces
-
-  **Filter Execution**      pnpm turbo run build \--filter=web   Runs build target strictly for web app
-
-  **Docker Prune**          npx turbo prune \--scope=web         Creates isolated sparse build tree in out/
-  -----------------------------------------------------------------------------------------------------------------------
+| **CLI / Configuration** | **Command / File** | **Purpose** |
+| --- | --- | --- |
+| **pnpm-workspace.yaml** | Root configuration file | Defines workspace directories (apps/*, packages/*) |
+| **Workspace Protocol** | "@repo/ui": "workspace:*"       Adds | internal package dependency in package.json |
+| **Run Monorepo Task** | pnpm turbo run build | Executes pipeline graph concurrently across workspaces |
+| **Filter Execution** | pnpm turbo run build --filter=web | uns build target strictly for web app |
+| **Docker Prune** | npx turbo prune --scope=web | reates isolated sparse build tree in out/ |
 
 ## SECTION 3: WEEKLY SYSTEM DESIGN & CODING PROBLEMS
 
@@ -122,10 +114,10 @@ Set up a shared database package \@repo/db in a pnpm + Turborepo monorepo.
 
 **Requirements**:
 
-1.  Create packages/db/package.json with workspace protocol exports (exports: { \".\": \"./src/index.ts\" }).
+1.  Create packages/db/package.json with workspace protocol exports (exports: { ".": "./src/index.ts" }).
 
 2.  Implement packages/db/src/index.ts exporting a singleton Prisma Client instance (prisma).
 
-3.  Configure apps/web/package.json to depend on \"@repo/db\": \"workspace:\*\" and import prisma directly inside a Next.js Server Component page (apps/web/app/users/page.tsx).
+3.  Configure apps/web/package.json to depend on "@repo/db": "workspace:*" and import prisma directly inside a Next.js Server Component page (apps/web/app/users/page.tsx).
 
 4.  Ensure pnpm turbo run build executes prisma generate in \@repo/db before building apps/web.

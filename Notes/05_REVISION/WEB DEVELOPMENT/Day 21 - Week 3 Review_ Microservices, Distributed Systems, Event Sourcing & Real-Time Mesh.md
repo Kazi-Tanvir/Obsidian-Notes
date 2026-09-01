@@ -1,20 +1,15 @@
+---
 tags:
-
 - backend
-
 - microservices
-
 - system-design
-
 - distributed-systems
-
 - event-sourcing
-
 - grpc
-
 - websockets
-
-- architecture date: 2026-08-21
+- architecture
+date: 2026-08-21
+---
 
 # Day 21 - Week 3 Review: Microservices, Distributed Systems, Event Sourcing & Real-Time Mesh
 
@@ -100,13 +95,13 @@ Week 3 bridged advanced inter-service transport, distributed data patterns, and 
 
 - **gRPC / Protocol Buffers**: Compact binary packing over HTTP/2 multiplexed streams; ideal for high-throughput, low-latency microservice meshes with strict deadlining.
 
-- **GraphQL & DataLoader**: Flexible client-driven data graphs with microtask batching and request-scoped memoization to eliminate \$N+1\$ database calls.
+- **GraphQL & DataLoader**: Flexible client-driven data graphs with microtask batching and request-scoped memoization to eliminate $N+1$ database calls.
 
 #### 2. Edge Ingress, Gateway Aggregation & Fault Tolerance
 
 - **Distributed Rate Limiting**: Sliding Window Counter algorithms via Redis Lua scripts to prevent noisy-neighbor API abuse.
 
-- **Circuit Breaker State Machine**: CLOSED -\> OPEN (fail-fast fallback) -\> HALF-OPEN (canary recovery testing) to halt cascading system failure.
+- **Circuit Breaker State Machine**: CLOSED -> OPEN (fail-fast fallback) -> HALF-OPEN (canary recovery testing) to halt cascading system failure.
 
 #### 3. Real-Time Networking at Scale
 
@@ -130,19 +125,13 @@ Week 3 bridged advanced inter-service transport, distributed data patterns, and 
 
 ### Distributed Systems Patterns Comparison Matrix:
 
-  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  **Pattern / Technology**   **Primary Use Case**                    **Key Invariant / Guarantee**                 **Fallback / Mitigation**
-  -------------------------- --------------------------------------- --------------------------------------------- -----------------------------------------------------
-  **gRPC / Protobuf**        Inter-service East-West communication   Strictly typed schema, binary performance     Deadlines / Timeouts on all RPCs
-
-  **DataLoader**             GraphQL nested field resolution         Batches \$N\$ queries into 1 SQL statement    Request-scoped lifecycle (no cross-user cache leak)
-
-  **Circuit Breaker**        Downstream dependency protection        Fails fast when error threshold exceeded      Returns cached data or degraded response
-
-  **Transactional Outbox**   Eliminating Dual-Write bug              Atomicity between DB state and Kafka event    Debezium CDC ensures at-least-once delivery
-
-  **Saga Orchestrator**      Multi-service business transactions     Backward compensating transaction rollbacks   Forward idempotent retries + Dead-Letter Queues
-  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| **Pattern / Technology** | **Primary Use Case** | **Key Invariant / Guarantee** | **Fallback / Mitigation** |
+| --- | --- | --- | --- |
+| **gRPC / Protobuf** | Inter-service East-West communication | Strictly typed schema, binary performance | Deadlines / Timeouts on all RPCs |
+| **DataLoader** | GraphQL nested field resolution | Batches $N$ queries into 1 SQL statement    R | quest-scoped lifecycle (no cross-user cache leak) |
+| **Circuit Breaker** | Downstream dependency protection | Fails fast when error threshold exceeded | Returns cached data or degraded response |
+| **Transactional Outbox** | Eliminating Dual-Write bug | Atomicity between DB state and Kafka event | Debezium CDC ensures at-least-once delivery |
+| **Saga Orchestrator** | Multi-service business transactions | Backward compensating transaction rollbacks | Forward idempotent retries + Dead-Letter Queues |
 
 ## SECTION 3: WEEKLY SYSTEM DESIGN & CODING PROBLEMS
 
@@ -168,9 +157,9 @@ Build a production-grade **Resilient Microservice Gateway & Outbox Dispatcher** 
 
 **Requirements**:
 
-1.  Implement a CircuitBreaker\<T\> class with configurable failure thresholds (e.g. 5 failures in 10s), timeout resets (5s), and state transitions (CLOSED, OPEN, HALF-OPEN).
+1.  Implement a CircuitBreaker<T> class with configurable failure thresholds (e.g. 5 failures in 10s), timeout resets (5s), and state transitions (CLOSED, OPEN, HALF-OPEN).
 
-2.  Build an API Gateway route handler that routes requests to a mock downstream gRPC microservice wrapped in the Circuit Breaker with a strict \$200\\text{ms}\$ deadline timeout.
+2.  Build an API Gateway route handler that routes requests to a mock downstream gRPC microservice wrapped in the Circuit Breaker with a strict $200\text{ms}$ deadline timeout.
 
 3.  If the downstream call succeeds:
 

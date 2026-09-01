@@ -1,20 +1,15 @@
+---
 tags:
-
 - javascript
-
 - metaprogramming
-
 - webassembly
-
 - streams
-
 - ast
-
 - atomics
-
 - performance
-
-- v8 date: 2026-08-21
+- v8
+date: 2026-08-21
+---
 
 # Day 21 - Week 3 Review: Metaprogramming, WebAssembly, Compilers & High-Performance Streams
 
@@ -82,9 +77,9 @@ Week 3 explored advanced engine-level JavaScript capabilities, bridging high-lev
 
 #### Pillar D: Compilers, ASTs & Transpilation Pipelines
 
-- **The 3 Stages**: Tokenization & Parsing -\> AST Transformation (Visitor Pattern) -\> Code Generation & Source Maps.
+- **The 3 Stages**: Tokenization & Parsing -> AST Transformation (Visitor Pattern) -> Code Generation & Source Maps.
 
-- **Native Tooling**: Why SWC (Rust) and ESBuild (Go) outperform single-threaded JS parsers by \$20\\times\\text{\--}100\\times\$.
+- **Native Tooling**: Why SWC (Rust) and ESBuild (Go) outperform single-threaded JS parsers by $20\times\text{--}100\times$.
 
 #### Pillar E: Web Streams API & Backpressure Flow Control
 
@@ -96,21 +91,14 @@ Week 3 explored advanced engine-level JavaScript capabilities, bridging high-lev
 
 ### Unified Quick Reference:
 
-  ----------------------------------------------------------------------------------------------------------------------------------------------------
-  **Feature / API**       **Primary Method / Interface**                **Key Mechanics & Pitfalls**
-  ----------------------- --------------------------------------------- ------------------------------------------------------------------------------
-  **Atomics**             Atomics.wait(i32, idx, val, timeout)          Can ONLY be called on Worker threads; blocks thread without CPU spin.
-
-  **Atomics**             Atomics.compareExchange(i32, idx, exp, val)   Atomic CAS operation returning old value.
-
-  **Wasm Memory**         memory.grow(numPages)                         **Detaches old ArrayBuffer!** Must re-create all TypedArray views.
-
-  **Babel AST**           path.replaceWith(newNode)                     Replaces current AST node and updates parent scope bindings.
-
-  **Web Streams**         controller.desiredSize                        \$\>0\$ indicates capacity to enqueue; \$\\le 0\$ requires pausing producer.
-
-  **Symbols**             \[Symbol.toPrimitive\](hint)                  hint is \"number\", \"string\", or \"default\".
-  ----------------------------------------------------------------------------------------------------------------------------------------------------
+| **Feature / API** | **Primary Method / Interface** | **Key Mechanics & Pitfalls** |
+| --- | --- | --- |
+| **Atomics** | Atomics.wait(i32, idx, val, timeout) | Can ONLY be called on Worker threads; blocks thread without CPU spin. |
+| **Atomics** | Atomics.compareExchange(i32, idx, exp, val) | Atomic CAS operation returning old value. |
+| **Wasm Memory** | memory.grow(numPages) | **Detaches old ArrayBuffer!** Must re-create all TypedArray views. |
+| **Babel AST** | path.replaceWith(newNode) | Replaces current AST node and updates parent scope bindings. |
+| **Web Streams** | controller.desiredSize | $>0$ indicates capacity to enqueue; $\le 0$ requires pausing producer. |
+| **Symbols** | [Symbol.toPrimitive](hint)                  h | nt is "number", "string", or "default". |
 
 ## SECTION 3: PRACTICAL PROBLEMS
 
@@ -118,19 +106,15 @@ Week 3 explored advanced engine-level JavaScript capabilities, bridging high-lev
 
 Analyze the following multi-threaded snippet. Predict the exact execution output and explain what occurs when Worker 2 attempts to read from a stale TypedArray view after memory.grow().
 
+```javascript
 const memory = new WebAssembly.Memory({ initial: 1, maximum: 5, shared: true });
-
 const u32 = new Int32Array(memory.buffer);
-
 Atomics.store(u32, 0, 100);
-
 // Thread B grows shared memory
-
 memory.grow(1);
-
 // Thread A tries to atomic-load from old u32 view:
-
 console.log(Atomics.load(u32, 0)); // What happens here?
+```
 
 *Hint*: Examine whether SharedArrayBuffers detach on grow() or if TypedArray buffer references remain valid in shared memory contexts.
 
@@ -138,25 +122,25 @@ console.log(Atomics.load(u32, 0)); // What happens here?
 
 Write a Babel plugin instrumentStreamBackpressurePlugin in TypeScript that:
 
-1.  Detects all instances of controller.enqueue(chunk) inside new ReadableStream({ \... }) calls.
+1.  Detects all instances of controller.enqueue(chunk) inside new ReadableStream({ ... }) calls.
 
 2.  Injects a backpressure check before enqueue:
 
-> if (controller.desiredSize \<= 0) {
+> if (controller.desiredSize <= 0) {
 >
-> console.warn(\"\[Backpressure Warning\]: Enqueueing into full stream queue!\");
+> console.warn("[Backpressure Warning]: Enqueueing into full stream queue!");
 >
 > }
 
 3.  Preserves all surrounding scope variables and AST line numbers.
 
-*Hint*: Match path.isCallExpression() where callee.object.name === \'controller\' and callee.property.name === \'enqueue\'.
+*Hint*: Match path.isCallExpression() where callee.object.name === 'controller' and callee.property.name === 'enqueue'.
 
 ### Challenge 3: Advanced High-Performance Hybrid Processing Engine
 
 Build a complete **Hybrid Stream Processing Engine** in TypeScript:
 
-1.  Accepts a ReadableStream\<Uint8Array\> representing a large binary data stream.
+1.  Accepts a ReadableStream<Uint8Array> representing a large binary data stream.
 
 2.  Pipes chunks into a custom TransformStream that writes bytes into a pre-allocated WebAssembly.Memory buffer.
 

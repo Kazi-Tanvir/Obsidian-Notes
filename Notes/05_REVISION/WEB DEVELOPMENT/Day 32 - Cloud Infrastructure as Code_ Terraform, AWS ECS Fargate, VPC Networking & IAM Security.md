@@ -1,20 +1,15 @@
+---
 tags:
-
 - devops
-
 - terraform
-
 - aws
-
 - ecs-fargate
-
 - vpc
-
 - cloud-infrastructure
-
 - security
-
-- backend date: 2026-09-01
+- backend
+date: 2026-09-01
+---
 
 # Day 32 - Cloud Infrastructure as Code: Terraform, AWS ECS Fargate, VPC Networking & IAM Security
 
@@ -26,7 +21,7 @@ Managing cloud infrastructure through manual web consoles leads to configuration
 
 **Terraform (HashiCorp HCL)** is a declarative Infrastructure as Code tool that provisions and manages multi-cloud resources.
 
-- **Declarative vs. Imperative**: You define the desired end state (resource \"aws_ecs_service\"), and Terraform calculates the delta dependency graph required to reach that state.
+- **Declarative vs. Imperative**: You define the desired end state (resource "aws_ecs_service"), and Terraform calculates the delta dependency graph required to reach that state.
 
 - **State File Management (terraform.tfstate)**: Acts as the single source of truth mapping declared configuration to actual cloud resource IDs. In production, the state file **must** be stored remotely in **AWS S3 with server-side encryption and DynamoDB state locking** to prevent race condition corruptions during team executions.
 
@@ -52,7 +47,7 @@ Managing cloud infrastructure through manual web consoles leads to configuration
 
 │ │ └──────────────────────────────┬───────────────────────────┘ └────────────────────────────────┘ │ │
 
-│ │ │ Route Table: 0.0.0.0/0 -\> NAT GW │ │
+│ │ │ Route Table: 0.0.0.0/0 -> NAT GW │ │
 
 │ │ ┌──────────────────────────────▼───────────────────────────┐ ┌────────────────────────────────┐ │ │
 
@@ -90,99 +85,107 @@ A critical security distinction in ECS:
 
 2.  **ECS Task Role (task_role_arn)**: Used by your running application container code at runtime (e.g. Node.js code accessing AWS S3 buckets or DynamoDB tables via AWS SDK).
 
-\# ECS Task Definition with Secrets Manager Integration
+# ECS Task Definition with Secrets Manager Integration
 
-resource \"aws_ecs_task_definition\" \"api\" {
+resource "aws_ecs_task_definition" "api" {
 
-family = \"production-api\"
+family = "production-api"
 
-network_mode = \"awsvpc\"
+network_mode = "awsvpc"
 
-requires_compatibilities = \[\"FARGATE\"\]
+requires_compatibilities = ["FARGATE"]
 
-cpu = \"1024\" \# 1 vCPU
+cpu = "1024" # 1 vCPU
 
-memory = \"2048\" \# 2 GB RAM
+memory = "2048" # 2 GB RAM
 
 execution_role_arn = aws_iam_role.ecs_execution_role.arn
 
 task_role_arn = aws_iam_role.ecs_task_role.arn
 
-container_definitions = jsonencode(\[
+container_definitions = jsonencode([
 
+```javascript
 {
+```
 
-name = \"api-service\"
+name = "api-service"
 
-image = \"\${aws_ecr_repository.api.repository_url}:latest\"
+image = "${aws_ecr_repository.api.repository_url}:latest"
 
 essential = true
 
-portMappings = \[
+portMappings = [
 
+```javascript
 {
+```
 
 containerPort = 8080
 
 hostPort = 8080
 
-protocol = \"tcp\"
+protocol = "tcp"
 
+```javascript
 }
+]
+```
 
-\]
+secrets = [
 
-secrets = \[
-
+```javascript
 {
+```
 
-name = \"DATABASE_URL\"
+name = "DATABASE_URL"
 
-valueFrom = \"\${aws_secretsmanager_secret.db_secret.arn}:DATABASE_URL::\"
+valueFrom = "${aws_secretsmanager_secret.db_secret.arn}:DATABASE_URL::"
 
 },
 
+```javascript
 {
+```
 
-name = \"JWT_SECRET\"
+name = "JWT_SECRET"
 
-valueFrom = \"\${aws_secretsmanager_secret.jwt_secret.arn}:JWT_SECRET::\"
+valueFrom = "${aws_secretsmanager_secret.jwt_secret.arn}:JWT_SECRET::"
 
+```javascript
 }
-
-\]
+]
+```
 
 logConfiguration = {
 
-logDriver = \"awslogs\"
+logDriver = "awslogs"
 
 options = {
 
-\"awslogs-group\" = \"/ecs/production-api\"
+"awslogs-group" = "/ecs/production-api"
 
-\"awslogs-region\" = \"us-east-1\"
+"awslogs-region" = "us-east-1"
 
-\"awslogs-stream-prefix\" = \"ecs\"
+"awslogs-stream-prefix" = "ecs"
 
+```javascript
 }
-
 }
-
 }
-
-\])
-
+])
 }
+```
 
 ### 3. Application Load Balancer & Auto-Scaling Policies
 
 Configuring target tracking auto-scaling based on CPU utilization and incoming HTTP request counts per target:
 
-\# ECS Service with Fargate Launch Type
+# ECS Service with Fargate Launch Type
 
-resource \"aws_ecs_service\" \"api\" {
+resource "aws_ecs_service" "api" {
 
-name = \"api-service\"
+name = "api-service"
 
 cluster = aws_ecs_cluster.main.id
 
@@ -190,37 +193,40 @@ task_definition = aws_ecs_task_definition.api.arn
 
 desired_count = 3
 
-launch_type = \"FARGATE\"
+launch_type = "FARGATE"
 
 network_configuration {
 
-subnets = aws_subnet.private_app\[\*\].id
+subnets = aws_subnet.private_app[*].id
 
-security_groups = \[aws_security_group.ecs_tasks.id\]
+security_groups = [aws_security_group.ecs_tasks.id]
 
 assign_public_ip = false
 
+```javascript
 }
+```
 
 load_balancer {
 
 target_group_arn = aws_lb_target_group.api.arn
 
-container_name = \"api-service\"
+container_name = "api-service"
 
 container_port = 8080
 
+```javascript
 }
-
 }
+```
 
-\# Auto-Scaling Target Tracking Policy (Maintains \~70% CPU)
+# Auto-Scaling Target Tracking Policy (Maintains ~70% CPU)
 
-resource \"aws_appautoscaling_policy\" \"ecs_cpu\" {
+resource "aws_appautoscaling_policy" "ecs_cpu" {
 
-name = \"ecs-cpu-target-tracking\"
+name = "ecs-cpu-target-tracking"
 
-policy_type = \"TargetTrackingScaling\"
+policy_type = "TargetTrackingScaling"
 
 resource_id = aws_appautoscaling_target.ecs_target.resource_id
 
@@ -232,9 +238,11 @@ target_tracking_scaling_policy_configuration {
 
 predefined_metric_specification {
 
-predefined_metric_type = \"ECSServiceAverageCPUUtilization\"
+predefined_metric_type = "ECSServiceAverageCPUUtilization"
 
+```javascript
 }
+```
 
 target_value = 70.0
 
@@ -242,27 +250,22 @@ scale_in_cooldown = 300
 
 scale_out_cooldown = 60
 
+```javascript
 }
-
 }
+```
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 
 ### Terraform CLI Commands Reference:
 
-  ----------------------------------------------------------------------------------------------------
-  **Command**                           **Action**
-  ------------------------------------- --------------------------------------------------------------
-  terraform init -backend-config=\...   Initializes provider plugins and remote S3 backend
-
-  terraform plan -out=tfplan            Generates speculative execution plan delta
-
-  terraform apply \"tfplan\"            Applies exact pre-calculated infrastructure changes
-
-  terraform destroy                     Tears down all resources managed by state file
-
-  terraform state rm \<resource\>       Untracks resource from state without deleting cloud resource
-  ----------------------------------------------------------------------------------------------------
+| **Command** | **Action** |
+| --- | --- |
+| terraform init -backend-config=... | nitializes provider plugins and remote S3 backend |
+| terraform plan -out=tfplan | Generates speculative execution plan delta |
+| terraform apply "tfplan"            A | plies exact pre-calculated infrastructure changes |
+| terraform destroy | Tears down all resources managed by state file |
+| terraform state rm <resource>       U | tracks resource from state without deleting cloud resource |
 
 ### Security Group Ingress / Egress Rule Matrix:
 
@@ -326,4 +329,4 @@ Write a modular, production-ready **Terraform Module for an ECS Fargate Service*
 
 3.  **Security Module (modules/security-groups)**:
 
-    - Strict least-privilege security group rules (ALB -\> ECS Tasks -\> RDS Database) with zero open public database ports.
+    - Strict least-privilege security group rules (ALB -> ECS Tasks -> RDS Database) with zero open public database ports.

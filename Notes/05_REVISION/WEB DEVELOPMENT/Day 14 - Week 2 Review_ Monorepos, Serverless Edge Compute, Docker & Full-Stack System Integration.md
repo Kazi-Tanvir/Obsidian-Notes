@@ -1,16 +1,13 @@
+---
 tags:
-
 - devops
-
 - system-design
-
 - monorepo
-
 - serverless
-
 - docker
-
-- cloud-architecture date: 2026-08-14
+- cloud-architecture
+date: 2026-08-14
+---
 
 # Day 14 - Week 2 Review: Monorepos, Serverless Edge Compute, Docker & Full-Stack System Integration
 
@@ -20,13 +17,13 @@ tags:
 
 Modern enterprise web architectures integrate heterogeneous compute environments to balance execution latency, cold-start characteristics, compute cost, and development ergonomics.
 
-\[Client / Mobile App\]
+[Client / Mobile App]
 
 │
 
 ▼
 
-\[CDN & Edge Layer\] ── (Vercel Edge / Cloudflare Workers: Auth, Geo-Routing, A/B Flags)
+[CDN & Edge Layer] ── (Vercel Edge / Cloudflare Workers: Auth, Geo-Routing, A/B Flags)
 
 │
 
@@ -34,25 +31,25 @@ Modern enterprise web architectures integrate heterogeneous compute environments
 
 ▼
 
-\[Reverse Proxy / API Gateway\] ── (Nginx / Envoy / Traefik: SSL Termination, Rate Limiting)
+[Reverse Proxy / API Gateway] ── (Nginx / Envoy / Traefik: SSL Termination, Rate Limiting)
 
 │
 
-├──► \[Serverless Compute\] (AWS Lambda: Spike Traffic, Async Jobs, PDF Generation)
+├──► [Serverless Compute] (AWS Lambda: Spike Traffic, Async Jobs, PDF Generation)
 
 ▼
 
-\[Containerized Microservices Cluster\] (Docker Compose / ECS / Kubernetes: Fastify, Express)
+[Containerized Microservices Cluster] (Docker Compose / ECS / Kubernetes: Fastify, Express)
 
 │
 
-├──► \[Distributed Cache\] (Redis: Session Store, Token Bucket Rate Limiting, Pub/Sub)
+├──► [Distributed Cache] (Redis: Session Store, Token Bucket Rate Limiting, Pub/Sub)
 
-├──► \[Primary Data Stores\] (PostgreSQL + Prisma, MongoDB + Mongoose)
+├──► [Primary Data Stores] (PostgreSQL + Prisma, MongoDB + Mongoose)
 
 ▼
 
-\[Event Broker\] (Apache Kafka / RabbitMQ: Transactional Outbox, Order Event Processing)
+[Event Broker] (Apache Kafka / RabbitMQ: Transactional Outbox, Order Event Processing)
 
 ### 2. High-Availability & Production Reliability Patterns
 
@@ -70,83 +67,53 @@ When containers receive SIGTERM, they must stop accepting new HTTP requests, com
 
 Propagate W3C Trace Context headers (traceparent, tracestate) across HTTP, gRPC, and Kafka messages to correlate distributed logs across microservice boundaries.
 
+```typescript
 // Production Graceful Shutdown Implementation Pattern
-
-import http from \'http\';
-
-import { PrismaClient } from \'@prisma/client\';
-
-import Redis from \'ioredis\';
-
+import http from 'http';
+import { PrismaClient } from '@prisma/client';
+import Redis from 'ioredis';
 const prisma = new PrismaClient();
-
-const redis = new Redis(process.env.REDIS_URL \|\| \'redis://localhost:6379\');
-
-const server = http.createServer((req, res) =\> res.end(\'OK\'));
-
+const redis = new Redis(process.env.REDIS_URL || 'redis://localhost:6379');
+const server = http.createServer((req, res) => res.end('OK'));
 async function handleShutdown(signal: string) {
-
-console.log(\`\[Shutdown\]: Received \${signal}. Draining connections\...\`);
-
+console.log(`[Shutdown]: Received ${signal}. Draining connections...`);
 // 1. Stop accepting new HTTP requests
-
-server.close(async () =\> {
-
-console.log(\'\[Shutdown\]: HTTP server closed.\');
-
+server.close(async () => {
+console.log('[Shutdown]: HTTP server closed.');
 try {
-
 // 2. Disconnect database connection pools & caches
-
-await prisma.\$disconnect();
-
+await prisma.$disconnect();
 await redis.quit();
-
-console.log(\'\[Shutdown\]: Database & Redis connections released cleanly.\');
-
+console.log('[Shutdown]: Database & Redis connections released cleanly.');
 process.exit(0);
-
 } catch (err) {
-
-console.error(\'\[Shutdown Error\]:\', err);
-
+console.error('[Shutdown Error]:', err);
 process.exit(1);
-
 }
-
 });
-
 // 3. Force exit if shutdown hangs beyond 10 seconds
+```
 
-setTimeout(() =\> {
+setTimeout(() => {
 
-console.error(\'\[Shutdown Timeout\]: Forcing termination.\');
-
+```javascript
+console.error('[Shutdown Timeout]: Forcing termination.');
 process.exit(1);
-
 }, 10000);
-
 }
-
-process.on(\'SIGTERM\', () =\> handleShutdown(\'SIGTERM\'));
-
-process.on(\'SIGINT\', () =\> handleShutdown(\'SIGINT\'));
+process.on('SIGTERM', () => handleShutdown('SIGTERM'));
+process.on('SIGINT', () => handleShutdown('SIGINT'));
+```
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 
-  ----------------------------------------------------------------------------------------------------------------------------
-  **Layer / Primitive**    **Key Configuration / Pattern**           **Production Role**
-  ------------------------ ----------------------------------------- ---------------------------------------------------------
-  **Turborepo**            turbo.json (dependsOn: \[\"\^build\"\])   Monorepo dependency task graphs & remote caching
-
-  **Docker Multi-Stage**   FROM node:20-alpine AS runner             Strips devDependencies and produces minimal image
-
-  **Edge Compute**         runtime: \'edge\' (Vercel / Cloudflare)   Low-latency routing & auth token validation at PoPs
-
-  **Graceful Shutdown**    process.on(\'SIGTERM\', cleanupFn)        Prevents dropped requests during deployments
-
-  **Kafka Outbox**         Outbox Table + Debezium / Poller          Guarantees atomic database updates and event publishing
-  ----------------------------------------------------------------------------------------------------------------------------
+| **Layer / Primitive** | **Key Configuration / Pattern** | **Production Role** |
+| --- | --- | --- |
+| **Turborepo** | turbo.json (dependsOn: ["\^build"])   Mon | repo dependency task graphs & remote caching |
+| **Docker Multi-Stage** | FROM node:20-alpine AS runner | Strips devDependencies and produces minimal image |
+| **Edge Compute** | runtime: 'edge' (Vercel / Cloudflare)   L | w-latency routing & auth token validation at PoPs |
+| **Graceful Shutdown** | process.on('SIGTERM', cleanupFn)        P | events dropped requests during deployments |
+| **Kafka Outbox** | Outbox Table + Debezium / Poller | Guarantees atomic database updates and event publishing |
 
 ## SECTION 3: WEEKLY SYSTEM DESIGN & CODING PROBLEMS
 

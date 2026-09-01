@@ -1,18 +1,13 @@
+---
 tags:
-
 - javascript
-
 - execution-context
-
 - call-stack
-
 - hoisting
-
 - scope-chain
-
 - v8
-
 date: 2026-08-01
+---
 
 # Day 1 - Execution Context, Call Stack & Scope Chain
 
@@ -48,25 +43,18 @@ An Execution Context consists of two primary phases:
 
 // Example: Execution Context Breakdown
 
+```javascript
 console.log(a); // Output: undefined (hoisted var)
-
-// console.log(b); // Throws ReferenceError: Cannot access \'b\' before initialization (TDZ)
-
+// console.log(b); // Throws ReferenceError: Cannot access 'b' before initialization (TDZ)
 var a = 10;
-
 let b = 20;
-
 function multiply(x, y) {
-
-var result = x \* y;
-
+var result = x * y;
 return result;
-
 }
-
 var res = multiply(a, b);
-
 console.log(res); // 200
+```
 
 
 
@@ -84,39 +72,25 @@ The **Call Stack** (or Execution Context Stack) is a LIFO (Last In, First Out) d
 
 // Call Stack Visualization
 
+```javascript
 function first() {
-
-console.log(\"Inside first\");
-
+console.log("Inside first");
 second();
-
-console.log(\"Exiting first\");
-
+console.log("Exiting first");
 }
-
 function second() {
-
-console.log(\"Inside second\");
-
+console.log("Inside second");
 }
-
 first();
-
-/\*
-
+/*
 Call Stack Trajectory:
-
-1\. Push Global Execution Context
-
-2\. Push first() EC
-
-3\. Push second() EC -\> console.log -\> Pop second() EC
-
-4\. Resume first() -\> console.log -\> Pop first() EC
-
-5\. Global Execution Context remains until window/process closes.
-
-\*/
+1. Push Global Execution Context
+2. Push first() EC
+3. Push second() EC -> console.log -> Pop second() EC
+4. Resume first() -> console.log -> Pop first() EC
+5. Global Execution Context remains until window/process closes.
+*/
+```
 
 
 
@@ -128,43 +102,33 @@ Call Stack Trajectory:
 
   - **Function Expressions** assigned to var/let/const follow variable hoisting rules.
 
-- **Lexical Environment**: Local memory plus reference to the parent\'s (outer) lexical environment.
+- **Lexical Environment**: Local memory plus reference to the parent's (outer) lexical environment.
 
 - **Scope Chain**: The hierarchy of lexical environments used to resolve identifier names. If a variable is not found in the local scope, the JS engine searches up the Scope Chain until it reaches the Global Scope. If not found there, a ReferenceError is thrown.
 
 // Pitfall & Edge Case: Shadowing & TDZ
 
-const x = \"global\";
-
+```javascript
+const x = "global";
 function scopeTest() {
-
-// console.log(x); // ReferenceError! \'x\' is shadowed by local \'let x\' which is in TDZ here!
-
-let x = \"local\";
-
-console.log(x); // \'local\'
-
+// console.log(x); // ReferenceError! 'x' is shadowed by local 'let x' which is in TDZ here!
+let x = "local";
+console.log(x); // 'local'
 }
-
 scopeTest();
+```
 
 
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 
-  -------------------------------------------------------------------------------------------------------------------
-  **Concept**           **Declaration**   **Hoisted?**   **Initial Value**   **Scope**           **Re-declarable?**
-  --------------------- ----------------- -------------- ------------------- ------------------- --------------------
-  var                   Variable          Yes            undefined           Function / Global   Yes
-
-  let                   Variable          Yes (TDZ)      Uninitialized       Block Scope {}      No
-
-  const                 Constant          Yes (TDZ)      Uninitialized       Block Scope {}      No
-
-  function foo(){}      Declaration       Yes            Function Body       Block / Function    Yes (varies)
-
-  var foo = () =\> {}   Expression        Yes (as var)   undefined           Function / Global   Yes
-  -------------------------------------------------------------------------------------------------------------------
+| **Concept** | **Declaration** | **Hoisted?** | **Initial Value** | **Scope** | **Re-declarable?** |
+| --- | --- | --- | --- | --- | --- |
+| var | Variable | Yes | undefined | Function / Global | Yes |
+| let | Variable | Yes (TDZ) | Uninitialized | Block Scope {} | No |
+| const | Constant | Yes (TDZ) | Uninitialized | Block Scope {} | No |
+| function foo(){} | Declaration | Yes | Function Body | Block / Function | Yes (varies) |
+| var foo = () => {} | xpression | es (as var) | ndefined | unction / Global | es |
 
 ### Core Rules & Mechanics
 
@@ -180,21 +144,16 @@ scopeTest();
 
 Predict the exact console output of the code snippet below and explain why each line produces its specific output based on Hoisting and Scope Chain rules.
 
+```javascript
 var a = 1;
-
 function b() {
-
 a = 10;
-
 return;
-
 function a() {}
-
 }
-
 b();
-
 console.log(a);
+```
 
 *Hint*: Consider how function a() {} inside b() is hoisted relative to assignment a = 10.
 
@@ -208,15 +167,13 @@ The following loop attempts to output indices 0, 1, 2 after a delay of 100ms, bu
 
 // Buggy Code
 
-for (var i = 0; i \< 3; i++) {
-
+```javascript
+for (var i = 0; i < 3; i++) {
 setTimeout(function() {
-
-console.log(\"Index: \" + i);
-
+console.log("Index: " + i);
 }, 100);
-
 }
+```
 
 *Hint*: Explain how closure and scope chain binding cause the original bug.
 
@@ -224,12 +181,12 @@ console.log(\"Index: \" + i);
 
 Write a lightweight custom tracer wrapper function createExecutionContextTracer(fn, fnName) from scratch that wraps any target function and logs:
 
-- \[Pushed EC\]: \<fnName\> with arguments: \<args\>
+- [Pushed EC]: <fnName> with arguments: <args>
 
 - Execution duration in milliseconds.
 
-- \[Popped EC\]: \<fnName\> returned: \<result\>
+- [Popped EC]: <fnName> returned: <result>
 
 - Catches and logs any thrown error before re-throwing it without breaking the stack.
 
-*Hint*: Use High-Resolution timers (performance.now()) and try\...finally block.
+*Hint*: Use High-Resolution timers (performance.now()) and try...finally block.

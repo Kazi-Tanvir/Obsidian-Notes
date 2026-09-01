@@ -1,16 +1,13 @@
+---
 tags:
-
 - devops
-
 - docker
-
 - containerization
-
 - docker-compose
-
 - backend
-
-- infrastructure date: 2026-08-13
+- infrastructure
+date: 2026-08-13
+---
 
 # Day 13 - Containerization with Docker, Multi-Stage Builds & Docker Compose
 
@@ -44,31 +41,31 @@ Docker builds images sequentially from Dockerfile instructions. Each instruction
 
 Multi-stage builds use multiple FROM instructions in a single Dockerfile. Dev dependencies, compilers, and build tools remain in intermediate build stages, producing a lightweight, minimal production image.
 
-\# Multi-Stage Dockerfile for Next.js App Router
+# Multi-Stage Dockerfile for Next.js App Router
 
-\# Stage 1: Base Dependencies
+# Stage 1: Base Dependencies
 
 FROM node:20-alpine AS base
 
-RUN apk add \--no-cache libc6-compat
+RUN apk add --no-cache libc6-compat
 
 WORKDIR /app
 
-\# Stage 2: Install Dependencies
+# Stage 2: Install Dependencies
 
 FROM base AS deps
 
 COPY package.json pnpm-lock.yaml ./
 
-RUN corepack enable pnpm && pnpm install \--frozen-lockfile
+RUN corepack enable pnpm && pnpm install --frozen-lockfile
 
-\# Stage 3: Builder Stage
+# Stage 3: Builder Stage
 
 FROM base AS builder
 
 WORKDIR /app
 
-COPY \--from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/node_modules ./node_modules
 
 COPY . .
 
@@ -76,7 +73,7 @@ ENV NEXT_TELEMETRY_DISABLED 1
 
 RUN corepack enable pnpm && pnpm run build
 
-\# Stage 4: Production Runner Stage (Minimal Distroless Footprint)
+# Stage 4: Production Runner Stage (Minimal Distroless Footprint)
 
 FROM node:20-alpine AS runner
 
@@ -86,17 +83,17 @@ ENV NODE_ENV production
 
 ENV NEXT_TELEMETRY_DISABLED 1
 
-\# Security: Non-root execution
+# Security: Non-root execution
 
-RUN addgroup \--system \--gid 1001 nodejs
+RUN addgroup --system --gid 1001 nodejs
 
-RUN adduser \--system \--uid 1001 nextjs
+RUN adduser --system --uid 1001 nextjs
 
-COPY \--from=builder /app/public ./public
+COPY --from=builder /app/public ./public
 
-COPY \--from=builder \--chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 
-COPY \--from=builder \--chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 USER nextjs
 
@@ -104,13 +101,13 @@ EXPOSE 3000
 
 ENV PORT 3000
 
-CMD \[\"node\", \"server.js\"\]
+CMD ["node", "server.js"]
 
 ### 4. Local Orchestration with Docker Compose
 
 Docker Compose defines and runs multi-container applications (Node API, PostgreSQL, Redis) via a declarative YAML configuration.
 
-version: \'3.8\'
+version: '3.8'
 
 services:
 
@@ -124,13 +121,13 @@ target: runner
 
 ports:
 
-\- \"3000:3000\"
+- "3000:3000"
 
 environment:
 
-\- DATABASE_URL=postgresql://postgres:secret@db:5432/app_db
+- DATABASE_URL=postgresql://postgres:secret@db:5432/app_db
 
-\- REDIS_URL=redis://redis:6379
+- REDIS_URL=redis://redis:6379
 
 depends_on:
 
@@ -144,7 +141,7 @@ condition: service_started
 
 networks:
 
-\- app-network
+- app-network
 
 db:
 
@@ -160,11 +157,11 @@ POSTGRES_DB: app_db
 
 volumes:
 
-\- pgdata:/var/lib/postgresql/data
+- pgdata:/var/lib/postgresql/data
 
 healthcheck:
 
-test: \[\"CMD-SHELL\", \"pg_isready -U postgres\"\]
+test: ["CMD-SHELL", "pg_isready -U postgres"]
 
 interval: 5s
 
@@ -174,7 +171,7 @@ retries: 5
 
 networks:
 
-\- app-network
+- app-network
 
 redis:
 
@@ -182,7 +179,7 @@ image: redis:7-alpine
 
 networks:
 
-\- app-network
+- app-network
 
 volumes:
 
@@ -196,21 +193,14 @@ driver: bridge
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 
-  ----------------------------------------------------------------------------------------------------------------------------------
-  **Directive / Command**           **Usage / Syntax**                          **Purpose**
-  --------------------------------- ------------------------------------------- ----------------------------------------------------
-  **FROM \<image\> AS \<stage\>**   FROM node:20-alpine AS builder              Defines named multi-stage build context
-
-  **COPY \--from=\<stage\>**        COPY \--from=builder /app/dist ./dist       Copies artifacts from previous build stage
-
-  **USER node**                     USER node                                   Drops root privileges for security
-
-  **docker build -t app .**         docker build \--target runner -t app:v1 .   Builds targeted production stage
-
-  **docker-compose up -d**          docker-compose up \--build -d               Spins up multi-container environment in background
-
-  **docker system prune -a**        docker system prune -a \--volumes           Cleans up unused layers, images, and volumes
-  ----------------------------------------------------------------------------------------------------------------------------------
+| **Directive / Command** | **Usage / Syntax** | **Purpose** |
+| --- | --- | --- |
+| **FROM <image> AS <stage>**   FRO | node:20-alpine AS builder              Def | nes named multi-stage build context |
+| **COPY --from=<stage>**        CO | Y --from=builder /app/dist ./dist       Cop | es artifacts from previous build stage |
+| **USER node** | USER node | Drops root privileges for security |
+| **docker build -t app .** | docker build --target runner -t app:v1 . | uilds targeted production stage |
+| **docker-compose up -d** | docker-compose up --build -d | pins up multi-container environment in background |
+| **docker system prune -a** | docker system prune -a --volumes | leans up unused layers, images, and volumes |
 
 ## SECTION 3: WEEKLY SYSTEM DESIGN & CODING PROBLEMS
 
@@ -220,7 +210,7 @@ Design a multi-stage Docker build and deployment strategy for a **pnpm Turborepo
 
 **Requirements**:
 
-1.  Detail how to use turbo prune \--scope=web inside Docker to extract only necessary workspace packages.
+1.  Detail how to use turbo prune --scope=web inside Docker to extract only necessary workspace packages.
 
 2.  Formulate a Docker layer caching strategy to avoid re-installing pnpm dependencies when unrelated monorepo apps change.
 
@@ -236,6 +226,6 @@ Build a production-ready **Docker Compose Environment with Nginx Reverse Proxy, 
 
 2.  Write a docker-compose.yml orchestrating Nginx (SSL termination & rate limiting proxy), Fastify API (3 replicas with load balancing), PostgreSQL (with healthchecks), and Redis.
 
-3.  Ensure Nginx routes /api/\* requests to the Fastify service replicas using bridge networking.
+3.  Ensure Nginx routes /api/* requests to the Fastify service replicas using bridge networking.
 
 4.  Include startup verification tests validating healthcheck execution and zero-downtime container restarts.

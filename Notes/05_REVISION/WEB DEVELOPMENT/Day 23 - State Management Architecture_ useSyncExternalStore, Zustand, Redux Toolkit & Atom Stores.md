@@ -1,20 +1,15 @@
+---
 tags:
-
 - frontend
-
 - react
-
 - state-management
-
 - zustand
-
 - redux
-
 - useSyncExternalStore
-
 - performance
-
-- architecture date: 2026-08-23
+- architecture
+date: 2026-08-23
+---
 
 # Day 23 - State Management Architecture: useSyncExternalStore, Zustand, Redux Toolkit & Atom Stores
 
@@ -24,7 +19,7 @@ tags:
 
 In React 18+ Concurrent Mode, React can pause, yield, and resume rendering to maintain responsive 60fps/120fps UI interactions.
 
-If components read from an **external mutable store** (outside React\'s useState/useReducer tree) via standard useEffect subscriptions:
+If components read from an **external mutable store** (outside React's useState/useReducer tree) via standard useEffect subscriptions:
 
 1.  Component A renders with external state value v1.
 
@@ -36,13 +31,13 @@ If components read from an **external mutable store** (outside React\'s useState
 
 5.  Result: **Tearing** --- the same UI tree displays conflicting visual states simultaneously in a single frame.
 
-\[ Tearing Scenario \]:
+[ Tearing Scenario ]:
 
 Render Frame Start ────► Component A (Reads Store: v1)
 
 │
 
-▼ \[Main thread yields: WebSocket mutates Store to v2\]
+▼ [Main thread yields: WebSocket mutates Store to v2]
 
 │
 
@@ -52,29 +47,30 @@ Component B (Reads Store: v2) ────► Inconsistent Corrupted UI Render!
 
 To fix tearing, React introduced useSyncExternalStore. It forces React to synchronously re-evaluate the snapshot whenever an external store emits an update during rendering, guaranteeing state consistency across concurrent slices.
 
-import { useSyncExternalStore } from \'react\';
-
-export function useStore\<TState, TSelected\>(
+```javascript
+import { useSyncExternalStore } from 'react';
+export function useStore<TState, TSelected>(
+```
 
 store: {
 
-subscribe: (listener: () =\> void) =\> () =\> void;
-
-getSnapshot: () =\> TState;
-
-getServerSnapshot?: () =\> TState;
+```javascript
+subscribe: (listener: () => void) => () => void;
+getSnapshot: () => TState;
+getServerSnapshot?: () => TState;
+```
 
 },
 
-selector: (state: TState) =\> TSelected
+selector: (state: TState) => TSelected
 
 ): TSelected {
 
-const getSnapshot = () =\> selector(store.getSnapshot());
-
+```javascript
+const getSnapshot = () => selector(store.getSnapshot());
 return useSyncExternalStore(store.subscribe, getSnapshot, store.getServerSnapshot);
-
 }
+```
 
 ### 3. Global State Architectural Paradigms Compared
 
@@ -82,41 +78,35 @@ return useSyncExternalStore(store.subscribe, getSnapshot, store.getServerSnapsho
 
 - **Model**: Single source of truth tree.
 
-- **Subscription Mechanism**: Selector functions ((state) =\> state.user.name) subscribe components only to the specific slices they read.
+- **Subscription Mechanism**: Selector functions ((state) => state.user.name) subscribe components only to the specific slices they read.
 
 - **Why Zustand Outperforms Context**: React Context causes all consumer components to re-render whenever *any* value inside the context object changes. Zustand bypasses React Context entirely, using module-level closures and useSyncExternalStore for surgical re-renders.
 
+```typescript
 // Modern Zustand Store with Slice Pattern & Immer Middleware
-
-import { create } from \'zustand\';
-
-import { immer } from \'zustand/middleware/immer\';
-
+import { create } from 'zustand';
+import { immer } from 'zustand/middleware/immer';
 interface UserSlice {
-
 profile: { name: string; email: string };
-
-updateEmail: (email: string) =\> void;
-
+updateEmail: (email: string) => void;
 }
+export const useAppStore = create<UserSlice>()(
+```
 
-export const useAppStore = create\<UserSlice\>()(
+immer((set) => ({
 
-immer((set) =\> ({
+profile: { name: "Tanvir", email: "tanvir@example.com" },
 
-profile: { name: \"Tanvir\", email: \"tanvir@example.com\" },
+updateEmail: (newEmail) =>
 
-updateEmail: (newEmail) =\>
+set((state) => {
 
-set((state) =\> {
-
+```javascript
 state.profile.email = newEmail; // Mutative syntax converted to immutable update via Immer
-
 }),
-
 }))
-
 );
+```
 
 #### B. Atomic / Bottom-Up Architecture (Jotai, Recoil)
 
@@ -128,19 +118,13 @@ state.profile.email = newEmail; // Mutative syntax converted to immutable update
 
 ### State Management Paradigms Comparison:
 
-  -----------------------------------------------------------------------------------------------------------------------------------------
-  **Feature / Metric**   **React Context API**     **Zustand**                  **Redux Toolkit (RTK)**        **Jotai / Recoil**
-  ---------------------- ------------------------- ---------------------------- ------------------------------ ----------------------------
-  **Architecture**       Component Tree Provider   External Module Store        External Redux Store           Decentralized Atoms
-
-  **Re-render Scope**    All consumers re-render   Only subscribed selectors    Only subscribed selectors      Only subscribed atoms
-
-  **Boilerplate**        Low                       Minimal                      Moderate (Slices/Thunks)       Minimal
-
-  **Async Handling**     Manual in useEffect       Native inside actions        createAsyncThunk / RTK Query   Async Atoms & Suspense
-
-  **Concurrent Safe**    Yes (inside React)        Yes (useSyncExternalStore)   Yes (useSyncExternalStore)     Yes (useSyncExternalStore)
-  -----------------------------------------------------------------------------------------------------------------------------------------
+| **Feature / Metric** | **React Context API** | **Zustand** | **Redux Toolkit (RTK)** | **Jotai / Recoil** |
+| --- | --- | --- | --- | --- |
+| **Architecture** | Component Tree Provider | External Module Store | External Redux Store | Decentralized Atoms |
+| **Re-render Scope** | All consumers re-render | Only subscribed selectors | Only subscribed selectors | Only subscribed atoms |
+| **Boilerplate** | Low | Minimal | Moderate (Slices/Thunks) | Minimal |
+| **Async Handling** | Manual in useEffect | Native inside actions | createAsyncThunk / RTK Query | Async Atoms & Suspense |
+| **Concurrent Safe** | Yes (inside React) | Yes (useSyncExternalStore) | Yes (useSyncExternalStore) | Yes (useSyncExternalStore) |
 
 ## SECTION 3: WEEKLY SYSTEM DESIGN & CODING PROBLEMS
 
@@ -162,7 +146,7 @@ Build a typed, dependency-free **Mini-Zustand Global State Store** library from 
 
 **Requirements**:
 
-1.  Implement createStore\<T\>(initializer) returning an external store with:
+1.  Implement createStore<T>(initializer) returning an external store with:
 
     - getState(): Returns current immutable state.
 

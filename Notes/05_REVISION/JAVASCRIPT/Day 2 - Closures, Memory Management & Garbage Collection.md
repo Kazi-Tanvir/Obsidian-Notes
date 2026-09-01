@@ -1,14 +1,12 @@
+---
 tags:
-
 - javascript
-
 - closures
-
 - memory-management
-
 - garbage-collection
-
-- v8-heap date: 2026-08-02
+- v8-heap
+date: 2026-08-02
+---
 
 # Day 2 - Closures, Memory Management & Garbage Collection
 
@@ -16,59 +14,39 @@ tags:
 
 ### 1. Closures & Lexical Environment Persistence
 
-A **closure** is the combination of a function bundled together (enclosed) with references to its surrounding state (the **Lexical Environment**). In JavaScript, closures give inner functions access to an outer function\'s scope even after the outer function has finished executing and its execution context has been popped off the Call Stack.
+A **closure** is the combination of a function bundled together (enclosed) with references to its surrounding state (the **Lexical Environment**). In JavaScript, closures give inner functions access to an outer function's scope even after the outer function has finished executing and its execution context has been popped off the Call Stack.
 
 #### Under the Hood Mechanics:
 
-- When a function is declared, it holds an internal \[\[Environment\]\] reference pointing to the Lexical Environment in which it was created.
+- When a function is declared, it holds an internal [[Environment]] reference pointing to the Lexical Environment in which it was created.
 
 - When an inner function references variables from its outer scope, those variables are stored in heap memory inside a **Closure Object** instead of being garbage-collected when the parent function context exits.
 
+```javascript
 // Module Pattern using Closures for Data Encapsulation
-
 function createBankContext(initialBalance) {
-
 let balance = initialBalance; // Private state
-
 return {
-
 deposit(amount) {
-
-if (amount \<= 0) throw new Error(\"Invalid deposit amount\");
-
+if (amount <= 0) throw new Error("Invalid deposit amount");
 balance += amount;
-
 return balance;
-
 },
-
 withdraw(amount) {
-
-if (amount \> balance) throw new Error(\"Insufficient funds\");
-
+if (amount > balance) throw new Error("Insufficient funds");
 balance -= amount;
-
 return balance;
-
 },
-
 getBalance() {
-
 return balance;
-
 }
-
 };
-
 }
-
 const myAccount = createBankContext(1000);
-
 console.log(myAccount.deposit(500)); // 1500
-
 console.log(myAccount.getBalance()); // 1500
-
 // console.log(myAccount.balance); // undefined (Private!)
+```
 
 ### 2. V8 Memory Layout & Garbage Collection (GC)
 
@@ -80,7 +58,7 @@ JavaScript manages memory automatically using **Garbage Collection**. The V8 Jav
 
     - Stores short-lived objects (most allocations).
 
-    - Cleaned frequently using the fast **Scavenger Algorithm (Cheney\'s Copying Algorithm)**.
+    - Cleaned frequently using the fast **Scavenger Algorithm (Cheney's Copying Algorithm)**.
 
 2.  **Old Generation (Old Pointer Space & Old Data Space)**:
 
@@ -118,43 +96,29 @@ A **memory leak** occurs when allocated memory is no longer needed by the applic
 
 4.  **Uncleaned Event Listeners**: Event handlers holding references to large objects.
 
+```javascript
 // Pitfall: Memory Leak via Detached DOM Node
-
 function LeakExample() {
-
-const element = document.getElementById(\"button\");
-
-const heavyData = new Array(1000000).fill(\"data\");
-
-element.addEventListener(\"click\", function onClick() {
-
+const element = document.getElementById("button");
+const heavyData = new Array(1000000).fill("data");
+element.addEventListener("click", function onClick() {
 console.log(heavyData.length);
-
 });
-
-// If \'element\' is removed from DOM without removeEventListener,
-
-// \'heavyData\' remains pinned in memory via the event listener closure!
-
+// If 'element' is removed from DOM without removeEventListener,
+// 'heavyData' remains pinned in memory via the event listener closure!
 }
-
 // Fix: Use WeakMap or explicitly detach listener / nullify references
+```
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 
-  ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  **Concept**       **Description**                                    **V8 Mechanism**                                   **Key Benefit / Pitfall**
-  ----------------- -------------------------------------------------- -------------------------------------------------- ------------------------------------------------------------------
-  **Closure**       Function retaining access to outer Lexical Scope   Stored in Heap via \[\[Environment\]\] reference   Enables encapsulation; retain unwanted references if misused
-
-  **Minor GC**      Collects short-lived allocations                   Cheney\'s Scavenger Algorithm                      Extremely fast (milliseconds); operates on Young Generation
-
-  **Major GC**      Collects long-lived allocations                    Mark-Sweep-Compact Algorithm                       Defragments Old Space; runs incrementally to minimize pause time
-
-  **WeakMap**       Key-value store holding weak object references     Weak Garbage Collection tracking                   Keys are garbage collected if no other references exist
-
-  **WeakSet**       Collection holding weak object references          Weak Garbage Collection tracking                   Items collected automatically when unreferenced elsewhere
-  ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| **Concept** | **Description** | **V8 Mechanism** | **Key Benefit / Pitfall** |
+| --- | --- | --- | --- |
+| **Closure** | Function retaining access to outer Lexical Scope | Stored in Heap via [[Environment]] reference   Ena | les encapsulation; retain unwanted references if misused |
+| **Minor GC** | Collects short-lived allocations | Cheney's Scavenger Algorithm | xtremely fast (milliseconds); operates on Young Generation |
+| **Major GC** | Collects long-lived allocations | Mark-Sweep-Compact Algorithm | Defragments Old Space; runs incrementally to minimize pause time |
+| **WeakMap** | Key-value store holding weak object references | Weak Garbage Collection tracking | Keys are garbage collected if no other references exist |
+| **WeakSet** | Collection holding weak object references | Weak Garbage Collection tracking | Items collected automatically when unreferenced elsewhere |
 
 ### Key Garbage Collection Metrics & Rules:
 
@@ -168,31 +132,21 @@ console.log(heavyData.length);
 
 Predict the exact console output of the code snippet below and explain how closure references behave across multiple function calls.
 
+```javascript
 function createCounter() {
-
 let count = 0;
-
 return function() {
-
 count++;
-
 return count;
-
 };
-
 }
-
 const counter1 = createCounter();
-
 const counter2 = createCounter();
-
 console.log(counter1());
-
 console.log(counter1());
-
 console.log(counter2());
-
 console.log(counter1());
+```
 
 *Hint*: Determine whether counter1 and counter2 share the same Lexical Environment or instantiate separate closures.
 
@@ -200,33 +154,22 @@ console.log(counter1());
 
 The EventEmitter implementation below contains a severe memory leak when listeners are registered and unsubscribed. Identify the leak and refactor the code to ensure memory is properly garbage-collected upon unsubscription.
 
+```javascript
 // Buggy Memory Leaking Event Emitter
-
 class LeakyEventEmitter {
-
 constructor() {
-
 this.events = {};
-
 }
-
 on(event, listener) {
-
-if (!this.events\[event\]) this.events\[event\] = \[\];
-
-this.events\[event\].push(listener);
-
-return () =\> {
-
+if (!this.events[event]) this.events[event] = [];
+this.events[event].push(listener);
+return () => {
 // Buggy Unsubscribe: Does not remove listener completely!
-
-this.events\[event\] = this.events\[event\].map(fn =\> fn === listener ? null : fn);
-
+this.events[event] = this.events[event].map(fn => fn === listener ? null : fn);
 };
-
 }
-
 }
+```
 
 *Hint*: Look at array filtering vs setting elements to null, and clean up empty event key arrays.
 

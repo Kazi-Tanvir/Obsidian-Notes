@@ -1,20 +1,15 @@
+---
 tags:
-
 - database
-
 - postgresql
-
 - scaling
-
 - connection-pooling
-
 - sharding
-
 - read-replicas
-
 - backend
-
-- system-design date: 2026-08-30
+- system-design
+date: 2026-08-30
+---
 
 # Day 30 - Database Scaling: Read Replicas, Connection Pooling, Partitioning & Sharding Architecture
 
@@ -60,13 +55,13 @@ Connection poolers act as a high-performance proxy layer that maintains a persis
 
 - **Session Pooling (Least aggressive)**: Connection is leased to a client for the entire lifespan of the client session. Safest, but lowest concurrency gain.
 
-- **Transaction Pooling (Recommended for Web APIs)**: Connection is leased only for the duration of a single BEGIN \... COMMIT transaction, then immediately released to the pool.
+- **Transaction Pooling (Recommended for Web APIs)**: Connection is leased only for the duration of a single BEGIN ... COMMIT transaction, then immediately released to the pool.
 
   - *Constraint*: Cannot use session-level state (e.g. SET timezone, LISTEN/NOTIFY, or un-named prepared statements in older drivers).
 
 - **Statement Pooling (Most aggressive)**: Connection is leased for a single query.
 
-  - *Constraint*: Multi-statement transactions (BEGIN\...COMMIT) are prohibited.
+  - *Constraint*: Multi-statement transactions (BEGIN...COMMIT) are prohibited.
 
 ### 3. Read/Write Splitting & Read-Your-Own-Writes Consistency
 
@@ -102,37 +97,27 @@ In an asynchronous replication topology, the Primary server writes changes to th
 
   2.  **Primary Routing Window**: Route all read queries for that user to the **Primary** database for the next 5 seconds (grace window), after which reads safely return to the Read Replicas.
 
+```typescript
 // Advanced Read/Write Router Implementation with Prisma Extension
-
-import { PrismaClient } from \'@prisma/client\';
-
+import { PrismaClient } from '@prisma/client';
 const primaryClient = new PrismaClient({ datasourceUrl: process.env.DATABASE_PRIMARY_URL });
-
 const replicaClient = new PrismaClient({ datasourceUrl: process.env.DATABASE_REPLICA_URL });
-
 export function getDatabaseClient(userLastWriteTimestamp?: number) {
-
 const REPLICATION_LAG_TOLERANCE_MS = 3000; // 3-second grace window
-
-if (userLastWriteTimestamp && Date.now() - userLastWriteTimestamp \< REPLICATION_LAG_TOLERANCE_MS) {
-
-// User recently wrote data -\> Route to Primary to guarantee Read-Your-Own-Writes!
-
+if (userLastWriteTimestamp && Date.now() - userLastWriteTimestamp < REPLICATION_LAG_TOLERANCE_MS) {
+// User recently wrote data -> Route to Primary to guarantee Read-Your-Own-Writes!
 return primaryClient;
-
 }
-
 // Safe to read from replica
-
 return replicaClient;
-
 }
+```
 
 ### 4. PostgreSQL Declarative Table Partitioning
 
 Partitioning divides a large table into smaller physical child tables while maintaining a single logical table interface.
 
-\-- Create Logical Partitioned Table by Range (Time-Series Orders)
+-- Create Logical Partitioned Table by Range (Time-Series Orders)
 
 CREATE TABLE orders (
 
@@ -144,45 +129,48 @@ amount DECIMAL(10, 2) NOT NULL,
 
 created_at TIMESTAMPTZ NOT NULL,
 
-PRIMARY KEY (order_id, created_at) \-- Partition key must be part of composite primary key
+PRIMARY KEY (order_id, created_at) -- Partition key must be part of composite primary key
 
+```javascript
 ) PARTITION BY RANGE (created_at);
+```
 
-\-- Create Monthly Child Partitions
+-- Create Monthly Child Partitions
 
 CREATE TABLE orders_2026_08 PARTITION OF orders
 
-FOR VALUES FROM (\'2026-08-01 00:00:00+00\') TO (\'2026-09-01 00:00:00+00\');
+```javascript
+FOR VALUES FROM ('2026-08-01 00:00:00+00') TO ('2026-09-01 00:00:00+00');
+```
 
 CREATE TABLE orders_2026_09 PARTITION OF orders
 
-FOR VALUES FROM (\'2026-09-01 00:00:00+00\') TO (\'2026-10-01 00:00:00+00\');
+```javascript
+FOR VALUES FROM ('2026-09-01 00:00:00+00') TO ('2026-10-01 00:00:00+00');
+```
 
-\-- Partition Pruning in Action:
+-- Partition Pruning in Action:
 
-\-- Query optimizer scans ONLY orders_2026_08 child table and skips all other partitions!
+-- Query optimizer scans ONLY orders_2026_08 child table and skips all other partitions!
 
 EXPLAIN ANALYZE
 
-SELECT \* FROM orders
+SELECT * FROM orders
 
-WHERE created_at \>= \'2026-08-15\' AND created_at \<= \'2026-08-20\';
+```javascript
+WHERE created_at >= '2026-08-15' AND created_at <= '2026-08-20';
+```
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 
 ### Database Scaling Strategies Comparison:
 
-  ----------------------------------------------------------------------------------------------------------------------------------------------------
-  **Technique**             **Solves**                               **Architectural Complexity**   **Primary Trade-Off**
-  ------------------------- ---------------------------------------- ------------------------------ --------------------------------------------------
-  **Connection Pooling**    Connection exhaustion & RAM bloat        Low (Drop-in proxy)            No session-level state in transaction pooling
-
-  **Read Replicas**         High read query volume                   Medium                         Replication lag & eventual consistency
-
-  **Table Partitioning**    Giant table index bloat & slow VACUUM    Medium                         Composite primary keys required on partition key
-
-  **Horizontal Sharding**   CPU/Disk/Write limits on single server   High                           Cross-shard joins & distributed transactions
-  ----------------------------------------------------------------------------------------------------------------------------------------------------
+| **Technique** | **Solves** | **Architectural Complexity** | **Primary Trade-Off** |
+| --- | --- | --- | --- |
+| **Connection Pooling** | Connection exhaustion & RAM bloat | Low (Drop-in proxy) | No session-level state in transaction pooling |
+| **Read Replicas** | High read query volume | Medium | Replication lag & eventual consistency |
+| **Table Partitioning** | Giant table index bloat & slow VACUUM | Medium | Composite primary keys required on partition key |
+| **Horizontal Sharding** | CPU/Disk/Write limits on single server | High | Cross-shard joins & distributed transactions |
 
 ## SECTION 3: WEEKLY SYSTEM DESIGN & CODING PROBLEMS
 
@@ -224,7 +212,7 @@ Build an enterprise **Database Context Router with Read-Your-Own-Writes Consiste
 
     - Accepts a context object { userId: string; lastWriteTimestamp?: number }.
 
-    - If Date.now() - lastWriteTimestamp \< 5000, forces SELECT queries to the Primary.
+    - If Date.now() - lastWriteTimestamp < 5000, forces SELECT queries to the Primary.
 
     - Emits an updated X-Last-Write-Timestamp header upon successful mutating transactions.
 

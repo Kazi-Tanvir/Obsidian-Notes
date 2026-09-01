@@ -1,16 +1,12 @@
+---
 tags:
-
 - backend
-
 - api-design
-
 - http
-
 - express
-
 - rest
-
 date: 2026-08-01
+---
 
 # Day 1 - Client-Server Architecture & RESTful API Design
 
@@ -52,83 +48,49 @@ Modern web applications rely on the **Client-Server Architecture**, where client
 
 #### Method Idempotency & Safety:
 
-  -----------------------------------------------------------------------------------------------------
-  **HTTP Verb**   **Safe?**   **Idempotent?**   **Typical Use Case**
-  --------------- ----------- ----------------- -------------------------------------------------------
-  GET             Yes         Yes               Retrieve resource representation
-
-  POST            No          No                Create new resource / process non-idempotent action
-
-  PUT             No          Yes               Replace resource completely or create at specific URI
-
-  PATCH           No          No (usually)      Partial modification of resource
-
-  DELETE          No          Yes               Remove resource
-  -----------------------------------------------------------------------------------------------------
+| **HTTP Verb** | **Safe?** | **Idempotent?** | **Typical Use Case** |
+| --- | --- | --- | --- |
+| GET | Yes | Yes | Retrieve resource representation |
+| POST | No | No | Create new resource / process non-idempotent action |
+| PUT | No | Yes | Replace resource completely or create at specific URI |
+| PATCH | No | No (usually) | Partial modification of resource |
+| DELETE | No | Yes | Remove resource |
 
 ### 3. Production Node.js & Express API Implementation Pattern
 
-import express, { Request, Response, NextFunction } from \'express\';
-
+```typescript
+import express, { Request, Response, NextFunction } from 'express';
 const app = express();
-
 app.use(express.json());
-
 // Standard API Response Contract Interface
-
-interface ApiResponse\<T\> {
-
+interface ApiResponse<T> {
 success: boolean;
-
 data?: T;
-
 error?: string;
-
 }
-
 // Controller Implementation Pattern
-
-app.get(\'/api/v1/products/:id\', async (req: Request, res: Response, next: NextFunction) =\> {
-
+app.get('/api/v1/products/:id', async (req: Request, res: Response, next: NextFunction) => {
 try {
-
 const { id } = req.params;
-
-if (!id \|\| isNaN(Number(id))) {
-
-return res.status(400).json({ success: false, error: \'Invalid product ID\' });
-
+if (!id || isNaN(Number(id))) {
+return res.status(400).json({ success: false, error: 'Invalid product ID' });
 }
-
 // Simulated DB Query
-
-const product = { id: Number(id), name: \'High Performance Server\', price: 1299.99 };
-
+const product = { id: Number(id), name: 'High Performance Server', price: 1299.99 };
 if (!product) {
-
-return res.status(404).json({ success: false, error: \'Product not found\' });
-
+return res.status(404).json({ success: false, error: 'Product not found' });
 }
-
 return res.status(200).json({ success: true, data: product });
-
 } catch (error) {
-
 next(error); // Pass to centralized error handler
-
 }
-
 });
-
 // Centralized Error Handling Middleware
-
-app.use((err: Error, req: Request, res: Response, next: NextFunction) =\> {
-
-console.error(\'\[API Error\]:\', err.stack);
-
-res.status(500).json({ success: false, error: \'Internal Server Error\' });
-
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+console.error('[API Error]:', err.stack);
+res.status(500).json({ success: false, error: 'Internal Server Error' });
 });
+```
 
 
 
@@ -164,7 +126,7 @@ res.status(500).json({ success: false, error: \'Internal Server Error\' });
 
 - Sub-resources reflect relationships: /api/v1/users/:userId/orders.
 
-- Use **hyphens (-)** for readability instead of underscores (\_): /api/v1/payment-intents.
+- Use **hyphens (-)** for readability instead of underscores (_): /api/v1/payment-intents.
 
 - Never use verbs in resource paths (Anti-pattern: /api/getUsers, /api/createOrder). Use HTTP verbs instead.
 
@@ -172,19 +134,15 @@ res.status(500).json({ success: false, error: \'Internal Server Error\' });
 
 # GET with Headers & Authorization
 
-curl -X GET https://api.example.com/v1/orders \\
-
--H \"Authorization: Bearer \<TOKEN\>\" \\
-
--H \"Accept: application/json\"
-
-\# POST JSON Payload
-
-curl -X POST https://api.example.com/v1/products \\
-
--H \"Content-Type: application/json\" \\
-
--d \'{\"name\":\"Monitor\",\"price\":299.99}\'
+```bash
+curl -X GET https://api.example.com/v1/orders \
+-H "Authorization: Bearer <TOKEN>" \
+-H "Accept: application/json"
+# POST JSON Payload
+curl -X POST https://api.example.com/v1/products \
+-H "Content-Type: application/json" \
+-d '{"name":"Monitor","price":299.99}'
+```
 
 
 
@@ -227,5 +185,3 @@ Build an Express/Node.js router module for **User Management** that satisfies th
 3.  Ensure every error is passed through a global error-handling middleware that returns standardized { success: false, error: string, timestamp: string } response objects.
 
 4.  Provide unit/integration test cases (specifying test inputs and expected status codes).
-
-#### 

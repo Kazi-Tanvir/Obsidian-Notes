@@ -1,18 +1,14 @@
+---
 tags:
-
 - backend
-
 - microservices
-
 - distributed-systems
-
 - saga-pattern
-
 - kafka
-
 - system-design
-
-- database date: 2026-08-20
+- database
+date: 2026-08-20
+---
 
 # Day 20 - Distributed Transactions, The Saga Pattern & Outbox CDC Architecture
 
@@ -30,11 +26,11 @@ In distributed microservices, a single business workflow often spans multiple in
 
 A **Saga** is a sequence of local transactions where each transaction updates data within a single service and publishes an event to trigger the next step. If a step fails, the Saga executes **Compensating Transactions** to undo preceding changes in reverse order.
 
-\[ Happy Path \]:
+[ Happy Path ]:
 
 CreateOrder ──► AuthorizePayment ──► ReserveInventory ──► ShipOrder ──► (Completed)
 
-\[ Failure at Inventory \]:
+[ Failure at Inventory ]:
 
 CreateOrder ──► AuthorizePayment ──► ReserveInventory (FAIL!)
 
@@ -52,21 +48,16 @@ CancelOrder
 
 #### Comparison: Choreography vs. Orchestration:
 
-  -------------------------------------------------------------------------------------------------------------------------------------
-  **Characteristic**      **Choreography (Event-Driven)**                   **Orchestration (State Machine)**
-  ----------------------- ------------------------------------------------- -----------------------------------------------------------
-  **Coordination**        Decentralized; services react to domain events    Centralized Saga Orchestrator engine
-
-  **Coupling**            Loosely coupled                                   Orchestrator knows all participating steps
-
-  **Complexity**          Difficult to visualize full workflow trajectory   Clear visibility into execution state and retries
-
-  **Best For**            Simple workflows (2--3 steps)                     Complex enterprise workflows (5+ steps, banking, booking)
-  -------------------------------------------------------------------------------------------------------------------------------------
+| **Characteristic** | **Choreography (Event-Driven)** | **Orchestration (State Machine)** |
+| --- | --- | --- |
+| **Coordination** | Decentralized; services react to domain events | Centralized Saga Orchestrator engine |
+| **Coupling** | Loosely coupled | Orchestrator knows all participating steps |
+| **Complexity** | Difficult to visualize full workflow trajectory | Clear visibility into execution state and retries |
+| **Best For** | Simple workflows (2--3 steps) | Complex enterprise workflows (5+ steps, banking, booking) |
 
 ### 3. Transactional Outbox Pattern + Change Data Capture (CDC)
 
-To guarantee that database mutations and event publications occur with \$100%\$ atomicity without distributed locks, we use the **Transactional Outbox Pattern**:
+To guarantee that database mutations and event publications occur with $100%$ atomicity without distributed locks, we use the **Transactional Outbox Pattern**:
 
 ┌──────────────────────────────────────────────┐
 
@@ -76,7 +67,7 @@ To guarantee that database mutations and event publications occur with \$100%\$ 
 
 │ BEGIN TRANSACTION; │
 
-│ INSERT INTO orders (\...); │
+│ INSERT INTO orders (...); │
 
 │ INSERT INTO outbox_table (event_payload); │
 
@@ -100,7 +91,7 @@ To guarantee that database mutations and event publications occur with \$100%\$ 
 
 ┌──────────────────────────────────────────────┐
 
-│ Apache Kafka Topic (\'order-events\') │
+│ Apache Kafka Topic ('order-events') │
 
 └──────────────────────────────────────────────┘
 
@@ -128,33 +119,33 @@ created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
 
 processed BOOLEAN DEFAULT FALSE
 
+```javascript
 );
-
 CREATE INDEX idx_outbox_unprocessed ON outbox_events(created_at) WHERE processed = FALSE;
+```
 
 ### Saga Orchestrator State Interface:
 
+```javascript
 export enum SagaStatus {
+```
 
-STARTED = \"STARTED\",
+STARTED = "STARTED",
 
-COMPENSATING = \"COMPENSATING\",
+COMPENSATING = "COMPENSATING",
 
-COMPLETED = \"COMPLETED\",
+COMPLETED = "COMPLETED",
 
-FAILED = \"FAILED\"
+FAILED = "FAILED"
 
+```typescript
 }
-
-export interface SagaStep\<TContext\> {
-
+export interface SagaStep<TContext> {
 name: string;
-
-execute: (context: TContext) =\> Promise\<void\>;
-
-compensate: (context: TContext) =\> Promise\<void\>;
-
+execute: (context: TContext) => Promise<void>;
+compensate: (context: TContext) => Promise<void>;
 }
+```
 
 ## SECTION 3: WEEKLY SYSTEM DESIGN & CODING PROBLEMS
 
@@ -176,7 +167,7 @@ Build a production-grade **Saga Orchestrator Engine** in TypeScript:
 
 **Requirements**:
 
-1.  Implement a generic SagaOrchestrator\<TContext\> class that accepts an array of SagaStep\<TContext\>.
+1.  Implement a generic SagaOrchestrator<TContext> class that accepts an array of SagaStep<TContext>.
 
 2.  The orchestrator must execute steps sequentially in forward order.
 

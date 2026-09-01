@@ -1,16 +1,13 @@
+---
 tags:
-
 - database
-
 - postgresql
-
 - prisma
-
 - sql
-
 - orm
-
-- backend date: 2026-08-04
+- backend
+date: 2026-08-04
+---
 
 # Day 4 - Relational Databases, PostgreSQL & Prisma ORM Architecture
 
@@ -30,17 +27,12 @@ Relational Database Management Systems (RDBMS) ensure transactional integrity vi
 
 #### Concurrency Isolation Levels & Anomalies:
 
-  ------------------------------------------------------------------------------------------------------------------------------------------
-  **Isolation Level**                       **Dirty Read**   **Non-Repeatable Read**   **Phantom Read**          **Serialization Anomaly**
-  ----------------------------------------- ---------------- ------------------------- ------------------------- ---------------------------
-  **Read Uncommitted**                      Possible         Possible                  Possible                  Possible
-
-  **Read Committed** (PostgreSQL Default)   Prevented        Possible                  Possible                  Possible
-
-  **Repeatable Read**                       Prevented        Prevented                 Prevented (in Postgres)   Possible
-
-  **Serializable**                          Prevented        Prevented                 Prevented                 Prevented
-  ------------------------------------------------------------------------------------------------------------------------------------------
+| **Isolation Level** | **Dirty Read** | **Non-Repeatable Read** | **Phantom Read** | **Serialization Anomaly** |
+| --- | --- | --- | --- | --- |
+| **Read Uncommitted** | Possible | Possible | Possible | Possible |
+| **Read Committed** (PostgreSQL Default) | Prevented | Possible | Possible | Possible |
+| **Repeatable Read** | Prevented | Prevented | Prevented (in Postgres) | Possible |
+| **Serializable** | Prevented | Prevented | Prevented | Prevented |
 
 ### 2. PostgreSQL Architecture & Indexing Mechanics
 
@@ -48,7 +40,7 @@ PostgreSQL uses multi-version concurrency control (**MVCC**) to handle concurren
 
 #### Index Types & Use Cases:
 
-1.  **B-Tree (Default)**: Equality (=) and range queries (\<, \>, BETWEEN, ORDER BY).
+1.  **B-Tree (Default)**: Equality (=) and range queries (<, >, BETWEEN, ORDER BY).
 
 2.  **GIN (Generalized Inverted Index)**: Array types, JSONB fields, full-text search.
 
@@ -56,11 +48,12 @@ PostgreSQL uses multi-version concurrency control (**MVCC**) to handle concurren
 
 4.  **BRIN (Block Range Index)**: Large append-only data (timeseries/logs) with minimal disk footprint.
 
-\-- PostgreSQL B-Tree Composite Index Optimization
+-- PostgreSQL B-Tree Composite Index Optimization
 
+```javascript
 CREATE INDEX idx_orders_user_created ON orders (user_id, created_at DESC);
-
-\-- Optimizes queries matching: WHERE user_id = \'usr_101\' ORDER BY created_at DESC;
+-- Optimizes queries matching: WHERE user_id = 'usr_101' ORDER BY created_at DESC;
+```
 
 ### 3. Prisma ORM Architecture & Query Engine
 
@@ -72,29 +65,36 @@ Prisma bridges Node.js/TypeScript applications with SQL databases via a modular 
 
 3.  **Prisma Query Engine (Rust)**: High-performance binary executable that compiles Prisma query ASTs into optimized native SQL queries.
 
+```javascript
 // Production schema.prisma
+```
 
 datasource db {
 
-provider = \"postgresql\"
+provider = "postgresql"
 
-url = env(\"DATABASE_URL\")
+url = env("DATABASE_URL")
 
+```javascript
 }
+```
 
 generator client {
 
-provider = \"prisma-client-js\"
+provider = "prisma-client-js"
 
+```javascript
 }
-
 enum Role {
+```
 
 USER
 
 ADMIN
 
+```javascript
 }
+```
 
 model User {
 
@@ -106,17 +106,19 @@ name String?
 
 role Role \@default(USER)
 
-orders Order\[\]
+orders Order[]
 
 createdAt DateTime \@default(now())
 
 updatedAt DateTime \@updatedAt
 
-@@index(\[email\])
+@@index([email])
 
-@@map(\"users\")
+@@map("users")
 
+```javascript
 }
+```
 
 model Order {
 
@@ -124,49 +126,42 @@ id String \@id \@default(uuid())
 
 userId String
 
-user User \@relation(fields: \[userId\], references: \[id\], onDelete: Cascade)
+user User \@relation(fields: [userId], references: [id], onDelete: Cascade)
 
 totalAmount Decimal \@db.Decimal(10, 2)
 
-status String \@default(\"PENDING\")
+status String \@default("PENDING")
 
 version Int \@default(1) // For Optimistic Locking
 
 createdAt DateTime \@default(now())
 
-@@index(\[userId, createdAt(sort: Desc)\])
+@@index([userId, createdAt(sort: Desc)])
 
-@@map(\"orders\")
+@@map("orders")
 
+```typescript
 }
-
 // Transaction & N+1 Prevention Pattern in Prisma
-
-import { PrismaClient } from \'@prisma/client\';
-
+import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
-
 // Interactive Transaction with Optimistic Locking
-
 async function processCheckout(userId: string, totalAmount: number) {
-
-return await prisma.\$transaction(async (tx) =\> {
-
+return await prisma.$transaction(async (tx) => {
 // 1. Fetch user & check state
-
 const user = await tx.user.findUnique({
+```
 
 where: { id: userId },
 
 select: { id: true, email: true } // Select specific fields to prevent over-fetching
 
+```javascript
 });
-
-if (!user) throw new Error(\"User not found\");
-
+if (!user) throw new Error("User not found");
 // 2. Create Order
-
 const order = await tx.order.create({
+```
 
 data: {
 
@@ -174,33 +169,25 @@ userId: user.id,
 
 totalAmount,
 
-status: \"COMPLETED\"
+status: "COMPLETED"
 
+```javascript
 }
-
 });
-
 return order;
-
 });
-
 }
+```
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 
-  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  **Operation / Feature**     **Prisma CLI / Syntax**                               **SQL Equivalence**                        **Best Practice**
-  --------------------------- ----------------------------------------------------- ------------------------------------------ -----------------------------------------------------------
-  **Apply Dev Migration**     npx prisma migrate dev                                ALTER TABLE / CREATE TABLE                 Auto-generates timestamped SQL migration files
-
-  **Generate Client Types**   npx prisma generate                                   N/A                                        Run automatically after schema modifications
-
-  **Field Select**            prisma.user.findMany({ select: { id: true } })        SELECT id FROM users;                      Prevents over-fetching large JSON/text columns
-
-  **Relation Join**           prisma.user.findMany({ include: { orders: true } })   JOIN orders ON users.id = orders.user_id   Solves N+1 query problem by fetching in unified queries
-
-  **Transactions**            prisma.\$transaction(\[p1, p2\])                      BEGIN; \... COMMIT;                        Use sequential array transactions or interactive callback
-  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| **Operation / Feature** | **Prisma CLI / Syntax** | **SQL Equivalence** | **Best Practice** |
+| --- | --- | --- | --- |
+| **Apply Dev Migration** | npx prisma migrate dev | ALTER TABLE / CREATE TABLE | Auto-generates timestamped SQL migration files |
+| **Generate Client Types** | npx prisma generate | N/A | Run automatically after schema modifications |
+| **Field Select** | prisma.user.findMany({ select: { id: true } }) | SELECT id FROM users; | Prevents over-fetching large JSON/text columns |
+| **Relation Join** | prisma.user.findMany({ include: { orders: true } }) | JOIN orders ON users.id = orders.user_id | Solves N+1 query problem by fetching in unified queries |
+| **Transactions** | prisma.$transaction([p1, p2])                      BE | IN; ... COMMIT;                        Use | sequential array transactions or interactive callback |
 
 ## SECTION 3: WEEKLY SYSTEM DESIGN & CODING PROBLEMS
 
@@ -222,7 +209,7 @@ Build a robust **Prisma Financial Ledger & Transfer Service** in TypeScript.
 
 **Requirements**:
 
-1.  Implement a transferFunds(fromAccountId: string, toAccountId: string, amount: number) function inside a Prisma \$transaction.
+1.  Implement a transferFunds(fromAccountId: string, toAccountId: string, amount: number) function inside a Prisma $transaction.
 
 2.  Ensure accounts cannot go below a zero balance (throw operational error).
 

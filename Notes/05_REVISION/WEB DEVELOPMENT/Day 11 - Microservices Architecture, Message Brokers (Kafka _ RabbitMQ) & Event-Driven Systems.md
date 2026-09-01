@@ -1,16 +1,13 @@
+---
 tags:
-
 - microservices
-
 - kafka
-
 - rabbitmq
-
 - event-driven
-
 - backend
-
-- system-design date: 2026-08-11
+- system-design
+date: 2026-08-11
+---
 
 # Day 11 - Microservices Architecture, Message Brokers (Kafka / RabbitMQ) & Event-Driven Systems
 
@@ -28,19 +25,13 @@ Moving from a monolithic application to a microservices architecture decomposes 
 
 Understanding when to select Kafka vs RabbitMQ depends on architectural requirements:
 
-  ---------------------------------------------------------------------------------------------------------------------------
-  **Architecture Metric**   **Apache Kafka**                                   **RabbitMQ**
-  ------------------------- -------------------------------------------------- ----------------------------------------------
-  **Core Abstraction**      Distributed Immutable Commit Log                   AMQP Message Queue & Exchange
-
-  **Consumption Model**     Pull-based by Consumer Groups                      Push-based to Consumers
-
-  **Message Replay**        Native support (Replay past offsets)               Messages deleted upon ack
-
-  **Routing Flexibility**   Topic-based partitions                             Complex routing keys (Topic, Fanout, Direct)
-
-  **Throughput Target**     Millions of msgs/sec (High-throughput streaming)   Complex routing & per-message workflows
-  ---------------------------------------------------------------------------------------------------------------------------
+| **Architecture Metric** | **Apache Kafka** | **RabbitMQ** |
+| --- | --- | --- |
+| **Core Abstraction** | Distributed Immutable Commit Log | AMQP Message Queue & Exchange |
+| **Consumption Model** | Pull-based by Consumer Groups | Push-based to Consumers |
+| **Message Replay** | Native support (Replay past offsets) | Messages deleted upon ack |
+| **Routing Flexibility** | Topic-based partitions | Complex routing keys (Topic, Fanout, Direct) |
+| **Throughput Target** | Millions of msgs/sec (High-throughput streaming) | Complex routing & per-message workflows |
 
 ### 3. Kafka Core Primitives & Consumer Groups
 
@@ -50,95 +41,83 @@ Understanding when to select Kafka vs RabbitMQ depends on architectural requirem
 
 - **Consumer Groups**: Scalable consumer instances sharing topic consumption. Each partition is assigned to exactly one consumer within a group.
 
+```javascript
 // producer.ts - KafkaJS Production Setup
-
-import { Kafka, Partitioners } from \'kafkajs\';
-
+import { Kafka, Partitioners } from 'kafkajs';
 const kafka = new Kafka({
+```
 
-clientId: \'order-service\',
+clientId: 'order-service',
 
-brokers: \[\'kafka-broker-1:9092\', \'kafka-broker-2:9092\'\],
+brokers: ['kafka-broker-1:9092', 'kafka-broker-2:9092'],
 
+```javascript
 });
-
 const producer = kafka.producer({
+```
 
 createPartitioner: Partitioners.DefaultPartitioner,
 
+```typescript
 });
-
 export async function publishOrderCreatedEvent(order: { id: string; userId: string; total: number }) {
-
 await producer.connect();
-
 await producer.send({
+```
 
-topic: \'order-events\',
+topic: 'order-events',
 
-messages: \[
+messages: [
 
+```javascript
 {
+```
 
 key: order.id, // Ensures order messages hash to same partition!
 
-value: JSON.stringify({ type: \'ORDER_CREATED\', payload: order }),
+value: JSON.stringify({ type: 'ORDER_CREATED', payload: order }),
 
-headers: { correlationId: \'req-123-abc\' },
+headers: { correlationId: 'req-123-abc' },
 
 },
 
-\],
+],
 
+```javascript
 });
-
 }
-
 // consumer.ts - KafkaJS Idempotent Consumer
-
-import { Kafka } from \'kafkajs\';
-
-const kafka = new Kafka({ clientId: \'payment-service\', brokers: \[\'kafka:9092\'\] });
-
-const consumer = kafka.consumer({ groupId: \'payment-processor-group\' });
-
+import { Kafka } from 'kafkajs';
+const kafka = new Kafka({ clientId: 'payment-service', brokers: ['kafka:9092'] });
+const consumer = kafka.consumer({ groupId: 'payment-processor-group' });
 export async function startConsumer() {
-
 await consumer.connect();
-
-await consumer.subscribe({ topic: \'order-events\', fromBeginning: false });
-
+await consumer.subscribe({ topic: 'order-events', fromBeginning: false });
 await consumer.run({
+```
 
-eachMessage: async ({ topic, partition, message }) =\> {
+eachMessage: async ({ topic, partition, message }) => {
 
-const event = JSON.parse(message.value?.toString() \|\| \'{}\');
-
+```javascript
+const event = JSON.parse(message.value?.toString() || '{}');
 // Idempotency check using DB deduplication table
-
 const isProcessed = await db.processedEvent.findUnique({
+```
 
 where: { eventId: message.key?.toString() }
 
+```javascript
 });
-
 if (isProcessed) return;
-
-if (event.type === \'ORDER_CREATED\') {
-
+if (event.type === 'ORDER_CREATED') {
 await processPayment(event.payload);
-
 // Mark event as processed in DB transaction
-
 await db.processedEvent.create({ data: { eventId: message.key?.toString() } });
-
 }
-
 },
-
 });
-
 }
+```
 
 ### 4. Transactional Outbox Pattern
 
@@ -146,19 +125,13 @@ To avoid **Dual-Write Vulnerabilities** (updating database succeeds but message 
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 
-  ----------------------------------------------------------------------------------------------------------------------------------------------------------
-  **Tool / Pattern**          **CLI Command / Configuration**                                           **Purpose**
-  --------------------------- ------------------------------------------------------------------------- ----------------------------------------------------
-  **Kafka Topic Creation**    kafka-topics.sh \--create \--topic order-events \--partitions 3           Creates partitioned topic
-
-  **Consumer Group Offset**   kafka-consumer-groups.sh \--bootstrap-server localhost:9092 \--describe   Checks consumer lag across partitions
-
-  **Partition Keying**        { key: \'userId\', value: \'\...\' }                                      Guarantees ordered execution per key
-
-  **KafkaJS Ack Levels**      acks: -1 (or all)                                                         Highest durability; waits for all in-sync replicas
-
-  **Transactional Outbox**    DB Table Outbox { id, aggregateId, type, payload, processed }             Prevents database/broker dual-write failures
-  ----------------------------------------------------------------------------------------------------------------------------------------------------------
+| **Tool / Pattern** | **CLI Command / Configuration** | **Purpose** |
+| --- | --- | --- |
+| **Kafka Topic Creation** | kafka-topics.sh --create --topic order-events --partitions 3           Cr | ates partitioned topic |
+| **Consumer Group Offset** | kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe   C | ecks consumer lag across partitions |
+| **Partition Keying** | { key: 'userId', value: '...' }                                      Guar | ntees ordered execution per key |
+| **KafkaJS Ack Levels** | acks: -1 (or all) | Highest durability; waits for all in-sync replicas |
+| **Transactional Outbox** | DB Table Outbox { id, aggregateId, type, payload, processed } | Prevents database/broker dual-write failures |
 
 ## SECTION 3: WEEKLY SYSTEM DESIGN & CODING PROBLEMS
 

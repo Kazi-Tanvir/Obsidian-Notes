@@ -1,16 +1,13 @@
+---
 tags:
-
 - backend
-
 - api-gateway
-
 - rate-limiting
-
 - microservices
-
 - reverse-proxy
-
-- system-design date: 2026-08-16
+- system-design
+date: 2026-08-16
+---
 
 # Day 16 - API Gateway Architecture, Rate Limiting, Request Aggregation & Reverse Proxies
 
@@ -34,55 +31,34 @@ In modern microservices architectures, exposing internal microservices directly 
 
 ### 2. Distributed Rate Limiting Algorithms
 
-  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  **Algorithm**                **Mechanism**                                               **Pros**                                              **Cons / Trade-offs**
-  ---------------------------- ----------------------------------------------------------- ----------------------------------------------------- -----------------------------------------------
-  **Token Bucket**             Tokens added at fixed rate; requests consume tokens         Handles bursts smoothly; memory efficient             Requires atomic decrement operations
+| **Algorithm** | **Mechanism** | **Pros** | **Cons / Trade-offs** |
+| --- | --- | --- | --- |
+| **Token Bucket** | Tokens added at fixed rate; requests consume tokens | Handles bursts smoothly; memory efficient | Requires atomic decrement operations |
+| **Leaky Bucket** | Requests enter queue; processed at constant output rate | Smooths traffic peaks; prevents downstream overload | Drops bursts if buffer queue is full |
+| **Fixed Window** | Counts requests in fixed time intervals (e.g. 1 min) | Minimal memory usage; simple counters | Burst at boundary edges can double rate limit |
+| **Sliding Window Counter** | Combines previous window weight with current window count | High accuracy; prevents window boundary spikes | Moderate Redis memory & compute overhead |
 
-  **Leaky Bucket**             Requests enter queue; processed at constant output rate     Smooths traffic peaks; prevents downstream overload   Drops bursts if buffer queue is full
-
-  **Fixed Window**             Counts requests in fixed time intervals (e.g. 1 min)        Minimal memory usage; simple counters                 Burst at boundary edges can double rate limit
-
-  **Sliding Window Counter**   Combines previous window weight with current window count   High accuracy; prevents window boundary spikes        Moderate Redis memory & compute overhead
-  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+```typescript
 // Redis Sliding Window Counter Rate Limiting Algorithm
-
-import Redis from \'ioredis\';
-
+import Redis from 'ioredis';
 const redis = new Redis();
-
-async function checkRateLimit(key: string, limit: number, windowSeconds: number): Promise\<{ allowed: boolean; remaining: number }\> {
-
+async function checkRateLimit(key: string, limit: number, windowSeconds: number): Promise<{ allowed: boolean; remaining: number }> {
 const now = Date.now();
-
-const windowMs = windowSeconds \* 1000;
-
+const windowMs = windowSeconds * 1000;
 const clearBefore = now - windowMs;
-
 // Pipeline: 1. Remove expired requests 2. Add current request 3. Count requests in window 4. Set TTL
-
 const multi = redis.multi();
-
 multi.zremrangebyscore(key, 0, clearBefore);
-
-multi.zadd(key, now, \`\${now}-\${Math.random()}\`);
-
+multi.zadd(key, now, `${now}-${Math.random()}`);
 multi.zcard(key);
-
 multi.expire(key, windowSeconds);
-
 const results = await multi.exec();
-
-const currentCount = results?.\[2\]?.\[1\] as number;
-
-const allowed = currentCount \<= limit;
-
+const currentCount = results?.[2]?.[1] as number;
+const allowed = currentCount <= limit;
 const remaining = Math.max(0, limit - currentCount);
-
 return { allowed, remaining };
-
 }
+```
 
 ### 3. Circuit Breaker Pattern & Cascading Failure Prevention
 
@@ -94,9 +70,10 @@ When an upstream microservice degrades, continuous incoming requests can exhaust
 
 - **HALF-OPEN State**: After a reset timeout, a fraction of requests are allowed through to probe service recovery.
 
+```javascript
 // Circuit Breaker State Transition
-
 enum CircuitState { CLOSED, OPEN, HALF_OPEN }
+```
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 
@@ -112,7 +89,7 @@ enum CircuitState { CLOSED, OPEN, HALF_OPEN }
 
 ### Essential Reverse Proxy Headers:
 
-X-Forwarded-For: \<client-ip\>, \<proxy1-ip\>
+X-Forwarded-For: <client-ip>, <proxy1-ip>
 
 X-Forwarded-Proto: https
 
@@ -148,8 +125,8 @@ Build a production-grade **API Gateway Request Aggregator & Rate Limiter** in No
 
     - Account Metrics from http://analytics-service:4003/summary
 
-2.  Integrate a Redis-backed Sliding Window rate-limiting middleware that returns standard X-RateLimit-\* headers and responds with 429 Too Many Requests when limits are breached.
+2.  Integrate a Redis-backed Sliding Window rate-limiting middleware that returns standard X-RateLimit-* headers and responds with 429 Too Many Requests when limits are breached.
 
-3.  Wrap downstream service calls with an in-memory Circuit Breaker: if analytics-service fails 3 times consecutively, return cached fallback metrics { metrics: null, status: \"degraded\" } without failing the entire dashboard response.
+3.  Wrap downstream service calls with an in-memory Circuit Breaker: if analytics-service fails 3 times consecutively, return cached fallback metrics { metrics: null, status: "degraded" } without failing the entire dashboard response.
 
 4.  Include test cases verifying rate-limit enforcement and circuit-breaker graceful degradation.

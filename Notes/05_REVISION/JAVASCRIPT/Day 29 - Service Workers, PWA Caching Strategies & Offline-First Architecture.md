@@ -1,18 +1,14 @@
+---
 tags:
-
 - javascript
-
 - service-workers
-
 - pwa
-
 - offline-first
-
 - cache-api
-
 - background-sync
-
-- push-api date: 2026-08-29
+- push-api
+date: 2026-08-29
+---
 
 # Day 29 - Service Workers, PWA Caching Strategies & Offline-First Architecture
 
@@ -48,7 +44,7 @@ Read / Write Cache
 
 #### Service Worker Lifecycle States:
 
-1.  **Registration**: The browser registers the worker script path via navigator.serviceWorker.register(\'/sw.js\', { scope: \'/\' }).
+1.  **Registration**: The browser registers the worker script path via navigator.serviceWorker.register('/sw.js', { scope: '/' }).
 
 2.  **Installation (install event)**: Pre-caches critical static shell assets using event.waitUntil(). self.skipWaiting() forces an updated worker to skip the waiting state and activate immediately.
 
@@ -56,51 +52,36 @@ Read / Write Cache
 
 4.  **Idle / Functional Events (fetch, sync, push)**: Wakes up on demand to process network fetches, background syncs, or push events, then terminates when idle to save device resources.
 
+```javascript
 // sw.js - Production Lifecycle Setup
-
-const CACHE_NAME = \'app-shell-v2\';
-
-const STATIC_ASSETS = \[\'/\', \'/index.html\', \'/styles.css\', \'/app.js\', \'/favicon.ico\'\];
-
+const CACHE_NAME = 'app-shell-v2';
+const STATIC_ASSETS = ['/', '/index.html', '/styles.css', '/app.js', '/favicon.ico'];
 // 1. Install Event: Cache Core App Shell
-
-self.addEventListener(\'install\', (event) =\> {
-
+self.addEventListener('install', (event) => {
 event.waitUntil(
-
-caches.open(CACHE_NAME).then((cache) =\> cache.addAll(STATIC_ASSETS))
-
+caches.open(CACHE_NAME).then((cache) => cache.addAll(STATIC_ASSETS))
 );
-
 self.skipWaiting(); // Bypass waiting state
-
 });
-
 // 2. Activate Event: Purge Outdated Caches
-
-self.addEventListener(\'activate\', (event) =\> {
-
+self.addEventListener('activate', (event) => {
 event.waitUntil(
-
-caches.keys().then((cacheNames) =\>
+caches.keys().then((cacheNames) =>
+```
 
 Promise.all(
 
 cacheNames
 
-.filter((name) =\> name !== CACHE_NAME)
-
-.map((name) =\> caches.delete(name))
-
+```javascript
+.filter((name) => name !== CACHE_NAME)
+.map((name) => caches.delete(name))
 )
-
 )
-
 );
-
 self.clients.claim(); // Take control of open tabs
-
 });
+```
 
 ### 2. The 5 Core PWA Caching Strategies
 
@@ -108,153 +89,105 @@ self.clients.claim(); // Take control of open tabs
 
 Best for static immutable assets (versioned CSS/JS bundles, images, fonts).
 
+```javascript
 async function cacheFirst(request) {
-
 const cachedResponse = await caches.match(request);
-
 if (cachedResponse) return cachedResponse;
-
 try {
-
 const networkResponse = await fetch(request);
-
 if (networkResponse.ok) {
-
 const cache = await caches.open(CACHE_NAME);
-
 cache.put(request, networkResponse.clone());
-
 }
-
 return networkResponse;
-
 } catch (error) {
-
-return new Response(\'Network error occurred\', { status: 408 });
-
+return new Response('Network error occurred', { status: 408 });
 }
-
 }
+```
 
 #### B. Network-First (Network Falling Back to Cache)
 
 Best for real-time frequently changing data where freshness is paramount (user profile, stock prices), falling back to cached state if offline.
 
+```javascript
 async function networkFirst(request) {
-
 try {
-
 const networkResponse = await fetch(request);
-
 if (networkResponse.ok) {
-
 const cache = await caches.open(CACHE_NAME);
-
 cache.put(request, networkResponse.clone());
-
 }
-
 return networkResponse;
-
 } catch (error) {
-
 const cachedResponse = await caches.match(request);
-
 if (cachedResponse) return cachedResponse;
+return new Response(JSON.stringify({ error: 'Offline and un-cached' }), {
+```
 
-return new Response(JSON.stringify({ error: \'Offline and un-cached\' }), {
-
-headers: { \'Content-Type\': \'application/json\' },
+headers: { 'Content-Type': 'application/json' },
 
 status: 503,
 
+```javascript
 });
-
 }
-
 }
+```
 
 #### C. Stale-While-Revalidate (SWR)
 
 Returns cached response immediately for instantaneous rendering, while asynchronously fetching a fresh copy from the network and updating the cache in the background. Best for social feeds, product catalogs, and dashboard summaries.
 
+```javascript
 async function staleWhileRevalidate(request) {
-
 const cache = await caches.open(CACHE_NAME);
-
 const cachedResponse = await cache.match(request);
-
-const fetchPromise = fetch(request).then((networkResponse) =\> {
-
+const fetchPromise = fetch(request).then((networkResponse) => {
 if (networkResponse.ok) {
-
 cache.put(request, networkResponse.clone());
-
 }
-
 return networkResponse;
-
-}).catch(() =\> null);
-
-return cachedResponse \|\| (await fetchPromise);
-
+}).catch(() => null);
+return cachedResponse || (await fetchPromise);
 }
+```
 
 ### 3. Background Sync & Offline Mutation Replays
 
 The **Background Sync API** allows web applications to defer server-state mutations (e.g. submitting a form, posting a comment) until the user has a stable network connection.
 
+```javascript
 // Main Thread: Registering Background Sync
-
 async function submitCommentOffline(commentData) {
-
-await saveToIndexedDB(\'offline_comments\', commentData);
-
+await saveToIndexedDB('offline_comments', commentData);
 const registration = await navigator.serviceWorker.ready;
-
-if (\'sync\' in registration) {
-
-await registration.sync.register(\'sync-comments\');
-
+if ('sync' in registration) {
+await registration.sync.register('sync-comments');
 } else {
-
 // Fallback if background sync is unsupported
-
 await syncCommentsImmediately();
-
 }
-
 }
-
 // Service Worker: Processing Sync Event
-
-self.addEventListener(\'sync\', (event) =\> {
-
-if (event.tag === \'sync-comments\') {
-
+self.addEventListener('sync', (event) => {
+if (event.tag === 'sync-comments') {
 event.waitUntil(replayOfflineComments());
-
 }
-
 });
+```
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 
 ### Caching Strategy Decision Matrix:
 
-  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  **Strategy**                 **Network Latency**               **Data Freshness**           **Offline Support**   **Recommended Resource Type**
-  ---------------------------- --------------------------------- ---------------------------- --------------------- ---------------------------------------------------
-  **Cache-First**              Ultra-Fast (\$\<10\\text{ms}\$)   Stale (until version bump)   Complete              Fingerprinted JS/CSS, Web Fonts, Static Icons
-
-  **Network-First**            High (Network-bound)              Immediate                    Fallback Only         Account Balances, Real-Time Telemetry
-
-  **Stale-While-Revalidate**   Ultra-Fast (\$\<10\\text{ms}\$)   Eventually Consistent        Complete              Articles, Dashboard Cards, Social Feeds
-
-  **Network-Only**             High (Network-bound)              Immediate                    None                  Payment Transactions, Live Authentication
-
-  **Cache-Only**               Ultra-Fast (\$\<5\\text{ms}\$)    Static                       Complete              Pre-cached Offline Fallback Pages (/offline.html)
-  ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| **Strategy** | **Network Latency** | **Data Freshness** | **Offline Support** | **Recommended Resource Type** |
+| --- | --- | --- | --- | --- |
+| **Cache-First** | Ultra-Fast ($<10\text{ms}$)   Sta | e (until version bump)   Com | lete              Fin | erprinted JS/CSS, Web Fonts, Static Icons |
+| **Network-First** | High (Network-bound) | Immediate | Fallback Only | Account Balances, Real-Time Telemetry |
+| **Stale-While-Revalidate** | Ultra-Fast ($<10\text{ms}$)   Eve | tually Consistent        Com | lete              Art | cles, Dashboard Cards, Social Feeds |
+| **Network-Only** | High (Network-bound) | Immediate | None | Payment Transactions, Live Authentication |
+| **Cache-Only** | Ultra-Fast ($<5\text{ms}$)    Sta | ic                       Com | lete              Pre | cached Offline Fallback Pages (/offline.html) |
 
 ## SECTION 3: PRACTICAL PROBLEMS
 
@@ -262,17 +195,14 @@ event.waitUntil(replayOfflineComments());
 
 Analyze the registration and scope setup below. Predict whether the Service Worker will intercept the fetch requests made by the page:
 
+```javascript
 // In /admin/dashboard/index.html:
-
-navigator.serviceWorker.register(\'/admin/sw.js\', { scope: \'/admin/\' });
-
+navigator.serviceWorker.register('/admin/sw.js', { scope: '/admin/' });
 // In Page Script:
-
-fetch(\'/admin/api/metrics\'); // Request A
-
-fetch(\'/api/v1/users\'); // Request B
-
-fetch(\'/assets/style.css\'); // Request C
+fetch('/admin/api/metrics'); // Request A
+fetch('/api/v1/users'); // Request B
+fetch('/assets/style.css'); // Request C
+```
 
 *Question*: Which requests (A, B, C) are intercepted by /admin/sw.js and why? What header must the server send to allow /admin/sw.js to control the root scope /?
 
@@ -288,17 +218,15 @@ Refactor the following un-bounded cache handler into a **Max-Item LRU Cache Stor
 
 2.  Evicts the oldest accessed entry when inserting item 51.
 
+```javascript
 // Unbounded Vulnerable Cache Routine
-
 async function cacheResourceUnbounded(cacheName, request, response) {
-
 const cache = await caches.open(cacheName);
-
 await cache.put(request, response); // Can grow indefinitely!
-
 }
+```
 
-*Hint*: Use cache.keys() to inspect existing requests and delete the oldest key (cache.delete(keys\[0\])).
+*Hint*: Use cache.keys() to inspect existing requests and delete the oldest key (cache.delete(keys[0])).
 
 ### Challenge 3: End-to-End Offline-First Background Sync Queue
 
@@ -312,11 +240,11 @@ Build a production-grade **Offline-First Mutation Synchronizer** in TypeScript:
 
     - Stores it into an IndexedDB store (pending_mutations).
 
-    - Registers a background sync tag \'sync-mutations\' on ServiceWorkerRegistration.
+    - Registers a background sync tag 'sync-mutations' on ServiceWorkerRegistration.
 
 2.  **Service Worker Sync Handler (sw.ts)**:
 
-    - Listens to self.addEventListener(\'sync\', \...) matching \'sync-mutations\'.
+    - Listens to self.addEventListener('sync', ...) matching 'sync-mutations'.
 
     - Iterates through pending mutations in chronological order.
 

@@ -1,16 +1,13 @@
+---
 tags:
-
 - backend
-
 - grpc
-
 - protobuf
-
 - microservices
-
 - http2
-
-- rpc date: 2026-08-15
+- rpc
+date: 2026-08-15
+---
 
 # Day 15 - gRPC, Protocol Buffers & Inter-Service Microservice Communication
 
@@ -22,93 +19,80 @@ While REST over HTTP/1.1 with JSON payloads is common for public-facing client A
 
 #### REST vs. gRPC Architectural Comparison:
 
-  ---------------------------------------------------------------------------------------------------------------------------------
-  **Architectural Metric**    **REST / JSON**                           **gRPC / Protocol Buffers**
-  --------------------------- ----------------------------------------- -----------------------------------------------------------
-  **Transport Layer**         HTTP/1.1 (or HTTP/2)                      HTTP/2 Native (Multiplexing, Header Compression)
-
-  **Data Serialization**      Text-based JSON (Large overhead)          Binary Protocol Buffers (Compact, High-speed)
-
-  **API Contract**            OpenAPI / Swagger (Optional, decoupled)   .proto IDL file (Strict, Required, Code-generated)
-
-  **Streaming Support**       Unary (or WebSockets / SSE)               Unary, Client Streaming, Server Streaming, Bi-Directional
-
-  **Browser Compatibility**   100% Native                               Requires gRPC-Web proxy / Envoy bridge
-  ---------------------------------------------------------------------------------------------------------------------------------
+| **Architectural Metric** | **REST / JSON** | **gRPC / Protocol Buffers** |
+| --- | --- | --- |
+| **Transport Layer** | HTTP/1.1 (or HTTP/2) | HTTP/2 Native (Multiplexing, Header Compression) |
+| **Data Serialization** | Text-based JSON (Large overhead) | Binary Protocol Buffers (Compact, High-speed) |
+| **API Contract** | OpenAPI / Swagger (Optional, decoupled) | .proto IDL file (Strict, Required, Code-generated) |
+| **Streaming Support** | Unary (or WebSockets / SSE) | Unary, Client Streaming, Server Streaming, Bi-Directional |
+| **Browser Compatibility** | 100% Native | Requires gRPC-Web proxy / Envoy bridge |
 
 ### 2. Protocol Buffers (Protobuf) IDL & Binary Packing
 
 Protocol Buffers define schemas in a language-agnostic .proto file. Each field is assigned a numbered tag (e.g. int32 id = 1;). Protobuf encodes field tags and raw bytes without repeating property names, reducing payload sizes by 60--80% compared to JSON.
 
+```javascript
 // auth.proto
-
-syntax = \"proto3\";
-
+syntax = "proto3";
 package auth;
+```
 
 service AuthService {
 
-// 1. Unary RPC: Single request -\> Single response
-
+```javascript
+// 1. Unary RPC: Single request -> Single response
 rpc VerifyToken (TokenRequest) returns (TokenResponse);
-
-// 2. Server Streaming RPC: Single request -\> Continuous Stream of events
-
+// 2. Server Streaming RPC: Single request -> Continuous Stream of events
 rpc StreamSecurityEvents (EventFilter) returns (stream SecurityEvent);
-
 }
+```
 
 message TokenRequest {
 
+```javascript
 string token = 1;
-
 string required_role = 2;
-
 }
+```
 
 message TokenResponse {
 
+```javascript
 bool is_valid = 1;
-
 string user_id = 2;
-
 repeated string permissions = 3;
-
 }
+```
 
 message EventFilter {
 
+```javascript
 string environment = 1;
-
 }
+```
 
 message SecurityEvent {
 
+```javascript
 string event_id = 1;
-
 string timestamp = 2;
-
 string severity = 3;
-
 string description = 4;
-
 }
+```
 
 ### 3. Implementing a gRPC Server in Node.js / TypeScript
 
 Using \@grpc/grpc-js and \@grpc/proto-loader, Node.js microservices compile .proto files dynamically or via static types.
 
+```javascript
 // server.ts - High-Performance gRPC Microservice
-
-import \* as grpc from \'@grpc/grpc-js\';
-
-import \* as protoLoader from \'@grpc/proto-loader\';
-
-path from \'path\';
-
-const PROTO_PATH = path.resolve(\_\_dirname, \'auth.proto\');
-
+import * as grpc from '@grpc/grpc-js';
+import * as protoLoader from '@grpc/proto-loader';
+path from 'path';
+const PROTO_PATH = path.resolve(__dirname, 'auth.proto');
 const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
+```
 
 keepCase: true,
 
@@ -120,105 +104,90 @@ defaults: true,
 
 oneofs: true,
 
+```javascript
 });
-
 const authProto = (grpc.loadPackageDefinition(packageDefinition) as any).auth;
-
 // Unary RPC Handler Implementation
-
 function verifyToken(
+```
 
-call: grpc.ServerUnaryCall\<any, any\>,
+call: grpc.ServerUnaryCall<any, any>,
 
-callback: grpc.sendUnaryData\<any\>
+callback: grpc.sendUnaryData<any>
 
 ) {
 
+```javascript
 const { token, required_role } = call.request;
-
 if (!token) {
-
 return callback({
+```
 
 code: grpc.status.INVALID_ARGUMENT,
 
-message: \'Token is required\',
+message: 'Token is required',
 
+```javascript
 });
-
 }
-
 // Simulated Verification
-
-const isValid = token.startsWith(\'bearer\_\');
-
+const isValid = token.startsWith('bearer_');
 callback(null, {
+```
 
 is_valid: isValid,
 
-user_id: \'usr_789\',
+user_id: 'usr_789',
 
-permissions: \[\'read:orders\', \'write:orders\'\],
+permissions: ['read:orders', 'write:orders'],
 
+```javascript
 });
-
 }
-
 // Server Initialization
-
 const server = new grpc.Server();
-
 server.addService(authProto.AuthService.service, { verifyToken });
-
 server.bindAsync(
+```
 
-\'0.0.0.0:50051\',
+'0.0.0.0:50051',
 
 grpc.ServerCredentials.createInsecure(),
 
-(err, port) =\> {
+(err, port) => {
 
+```javascript
 if (err) throw err;
-
-console.log(\`\[gRPC Service\]: Listening on port \${port}\`);
-
+console.log(`[gRPC Service]: Listening on port ${port}`);
 }
-
 );
+```
 
 ### 4. gRPC Deadlines, Timeouts & Metadata Context
 
-Unlike REST where requests often hang indefinitely on slow backends, gRPC enforces strict **Deadlines**. Deadlines propagate across multi-tier microservice calls (Service A -\> Service B -\> Service C), automatically aborting downstream processing if the top-level timeout expires.
+Unlike REST where requests often hang indefinitely on slow backends, gRPC enforces strict **Deadlines**. Deadlines propagate across multi-tier microservice calls (Service A -> Service B -> Service C), automatically aborting downstream processing if the top-level timeout expires.
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 
-  -------------------------------------------------------------------------------
-  **gRPC Status Code**    **Name**                **Corresponding HTTP Status**
-  ----------------------- ----------------------- -------------------------------
-  **0**                   OK                      200 OK
-
-  **3**                   INVALID_ARGUMENT        400 Bad Request
-
-  **4**                   DEADLINE_EXCEEDED       504 Gateway Timeout
-
-  **5**                   NOT_FOUND               404 Not Found
-
-  **7**                   PERMISSION_DENIED       403 Forbidden
-
-  **14**                  UNAVAILABLE             503 Service Unavailable
-
-  **16**                  UNAUTHENTICATED         401 Unauthorized
-  -------------------------------------------------------------------------------
+| **gRPC Status Code** | **Name** | **Corresponding HTTP Status** |
+| --- | --- | --- |
+| **0** | OK | 200 OK |
+| **3** | INVALID_ARGUMENT | 400 Bad Request |
+| **4** | DEADLINE_EXCEEDED | 504 Gateway Timeout |
+| **5** | NOT_FOUND | 404 Not Found |
+| **7** | PERMISSION_DENIED | 403 Forbidden |
+| **14** | UNAVAILABLE | 503 Service Unavailable |
+| **16** | UNAUTHENTICATED | 401 Unauthorized |
 
 ### CLI Testing Commands (grpcurl)
 
-\# List all services on a gRPC server with reflection enabled
+# List all services on a gRPC server with reflection enabled
 
 grpcurl -plaintext localhost:50051 list
 
-\# Invoke a Unary RPC method
+# Invoke a Unary RPC method
 
-grpcurl -plaintext -d \'{\"token\": \"bearer_abc\", \"required_role\": \"admin\"}\' \\
+grpcurl -plaintext -d '{"token": "bearer_abc", "required_role": "admin"}' \
 
 localhost:50051 auth.AuthService/VerifyToken
 
@@ -230,7 +199,7 @@ Design a low-latency gRPC-based microservice architecture for a High-Frequency O
 
 **Requirements**:
 
-1.  Diagram the inter-service communication flow across 3 services: API Gateway (REST/Next.js) -\> Order Matching Engine (gRPC) -\> Risk Management Service (gRPC).
+1.  Diagram the inter-service communication flow across 3 services: API Gateway (REST/Next.js) -> Order Matching Engine (gRPC) -> Risk Management Service (gRPC).
 
 2.  Formulate .proto schema definitions for PlaceOrder, CancelOrder, and StreamLiveOrderBook (Server Streaming).
 

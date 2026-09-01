@@ -1,16 +1,13 @@
+---
 tags:
-
 - backend
-
 - nodejs
-
 - event-loop
-
 - async-io
-
 - libuv
-
-- worker-threads date: 2026-08-02
+- worker-threads
+date: 2026-08-02
+---
 
 # Day 2 - Advanced Node.js Event Loop, Asynchronous I/O & Worker Threads
 
@@ -26,25 +23,25 @@ Node.js is an asynchronous, event-driven JavaScript runtime. It is built on thre
 
 3.  **C++ Bindings & Core Modules**: Connects JS code (e.g., fs, net, crypto, http) with underlying C/C++ libuv primitives.
 
-+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--+
++-------------------------------------------------------+
 
-\| Node.js Application \|
+| Node.js Application |
 
-+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--+
++-------------------------------------------------------+
 
-\| Node.js Standard Library (JS) \|
+| Node.js Standard Library (JS) |
 
-+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--+
++-------------------------------------------------------+
 
-\| Node.js C++ Bindings / Addons \|
+| Node.js C++ Bindings / Addons |
 
-+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--+
++---------------------------+---------------------------+
 
-\| V8 JS Engine \| libuv (C) \|
+| V8 JS Engine | libuv (C) |
 
-\| (Call Stack / Memory Heap) \| (Event Loop, Thread Pool) \|
+| (Call Stack / Memory Heap) | (Event Loop, Thread Pool) |
 
-+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--+
++---------------------------+---------------------------+
 
 ### 2. The 6 Phases of the libuv Event Loop
 
@@ -66,7 +63,7 @@ When Node.js starts, it initializes the Event Loop. Each iteration of the Event 
 
 5.  **Check Phase**: Executes callbacks scheduled by setImmediate().
 
-6.  **Close Callbacks Phase**: Executes close handlers (e.g. socket.on(\'close\', \...)).
+6.  **Close Callbacks Phase**: Executes close handlers (e.g. socket.on('close', ...)).
 
 #### Microtask Priority (Between Phases):
 
@@ -76,37 +73,24 @@ Before transitioning to the next phase, Node.js drains:
 
 2.  Promise Microtask queue (queueMicrotask / resolved Promise .then()).
 
+```javascript
 // Execution Order Demonstration
-
-console.log(\"1. Sync Main Execution\");
-
-setTimeout(() =\> console.log(\"2. Timers Phase (setTimeout)\"), 0);
-
-setImmediate(() =\> console.log(\"3. Check Phase (setImmediate)\"));
-
-Promise.resolve().then(() =\> console.log(\"4. Promise Microtask\"));
-
-process.nextTick(() =\> console.log(\"5. process.nextTick\"));
-
-console.log(\"6. Sync End\");
-
-/\*
-
+console.log("1. Sync Main Execution");
+setTimeout(() => console.log("2. Timers Phase (setTimeout)"), 0);
+setImmediate(() => console.log("3. Check Phase (setImmediate)"));
+Promise.resolve().then(() => console.log("4. Promise Microtask"));
+process.nextTick(() => console.log("5. process.nextTick"));
+console.log("6. Sync End");
+/*
 Output Order:
-
-1\. Sync Main Execution
-
-6\. Sync End
-
-5\. process.nextTick
-
-4\. Promise Microtask
-
-2\. Timers Phase (setTimeout)
-
-3\. Check Phase (setImmediate)
-
-\*/
+1. Sync Main Execution
+6. Sync End
+5. process.nextTick
+4. Promise Microtask
+2. Timers Phase (setTimeout)
+3. Check Phase (setImmediate)
+*/
+```
 
 ### 3. Offloading CPU-Bound Work: Worker Threads vs Thread Pool
 
@@ -114,59 +98,45 @@ Output Order:
 
 - **Worker Threads (worker_threads)**: Enables running CPU-bound JavaScript execution in parallel across true OS threads sharing memory via ArrayBuffer / SharedArrayBuffer.
 
+```typescript
 // Main Thread: offloadHeavyTask.ts
-
-import { Worker } from \'worker_threads\';
-
-import path from \'path\';
-
-export function runCpuHeavyTask(data: number): Promise\<number\> {
-
-return new Promise((resolve, reject) =\> {
-
-const worker = new Worker(path.resolve(\_\_dirname, \'./worker.js\'), {
+import { Worker } from 'worker_threads';
+import path from 'path';
+export function runCpuHeavyTask(data: number): Promise<number> {
+return new Promise((resolve, reject) => {
+const worker = new Worker(path.resolve(__dirname, './worker.js'), {
+```
 
 workerData: data
 
+```javascript
 });
-
-worker.on(\'message\', resolve);
-
-worker.on(\'error\', reject);
-
-worker.on(\'exit\', (code) =\> {
-
-if (code !== 0) reject(new Error(\`Worker stopped with exit code \${code}\`));
-
+worker.on('message', resolve);
+worker.on('error', reject);
+worker.on('exit', (code) => {
+if (code !== 0) reject(new Error(`Worker stopped with exit code ${code}`));
 });
-
 });
-
 }
+```
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 
-  -------------------------------------------------------------------------------------------------------------------------------------------------
-  **API / Concept**    **Category**      **Execution Phase / Mechanism**                        **Primary Use Case**
-  -------------------- ----------------- ------------------------------------------------------ ---------------------------------------------------
-  process.nextTick()   Microtask         Drains immediately after current operation completes   Deferring execution before next event loop phase
-
-  Promise.then()       Microtask         Drains immediately after nextTick queue                Asynchronous resolution / chaining
-
-  setTimeout(fn, 0)    Timers Phase      Executed in Timers phase after minimum threshold       Scheduled delayed tasks
-
-  setImmediate(fn)     Check Phase       Executed in Check phase immediately after Poll phase   I/O completion callbacks
-
-  UV_THREADPOOL_SIZE   Environment Var   Configures libuv C thread pool size                    Scaling file I/O & crypto concurrency
-
-  worker_threads       Module            Spawns separate V8 isolates & OS threads               Heavy CPU calculation without blocking event loop
-  -------------------------------------------------------------------------------------------------------------------------------------------------
+| **API / Concept** | **Category** | **Execution Phase / Mechanism** | **Primary Use Case** |
+| --- | --- | --- | --- |
+| process.nextTick() | Microtask | Drains immediately after current operation completes | Deferring execution before next event loop phase |
+| Promise.then() | Microtask | Drains immediately after nextTick queue | Asynchronous resolution / chaining |
+| setTimeout(fn, 0) | Timers Phase | Executed in Timers phase after minimum threshold | Scheduled delayed tasks |
+| setImmediate(fn) | Check Phase | Executed in Check phase immediately after Poll phase | I/O completion callbacks |
+| UV_THREADPOOL_SIZE | Environment Var | Configures libuv C thread pool size | Scaling file I/O & crypto concurrency |
+| worker_threads | Module | Spawns separate V8 isolates & OS threads | Heavy CPU calculation without blocking event loop |
 
 ### Environment Setup Commands:
 
-\# Increase libuv thread pool size for high-concurrency Node.js crypto/file server
-
+```javascript
+# Increase libuv thread pool size for high-concurrency Node.js crypto/file server
 export UV_THREADPOOL_SIZE=16
+```
 
 node server.js
 
@@ -196,6 +166,6 @@ Build a resilient **Worker Thread Pool Manager** class in TypeScript from scratc
 
 3.  Automatically replace crashed workers without dropping queued jobs.
 
-4.  Expose exec(taskData: any): Promise\<any\> and destroy(): Promise\<void\>.
+4.  Expose exec(taskData: any): Promise<any> and destroy(): Promise<void>.
 
 5.  Provide unit test scenarios simulating 20 concurrent tasks dispatched across 4 workers.

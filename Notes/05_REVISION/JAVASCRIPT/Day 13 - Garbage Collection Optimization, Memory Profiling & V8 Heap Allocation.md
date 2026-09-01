@@ -1,16 +1,13 @@
+---
 tags:
-
 - javascript
-
 - memory-profiling
-
 - v8-heap
-
 - garbage-collection
-
 - performance
-
-- memory-leaks date: 2026-08-13
+- memory-leaks
+date: 2026-08-13
+---
 
 # Day 13 - Garbage Collection Optimization, Memory Profiling & V8 Heap Allocation
 
@@ -36,7 +33,7 @@ The V8 Engine manages JavaScript memory through a structured heap memory layout 
 
 Garbage collection reclaims memory occupied by unreferenced objects. V8 utilizes a generational garbage collection strategy:
 
-#### Minor GC (Scavenger / Cheney\'s Algorithm):
+#### Minor GC (Scavenger / Cheney's Algorithm):
 
 - Uses a **To-Space** and **From-Space** semi-space copying collector.
 
@@ -52,33 +49,22 @@ When the Old Space reaches its dynamic threshold, V8 triggers Major GC across 3 
 
 3.  **Compacting**: Relocates surviving objects into contiguous memory blocks to eliminate fragmentation.
 
+```javascript
 // Visualizing Memory Allocation Dynamics in V8
-
 function AllocationPatternTest() {
-
-// 1. Short-lived allocation -\> Allocated in New Space (Nursery)
-
-for (let i = 0; i \< 10000; i++) {
-
-const temp = { id: i, payload: \"transient\" };
-
+// 1. Short-lived allocation -> Allocated in New Space (Nursery)
+for (let i = 0; i < 10000; i++) {
+const temp = { id: i, payload: "transient" };
 // Automatically collected by Minor GC (Scavenger)
-
 }
-
-// 2. Long-lived allocation -\> Promoted to Old Space after 2 GC cycles
-
+// 2. Long-lived allocation -> Promoted to Old Space after 2 GC cycles
 const persistentCache = new Map();
-
-for (let i = 0; i \< 1000; i++) {
-
-persistentCache.set(\`key-\${i}\`, { data: new Array(100).fill(\"persistent\") });
-
+for (let i = 0; i < 1000; i++) {
+persistentCache.set(`key-${i}`, { data: new Array(100).fill("persistent") });
 }
-
 return persistentCache;
-
 }
+```
 
 ### 3. Memory Leak Anti-Patterns in JavaScript
 
@@ -92,37 +78,24 @@ A memory leak occurs when an application retains references to objects that are 
 
 3.  **Uncleared Timers & Listeners**: Global setInterval or EventEmitter callbacks holding reference to enclosing scopes.
 
+```javascript
 // Anti-Pattern: Detached DOM Node Leak
-
 let detachedElementRef;
-
 function createLeak() {
-
-const button = document.createElement(\"button\");
-
-button.id = \"leak-button\";
-
+const button = document.createElement("button");
+button.id = "leak-button";
 document.body.appendChild(button);
-
 // JS holds reference to button
-
 detachedElementRef = button;
-
 // Button removed from DOM, but detachedElementRef keeps entire subtree in memory!
-
 document.body.removeChild(button);
-
 }
-
 // Remediation: Nullify reference after DOM removal
-
 function fixLeak() {
-
 createLeak();
-
 detachedElementRef = null; // Released for GC
-
 }
+```
 
 ### 4. Memory Profiling in Chrome DevTools
 
@@ -134,19 +107,13 @@ detachedElementRef = null; // Released for GC
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 
-  -------------------------------------------------------------------------------------------------------------------------------------
-  **Metric / Command**                  **Purpose / Usage**                        **Significance**
-  ------------------------------------- ------------------------------------------ ----------------------------------------------------
-  **node \--trace-gc script.js**        Logs detailed V8 GC execution statistics   Identifies GC frequency & Stop-The-World duration
-
-  **node \--max-old-space-size=4096**   Configures Node.js heap limit (e.g. 4GB)   Prevents OOM crashes in heavy workloads
-
-  **Shallow Size**                      Object.keys() & internal field bytes       Direct memory footprint of target object
-
-  **Retained Size**                     Distance graph reachability size           Real memory reclaimed if object is dereferenced
-
-  **WeakRef & FinalizationRegistry**    const ref = new WeakRef(obj)               Allows non-retaining references & GC cleanup hooks
-  -------------------------------------------------------------------------------------------------------------------------------------
+| **Metric / Command** | **Purpose / Usage** | **Significance** |
+| --- | --- | --- |
+| **node --trace-gc script.js** | ogs detailed V8 GC execution statistics | dentifies GC frequency & Stop-The-World duration |
+| **node --max-old-space-size=4096** | onfigures Node.js heap limit (e.g. 4GB) | revents OOM crashes in heavy workloads |
+| **Shallow Size** | Object.keys() & internal field bytes | Direct memory footprint of target object |
+| **Retained Size** | Distance graph reachability size | Real memory reclaimed if object is dereferenced |
+| **WeakRef & FinalizationRegistry** | const ref = new WeakRef(obj) | Allows non-retaining references & GC cleanup hooks |
 
 ## SECTION 3: PRACTICAL PROBLEMS
 
@@ -160,37 +127,24 @@ Analyze the object graph below and calculate:
 
 3.  What happens to the memory when manager = null is executed?
 
+```javascript
 class UserSession {
-
 constructor(id) {
-
 this.id = id; // 8 bytes
-
-this.buffer = new ArrayBuffer(1024 \* 1024); // 1MB payload
-
+this.buffer = new ArrayBuffer(1024 * 1024); // 1MB payload
 }
-
 }
-
 class UserSessionManager {
-
 constructor() {
-
 this.sessions = new Map(); // 128 bytes map metadata
-
 }
-
 addSession(id) {
-
 this.sessions.set(id, new UserSession(id));
-
 }
-
 }
-
 let manager = new UserSessionManager();
-
-manager.addSession(\"usr_100\");
+manager.addSession("usr_100");
+```
 
 *Hint*: Calculate retained memory transitively through this.sessions.
 
@@ -198,37 +152,31 @@ manager.addSession(\"usr_100\");
 
 The following code leaks memory when startWorker() is invoked repeatedly. Identify the root cause of the retained memory and refactor it so that unused data is freed by V8.
 
+```javascript
 // Leaky Code Pattern
-
 let unusedClosureLeak = null;
-
 function startWorker() {
-
 const originalLeak = unusedClosureLeak;
-
 // Large allocation
-
-const hugeData = new ArrayBuffer(10 \* 1024 \* 1024); // 10MB
+const hugeData = new ArrayBuffer(10 * 1024 * 1024); // 10MB
+```
 
 unusedClosureLeak = function () {
 
+```javascript
 if (originalLeak) {
-
-console.log(\"Worker active\");
-
+console.log("Worker active");
 }
-
 };
-
 }
-
 setInterval(startWorker, 1000); // 10MB leaked every second!
+```
 
 *Hint*: Explain how hugeData is trapped in the lexical environment shared by unusedClosureLeak.
 
 ### Challenge 3: Building a Zero-Allocation Object Pool Engine
 
-Write a high-performance, reusable **Object Pool Class** ObjectPool\<T\> in TypeScript that:
+Write a high-performance, reusable **Object Pool Class** ObjectPool<T> in TypeScript that:
 
 1.  Pre-allocates an array of N instances using a factory function allocator().
 

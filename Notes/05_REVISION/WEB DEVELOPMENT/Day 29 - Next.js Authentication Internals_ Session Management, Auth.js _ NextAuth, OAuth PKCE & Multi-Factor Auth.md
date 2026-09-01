@@ -1,20 +1,15 @@
+---
 tags:
-
 - frontend
-
 - nextjs
-
 - auth
-
 - security
-
 - oauth
-
 - session-management
-
 - mfa
-
-- backend date: 2026-08-29
+- backend
+date: 2026-08-29
+---
 
 # Day 29 - Next.js Authentication Internals: Session Management, Auth.js / NextAuth, OAuth PKCE & Multi-Factor Auth
 
@@ -28,7 +23,7 @@ Authentication in Next.js App Router spans both server-side React Server Compone
 
 │ │
 
-│ \[ Edge Middleware \] ────────► \[ Server Components (RSC) \] ────────► \[ Server Actions / Route Handlers \] │
+│ [ Edge Middleware ] ────────► [ Server Components (RSC) ] ────────► [ Server Actions / Route Handlers ] │
 
 │ • Edge JWT verification • Universal auth() read • Mutating state with CSRF check │
 
@@ -50,27 +45,22 @@ Authentication in Next.js App Router spans both server-side React Server Compone
 
 Auth.js v5 introduces the **Universal auth() helper**, which functions consistently across all App Router boundaries:
 
+```javascript
 // auth.ts - Central Configuration
-
-import NextAuth from \'next-auth\';
-
-import GitHub from \'next-auth/providers/github\';
-
-import Credentials from \'next-auth/providers/credentials\';
-
-import { PrismaAdapter } from \'@auth/prisma-adapter\';
-
-import { prisma } from \'@/lib/prisma\';
-
-import { z } from \'zod\';
-
+import NextAuth from 'next-auth';
+import GitHub from 'next-auth/providers/github';
+import Credentials from 'next-auth/providers/credentials';
+import { PrismaAdapter } from '@auth/prisma-adapter';
+import { prisma } from '@/lib/prisma';
+import { z } from 'zod';
 export const { handlers, signIn, signOut, auth } = NextAuth({
+```
 
 adapter: PrismaAdapter(prisma),
 
-session: { strategy: \'jwt\', maxAge: 30 \* 24 \* 60 \* 60 },
+session: { strategy: 'jwt', maxAge: 30 * 24 * 60 * 60 },
 
-providers: \[
+providers: [
 
 GitHub({
 
@@ -82,97 +72,70 @@ clientSecret: process.env.AUTH_GITHUB_SECRET,
 
 Credentials({
 
+```javascript
 async authorize(credentials) {
-
 const parsed = z.object({ email: z.string().email(), password: z.string().min(8) }).safeParse(credentials);
-
 if (!parsed.success) return null;
-
 const user = await prisma.user.findUnique({ where: { email: parsed.data.email } });
-
-if (!user \|\| !user.passwordHash) return null;
-
+if (!user || !user.passwordHash) return null;
 const isValid = await verifyPassword(parsed.data.password, user.passwordHash);
-
 return isValid ? user : null;
+```
 
 },
 
 }),
 
-\],
+],
 
 callbacks: {
 
+```javascript
 async jwt({ token, user }) {
-
 if (user) {
-
 token.id = user.id;
-
 token.role = user.role;
-
 }
-
 return token;
-
 },
-
 async session({ session, token }) {
-
 if (session.user) {
-
 session.user.id = token.id as string;
-
 session.user.role = token.role as string;
-
 }
-
 return session;
+```
 
 },
 
 },
 
+```javascript
 });
+```
 
 #### Usage Across Next.js App Router:
 
+```typescript
 // 1. In Server Components (app/dashboard/page.tsx)
-
-import { auth } from \'@/auth\';
-
-import { redirect } from \'next/navigation\';
-
+import { auth } from '@/auth';
+import { redirect } from 'next/navigation';
 export default async function DashboardPage() {
-
 const session = await auth();
-
-if (!session) redirect(\'/api/auth/signin\');
-
-return \<h1\>Welcome back, {session.user.name} ({session.user.role})\</h1\>;
-
+if (!session) redirect('/api/auth/signin');
+return <h1>Welcome back, {session.user.name} ({session.user.role})</h1>;
 }
-
 // 2. In Server Actions (app/actions.ts)
-
-\'use server\';
-
-import { auth } from \'@/auth\';
-
+'use server';
+import { auth } from '@/auth';
 export async function deleteProjectAction(projectId: string) {
-
 const session = await auth();
-
-if (!session \|\| session.user.role !== \'ADMIN\') {
-
-throw new Error(\'Unauthorized\');
-
+if (!session || session.user.role !== 'ADMIN') {
+throw new Error('Unauthorized');
 }
-
 await prisma.project.delete({ where: { id: projectId } });
-
 }
+```
 
 ### 3. Secure Cookie Jar & Hardening Flags
 
@@ -184,25 +147,19 @@ Session cookies must be protected against tampering and cross-origin leaks:
 
 - **SameSite=Lax / SameSite=Strict**: Protects against CSRF attacks.
 
-- **\_\_Host- and \_\_Secure- Prefixes**: Browser cookie prefixes that enforce strict origin, path, and secure HTTPS requirements.
+- **__Host- and __Secure- Prefixes**: Browser cookie prefixes that enforce strict origin, path, and secure HTTPS requirements.
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 
 ### Next.js Authentication Reference:
 
-  ------------------------------------------------------------------------------------------------------------------------------------------
-  **Boundary**           **Method**                                      **Runtime**          **Performance**
-  ---------------------- ----------------------------------------------- -------------------- ----------------------------------------------
-  **Server Component**   const session = await auth()                    Node.js / Edge       Zero client bundle, runs on server
-
-  **Server Action**      const session = await auth()                    Node.js Serverless   Validates caller identity before DB mutation
-
-  **Route Handler**      export const { GET, POST } = handlers           Node.js / Edge       Manages OAuth redirects and API callbacks
-
-  **Edge Middleware**    export { auth as middleware } from \'@/auth\'   Edge Runtime (V8)    Fast sub-5ms path protection before render
-
-  **Client Component**   useSession() via \<SessionProvider\>            Browser DOM          Client-side reactive UI state
-  ------------------------------------------------------------------------------------------------------------------------------------------
+| **Boundary** | **Method** | **Runtime** | **Performance** |
+| --- | --- | --- | --- |
+| **Server Component** | const session = await auth() | Node.js / Edge | Zero client bundle, runs on server |
+| **Server Action** | const session = await auth() | Node.js Serverless | Validates caller identity before DB mutation |
+| **Route Handler** | export const { GET, POST } = handlers | Node.js / Edge | Manages OAuth redirects and API callbacks |
+| **Edge Middleware** | export { auth as middleware } from '@/auth'   E | ge Runtime (V8)    F | st sub-5ms path protection before render |
+| **Client Component** | useSession() via <SessionProvider>            B | owser DOM          C | ient-side reactive UI state |
 
 ## SECTION 3: WEEKLY SYSTEM DESIGN & CODING PROBLEMS
 
@@ -218,7 +175,7 @@ Design a secure Enterprise authentication system in Next.js App Router for a B2B
 
     - **Time-Based One-Time Password (TOTP MFA)** verification step (RFC 6238) using QR code setup and secret encryption.
 
-    - **Instant Global Device Revocation**: Detail how stateless JWT sessions can be revoked immediately across all active browser sessions when a user clicks \"Log out of all devices\".
+    - **Instant Global Device Revocation**: Detail how stateless JWT sessions can be revoked immediately across all active browser sessions when a user clicks "Log out of all devices".
 
 2.  Architect cookie chunking strategies for handling large JWT payloads that exceed browser 4096-byte cookie limits.
 
@@ -232,7 +189,7 @@ Build a complete **Next.js TOTP MFA Verification Route & Server Action** in Type
 
     - Generates a cryptographically random 32-character base32 secret.
 
-    - Computes an otpauth://totp/MyApp:user@email.com?secret=\... URI.
+    - Computes an otpauth://totp/MyApp:user@email.com?secret=... URI.
 
     - Encrypts and saves the unverified secret to the database.
 

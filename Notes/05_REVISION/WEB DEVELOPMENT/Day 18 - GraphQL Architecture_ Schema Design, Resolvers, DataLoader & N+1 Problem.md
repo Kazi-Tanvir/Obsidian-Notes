@@ -1,18 +1,14 @@
+---
 tags:
-
 - backend
-
 - graphql
-
 - apollo
-
 - dataloader
-
 - api-design
-
 - database
-
-- performance date: 2026-08-18
+- performance
+date: 2026-08-18
+---
 
 # Day 18 - GraphQL Architecture: Schema Design, Resolvers, DataLoader & N+1 Problem
 
@@ -32,7 +28,7 @@ tags:
 
 #### Resolver Anatomy:
 
-fieldName(parent, args, context, info) =\> Promise\<Result\> \| Result
+fieldName(parent, args, context, info) => Promise<Result> | Result
 
 - parent: The return value of the parent resolver in the AST tree.
 
@@ -44,13 +40,15 @@ fieldName(parent, args, context, info) =\> Promise\<Result\> \| Result
 
 ### 2. The N+1 Query Problem in GraphQL
 
-Because GraphQL resolvers execute independently per field, requesting a list of \$N\$ items with a nested relation causes \$1\$ initial query plus \$N\$ subsequent database queries (\$N+1\$).
+Because GraphQL resolvers execute independently per field, requesting a list of $N$ items with a nested relation causes $1$ initial query plus $N$ subsequent database queries ($N+1$).
 
-\# Triggers 1 query for users + 100 queries for authors (101 DB calls!)
+# Triggers 1 query for users + 100 queries for authors (101 DB calls!)
 
 query GetPosts {
 
+```javascript
 posts(limit: 100) {
+```
 
 id
 
@@ -62,67 +60,55 @@ id
 
 name
 
+```javascript
 }
-
 }
-
 }
+```
 
 ### 3. Solving N+1 with DataLoader: Batching & Caching
 
-**DataLoader** solves the N+1 problem by leveraging Node.js Event Loop microtask scheduling to **Batch** multiple individual fetch requests into a single bulk query (e.g., WHERE id IN (\...)) and providing **Request-Scoped Memoization Caching**.
+**DataLoader** solves the N+1 problem by leveraging Node.js Event Loop microtask scheduling to **Batch** multiple individual fetch requests into a single bulk query (e.g., WHERE id IN (...)) and providing **Request-Scoped Memoization Caching**.
 
+```javascript
 // Implementing DataLoader in Node.js / TypeScript
-
-import DataLoader from \'dataloader\';
-
-import { prisma } from \'./db\';
-
+import DataLoader from 'dataloader';
+import { prisma } from './db';
 // Batch Loading Function: Must return array of same length in exact same order!
-
 export function createAuthorLoader() {
-
-return new DataLoader\<string, User\>(async (authorIds) =\> {
-
-console.log(\`\[DataLoader\]: Batching \${authorIds.length} author IDs into 1 SQL query.\`);
-
+return new DataLoader<string, User>(async (authorIds) => {
+console.log(`[DataLoader]: Batching ${authorIds.length} author IDs into 1 SQL query.`);
 const authors = await prisma.user.findMany({
+```
 
-where: { id: { in: \[\...authorIds\] } }
+where: { id: { in: [...authorIds] } }
 
+```javascript
 });
-
 // Map results back to exact order of requested keys
-
-const authorMap = new Map(authors.map((a) =\> \[a.id, a\]));
-
-return authorIds.map((id) =\> authorMap.get(id) \|\| new Error(\`Author \${id} not found\`));
-
+const authorMap = new Map(authors.map((a) => [a.id, a]));
+return authorIds.map((id) => authorMap.get(id) || new Error(`Author ${id} not found`));
 });
-
 }
-
 // Resolver Implementation:
-
 export const resolvers = {
+```
 
 Post: {
 
-author: async (parent, \_args, context) =\> {
+author: async (parent, _args, context) => {
 
+```javascript
 // Replaces direct database query with batched loader!
-
 return context.loaders.authorLoader.load(parent.authorId);
-
 }
-
 }
-
 };
+```
 
 ### 4. Security & Protection: Query Complexity & Depth Limiting
 
-Because clients define the query structure, malicious actors can submit deeply recursive or cyclically nested queries (user { posts { author { posts { \... } } } }), leading to server Denial-of-Service (DoS).
+Because clients define the query structure, malicious actors can submit deeply recursive or cyclically nested queries (user { posts { author { posts { ... } } } }), leading to server Denial-of-Service (DoS).
 
 - **Depth Limiting**: Rejects queries exceeding maximum AST depth threshold (e.g., max 6 levels).
 
@@ -132,17 +118,20 @@ Because clients define the query structure, malicious actors can submit deeply r
 
 ### GraphQL Schema Definition Language (SDL):
 
+```javascript
 type User {
+```
 
 id: ID!
 
 email: String!
 
-posts(limit: Int = 10): \[Post!\]!
+posts(limit: Int = 10): [Post!]!
 
+```javascript
 }
-
 type Post {
+```
 
 id: ID!
 
@@ -154,29 +143,33 @@ author: User!
 
 createdAt: String!
 
+```javascript
 }
-
 type Query {
+```
 
 me: User
 
-posts(limit: Int): \[Post!\]!
+posts(limit: Int): [Post!]!
 
+```javascript
 }
-
 type Mutation {
+```
 
 createPost(title: String!, content: String!): Post!
 
+```javascript
 }
+```
 
 ### Context Setup Pattern:
 
+```javascript
 // Must instantiate new DataLoaders per request to prevent cross-user cache leaking!
-
 const server = new ApolloServer({ typeDefs, resolvers });
-
-const context = async ({ req }) =\> ({
+const context = async ({ req }) => ({
+```
 
 user: await authenticateUser(req.headers.authorization),
 
@@ -184,9 +177,10 @@ loaders: {
 
 authorLoader: createAuthorLoader()
 
+```javascript
 }
-
 });
+```
 
 ## SECTION 3: WEEKLY SYSTEM DESIGN & CODING PROBLEMS
 
@@ -212,6 +206,6 @@ Build a production-grade GraphQL Server in TypeScript using **GraphQL Yoga** or 
 
 2.  Create dedicated DataLoader instances for Organization.members and Project.contributors to eliminate N+1 queries.
 
-3.  Add a custom depthLimit(5) validation rule and a query cost analyzer middleware that rejects queries with costs \$\> 100\$.
+3.  Add a custom depthLimit(5) validation rule and a query cost analyzer middleware that rejects queries with costs $> 100$.
 
 4.  Include mock test cases verifying that querying 50 projects with authors and organizations triggers exactly 3 total database batch calls instead of 101 calls.

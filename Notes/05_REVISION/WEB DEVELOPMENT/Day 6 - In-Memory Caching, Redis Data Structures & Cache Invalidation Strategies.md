@@ -1,16 +1,13 @@
+---
 tags:
-
 - backend
-
 - redis
-
 - caching
-
 - performance
-
 - database
-
-- system-design date: 2026-08-06
+- system-design
+date: 2026-08-06
+---
 
 # Day 6 - In-Memory Caching, Redis Data Structures & Cache Invalidation Strategies
 
@@ -38,63 +35,54 @@ Redis (Remote Dictionary Server) is an in-memory key-value data store powered by
 
 - **Strings**: Text, JSON strings, integers (supports atomic INCR / DECR).
 
-- **Hashes**: Object representations (HSET user:101 name \"Alice\" age 30).
+- **Hashes**: Object representations (HSET user:101 name "Alice" age 30).
 
 - **Lists**: Linked lists (LPUSH / RPOP for job queues).
 
 - **Sets**: Unique unordered elements (SADD / SINTER for common friends).
 
-- **Sorted Sets (ZSET)**: Unique elements scored by floating-point numbers (ZADD leaderboard 1500 \"user101\"). Ideal for leaderboard ranking and Sliding Window Rate Limiters.
+- **Sorted Sets (ZSET)**: Unique elements scored by floating-point numbers (ZADD leaderboard 1500 "user101"). Ideal for leaderboard ranking and Sliding Window Rate Limiters.
 
+```javascript
 // Production Node.js ioredis Cache-Aside Service Pattern
-
-import Redis from \'ioredis\';
-
+import Redis from 'ioredis';
 const redis = new Redis({
+```
 
-host: process.env.REDIS_HOST \|\| \'127.0.0.1\',
+host: process.env.REDIS_HOST || '127.0.0.1',
 
-port: Number(process.env.REDIS_PORT) \|\| 6379,
+port: Number(process.env.REDIS_PORT) || 6379,
 
 maxRetriesPerRequest: 3
 
+```javascript
 });
-
-export async function getCachedData\<T\>(
+export async function getCachedData<T>(
+```
 
 key: string,
 
 ttlSeconds: number,
 
-fetchFromDbFn: () =\> Promise\<T\>
+fetchFromDbFn: () => Promise<T>
 
-): Promise\<T\> {
+): Promise<T> {
 
+```javascript
 // 1. Check Redis Cache
-
 const cached = await redis.get(key);
-
 if (cached) {
-
 return JSON.parse(cached) as T;
-
 }
-
 // 2. Cache Miss: Query Database
-
 const freshData = await fetchFromDbFn();
-
 // 3. Populate Redis with TTL (SETEX)
-
 if (freshData) {
-
 await redis.setex(key, ttlSeconds, JSON.stringify(freshData));
-
 }
-
 return freshData;
-
 }
+```
 
 ### 3. Mitigating Cache Stampede (Thundering Herd) & Distributed Locks
 
@@ -104,9 +92,10 @@ return freshData;
 
 When a Cache Miss occurs, the first request acquires a short-lived distributed Redis lock (SET key value NX PX 5000) to recompute and populate the cache while secondary requests wait or retry.
 
+```javascript
 // Redis Mutex Lock to Prevent Cache Stampede
-
-async function getWithMutexLock\<T\>(
+async function getWithMutexLock<T>(
+```
 
 key: string,
 
@@ -114,61 +103,40 @@ lockKey: string,
 
 ttl: number,
 
-fetchFn: () =\> Promise\<T\>
+fetchFn: () => Promise<T>
 
-): Promise\<T\> {
+): Promise<T> {
 
+```javascript
 let cached = await redis.get(key);
-
 if (cached) return JSON.parse(cached);
-
 // Acquire Lock (NX = Only set if Not Exist, PX = Expiration in ms)
-
-const acquiredLock = await redis.set(lockKey, \'locked\', \'NX\', \'PX\', 3000);
-
-if (acquiredLock === \'OK\') {
-
+const acquiredLock = await redis.set(lockKey, 'locked', 'NX', 'PX', 3000);
+if (acquiredLock === 'OK') {
 try {
-
 const freshData = await fetchFn();
-
 await redis.setex(key, ttl, JSON.stringify(freshData));
-
 return freshData;
-
 } finally {
-
 await redis.del(lockKey); // Release lock
-
 }
-
 } else {
-
 // Lock held by another request: Sleep and retry
-
-await new Promise((resolve) =\> setTimeout(resolve, 50));
-
+await new Promise((resolve) => setTimeout(resolve, 50));
 return getWithMutexLock(key, lockKey, ttl, fetchFn);
-
 }
-
 }
+```
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 
-  ----------------------------------------------------------------------------------------------------
-  **Command**             **Syntax**                **Description / Use Case**
-  ----------------------- ------------------------- --------------------------------------------------
-  **SETEX**               SETEX key seconds value   Sets key with automatic expiration (TTL)
-
-  **HSET / HGETALL**      HSET key field value      Reads/writes Hash fields (Memory efficient DTOs)
-
-  **ZADD / ZRANGE**       ZADD key score member     Adds to Sorted Set (Leaderboards, Rate Limiters)
-
-  **EXPIRE / TTL**        EXPIRE key seconds        Updates TTL or checks remaining time
-
-  **DEL / UNLINK**        UNLINK key                Asynchronous non-blocking deletion of large keys
-  ----------------------------------------------------------------------------------------------------
+| **Command** | **Syntax** | **Description / Use Case** |
+| --- | --- | --- |
+| **SETEX** | SETEX key seconds value | Sets key with automatic expiration (TTL) |
+| **HSET / HGETALL** | HSET key field value | Reads/writes Hash fields (Memory efficient DTOs) |
+| **ZADD / ZRANGE** | ZADD key score member | Adds to Sorted Set (Leaderboards, Rate Limiters) |
+| **EXPIRE / TTL** | EXPIRE key seconds | Updates TTL or checks remaining time |
+| **DEL / UNLINK** | UNLINK key | Asynchronous non-blocking deletion of large keys |
 
 ### Redis Eviction Policies (redis.conf):
 

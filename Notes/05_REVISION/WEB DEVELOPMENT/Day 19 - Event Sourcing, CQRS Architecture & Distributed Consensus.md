@@ -1,18 +1,14 @@
+---
 tags:
-
 - backend
-
 - event-sourcing
-
 - cqrs
-
 - microservices
-
 - architecture
-
 - system-design
-
-- database date: 2026-08-19
+- database
+date: 2026-08-19
+---
 
 # Day 19 - Event Sourcing, CQRS Architecture & Distributed Consensus
 
@@ -36,11 +32,11 @@ In standard CRUD architectures, database records are modified destructively in-p
 
 Event Sourcing pairs naturally with **CQRS**, separating the application into two distinct paths:
 
-\[ Client Request \]
+[ Client Request ]
 
 │
 
-├───► \[ Command / Write Side \] ───► Invariant Validation ───► \[ Append to EventStore \]
+├───► [ Command / Write Side ] ───► Invariant Validation ───► [ Append to EventStore ]
 
 │ │
 
@@ -50,11 +46,11 @@ Event Sourcing pairs naturally with **CQRS**, separating the application into tw
 
 │ ▼
 
-│ \[ Read Model Projections \]
+│ [ Read Model Projections ]
 
 │ │
 
-└───► \[ Query / Read Side \] ◄──────────────────────────────────────────┘
+└───► [ Query / Read Side ] ◄──────────────────────────────────────────┘
 
 1.  **Write Model (Command Side)**:
 
@@ -72,81 +68,58 @@ Event Sourcing pairs naturally with **CQRS**, separating the application into tw
 
 ### 3. Aggregate Root Implementation & Snapshotting
 
-To prevent slow startup times when an aggregate has thousands of events, a **Snapshot Strategy** persists the hydrated aggregate state every \$N\$ events (e.g. every 100 events). Rehydration then loads the snapshot and replays only subsequent delta events.
+To prevent slow startup times when an aggregate has thousands of events, a **Snapshot Strategy** persists the hydrated aggregate state every $N$ events (e.g. every 100 events). Rehydration then loads the snapshot and replays only subsequent delta events.
 
+```typescript
 // Aggregate State Hydration Pattern
-
 export interface DomainEvent {
-
 eventId: string;
-
 aggregateId: string;
-
 type: string;
-
 payload: any;
-
 version: number;
-
 timestamp: string;
-
 }
-
 export class BankAccountAggregate {
-
-public id: string = \"\";
-
+public id: string = "";
 public balance: number = 0;
-
 public version: number = 0;
-
 // Replays an event to mutate internal state without validation checks
+```
 
 public apply(event: DomainEvent): void {
 
+```javascript
 switch (event.type) {
-
-case \"AccountOpened\":
-
+case "AccountOpened":
 this.id = event.aggregateId;
-
 this.balance = event.payload.initialDeposit;
-
 break;
-
-case \"MoneyDeposited\":
-
+case "MoneyDeposited":
 this.balance += event.payload.amount;
-
 break;
-
-case \"MoneyWithdrawn\":
-
+case "MoneyWithdrawn":
 this.balance -= event.payload.amount;
-
 break;
-
 }
-
 this.version = event.version;
-
 }
-
 // Business Invariant Command Validator
+```
 
 public withdraw(amount: number): DomainEvent {
 
-if (amount \<= 0) throw new Error(\"Withdrawal amount must be positive\");
-
-if (this.balance \< amount) throw new Error(\"Insufficient funds\");
-
+```javascript
+if (amount <= 0) throw new Error("Withdrawal amount must be positive");
+if (this.balance < amount) throw new Error("Insufficient funds");
 return {
+```
 
 eventId: crypto.randomUUID(),
 
 aggregateId: this.id,
 
-type: \"MoneyWithdrawn\",
+type: "MoneyWithdrawn",
 
 payload: { amount },
 
@@ -154,51 +127,55 @@ version: this.version + 1,
 
 timestamp: new Date().toISOString()
 
+```javascript
 };
-
 }
-
 }
+```
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 
 ### Canonical Event Envelope Schema:
 
+```javascript
 {
+```
 
-\"eventId\": \"e81d4fae-7dec-11d0-a765-00a0c91e6bf6\",
+"eventId": "e81d4fae-7dec-11d0-a765-00a0c91e6bf6",
 
-\"aggregateId\": \"acc-9921\",
+"aggregateId": "acc-9921",
 
-\"aggregateType\": \"BankAccount\",
+"aggregateType": "BankAccount",
 
-\"eventType\": \"MoneyTransferred\",
+"eventType": "MoneyTransferred",
 
-\"version\": 14,
+"version": 14,
 
-\"payload\": {
+"payload": {
 
-\"recipientId\": \"acc-1044\",
+"recipientId": "acc-1044",
 
-\"amount\": 250.00,
+"amount": 250.00,
 
-\"currency\": \"USD\"
-
-},
-
-\"metadata\": {
-
-\"userId\": \"user-881\",
-
-\"correlationId\": \"corr-4412\",
-
-\"causationId\": \"cmd-1092\"
+"currency": "USD"
 
 },
 
-\"timestamp\": \"2026-08-19T15:30:00.000Z\"
+"metadata": {
 
+"userId": "user-881",
+
+"correlationId": "corr-4412",
+
+"causationId": "cmd-1092"
+
+},
+
+"timestamp": "2026-08-19T15:30:00.000Z"
+
+```javascript
 }
+```
 
 ### Event Store PostgreSQL Table Schema:
 
@@ -220,9 +197,11 @@ metadata JSONB NOT NULL,
 
 created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
 
-UNIQUE (aggregate_id, version) \-- Guarantees optimistic concurrency
+UNIQUE (aggregate_id, version) -- Guarantees optimistic concurrency
 
+```javascript
 );
+```
 
 ## SECTION 3: WEEKLY SYSTEM DESIGN & CODING PROBLEMS
 
