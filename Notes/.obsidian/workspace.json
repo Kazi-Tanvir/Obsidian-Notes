@@ -23,12 +23,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "05_REVISION/WEB DEVELOPMENT/Day 8 - Next.js App Router Architecture, Server Components (RSC) vs Client Components & Data Fetching.md",
+                "file": "99_ARCHIVE/SYS_Tracker.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Day 8 - Next.js App Router Architecture, Server Components (RSC) vs Client Components & Data Fetching"
+              "title": "SYS_Tracker"
             }
           }
         ],
@@ -255,6 +255,9 @@
   },
   "active": "c2d130de4dddc1d6",
   "lastOpenFiles": [
+    "99_ARCHIVE/SYS_TRACKER — Design Specification.md",
+    "99_ARCHIVE/Information Technology and Network Society.md",
+    "05_REVISION/WEB DEVELOPMENT/Day 8 - Next.js App Router Architecture, Server Components (RSC) vs Client Components & Data Fetching.md",
     "05_REVISION/c revision/Day 6 - Pointers Fundamentals, Pointer Arithmetic, Double Pointers & Generic void Pointers.md",
     "05_REVISION/JAVASCRIPT/Day 16 - Property Descriptors, Object Immutability & Object Internal Slots.md",
     "05_REVISION/c revision/Day 9 - Dynamic Memory Allocation Mechanics, Heap Metadata, Fragmentation & Safe Reallocation.md",
@@ -278,9 +281,6 @@
     "02_DU_IIT/1st Year/1-1/STAT 1103 - Probability & Stats/Lecture Sheets/06-sampling-dist.md",
     "02_DU_IIT/1st Year/1-1/STAT 1103 - Probability & Stats/Lecture Sheets/07-par-est.md",
     "02_DU_IIT/1st Year/1-1/STAT 1103 - Probability & Stats/Books/sheldon_ross_stats/Chapter 14 - 13 Quality control.md",
-    "02_DU_IIT/1st Year/1-1/STAT 1103 - Probability & Stats/Books/sheldon_ross_stats/Chapter 09 - 8 Hypothesis testing.md",
-    "02_DU_IIT/1st Year/1-1/STAT 1103 - Probability & Stats/Books/sheldon_ross_stats/Chapter 08 - 7 Parameter estimation.md",
-    "05_REVISION/JAVASCRIPT/Day 1 - Execution Context, Call Stack & Scope Chain (1).md",
     "05_REVISION/WEB DEVELOPMENT",
     "05_REVISION/JAVASCRIPT",
     "05_REVISION/Unconfirmed 341912.crdownload",
