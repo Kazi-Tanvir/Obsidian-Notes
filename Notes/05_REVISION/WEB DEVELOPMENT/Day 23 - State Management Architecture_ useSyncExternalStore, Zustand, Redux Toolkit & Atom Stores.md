@@ -1,13 +1,13 @@
 ---
 tags:
-- frontend
-- react
-- state-management
-- zustand
-- redux
-- useSyncExternalStore
-- performance
-- architecture
+  - frontend
+  - react
+  - state-management
+  - zustand
+  - redux
+  - useSyncExternalStore
+  - performance
+  - architecture
 date: 2026-08-23
 ---
 
@@ -19,56 +19,45 @@ date: 2026-08-23
 
 In React 18+ Concurrent Mode, React can pause, yield, and resume rendering to maintain responsive 60fps/120fps UI interactions.
 
-If components read from an **external mutable store** (outside React's useState/useReducer tree) via standard useEffect subscriptions:
+If components read from an **external mutable store** (outside React's `useState`/`useReducer` tree) via standard `useEffect` subscriptions:
 
-1.  Component A renders with external state value v1.
+- Component A renders with external state value `v1`.
 
-2.  React yields the main thread to handle an incoming WebSocket event.
+- React yields the main thread to handle an incoming WebSocket event.
 
-3.  The WebSocket updates the external store to v2.
+- The WebSocket updates the external store to `v2`.
 
-4.  React resumes rendering and renders Component B with external state value v2.
+- React resumes rendering and renders Component B with external state value `v2`.
 
-5.  Result: **Tearing** --- the same UI tree displays conflicting visual states simultaneously in a single frame.
+- Result: **Tearing** — the same UI tree displays conflicting visual states simultaneously in a single frame.
 
 [ Tearing Scenario ]:
 
 Render Frame Start ────► Component A (Reads Store: v1)
 
-│
+```typescript
+                             │
+                             ▼ [Main thread yields: WebSocket mutates Store to v2]
+                             │
+                         Component B (Reads Store: v2) ────► Inconsistent Corrupted UI Render!
+```
 
-▼ [Main thread yields: WebSocket mutates Store to v2]
+### 2. The `useSyncExternalStore` Hook Architecture
 
-│
+To fix tearing, React introduced `useSyncExternalStore`. It forces React to synchronously re-evaluate the snapshot whenever an external store emits an update during rendering, guaranteeing state consistency across concurrent slices.
 
-Component B (Reads Store: v2) ────► Inconsistent Corrupted UI Render!
-
-### 2. The useSyncExternalStore Hook Architecture
-
-To fix tearing, React introduced useSyncExternalStore. It forces React to synchronously re-evaluate the snapshot whenever an external store emits an update during rendering, guaranteeing state consistency across concurrent slices.
-
-```javascript
+```typescript
 import { useSyncExternalStore } from 'react';
 export function useStore<TState, TSelected>(
-```
-
-store: {
-
-```javascript
-subscribe: (listener: () => void) => () => void;
-getSnapshot: () => TState;
-getServerSnapshot?: () => TState;
-```
-
-},
-
-selector: (state: TState) => TSelected
-
+  store: {
+    subscribe: (listener: () => void) => () => void;
+    getSnapshot: () => TState;
+    getServerSnapshot?: () => TState;
+  },
+  selector: (state: TState) => TSelected
 ): TSelected {
-
-```javascript
-const getSnapshot = () => selector(store.getSnapshot());
-return useSyncExternalStore(store.subscribe, getSnapshot, store.getServerSnapshot);
+  const getSnapshot = () => selector(store.getSnapshot());
+  return useSyncExternalStore(store.subscribe, getSnapshot, store.getServerSnapshot);
 }
 ```
 
@@ -78,33 +67,26 @@ return useSyncExternalStore(store.subscribe, getSnapshot, store.getServerSnapsho
 
 - **Model**: Single source of truth tree.
 
-- **Subscription Mechanism**: Selector functions ((state) => state.user.name) subscribe components only to the specific slices they read.
+- **Subscription Mechanism**: Selector functions (`(state) => state.user.name`) subscribe components only to the specific slices they read.
 
-- **Why Zustand Outperforms Context**: React Context causes all consumer components to re-render whenever *any* value inside the context object changes. Zustand bypasses React Context entirely, using module-level closures and useSyncExternalStore for surgical re-renders.
+- **Why Zustand Outperforms Context**: React Context causes all consumer components to re-render whenever *any* value inside the context object changes. Zustand bypasses React Context entirely, using module-level closures and `useSyncExternalStore` for surgical re-renders.
 
 ```typescript
 // Modern Zustand Store with Slice Pattern & Immer Middleware
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 interface UserSlice {
-profile: { name: string; email: string };
-updateEmail: (email: string) => void;
+  profile: { name: string; email: string };
+  updateEmail: (email: string) => void;
 }
 export const useAppStore = create<UserSlice>()(
-```
-
-immer((set) => ({
-
-profile: { name: "Tanvir", email: "tanvir@example.com" },
-
-updateEmail: (newEmail) =>
-
-set((state) => {
-
-```javascript
-state.profile.email = newEmail; // Mutative syntax converted to immutable update via Immer
-}),
-}))
+  immer((set) => ({
+    profile: { name: "Tanvir", email: "tanvir@example.com" },
+    updateEmail: (newEmail) =>
+      set((state) => {
+        state.profile.email = newEmail; // Mutative syntax converted to immutable update via Immer
+      }),
+  }))
 );
 ```
 
@@ -112,7 +94,7 @@ state.profile.email = newEmail; // Mutative syntax converted to immutable update
 
 - **Model**: State is decomposed into isolated, composable primitives called **Atoms**.
 
-- **Dependency Graph**: Components only subscribe to individual atoms. Derived state atoms (read getters) compute transformations automatically without triggering unnecessary parent re-renders.
+- **Dependency Graph**: Components only subscribe to individual atoms. Derived state atoms (`read` getters) compute transformations automatically without triggering unnecessary parent re-renders.
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 
@@ -123,8 +105,8 @@ state.profile.email = newEmail; // Mutative syntax converted to immutable update
 | **Architecture** | Component Tree Provider | External Module Store | External Redux Store | Decentralized Atoms |
 | **Re-render Scope** | All consumers re-render | Only subscribed selectors | Only subscribed selectors | Only subscribed atoms |
 | **Boilerplate** | Low | Minimal | Moderate (Slices/Thunks) | Minimal |
-| **Async Handling** | Manual in useEffect | Native inside actions | createAsyncThunk / RTK Query | Async Atoms & Suspense |
-| **Concurrent Safe** | Yes (inside React) | Yes (useSyncExternalStore) | Yes (useSyncExternalStore) | Yes (useSyncExternalStore) |
+| **Async Handling** | Manual in `useEffect` | Native inside actions | `createAsyncThunk` / RTK Query | Async Atoms & Suspense |
+| **Concurrent Safe** | Yes (inside React) | Yes (`useSyncExternalStore`) | Yes (`useSyncExternalStore`) | Yes (`useSyncExternalStore`) |
 
 ## SECTION 3: WEEKLY SYSTEM DESIGN & CODING PROBLEMS
 
@@ -134,11 +116,11 @@ Design a real-time collaborative document state architecture for a multi-tab bro
 
 **Requirements**:
 
-1.  Detail how local client mutations synchronize across multiple open browser tabs using BroadcastChannel and IndexedDB.
+- Detail how local client mutations synchronize across multiple open browser tabs using `BroadcastChannel` and `IndexedDB`.
 
-2.  Formulate a conflict resolution strategy (Last-Write-Wins timestamps vs CRDT vector clocks) when two tabs edit the same document offline.
+- Formulate a conflict resolution strategy (Last-Write-Wins timestamps vs CRDT vector clocks) when two tabs edit the same document offline.
 
-3.  Design the React state layer using useSyncExternalStore so tab switches and background storage events update the active React view with zero tearing and zero lost focus states.
+- Design the React state layer using `useSyncExternalStore` so tab switches and background storage events update the active React view with zero tearing and zero lost focus states.
 
 ### Problem 2: End-to-End Code Implementation Challenge
 
@@ -146,20 +128,20 @@ Build a typed, dependency-free **Mini-Zustand Global State Store** library from 
 
 **Requirements**:
 
-1.  Implement createStore<T>(initializer) returning an external store with:
+- Implement `createStore<T>(initializer)` returning an external store with:
 
-    - getState(): Returns current immutable state.
+- `getState()`: Returns current immutable state.
 
-    - setState(partialOrFn): Updates state and notifies subscribers.
+- `setState(partialOrFn)`: Updates state and notifies subscribers.
 
-    - subscribe(listener): Subscribes to changes and returns an unsubscription function.
+- `subscribe(listener)`: Subscribes to changes and returns an unsubscription function.
 
-2.  Implement a React Hook wrapper useCustomStore(store, selector, equalityFn?) powered by useSyncExternalStore that only re-renders the component if the selected state slice changes (using shallow equality checks).
+- Implement a React Hook wrapper `useCustomStore(store, selector, equalityFn?)` powered by `useSyncExternalStore` that only re-renders the component if the selected state slice changes (using shallow equality checks).
 
-3.  Implement a built-in devtools middleware that logs state transitions with timestamp and action names to the console.
+- Implement a built-in `devtools` middleware that logs state transitions with timestamp and action names to the console.
 
-4.  Provide unit tests verifying:
+- Provide unit tests verifying:
 
-    - Component does not re-render when an unselected slice changes.
+- Component does not re-render when an unselected slice changes.
 
-    - Unsubscription cleans up listeners completely.
+- Unsubscription cleans up listeners completely.

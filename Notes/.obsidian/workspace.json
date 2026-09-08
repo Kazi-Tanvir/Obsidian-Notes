@@ -23,12 +23,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "05_REVISION/WEB DEVELOPMENT/Day 24 - Web Performance Engineering_ Core Web Vitals, Script Evaluation & Critical Rendering Path.md",
+                "file": "05_REVISION/WEB DEVELOPMENT/Day 8 - Next.js App Router Architecture, Server Components (RSC) vs Client Components & Data Fetching.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Day 24 - Web Performance Engineering_ Core Web Vitals, Script Evaluation & Critical Rendering Path"
+              "title": "Day 8 - Next.js App Router Architecture, Server Components (RSC) vs Client Components & Data Fetching"
             }
           }
         ],
@@ -255,6 +255,10 @@
   },
   "active": "c2d130de4dddc1d6",
   "lastOpenFiles": [
+    "05_REVISION/c revision/Day 6 - Pointers Fundamentals, Pointer Arithmetic, Double Pointers & Generic void Pointers.md",
+    "05_REVISION/JAVASCRIPT/Day 16 - Property Descriptors, Object Immutability & Object Internal Slots.md",
+    "05_REVISION/c revision/Day 9 - Dynamic Memory Allocation Mechanics, Heap Metadata, Fragmentation & Safe Reallocation.md",
+    "05_REVISION/WEB DEVELOPMENT/Day 24 - Web Performance Engineering_ Core Web Vitals, Script Evaluation & Critical Rendering Path.md",
     "05_REVISION/WEB DEVELOPMENT/Day 23 - State Management Architecture_ useSyncExternalStore, Zustand, Redux Toolkit & Atom Stores.md",
     "05_REVISION/JAVASCRIPT/Day 4 - Prototypes, Prototypal Inheritance & Object Oriented JavaScript.md",
     "05_REVISION/JAVASCRIPT/Day 3 - Asynchronous JavaScript Promises, Async_Await & Microtask Queue.md",
@@ -277,10 +281,6 @@
     "02_DU_IIT/1st Year/1-1/STAT 1103 - Probability & Stats/Books/sheldon_ross_stats/Chapter 09 - 8 Hypothesis testing.md",
     "02_DU_IIT/1st Year/1-1/STAT 1103 - Probability & Stats/Books/sheldon_ross_stats/Chapter 08 - 7 Parameter estimation.md",
     "05_REVISION/JAVASCRIPT/Day 1 - Execution Context, Call Stack & Scope Chain (1).md",
-    "03_COURSES/01_WEB_DEVELOPMENT/03_JavaScript/Async, Await, and Fetch API.md",
-    "03_COURSES/01_WEB_DEVELOPMENT/03_JavaScript/Advanced JS (Destructuring, Spread, IIFE).md",
-    "02_DU_IIT/1st Year/1-1/00_Previous_questions/GE_1105_Introduction_to_Sociology.md",
-    "02_DU_IIT/1st Year/1-1/00_Previous_questions/CSE_1101_Structured_Programming.md",
     "05_REVISION/WEB DEVELOPMENT",
     "05_REVISION/JAVASCRIPT",
     "05_REVISION/Unconfirmed 341912.crdownload",

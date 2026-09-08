@@ -1,12 +1,12 @@
 ---
 tags:
-- javascript
-- design-patterns
-- typescript
-- creational-patterns
-- structural-patterns
-- architecture
-- clean-code
+  - javascript
+  - design-patterns
+  - typescript
+  - creational-patterns
+  - structural-patterns
+  - architecture
+  - clean-code
 date: 2026-08-22
 ---
 
@@ -25,26 +25,18 @@ Ensures a class has only one instance while providing a global access point. In 
 ```typescript
 // Thread-safe / Closure-guarded Singleton in TypeScript
 export class DatabaseConnectionPool {
-private static instance: DatabaseConnectionPool | null = null;
-private readonly connectionString: string;
-```
-
-private constructor(connectionString: string) {
-
-```javascript
-this.connectionString = connectionString;
-}
-```
-
-public static getInstance(connectionString: string = "postgres://localhost:5432"): DatabaseConnectionPool {
-
-```javascript
-if (!DatabaseConnectionPool.instance) {
-DatabaseConnectionPool.instance = new DatabaseConnectionPool(connectionString);
-Object.freeze(DatabaseConnectionPool.instance); // Prevent external mutation
-}
-return DatabaseConnectionPool.instance;
-}
+  private static instance: DatabaseConnectionPool | null = null;
+  private readonly connectionString: string;
+  private constructor(connectionString: string) {
+    this.connectionString = connectionString;
+  }
+  public static getInstance(connectionString: string = "postgres://localhost:5432"): DatabaseConnectionPool {
+    if (!DatabaseConnectionPool.instance) {
+      DatabaseConnectionPool.instance = new DatabaseConnectionPool(connectionString);
+      Object.freeze(DatabaseConnectionPool.instance); // Prevent external mutation
+    }
+    return DatabaseConnectionPool.instance;
+  }
 }
 ```
 
@@ -55,37 +47,29 @@ Encapsulates object creation logic, allowing subclasses or caller configurations
 ```typescript
 // Polymorphic Payment Gateway Factory
 export interface PaymentProcessor {
-processPayment(amount: number): Promise<{ success: boolean; txId: string }>;
+  processPayment(amount: number): Promise<{ success: boolean; txId: string }>;
 }
 export class StripeProcessor implements PaymentProcessor {
-async processPayment(amount: number) {
-return { success: true, txId: `stripe_${Date.now()}` };
-}
+  async processPayment(amount: number) {
+    return { success: true, txId: `stripe_${Date.now()}` };
+  }
 }
 export class PayPalProcessor implements PaymentProcessor {
-async processPayment(amount: number) {
-return { success: true, txId: `paypal_${Date.now()}` };
-}
+  async processPayment(amount: number) {
+    return { success: true, txId: `paypal_${Date.now()}` };
+  }
 }
 export class PaymentProcessorFactory {
-```
-
-public static createProcessor(provider: "stripe" | "paypal"): PaymentProcessor {
-
-```javascript
-switch (provider) {
-case "stripe":
-return new StripeProcessor();
-case "paypal":
-return new PayPalProcessor();
-```
-
-default:
-
-```javascript
-throw new Error(`Unsupported payment provider: ${provider}`);
-}
-}
+  public static createProcessor(provider: "stripe" | "paypal"): PaymentProcessor {
+    switch (provider) {
+      case "stripe":
+        return new StripeProcessor();
+      case "paypal":
+        return new PayPalProcessor();
+      default:
+        throw new Error(`Unsupported payment provider: ${provider}`);
+    }
+  }
 }
 ```
 
@@ -96,54 +80,32 @@ Separates the construction of a complex object from its representation, allowing
 ```typescript
 // Immutable Fluent Request Builder
 export class HttpRequestBuilder {
-private readonly url: string;
-private readonly method: string;
-private readonly headers: Record<string, string>;
-private readonly body?: unknown;
-constructor(url: string, method: string = "GET", headers: Record<string, string> = {}, body?: unknown) {
-this.url = url;
-this.method = method;
-this.headers = headers;
-this.body = body;
-}
-```
-
-public setMethod(method: "GET" | "POST" | "PUT" | "DELETE"): HttpRequestBuilder {
-
-```javascript
-return new HttpRequestBuilder(this.url, method, { ...this.headers }, this.body);
-}
-```
-
-public setHeader(key: string, value: string): HttpRequestBuilder {
-
-```javascript
-return new HttpRequestBuilder(this.url, this.method, { ...this.headers, [key]: value }, this.body);
-}
-```
-
-public setJsonBody(body: unknown): HttpRequestBuilder {
-
-```javascript
-return new HttpRequestBuilder(this.url, this.method, { ...this.headers, "Content-Type": "application/json" }, body);
-}
-```
-
-public build(): Request {
-
-```javascript
-return new Request(this.url, {
-```
-
-method: this.method,
-
-headers: this.headers,
-
-body: this.body ? JSON.stringify(this.body) : undefined
-
-```javascript
-});
-}
+  private readonly url: string;
+  private readonly method: string;
+  private readonly headers: Record<string, string>;
+  private readonly body?: unknown;
+  constructor(url: string, method: string = "GET", headers: Record<string, string> = {}, body?: unknown) {
+    this.url = url;
+    this.method = method;
+    this.headers = headers;
+    this.body = body;
+  }
+  public setMethod(method: "GET" | "POST" | "PUT" | "DELETE"): HttpRequestBuilder {
+    return new HttpRequestBuilder(this.url, method, { ...this.headers }, this.body);
+  }
+  public setHeader(key: string, value: string): HttpRequestBuilder {
+    return new HttpRequestBuilder(this.url, this.method, { ...this.headers, [key]: value }, this.body);
+  }
+  public setJsonBody(body: unknown): HttpRequestBuilder {
+    return new HttpRequestBuilder(this.url, this.method, { ...this.headers, "Content-Type": "application/json" }, body);
+  }
+  public build(): Request {
+    return new Request(this.url, {
+      method: this.method,
+      headers: this.headers,
+      body: this.body ? JSON.stringify(this.body) : undefined
+    });
+  }
 }
 ```
 
@@ -158,26 +120,22 @@ Converts the interface of a class into another interface clients expect, enablin
 ```typescript
 // Adapting Legacy XML Third-Party Service to Standard JSON Contract
 interface ModernWeatherService {
-getTemperature(city: string): Promise<number>;
+  getTemperature(city: string): Promise<number>;
 }
 class LegacyXmlWeatherApi {
-```
-
-public fetchXmlData(location: string): string {
-
-```typescript
-return `<weather><city>${location}</city><temp_f>77</temp_f></weather>`;
-}
+  public fetchXmlData(location: string): string {
+    return `<weather><city>${location}</city><temp_f>77</temp_f></weather>`;
+  }
 }
 export class WeatherApiAdapter implements ModernWeatherService {
-constructor(private legacyApi: LegacyXmlWeatherApi) {}
-async getTemperature(city: string): Promise<number> {
-const xml = this.legacyApi.fetchXmlData(city);
-// Parse XML and convert Fahrenheit to Celsius
-const tempFMatch = xml.match(/<temp_f>(\d+)<\/temp_f>/);
-const tempF = tempFMatch ? parseFloat(tempFMatch[1]) : 32;
-return ((tempF - 32) * 5) / 9;
-}
+  constructor(private legacyApi: LegacyXmlWeatherApi) {}
+  async getTemperature(city: string): Promise<number> {
+    const xml = this.legacyApi.fetchXmlData(city);
+    // Parse XML and convert Fahrenheit to Celsius
+    const tempFMatch = xml.match(/<temp_f>(\d+)<\/temp_f>/);
+    const tempF = tempFMatch ? parseFloat(tempFMatch[1]) : 32;
+    return ((tempF - 32) * 5) / 9;
+  }
 }
 ```
 
@@ -188,23 +146,17 @@ Attaches additional responsibilities to methods, accessors, or classes dynamical
 ```javascript
 // TC39 Stage 3 Method Timing Decorator
 export function LogExecutionTime<This, Args extends any[], Return>(
-```
-
-target: (this: This, ...args: Args) => Return,
-
-context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return>
-
+  target: (this: This, ...args: Args) => Return,
+  context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return>
 ) {
-
-```javascript
-const methodName = String(context.name);
-return function (this: This, ...args: Args): Return {
-const start = performance.now();
-const result = target.apply(this, args);
-const duration = performance.now() - start;
-console.log(`[Method ${methodName}] Execution Time: ${duration.toFixed(2)}ms`);
-return result;
-};
+  const methodName = String(context.name);
+  return function (this: This, ...args: Args): Return {
+    const start = performance.now();
+    const result = target.apply(this, args);
+    const duration = performance.now() - start;
+    console.log(`[Method ${methodName}] Execution Time: ${duration.toFixed(2)}ms`);
+    return result;
+  };
 }
 ```
 
@@ -225,23 +177,23 @@ return result;
 
 ### Challenge 1: Factory vs Constructor Object Shape Optimization
 
-Analyze the two object generation approaches below. Explain how V8's Hidden Classes (Shapes) and Inline Caches (ICs) behave when calling calculateTotal() on objects produced by Approach A vs Approach B.
+Analyze the two object generation approaches below. Explain how V8's Hidden Classes (Shapes) and Inline Caches (ICs) behave when calling `calculateTotal()` on objects produced by Approach A vs Approach B.
 
 ```javascript
 // Approach A: Inline Object Literal Factory
 function createItemA(id, price, tax) {
-if (tax) {
-return { id, price, tax };
-}
-return { id, price };
+  if (tax) {
+    return { id, price, tax };
+  }
+  return { id, price };
 }
 // Approach B: Monomorphic Class Constructor
 class ItemB {
-constructor(id, price, tax = 0) {
-this.id = id;
-this.price = price;
-this.tax = tax;
-}
+  constructor(id, price, tax = 0) {
+    this.id = id;
+    this.price = price;
+    this.tax = tax;
+  }
 }
 ```
 
@@ -249,44 +201,33 @@ this.tax = tax;
 
 ### Challenge 2: Refactoring a Complex Monolithic API Client to the Builder Pattern
 
-Refactor the following bloated, positional-argument function into a strongly-typed, immutable ApiQueryBuilder class with validation checks:
+Refactor the following bloated, positional-argument function into a strongly-typed, immutable `ApiQueryBuilder` class with validation checks:
 
-```javascript
+```typescript
 // Legacy Anti-Pattern: Monolithic function with 7 positional parameters
 function searchProducts(
-```
-
-query: string,
-
-category?: string,
-
-minPrice?: number,
-
-maxPrice?: number,
-
-sortBy?: "price" | "date",
-
-page?: number,
-
-limit?: number
-
+  query: string,
+  category?: string,
+  minPrice?: number,
+  maxPrice?: number,
+  sortBy?: "price" | "date",
+  page?: number,
+  limit?: number
 ) {
-
-```javascript
-// executes search...
+  // executes search...
 }
 ```
 
-*Hint*: Ensure validation rules (e.g., minPrice <= maxPrice and limit <= 100) throw descriptive errors upon calling .build().
+*Hint*: Ensure validation rules (e.g., `minPrice <= maxPrice` and `limit <= 100`) throw descriptive errors upon calling `.build()`.
 
 ### Challenge 3: Advanced TC39 Stage 3 Decorator Suite in TypeScript
 
 Build a production-grade decorator suite in TypeScript:
 
-1.  \@AutoRetry({ maxAttempts: number, backoffMs: number }): Retries failed asynchronous method executions with exponential backoff before throwing the final error.
+- `@AutoRetry({ maxAttempts: number, backoffMs: number })`: Retries failed asynchronous method executions with exponential backoff before throwing the final error.
 
-2.  \@Memoize({ ttlMs: number }): Caches method return values based on serialized arguments with automatic TTL cache invalidation.
+- `@Memoize({ ttlMs: number })`: Caches method return values based on serialized arguments with automatic TTL cache invalidation.
 
-3.  \@ValidateArgs(schema: ZodSchema): Validates incoming method arguments against a Zod schema before invoking the underlying method body.
+- `@ValidateArgs(schema: ZodSchema)`: Validates incoming method arguments against a Zod schema before invoking the underlying method body.
 
-*Hint*: Use TC39 Stage 3 method decorator signatures (target, context: ClassMethodDecoratorContext) and wrap the original function in a higher-order executor.
+*Hint*: Use TC39 Stage 3 method decorator signatures `(target, context: ClassMethodDecoratorContext)` and wrap the original function in a higher-order executor.

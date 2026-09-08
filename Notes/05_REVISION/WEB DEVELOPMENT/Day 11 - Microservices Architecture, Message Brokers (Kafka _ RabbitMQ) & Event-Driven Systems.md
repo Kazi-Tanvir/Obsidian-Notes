@@ -1,11 +1,11 @@
 ---
 tags:
-- microservices
-- kafka
-- rabbitmq
-- event-driven
-- backend
-- system-design
+  - microservices
+  - kafka
+  - rabbitmq
+  - event-driven
+  - backend
+  - system-design
 date: 2026-08-11
 ---
 
@@ -37,85 +37,55 @@ Understanding when to select Kafka vs RabbitMQ depends on architectural requirem
 
 - **Topics & Partitions**: Topics are divided into partitions distributed across cluster broker nodes. Order is strictly guaranteed **within a partition**, not across partitions.
 
-- **Partition Keying**: Events with identical keys (e.g. orderId) hash to the same partition, guaranteeing ordered sequential processing.
+- **Partition Keying**: Events with identical keys (e.g. `orderId`) hash to the same partition, guaranteeing ordered sequential processing.
 
 - **Consumer Groups**: Scalable consumer instances sharing topic consumption. Each partition is assigned to exactly one consumer within a group.
 
-```javascript
+```typescript
 // producer.ts - KafkaJS Production Setup
 import { Kafka, Partitioners } from 'kafkajs';
 const kafka = new Kafka({
-```
-
-clientId: 'order-service',
-
-brokers: ['kafka-broker-1:9092', 'kafka-broker-2:9092'],
-
-```javascript
+  clientId: 'order-service',
+  brokers: ['kafka-broker-1:9092', 'kafka-broker-2:9092'],
 });
 const producer = kafka.producer({
-```
-
-createPartitioner: Partitioners.DefaultPartitioner,
-
-```typescript
+  createPartitioner: Partitioners.DefaultPartitioner,
 });
 export async function publishOrderCreatedEvent(order: { id: string; userId: string; total: number }) {
-await producer.connect();
-await producer.send({
-```
-
-topic: 'order-events',
-
-messages: [
-
-```javascript
-{
-```
-
-key: order.id, // Ensures order messages hash to same partition!
-
-value: JSON.stringify({ type: 'ORDER_CREATED', payload: order }),
-
-headers: { correlationId: 'req-123-abc' },
-
-},
-
-],
-
-```javascript
-});
+  await producer.connect();
+  await producer.send({
+    topic: 'order-events',
+    messages: [
+      {
+        key: order.id, // Ensures order messages hash to same partition!
+        value: JSON.stringify({ type: 'ORDER_CREATED', payload: order }),
+        headers: { correlationId: 'req-123-abc' },
+      },
+    ],
+  });
 }
 // consumer.ts - KafkaJS Idempotent Consumer
 import { Kafka } from 'kafkajs';
 const kafka = new Kafka({ clientId: 'payment-service', brokers: ['kafka:9092'] });
 const consumer = kafka.consumer({ groupId: 'payment-processor-group' });
 export async function startConsumer() {
-await consumer.connect();
-await consumer.subscribe({ topic: 'order-events', fromBeginning: false });
-await consumer.run({
-```
-
-eachMessage: async ({ topic, partition, message }) => {
-
-```javascript
-const event = JSON.parse(message.value?.toString() || '{}');
-// Idempotency check using DB deduplication table
-const isProcessed = await db.processedEvent.findUnique({
-```
-
-where: { eventId: message.key?.toString() }
-
-```javascript
-});
-if (isProcessed) return;
-if (event.type === 'ORDER_CREATED') {
-await processPayment(event.payload);
-// Mark event as processed in DB transaction
-await db.processedEvent.create({ data: { eventId: message.key?.toString() } });
-}
-},
-});
+  await consumer.connect();
+  await consumer.subscribe({ topic: 'order-events', fromBeginning: false });
+  await consumer.run({
+    eachMessage: async ({ topic, partition, message }) => {
+      const event = JSON.parse(message.value?.toString() || '{}');
+      // Idempotency check using DB deduplication table
+      const isProcessed = await db.processedEvent.findUnique({
+        where: { eventId: message.key?.toString() }
+      });
+      if (isProcessed) return;
+      if (event.type === 'ORDER_CREATED') {
+        await processPayment(event.payload);
+        // Mark event as processed in DB transaction
+        await db.processedEvent.create({ data: { eventId: message.key?.toString() } });
+      }
+    },
+  });
 }
 ```
 
@@ -127,11 +97,11 @@ To avoid **Dual-Write Vulnerabilities** (updating database succeeds but message 
 
 | **Tool / Pattern** | **CLI Command / Configuration** | **Purpose** |
 | --- | --- | --- |
-| **Kafka Topic Creation** | kafka-topics.sh --create --topic order-events --partitions 3           Cr | ates partitioned topic |
-| **Consumer Group Offset** | kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe   C | ecks consumer lag across partitions |
-| **Partition Keying** | { key: 'userId', value: '...' }                                      Guar | ntees ordered execution per key |
-| **KafkaJS Ack Levels** | acks: -1 (or all) | Highest durability; waits for all in-sync replicas |
-| **Transactional Outbox** | DB Table Outbox { id, aggregateId, type, payload, processed } | Prevents database/broker dual-write failures |
+| **Kafka Topic Creation** | `kafka-topics.sh --create --topic order-events --partitions 3` | Creates partitioned topic |
+| **Consumer Group Offset** | `kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe` | Checks consumer lag across partitions |
+| **Partition Keying** | `{ key: 'userId', value: '...' }` | Guarantees ordered execution per key |
+| **KafkaJS Ack Levels** | `acks: -1` (or `all`) | Highest durability; waits for all in-sync replicas |
+| **Transactional Outbox** | DB Table `Outbox { id, aggregateId, type, payload, processed }` | Prevents database/broker dual-write failures |
 
 ## SECTION 3: WEEKLY SYSTEM DESIGN & CODING PROBLEMS
 
@@ -141,22 +111,22 @@ Design an asynchronous, fault-tolerant Event-Driven E-Commerce System handling O
 
 **Requirements**:
 
-1.  Diagram Kafka topic and partition layouts (order-events, payment-events, inventory-events).
+- Diagram Kafka topic and partition layouts (`order-events`, `payment-events`, `inventory-events`).
 
-2.  Explain how to handle out-of-order event delivery using event timestamps and sequence numbers.
+- Explain how to handle out-of-order event delivery using event timestamps and sequence numbers.
 
-3.  Design a Dead-Letter Queue (DLQ) retry architecture for failed consumer messages.
+- Design a Dead-Letter Queue (DLQ) retry architecture for failed consumer messages.
 
 ### Problem 2: End-to-End Code Implementation Challenge
 
-Build a resilient **Kafka Order Processing Consumer Service** in Node.js/TypeScript using kafkajs.
+Build a resilient **Kafka Order Processing Consumer Service** in Node.js/TypeScript using `kafkajs`.
 
 **Requirements**:
 
-1.  Subscribe to order-events under consumer group inventory-service.
+- Subscribe to `order-events` under consumer group `inventory-service`.
 
-2.  Implement idempotent message processing using a local database transaction (checking if message.offset or orderId was previously processed).
+- Implement idempotent message processing using a local database transaction (checking if `message.offset` or `orderId` was previously processed).
 
-3.  Handle transient consumer errors with exponential backoff retries.
+- Handle transient consumer errors with exponential backoff retries.
 
-4.  Route unprocessable messages to a order-events-dlq topic after 3 failed retries.
+- Route unprocessable messages to a `order-events-dlq` topic after 3 failed retries.

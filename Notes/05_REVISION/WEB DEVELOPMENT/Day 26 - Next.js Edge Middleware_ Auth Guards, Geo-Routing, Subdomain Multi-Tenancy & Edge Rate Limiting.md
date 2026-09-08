@@ -1,13 +1,13 @@
 ---
 tags:
-- frontend
-- nextjs
-- edge-middleware
-- auth
-- rate-limiting
-- multi-tenancy
-- performance
-- devops
+  - frontend
+  - nextjs
+  - edge-middleware
+  - auth
+  - rate-limiting
+  - multi-tenancy
+  - performance
+  - devops
 date: 2026-08-26
 ---
 
@@ -21,100 +21,90 @@ Next.js Edge Middleware executes on globally distributed Edge servers (V8 Isolat
 
 Incoming Request ──► [ Anycast Edge CDN ] ──► [ Edge Middleware ] ──► Route Decision:
 
-│
-
-┌────────────────────────────────┼──────────────────────────────┐
-
-▼ ▼ ▼
-
-NextResponse.redirect() NextResponse.rewrite() NextResponse.next()
-
-(307/308 URL changes) (Proxies internal path) (Passes to RSC/API)
+```typescript
+                                                    │
+                   ┌────────────────────────────────┼──────────────────────────────┐
+                   ▼                                ▼                              ▼
+          NextResponse.redirect()          NextResponse.rewrite()         NextResponse.next()
+          (307/308 URL changes)            (Proxies internal path)        (Passes to RSC/API)
+```
 
 #### Edge Runtime Constraints:
 
 - Fast startup times (sub-5ms) with ultra-low memory overhead.
 
-- No Node.js native binary addons (native C++), no filesystem (fs), no eval().
+- No Node.js native binary addons (`native C++`), no filesystem (`fs`), no `eval()`.
 
-- Standard Web APIs supported: Fetch, Request, Response, Web Crypto API, URL, Headers, Cookies.
+- Standard Web APIs supported: `Fetch`, `Request`, `Response`, `Web Crypto API`, `URL`, `Headers`, `Cookies`.
 
 ### 2. Core Architectural Use Cases
 
-#### A. Edge Authentication & JWT Verification (via jose)
+#### A. Edge Authentication & JWT Verification (via `jose`)
 
 Verifying tokens at the Edge prevents unauthorized requests from ever triggering expensive database or serverless compute.
 
-```javascript
+```typescript
 // middleware.ts
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { jwtVerify } from 'jose';
 const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET!);
 export async function middleware(req: NextRequest) {
-const token = req.cookies.get('auth_token')?.value;
-if (!token) {
-return NextResponse.redirect(new URL('/login', req.url));
-}
-try {
-const { payload } = await jwtVerify(token, JWT_SECRET);
-// Inject verified user metadata into headers for downstream Server Components
-const requestHeaders = new Headers(req.headers);
-requestHeaders.set('x-user-id', payload.sub as string);
-requestHeaders.set('x-user-role', payload.role as string);
-return NextResponse.next({
-```
-
-request: { headers: requestHeaders },
-
-```javascript
-});
-} catch (err) {
-return NextResponse.redirect(new URL('/login?error=invalid_session', req.url));
-}
+  const token = req.cookies.get('auth_token')?.value;
+  if (!token) {
+    return NextResponse.redirect(new URL('/login', req.url));
+  }
+  try {
+    const { payload } = await jwtVerify(token, JWT_SECRET);
+    // Inject verified user metadata into headers for downstream Server Components
+    const requestHeaders = new Headers(req.headers);
+    requestHeaders.set('x-user-id', payload.sub as string);
+    requestHeaders.set('x-user-role', payload.role as string);
+    return NextResponse.next({
+      request: { headers: requestHeaders },
+    });
+  } catch (err) {
+    return NextResponse.redirect(new URL('/login?error=invalid_session', req.url));
+  }
 }
 export const config = {
-```
-
-matcher: ['/dashboard/:path*', '/api/protected/:path*'],
-
-```javascript
+  matcher: ['/dashboard/:path*', '/api/protected/:path*'],
 };
 ```
 
 #### B. Subdomain Multi-Tenancy Rewriting
 
-Allows SaaS platforms to map dynamic subdomains (tenant1.domain.com or custom domains acme.com) to internal multi-tenant routes (/app/tenants/tenant1) seamlessly without changing the browser address bar.
+Allows SaaS platforms to map dynamic subdomains (`tenant1.domain.com` or custom domains `acme.com`) to internal multi-tenant routes (`/app/tenants/tenant1`) seamlessly without changing the browser address bar.
 
-```javascript
+```typescript
 export function handleMultiTenancy(req: NextRequest) {
-const hostname = req.headers.get('host') || '';
-const currentHost = hostname.replace(`.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`, '');
-// If request is from root domain or admin portal, pass through
-if (hostname === process.env.NEXT_PUBLIC_ROOT_DOMAIN || currentHost === 'admin') {
-return NextResponse.next();
-}
-// Rewrite internal path: /posts -> /tenants/[tenant]/posts
-const { pathname } = req.nextUrl;
-return NextResponse.rewrite(
-new URL(`/tenants/${currentHost}${pathname}`, req.url)
-);
+  const hostname = req.headers.get('host') || '';
+  const currentHost = hostname.replace(`.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`, '');
+  // If request is from root domain or admin portal, pass through
+  if (hostname === process.env.NEXT_PUBLIC_ROOT_DOMAIN || currentHost === 'admin') {
+    return NextResponse.next();
+  }
+  // Rewrite internal path: /posts -> /tenants/[tenant]/posts
+  const { pathname } = req.nextUrl;
+  return NextResponse.rewrite(
+    new URL(`/tenants/${currentHost}${pathname}`, req.url)
+  );
 }
 ```
 
 #### C. Geolocation Routing & Edge Compliance
 
-Inspects incoming geolocation headers (geo.country, geo.city) to enforce data compliance (GDPR banner injection, regional content locking, currency localization).
+Inspects incoming geolocation headers (`geo.country`, `geo.city`) to enforce data compliance (GDPR banner injection, regional content locking, currency localization).
 
-```javascript
+```typescript
 export function handleGeoRouting(req: NextRequest) {
-const country = req.geo?.country || 'US';
-const response = NextResponse.next();
-response.headers.set('x-user-country', country);
-if (country === 'EU' && !req.cookies.has('gdpr_consent')) {
-response.cookies.set('show_gdpr_banner', 'true');
-}
-return response;
+  const country = req.geo?.country || 'US';
+  const response = NextResponse.next();
+  response.headers.set('x-user-country', country);
+  if (country === 'EU' && !req.cookies.has('gdpr_consent')) {
+    response.cookies.set('show_gdpr_banner', 'true');
+  }
+  return response;
 }
 ```
 
@@ -124,11 +114,11 @@ return response;
 
 | **API / Method** | **Purpose** | **Browser URL Behavior** | **Typical Use Case** |
 | --- | --- | --- | --- |
-| NextResponse.next() | Continues request pipeline | Unchanged | Header/Cookie injection, telemetry |
-| NextResponse.redirect(url) | Emits 307 / 308 HTTP redirect | Updates to new URL | Unauthenticated login redirects |
-| NextResponse.rewrite(url) | Proxies content from a different path | Unchanged | Multi-tenancy, A/B split testing |
-| req.cookies.get(name) | Reads incoming request cookie | N/A | Session token inspection |
-| res.cookies.set(name, val) | Sets outgoing response cookie | N/A | Session refresh, A/B bucket tagging |
+| `NextResponse.next()` | Continues request pipeline | Unchanged | Header/Cookie injection, telemetry |
+| `NextResponse.redirect(url)` | Emits 307 / 308 HTTP redirect | Updates to new URL | Unauthenticated login redirects |
+| `NextResponse.rewrite(url)` | Proxies content from a different path | Unchanged | Multi-tenancy, A/B split testing |
+| `req.cookies.get(name)` | Reads incoming request cookie | N/A | Session token inspection |
+| `res.cookies.set(name, val)` | Sets outgoing response cookie | N/A | Session refresh, A/B bucket tagging |
 
 ## SECTION 3: WEEKLY SYSTEM DESIGN & CODING PROBLEMS
 
@@ -138,38 +128,38 @@ Design an enterprise-scale Edge routing architecture for a multi-tenant platform
 
 **Requirements**:
 
-1.  Detail how Edge Middleware handles:
+- Detail how Edge Middleware handles:
 
-    - Dynamic Custom Domains (e.g. analytics.customer.com -> /sites/[siteId]) using Edge key-value lookup caches.
+- Dynamic Custom Domains (e.g. `analytics.customer.com` -> `/sites/[siteId]`) using Edge key-value lookup caches.
 
-    - Bot & Scraping Detection (identifying malicious User-Agents and IP spikes).
+- Bot & Scraping Detection (identifying malicious User-Agents and IP spikes).
 
-    - Distributed Rate Limiting via Redis / Upstash with minimal latency impact ($<10\text{ms}$).
+- Distributed Rate Limiting via Redis / Upstash with minimal latency impact ($<10\text{ms}$).
 
-2.  Formulate a fail-open vs fail-closed security policy if the Edge rate limiting service experiences an outage.
+- Formulate a fail-open vs fail-closed security policy if the Edge rate limiting service experiences an outage.
 
-3.  Design downstream Server Component context extraction for multi-tenant database partitioning.
+- Design downstream Server Component context extraction for multi-tenant database partitioning.
 
 ### Problem 2: End-to-End Code Implementation Challenge
 
-Build a production-grade **Edge Security & Routing Guard** in Next.js Middleware (middleware.ts):
+Build a production-grade **Edge Security & Routing Guard** in Next.js Middleware (`middleware.ts`):
 
 **Requirements**:
 
-1.  Implement a pipeline router executing the following stages in order:
+- Implement a pipeline router executing the following stages in order:
 
-    - **Rate Limiting**: Sliding Window counter via Upstash Redis REST API (max 20 requests per 10 seconds per IP).
+- **Rate Limiting**: Sliding Window counter via Upstash Redis REST API (max 20 requests per 10 seconds per IP).
 
-    - **Edge Auth Verification**: Verifies JWT using jose library, injecting x-user-id and x-tenant-id into request headers.
+- **Edge Auth Verification**: Verifies JWT using `jose` library, injecting `x-user-id` and `x-tenant-id` into request headers.
 
-    - **Subdomain Multi-Tenant Rewriting**: Rewrites [tenant].domain.com/dashboard to /app/tenants/[tenant]/dashboard.
+- **Subdomain Multi-Tenant Rewriting**: Rewrites `[tenant].domain.com/dashboard` to `/app/tenants/[tenant]/dashboard`.
 
-2.  Ensure public routes (/login, /api/health, /_next/static, /favicon.ico) bypass authentication with strict regex matchers.
+- Ensure public routes (`/login`, `/api/health`, `/_next/static`, `/favicon.ico`) bypass authentication with strict regex matchers.
 
-3.  Include unit tests simulating:
+- Include unit tests simulating:
 
-    - 429 Too Many Requests response with standard Retry-After header when rate limit is exceeded.
+- 429 Too Many Requests response with standard `Retry-After` header when rate limit is exceeded.
 
-    - 307 Redirect to /login when JWT token is expired.
+- 307 Redirect to `/login` when JWT token is expired.
 
-    - Correct internal URL rewriting for multi-tenant subdomains.
+- Correct internal URL rewriting for multi-tenant subdomains.

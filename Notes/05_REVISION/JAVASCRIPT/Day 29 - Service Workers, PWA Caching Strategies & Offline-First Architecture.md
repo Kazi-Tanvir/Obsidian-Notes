@@ -1,12 +1,12 @@
 ---
 tags:
-- javascript
-- service-workers
-- pwa
-- offline-first
-- cache-api
-- background-sync
-- push-api
+  - javascript
+  - service-workers
+  - pwa
+  - offline-first
+  - cache-api
+  - background-sync
+  - push-api
 date: 2026-08-29
 ---
 
@@ -18,39 +18,34 @@ date: 2026-08-29
 
 A **Service Worker** is a client-side programmable network proxy running in a background worker thread separate from the DOM. It intercepts network requests, manages client-side caching, and enables offline capabilities, background synchronization, and push notifications.
 
-┌─────────────────┐ HTTP Request ┌──────────────────────┐ Network Fetch ┌─────────────────┐
+┌─────────────────┐        HTTP Request        ┌──────────────────────┐        Network Fetch       ┌─────────────────┐
 
-│ Browser / DOM │ ─────────────────────────► │ Service Worker Proxy │ ─────────────────────────► │ Origin Server │
+│ Browser / DOM   │ ─────────────────────────► │ Service Worker Proxy │ ─────────────────────────► │ Origin Server   │
 
-│ Client Context │ ◄───────────────────────── │ (Fetch Event Handler)│ ◄───────────────────────── │ (Remote API/CDN)│
+│ Client Context  │ ◄───────────────────────── │ (Fetch Event Handler)│ ◄───────────────────────── │ (Remote API/CDN)│
 
-└─────────────────┘ HTTP Response └──────────┬───────────┘ HTTP Response └─────────────────┘
+└─────────────────┘        HTTP Response       └──────────┬───────────┘        HTTP Response       └─────────────────┘
 
-│
-
-Read / Write Cache
-
-│
-
-▼
-
-┌──────────────────────┐
-
-│ Cache Storage API │
-
-│ IndexedDB │
-
-└──────────────────────┘
+```javascript
+                                                          │
+                                                Read / Write Cache
+                                                          │
+                                                          ▼
+                                               ┌──────────────────────┐
+                                               │   Cache Storage API  │
+                                               │      IndexedDB       │
+                                               └──────────────────────┘
+```
 
 #### Service Worker Lifecycle States:
 
-1.  **Registration**: The browser registers the worker script path via navigator.serviceWorker.register('/sw.js', { scope: '/' }).
+- **Registration**: The browser registers the worker script path via `navigator.serviceWorker.register('/sw.js', { scope: '/' })`.
 
-2.  **Installation (install event)**: Pre-caches critical static shell assets using event.waitUntil(). self.skipWaiting() forces an updated worker to skip the waiting state and activate immediately.
+- **Installation (**`install` **event)**: Pre-caches critical static shell assets using `event.waitUntil()`. `self.skipWaiting()` forces an updated worker to skip the waiting state and activate immediately.
 
-3.  **Activation (activate event)**: Cleans up obsolete caches from previous versions. self.clients.claim() enables the new worker to take control of all open pages immediately without requiring a page reload.
+- **Activation (**`activate` **event)**: Cleans up obsolete caches from previous versions. `self.clients.claim()` enables the new worker to take control of all open pages immediately without requiring a page reload.
 
-4.  **Idle / Functional Events (fetch, sync, push)**: Wakes up on demand to process network fetches, background syncs, or push events, then terminates when idle to save device resources.
+- **Idle / Functional Events (**`fetch`**,** `sync`**,** `push`**)**: Wakes up on demand to process network fetches, background syncs, or push events, then terminates when idle to save device resources.
 
 ```javascript
 // sw.js - Production Lifecycle Setup
@@ -58,28 +53,23 @@ const CACHE_NAME = 'app-shell-v2';
 const STATIC_ASSETS = ['/', '/index.html', '/styles.css', '/app.js', '/favicon.ico'];
 // 1. Install Event: Cache Core App Shell
 self.addEventListener('install', (event) => {
-event.waitUntil(
-caches.open(CACHE_NAME).then((cache) => cache.addAll(STATIC_ASSETS))
-);
-self.skipWaiting(); // Bypass waiting state
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(STATIC_ASSETS))
+  );
+  self.skipWaiting(); // Bypass waiting state
 });
 // 2. Activate Event: Purge Outdated Caches
 self.addEventListener('activate', (event) => {
-event.waitUntil(
-caches.keys().then((cacheNames) =>
-```
-
-Promise.all(
-
-cacheNames
-
-```javascript
-.filter((name) => name !== CACHE_NAME)
-.map((name) => caches.delete(name))
-)
-)
-);
-self.clients.claim(); // Take control of open tabs
+  event.waitUntil(
+    caches.keys().then((cacheNames) =>
+      Promise.all(
+        cacheNames
+          .filter((name) => name !== CACHE_NAME)
+          .map((name) => caches.delete(name))
+      )
+    )
+  );
+  self.clients.claim(); // Take control of open tabs
 });
 ```
 
@@ -91,18 +81,18 @@ Best for static immutable assets (versioned CSS/JS bundles, images, fonts).
 
 ```javascript
 async function cacheFirst(request) {
-const cachedResponse = await caches.match(request);
-if (cachedResponse) return cachedResponse;
-try {
-const networkResponse = await fetch(request);
-if (networkResponse.ok) {
-const cache = await caches.open(CACHE_NAME);
-cache.put(request, networkResponse.clone());
-}
-return networkResponse;
-} catch (error) {
-return new Response('Network error occurred', { status: 408 });
-}
+  const cachedResponse = await caches.match(request);
+  if (cachedResponse) return cachedResponse;
+  try {
+    const networkResponse = await fetch(request);
+    if (networkResponse.ok) {
+      const cache = await caches.open(CACHE_NAME);
+      cache.put(request, networkResponse.clone());
+    }
+    return networkResponse;
+  } catch (error) {
+    return new Response('Network error occurred', { status: 408 });
+  }
 }
 ```
 
@@ -112,26 +102,21 @@ Best for real-time frequently changing data where freshness is paramount (user p
 
 ```javascript
 async function networkFirst(request) {
-try {
-const networkResponse = await fetch(request);
-if (networkResponse.ok) {
-const cache = await caches.open(CACHE_NAME);
-cache.put(request, networkResponse.clone());
-}
-return networkResponse;
-} catch (error) {
-const cachedResponse = await caches.match(request);
-if (cachedResponse) return cachedResponse;
-return new Response(JSON.stringify({ error: 'Offline and un-cached' }), {
-```
-
-headers: { 'Content-Type': 'application/json' },
-
-status: 503,
-
-```javascript
-});
-}
+  try {
+    const networkResponse = await fetch(request);
+    if (networkResponse.ok) {
+      const cache = await caches.open(CACHE_NAME);
+      cache.put(request, networkResponse.clone());
+    }
+    return networkResponse;
+  } catch (error) {
+    const cachedResponse = await caches.match(request);
+    if (cachedResponse) return cachedResponse;
+    return new Response(JSON.stringify({ error: 'Offline and un-cached' }), {
+      headers: { 'Content-Type': 'application/json' },
+      status: 503,
+    });
+  }
 }
 ```
 
@@ -141,15 +126,15 @@ Returns cached response immediately for instantaneous rendering, while asynchron
 
 ```javascript
 async function staleWhileRevalidate(request) {
-const cache = await caches.open(CACHE_NAME);
-const cachedResponse = await cache.match(request);
-const fetchPromise = fetch(request).then((networkResponse) => {
-if (networkResponse.ok) {
-cache.put(request, networkResponse.clone());
-}
-return networkResponse;
-}).catch(() => null);
-return cachedResponse || (await fetchPromise);
+  const cache = await caches.open(CACHE_NAME);
+  const cachedResponse = await cache.match(request);
+  const fetchPromise = fetch(request).then((networkResponse) => {
+    if (networkResponse.ok) {
+      cache.put(request, networkResponse.clone());
+    }
+    return networkResponse;
+  }).catch(() => null);
+  return cachedResponse || (await fetchPromise);
 }
 ```
 
@@ -160,20 +145,20 @@ The **Background Sync API** allows web applications to defer server-state mutati
 ```javascript
 // Main Thread: Registering Background Sync
 async function submitCommentOffline(commentData) {
-await saveToIndexedDB('offline_comments', commentData);
-const registration = await navigator.serviceWorker.ready;
-if ('sync' in registration) {
-await registration.sync.register('sync-comments');
-} else {
-// Fallback if background sync is unsupported
-await syncCommentsImmediately();
-}
+  await saveToIndexedDB('offline_comments', commentData);
+  const registration = await navigator.serviceWorker.ready;
+  if ('sync' in registration) {
+    await registration.sync.register('sync-comments');
+  } else {
+    // Fallback if background sync is unsupported
+    await syncCommentsImmediately();
+  }
 }
 // Service Worker: Processing Sync Event
 self.addEventListener('sync', (event) => {
-if (event.tag === 'sync-comments') {
-event.waitUntil(replayOfflineComments());
-}
+  if (event.tag === 'sync-comments') {
+    event.waitUntil(replayOfflineComments());
+  }
 });
 ```
 
@@ -183,11 +168,11 @@ event.waitUntil(replayOfflineComments());
 
 | **Strategy** | **Network Latency** | **Data Freshness** | **Offline Support** | **Recommended Resource Type** |
 | --- | --- | --- | --- | --- |
-| **Cache-First** | Ultra-Fast ($<10\text{ms}$)   Sta | e (until version bump)   Com | lete              Fin | erprinted JS/CSS, Web Fonts, Static Icons |
+| **Cache-First** | Ultra-Fast ($<10\text{ms}$) | Stale (until version bump) | Complete | Fingerprinted JS/CSS, Web Fonts, Static Icons |
 | **Network-First** | High (Network-bound) | Immediate | Fallback Only | Account Balances, Real-Time Telemetry |
-| **Stale-While-Revalidate** | Ultra-Fast ($<10\text{ms}$)   Eve | tually Consistent        Com | lete              Art | cles, Dashboard Cards, Social Feeds |
+| **Stale-While-Revalidate** | Ultra-Fast ($<10\text{ms}$) | Eventually Consistent | Complete | Articles, Dashboard Cards, Social Feeds |
 | **Network-Only** | High (Network-bound) | Immediate | None | Payment Transactions, Live Authentication |
-| **Cache-Only** | Ultra-Fast ($<5\text{ms}$)    Sta | ic                       Com | lete              Pre | cached Offline Fallback Pages (/offline.html) |
+| **Cache-Only** | Ultra-Fast ($<5\text{ms}$) | Static | Complete | Pre-cached Offline Fallback Pages (`/offline.html`) |
 
 ## SECTION 3: PRACTICAL PROBLEMS
 
@@ -200,33 +185,32 @@ Analyze the registration and scope setup below. Predict whether the Service Work
 navigator.serviceWorker.register('/admin/sw.js', { scope: '/admin/' });
 // In Page Script:
 fetch('/admin/api/metrics'); // Request A
-fetch('/api/v1/users'); // Request B
-fetch('/assets/style.css'); // Request C
+fetch('/api/v1/users');      // Request B
+fetch('/assets/style.css');  // Request C
+Question: Which requests (A, B, C) are intercepted by /admin/sw.js and why? What header must the server send to allow /admin/sw.js to control the root scope /?
 ```
 
-*Question*: Which requests (A, B, C) are intercepted by /admin/sw.js and why? What header must the server send to allow /admin/sw.js to control the root scope /?
-
-*Hint*: Research the Service-Worker-Allowed HTTP response header and scope directory restrictions.
+*Hint*: Research the `Service-Worker-Allowed` HTTP response header and scope directory restrictions.
 
 ### Challenge 2: Memory-Bounded LRU Cache Storage Wrapper
 
-The standard CacheStorage API has no built-in max-item or time-to-live (TTL) limits, leading to potential storage quota exhaustion (QuotaExceededError).
+The standard `CacheStorage` API has no built-in max-item or time-to-live (TTL) limits, leading to potential storage quota exhaustion (`QuotaExceededError`).
 
 Refactor the following un-bounded cache handler into a **Max-Item LRU Cache Storage Wrapper**:
 
-1.  Enforces a maximum limit of 50 cached entries per cache bucket.
+- Enforces a maximum limit of 50 cached entries per cache bucket.
 
-2.  Evicts the oldest accessed entry when inserting item 51.
+- Evicts the oldest accessed entry when inserting item 51.
 
 ```javascript
 // Unbounded Vulnerable Cache Routine
 async function cacheResourceUnbounded(cacheName, request, response) {
-const cache = await caches.open(cacheName);
-await cache.put(request, response); // Can grow indefinitely!
+  const cache = await caches.open(cacheName);
+  await cache.put(request, response); // Can grow indefinitely!
 }
 ```
 
-*Hint*: Use cache.keys() to inspect existing requests and delete the oldest key (cache.delete(keys[0])).
+*Hint*: Use `cache.keys()` to inspect existing requests and delete the oldest key (`cache.delete(keys[0])`).
 
 ### Challenge 3: End-to-End Offline-First Background Sync Queue
 
@@ -234,22 +218,22 @@ Build a production-grade **Offline-First Mutation Synchronizer** in TypeScript:
 
 **Requirements**:
 
-1.  **Client Interceptor (offlineApiClient)**: Intercepts POST, PUT, DELETE requests. If navigator.onLine === false or fetch fails with a network exception:
+- **Client Interceptor (**`offlineApiClient`**)**: Intercepts `POST`, `PUT`, `DELETE` requests. If `navigator.onLine === false` or fetch fails with a network exception:
 
-    - Serializes the request (URL, Method, Headers, JSON Body, UUID, timestamp).
+- Serializes the request (URL, Method, Headers, JSON Body, UUID, timestamp).
 
-    - Stores it into an IndexedDB store (pending_mutations).
+- Stores it into an IndexedDB store (`pending_mutations`).
 
-    - Registers a background sync tag 'sync-mutations' on ServiceWorkerRegistration.
+- Registers a background sync tag `'sync-mutations'` on `ServiceWorkerRegistration`.
 
-2.  **Service Worker Sync Handler (sw.ts)**:
+- **Service Worker Sync Handler (**`sw.ts`**)**:
 
-    - Listens to self.addEventListener('sync', ...) matching 'sync-mutations'.
+- Listens to `self.addEventListener('sync', ...)` matching `'sync-mutations'`.
 
-    - Iterates through pending mutations in chronological order.
+- Iterates through pending mutations in chronological order.
 
-    - Replays requests with custom X-Idempotency-Key and X-Offline-Replay: true headers.
+- Replays requests with custom `X-Idempotency-Key` and `X-Offline-Replay: true` headers.
 
-    - Deletes successfully processed records from IndexedDB and notifies open window clients via postMessage().
+- Deletes successfully processed records from IndexedDB and notifies open window clients via `postMessage()`.
 
-    - Implements exponential backoff retry and Dead-Letter Queue (DLQ) if the server returns 4xx/5xx responses.
+- Implements exponential backoff retry and Dead-Letter Queue (DLQ) if the server returns 4xx/5xx responses.

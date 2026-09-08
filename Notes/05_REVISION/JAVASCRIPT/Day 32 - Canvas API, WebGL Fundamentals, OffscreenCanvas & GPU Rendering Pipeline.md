@@ -1,13 +1,13 @@
 ---
 tags:
-- javascript
-- canvas
-- webgl
-- offscreen-canvas
-- web-workers
-- gpu-rendering
-- graphics
-- performance
+  - javascript
+  - canvas
+  - webgl
+  - offscreen-canvas
+  - web-workers
+  - gpu-rendering
+  - graphics
+  - performance
 date: 2026-09-01
 ---
 
@@ -27,23 +27,23 @@ Modern web browsers split rendering across the **Main Thread (CPU)** and the **C
 
 ┌────────────────────────────────────── Browser Graphics Pipeline ──────────────────────────────────────┐
 
-│ │
+│                                                                                                       │
 
-│ 1. JavaScript Code (App Logic / Physics) ──► CPU Main Thread or Web Worker │
+│  1. JavaScript Code (App Logic / Physics) ──► CPU Main Thread or Web Worker                           │
 
-│ │
+│                                                                                                       │
 
-│ 2. Draw Commands / Shaders ──► Skia (2D) or WebGL / WebGPU Drivers │
+│  2. Draw Commands / Shaders ──► Skia (2D) or WebGL / WebGPU Drivers                                   │
 
-│ │
+│                                                                                                       │
 
-│ 3. GPU Pipeline: Vertex Shader ──► Rasterization ──► Fragment (Pixel) Shader ──► Framebuffer Buffer │
+│  3. GPU Pipeline: Vertex Shader ──► Rasterization ──► Fragment (Pixel) Shader ──► Framebuffer Buffer  │
 
-│ │
+│                                                                                                       │
 
-│ 4. Display Screen (VSync Refresh: 60Hz = 16.6ms budget / 120Hz = 8.3ms budget) │
+│  4. Display Screen (VSync Refresh: 60Hz = 16.6ms budget / 120Hz = 8.3ms budget)                       │
 
-│ │
+│                                                                                                       │
 
 └───────────────────────────────────────────────────────────────────────────────────────────────────────┘
 
@@ -54,35 +54,35 @@ A common mistake is rendering on high-DPI (Retina/4K) displays without scaling t
 ```javascript
 // High-DPI Sharp Rendering Setup
 function setupHighDPICanvas(canvas, cssWidth, cssHeight) {
-const dpr = window.devicePixelRatio || 1;
-const ctx = canvas.getContext('2d');
-// Set physical pixel resolution
-canvas.width = cssWidth * dpr;
-canvas.height = cssHeight * dpr;
-// Maintain CSS layout dimensions
-canvas.style.width = `${cssWidth}px`;
-canvas.style.height = `${cssHeight}px`;
-// Scale coordinate system so 1 unit = 1 CSS pixel
-ctx.scale(dpr, dpr);
-return ctx;
+  const dpr = window.devicePixelRatio || 1;
+  const ctx = canvas.getContext('2d');
+  // Set physical pixel resolution
+  canvas.width = cssWidth * dpr;
+  canvas.height = cssHeight * dpr;
+  // Maintain CSS layout dimensions
+  canvas.style.width = `${cssWidth}px`;
+  canvas.style.height = `${cssHeight}px`;
+  // Scale coordinate system so 1 unit = 1 CSS pixel
+  ctx.scale(dpr, dpr);
+  return ctx;
 }
 // Delta-Time Independent Render Loop
 let lastTime = performance.now();
 function renderLoop(currentTime) {
-// Calculate delta time in seconds (e.g. 0.016s at 60fps)
-const deltaTime = (currentTime - lastTime) / 1000;
-lastTime = currentTime;
-// Update physics with frame-rate independence: position += velocity * deltaTime
-updatePhysics(deltaTime);
-drawScene();
-requestAnimationFrame(renderLoop);
+  // Calculate delta time in seconds (e.g. 0.016s at 60fps)
+  const deltaTime = (currentTime - lastTime) / 1000;
+  lastTime = currentTime;
+  // Update physics with frame-rate independence: position += velocity * deltaTime
+  updatePhysics(deltaTime);
+  drawScene();
+  requestAnimationFrame(renderLoop);
 }
 requestAnimationFrame(renderLoop);
 ```
 
 ### 3. OffscreenCanvas & Multi-Threaded Worker Rendering
 
-OffscreenCanvas completely decouples rendering from the DOM. By transferring control of a canvas to a **Web Worker**, the rendering loop runs at a steady 60--120 FPS without stuttering even when the main thread executes heavy JavaScript or DOM reflows.
+`OffscreenCanvas` completely decouples rendering from the DOM. By transferring control of a canvas to a **Web Worker**, the rendering loop runs at a steady 60–120 FPS without stuttering even when the main thread executes heavy JavaScript or DOM reflows.
 
 ```javascript
 // main.js (Main UI Thread)
@@ -94,36 +94,32 @@ const worker = new Worker(new URL('./graphics.worker.js', import.meta.url), { ty
 worker.postMessage({ type: 'INIT', canvas: offscreen }, [offscreen]);
 // Listen for user interactions and forward to worker
 window.addEventListener('mousemove', (e) => {
-worker.postMessage({ type: 'MOUSE_MOVE', x: e.clientX, y: e.clientY });
+  worker.postMessage({ type: 'MOUSE_MOVE', x: e.clientX, y: e.clientY });
 });
 // graphics.worker.js (Dedicated Web Worker Thread)
 let ctx;
 let particles = [];
-```
-
 self.onmessage = (event) => {
-
-```javascript
-const { type, canvas, x, y } = event.data;
-if (type === 'INIT') {
-ctx = canvas.getContext('2d');
-initParticles(10000);
-requestAnimationFrame(workerLoop);
-} else if (type === 'MOUSE_MOVE') {
-updateMousePosition(x, y);
-}
+  const { type, canvas, x, y } = event.data;
+  if (type === 'INIT') {
+    ctx = canvas.getContext('2d');
+    initParticles(10000);
+    requestAnimationFrame(workerLoop);
+  } else if (type === 'MOUSE_MOVE') {
+    updateMousePosition(x, y);
+  }
 };
 function workerLoop(time) {
-ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-// Render 10,000 particles at 60fps on separate thread!
-for (let i = 0; i < particles.length; i++) {
-const p = particles[i];
-p.x += p.vx;
-p.y += p.vy;
-ctx.fillStyle = p.color;
-ctx.fillRect(p.x, p.y, p.size, p.size);
-}
-requestAnimationFrame(workerLoop);
+  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+  // Render 10,000 particles at 60fps on separate thread!
+  for (let i = 0; i < particles.length; i++) {
+    const p = particles[i];
+    p.x += p.vx;
+    p.y += p.vy;
+    ctx.fillStyle = p.color;
+    ctx.fillRect(p.x, p.y, p.size, p.size);
+  }
+  requestAnimationFrame(workerLoop);
 }
 ```
 
@@ -131,32 +127,32 @@ requestAnimationFrame(workerLoop);
 
 WebGL allows executing raw C-like **GLSL (OpenGL Shading Language)** programs on the GPU:
 
-- **Vertex Shader**: Runs once per vertex; computes 3D-to-2D clip-space coordinates (gl_Position).
+- **Vertex Shader**: Runs once per vertex; computes 3D-to-2D clip-space coordinates (`gl_Position`).
 
-- **Fragment Shader**: Runs once per pixel/fragment; calculates final RGBA pixel colors (outColor).
+- **Fragment Shader**: Runs once per pixel/fragment; calculates final RGBA pixel colors (`outColor`).
 
 ```javascript
 // Minimal WebGL2 Shader Compilation Boilerplate
 function createWebGLProgram(gl, vertexSource, fragmentSource) {
-function compileShader(gl, type, source) {
-const shader = gl.createShader(type);
-gl.shaderSource(shader, source);
-gl.compileShader(shader);
-if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-throw new Error(`Shader compile error: ${gl.getShaderInfoLog(shader)}`);
-}
-return shader;
-}
-const vertexShader = compileShader(gl, gl.VERTEX_SHADER, vertexSource);
-const fragmentShader = compileShader(gl, gl.FRAGMENT_SHADER, fragmentSource);
-const program = gl.createProgram();
-gl.attachShader(program, vertexShader);
-gl.attachShader(program, fragmentShader);
-gl.linkProgram(program);
-if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-throw new Error(`Program link error: ${gl.getProgramInfoLog(program)}`);
-}
-return program;
+  function compileShader(gl, type, source) {
+    const shader = gl.createShader(type);
+    gl.shaderSource(shader, source);
+    gl.compileShader(shader);
+    if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+      throw new Error(`Shader compile error: ${gl.getShaderInfoLog(shader)}`);
+    }
+    return shader;
+  }
+  const vertexShader = compileShader(gl, gl.VERTEX_SHADER, vertexSource);
+  const fragmentShader = compileShader(gl, gl.FRAGMENT_SHADER, fragmentSource);
+  const program = gl.createProgram();
+  gl.attachShader(program, vertexShader);
+  gl.attachShader(program, fragmentShader);
+  gl.linkProgram(program);
+  if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+    throw new Error(`Program link error: ${gl.getProgramInfoLog(program)}`);
+  }
+  return program;
 }
 ```
 
@@ -174,7 +170,7 @@ return program;
 ### Canvas State Stack APIs:
 
 ```javascript
-ctx.save(); // Pushes current transformations, clip paths, and styles to internal stack
+ctx.save();    // Pushes current transformations, clip paths, and styles to internal stack
 ctx.translate(x, y);
 ctx.rotate(angle);
 ctx.fillStyle = 'red';
@@ -196,15 +192,14 @@ document.body.appendChild(canvas);
 const ctx = canvas.getContext('2d');
 ctx.fillStyle = 'blue';
 ctx.fillRect(50, 50, 100, 100);
+Question: On a device with window.devicePixelRatio = 2 (e.g. MacBook Retina / 4K display), why is the blue box blurry? What are the exact default values of canvas.width and canvas.height if not explicitly specified?
 ```
-
-*Question*: On a device with window.devicePixelRatio = 2 (e.g. MacBook Retina / 4K display), why is the blue box blurry? What are the exact default values of canvas.width and canvas.height if not explicitly specified?
 
 *Hint*: Understand the difference between CSS layout pixel dimensions and backing store bitmap pixel buffer dimensions.
 
 ### Challenge 2: Memory-Bounded Canvas Particle Engine with Zero GC Churn
 
-Refactor an un-optimized particle engine that creates 5,000 new object instances (new Particle()) per second into an allocation-free engine using **TypedArrays** (Float32Array) and an **Object Pool** pattern to prevent Garbage Collection frame drops.
+Refactor an un-optimized particle engine that creates 5,000 new object instances (`new Particle()`) per second into an allocation-free engine using **TypedArrays** (`Float32Array`) and an **Object Pool** pattern to prevent Garbage Collection frame drops.
 
 ### Challenge 3: Real-Time WebGL Color-Grading Filter Engine in TypeScript
 
@@ -212,18 +207,18 @@ Build an End-to-End **WebGL2 Post-Processing Image & Video Shader Filter Engine*
 
 **Requirements**:
 
-1.  **Shader Pipeline (WebGLFilterEngine)**:
+- **Shader Pipeline (**`WebGLFilterEngine`**)**:
 
-    - Compiles a Fullscreen Quad Vertex Shader and a dynamic Fragment Shader in GLSL ES 3.00.
+- Compiles a Fullscreen Quad Vertex Shader and a dynamic Fragment Shader in GLSL ES 3.00.
 
-    - Accepts real-time Uniform parameters: u_brightness (float), u_contrast (float), u_saturation (float), u_tint (vec3).
+- Accepts real-time Uniform parameters: `u_brightness` (float), `u_contrast` (float), `u_saturation` (float), `u_tint` (vec3).
 
-2.  **Texture Management**:
+- **Texture Management**:
 
-    - Uploads an HTMLImageElement, HTMLVideoElement, or ImageBitmap to a WebGL 2D Texture (gl.texImage2D).
+- Uploads an `HTMLImageElement`, `HTMLVideoElement`, or `ImageBitmap` to a WebGL 2D Texture (`gl.texImage2D`).
 
-    - Renders the post-processed result at 60 FPS.
+- Renders the post-processed result at 60 FPS.
 
-3.  **OffscreenCanvas Web Worker Mode**:
+- **OffscreenCanvas Web Worker Mode**:
 
-    - Includes support for running inside an OffscreenCanvas worker receiving live video frames from a MediaStreamTrackProcessor.
+- Includes support for running inside an `OffscreenCanvas` worker receiving live video frames from a `MediaStreamTrackProcessor`.

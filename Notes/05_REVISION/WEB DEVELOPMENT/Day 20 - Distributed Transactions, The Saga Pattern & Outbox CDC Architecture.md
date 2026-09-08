@@ -1,12 +1,12 @@
 ---
 tags:
-- backend
-- microservices
-- distributed-systems
-- saga-pattern
-- kafka
-- system-design
-- database
+  - backend
+  - microservices
+  - distributed-systems
+  - saga-pattern
+  - kafka
+  - system-design
+  - database
 date: 2026-08-20
 ---
 
@@ -34,17 +34,14 @@ CreateOrder ──► AuthorizePayment ──► ReserveInventory ──► Ship
 
 CreateOrder ──► AuthorizePayment ──► ReserveInventory (FAIL!)
 
-│ │
-
-▼ ▼
-
-RefundPayment ◄───────────────┘
-
-│
-
-▼
-
-CancelOrder
+```typescript
+                      │                      │
+                      ▼                      ▼
+               RefundPayment ◄───────────────┘
+                      │
+                      ▼
+                 CancelOrder
+```
 
 #### Comparison: Choreography vs. Orchestration:
 
@@ -53,7 +50,7 @@ CancelOrder
 | **Coordination** | Decentralized; services react to domain events | Centralized Saga Orchestrator engine |
 | **Coupling** | Loosely coupled | Orchestrator knows all participating steps |
 | **Complexity** | Difficult to visualize full workflow trajectory | Clear visibility into execution state and retries |
-| **Best For** | Simple workflows (2--3 steps) | Complex enterprise workflows (5+ steps, banking, booking) |
+| **Best For** | Simple workflows (2–3 steps) | Complex enterprise workflows (5+ steps, banking, booking) |
 
 ### 3. Transactional Outbox Pattern + Change Data Capture (CDC)
 
@@ -61,89 +58,76 @@ To guarantee that database mutations and event publications occur with $100%$ at
 
 ┌──────────────────────────────────────────────┐
 
-│ Service Application │
+│ Service Application                          │
 
-│ │
+│                                              │
 
-│ BEGIN TRANSACTION; │
+│  BEGIN TRANSACTION;                          │
 
-│ INSERT INTO orders (...); │
+│    INSERT INTO orders (...);                 │
 
-│ INSERT INTO outbox_table (event_payload); │
+│    INSERT INTO outbox_table (event_payload); │
 
-│ COMMIT; │
-
-└──────────────────────┬───────────────────────┘
-
-│
-
-▼ (PostgreSQL Write-Ahead Log - WAL)
-
-┌──────────────────────────────────────────────┐
-
-│ Debezium CDC / Kafka Connect Engine │
+│  COMMIT;                                     │
 
 └──────────────────────┬───────────────────────┘
 
-│
-
-▼ (Guaranteed At-Least-Once Delivery)
+```typescript
+                       │
+                       ▼ (PostgreSQL Write-Ahead Log - WAL)
+```
 
 ┌──────────────────────────────────────────────┐
 
-│ Apache Kafka Topic ('order-events') │
+│ Debezium CDC / Kafka Connect Engine          │
+
+└──────────────────────┬───────────────────────┘
+
+```typescript
+                       │
+                       ▼ (Guaranteed At-Least-Once Delivery)
+```
+
+┌──────────────────────────────────────────────┐
+
+│ Apache Kafka Topic ('order-events')          │
 
 └──────────────────────────────────────────────┘
 
-1.  Order mutation and event envelope are committed inside the **same local ACID database transaction**.
+- Order mutation and event envelope are committed inside the **same local ACID database transaction**.
 
-2.  A Change Data Capture (CDC) tool (e.g. **Debezium**) reads the PostgreSQL WAL (Write-Ahead Log) and pushes events to Apache Kafka without touching application logic.
+- A Change Data Capture (CDC) tool (e.g. **Debezium**) reads the PostgreSQL WAL (Write-Ahead Log) and pushes events to Apache Kafka without touching application logic.
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 
 ### Outbox Table DDL (PostgreSQL):
 
+```sql
 CREATE TABLE outbox_events (
-
-id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-
-aggregate_type VARCHAR(64) NOT NULL,
-
-aggregate_id VARCHAR(64) NOT NULL,
-
-event_type VARCHAR(64) NOT NULL,
-
-payload JSONB NOT NULL,
-
-created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-
-processed BOOLEAN DEFAULT FALSE
-
-```javascript
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  aggregate_type VARCHAR(64) NOT NULL,
+  aggregate_id VARCHAR(64) NOT NULL,
+  event_type VARCHAR(64) NOT NULL,
+  payload JSONB NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  processed BOOLEAN DEFAULT FALSE
 );
 CREATE INDEX idx_outbox_unprocessed ON outbox_events(created_at) WHERE processed = FALSE;
 ```
 
 ### Saga Orchestrator State Interface:
 
-```javascript
-export enum SagaStatus {
-```
-
-STARTED = "STARTED",
-
-COMPENSATING = "COMPENSATING",
-
-COMPLETED = "COMPLETED",
-
-FAILED = "FAILED"
-
 ```typescript
+export enum SagaStatus {
+  STARTED = "STARTED",
+  COMPENSATING = "COMPENSATING",
+  COMPLETED = "COMPLETED",
+  FAILED = "FAILED"
 }
 export interface SagaStep<TContext> {
-name: string;
-execute: (context: TContext) => Promise<void>;
-compensate: (context: TContext) => Promise<void>;
+  name: string;
+  execute: (context: TContext) => Promise<void>;
+  compensate: (context: TContext) => Promise<void>;
 }
 ```
 
@@ -155,11 +139,11 @@ Design a multi-service travel booking platform (Flights, Hotels, Car Rentals) or
 
 **Requirements**:
 
-1.  Choose between an Orchestrated Saga (using Temporal/Custom Node.js State Machine) vs Choreographed Kafka events, justifying your choice for handling third-party API downtime.
+- Choose between an Orchestrated Saga (using Temporal/Custom Node.js State Machine) vs Choreographed Kafka events, justifying your choice for handling third-party API downtime.
 
-2.  Detail the compensation sequence if Flight Booking succeeds, Hotel Booking succeeds, but Car Rental fails due to credit card authorization limits.
+- Detail the compensation sequence if Flight Booking succeeds, Hotel Booking succeeds, but Car Rental fails due to credit card authorization limits.
 
-3.  Design the Idempotency Strategy ensuring that compensating requests (e.g. POST /api/v1/hotels/cancel) are safely retried without double-cancelling.
+- Design the Idempotency Strategy ensuring that compensating requests (e.g. `POST /api/v1/hotels/cancel`) are safely retried without double-cancelling.
 
 ### Problem 2: End-to-End Code Implementation Challenge
 
@@ -167,20 +151,20 @@ Build a production-grade **Saga Orchestrator Engine** in TypeScript:
 
 **Requirements**:
 
-1.  Implement a generic SagaOrchestrator<TContext> class that accepts an array of SagaStep<TContext>.
+- Implement a generic `SagaOrchestrator<TContext>` class that accepts an array of `SagaStep<TContext>`.
 
-2.  The orchestrator must execute steps sequentially in forward order.
+- The orchestrator must execute steps sequentially in forward order.
 
-3.  If any step throws an error:
+- If any step throws an error:
 
-    - Catch the failure and immediately transition to COMPENSATING mode.
+- Catch the failure and immediately transition to `COMPENSATING` mode.
 
-    - Execute the corresponding compensate() functions in **reverse order** for all previously completed steps.
+- Execute the corresponding `compensate()` functions in **reverse order** for all previously completed steps.
 
-    - Record and log step execution duration and compensation errors.
+- Record and log step execution duration and compensation errors.
 
-4.  Include mock test cases verifying:
+- Include mock test cases verifying:
 
-    - Full successful execution trajectory.
+- Full successful execution trajectory.
 
-    - Mid-pipeline failure at Step 3 triggering rollbacks of Step 2 and Step 1.
+- Mid-pipeline failure at Step 3 triggering rollbacks of Step 2 and Step 1.
