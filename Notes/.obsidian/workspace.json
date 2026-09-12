@@ -80,8 +80,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "279416c7625b4660",
@@ -245,7 +244,9 @@
   },
   "active": "41125d2dba3cc8d9",
   "lastOpenFiles": [
+    "02_DU_IIT/1st Year/1-1/CSE 1101 - Structured Programming/Books/teach_yourself_c_md/08_chapter_8_console_io.md",
     "02_DU_IIT/1st Year/1-1/CSE 1101 - Structured Programming/Books/teach_yourself_c_md/06_chapter_6_using_pointers.md",
+    "02_DU_IIT/1st Year/1-1/CSE 1101 - Structured Programming/Books/teach_yourself_c_md/09_chapter_9_file_io.md",
     "02_DU_IIT/1st Year/1-1/CSE 1101 - Structured Programming/Books/teach_yourself_c_md/10_chapter_10_structures_and_unions.md",
     "02_DU_IIT/1st Year/1-1/CSE 1101 - Structured Programming/Books/teach_yourself_c_md/00_table_of_contents.md",
     "02_DU_IIT/1st Year/1-1/CSE 1101 - Structured Programming/Books/teach_yourself_c_md/07_chapter_7_closer_look_at_functions.md",
@@ -270,8 +271,6 @@
     "02_DU_IIT/1st Year/1-1/MATH 1107 - Calculus/Books/anton_calculus/2 - 2 The Derivative.md",
     "02_DU_IIT/1st Year/1-1/CSE 1102 - Discrete Mathematics/Books/Rosen_Discrete_Math/01_Logic_&_Proofs.md",
     "02_DU_IIT/1st Year/1-1/CSE 1102 - Discrete Mathematics/Books/Rosen_Discrete_Math/02_Sets_Functions.md",
-    "02_DU_IIT/1st Year/1-1/CSE 1102 - Discrete Mathematics/Books/CSE 1102 5.1.md",
-    "02_DU_IIT/1st Year/1-1/CSE 1101L - Structured Programming/Notes/CSE 1101 L1.md",
     "05_REVISION/JAVASCRIPT/Unconfirmed 284802.crdownload",
     "05_REVISION/JAVASCRIPT/Unconfirmed 897747.crdownload",
     "05_REVISION/JAVASCRIPT/Unconfirmed 486437.crdownload",
