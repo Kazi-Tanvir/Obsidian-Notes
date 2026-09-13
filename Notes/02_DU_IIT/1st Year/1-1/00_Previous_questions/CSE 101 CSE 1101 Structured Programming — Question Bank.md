@@ -227,15 +227,10 @@ _Instruction: Answer any five questions. When answering a question, please answe
 ## 4. CSE 1101: Structured Programming - Final Examination 2025
 
 **Institute of Information Technology, University of Dhaka**
-
 **Program:** Bachelor of Science in Software Engineering (BSSE)
-
 **Semester:** 1st Year 1st Semester Final Examination, 2025
-
 **Course Code:** CSE 1101 (Structured Programming)
-
 **Marks:** 60 | **Duration:** 3 Hours
-
 _Instruction: Answer any 5 (five) of the following questions. When answering a question, please answer all the subsections of it at once._
 
 ---
