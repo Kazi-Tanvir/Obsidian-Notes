@@ -68,19 +68,13 @@ _Instruction: Answer any three of the following questions._
 ## 2. CSE 1101: Structured Programming - Final Examination 2023
 
 **Institute of Information Technology, University of Dhaka**
-
 **Program:** Bachelor of Science in Software Engineering (BSSE)
-
 **Semester:** 1st Semester Final Examination, 2023
-
 **Course Code:** CSE 1101 (Structured Programming)
-
 **Marks:** 60 | **Time:** 3 Hours
-
 _Instruction: Answer any 5 (five) questions. When answering a question, please answer all the subsections of it at once._
 
 ---
-
 ### Question 1
 
 - **a.** What are the essential components of a C program? Write an example code and show all the components. `[4]`
