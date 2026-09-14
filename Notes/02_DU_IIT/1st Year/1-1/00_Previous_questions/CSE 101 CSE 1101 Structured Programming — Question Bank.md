@@ -1,4 +1,4 @@
-			# CSE 101 / CSE 1101: Structured Programming - Question Bank
+# CSE 101 / CSE 1101: Structured Programming - Question Bank
 
 ---
 
