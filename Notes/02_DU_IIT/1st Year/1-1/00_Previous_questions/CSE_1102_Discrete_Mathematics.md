@@ -119,6 +119,63 @@ Write these propositions using p, q, and r and logical connectives (including ne
 **6.**
 - **(a)** Define Hamilton Circuit? Show that neither graph displayed below has a Hamilton circuit. `(4)`
 - **(b)** Find a shortest path between a and z in the following graph. `(4)`
+<svg width="450" height="160" viewBox="0 0 680 240" xmlns="http://www.w3.org/2000/svg" style="font-family: serif; font-size: 15px; font-style: italic; background: white; border-radius: 8px;">
+  <!-- Edges -->
+  <g stroke="#000" stroke-width="1.8">
+    <line x1="60" y1="120" x2="180" y2="40" />
+    <line x1="60" y1="120" x2="180" y2="200" />
+    <line x1="180" y1="40" x2="180" y2="200" />
+    <line x1="180" y1="40" x2="310" y2="40" />
+    <line x1="180" y1="200" x2="310" y2="40" />
+    <line x1="180" y1="200" x2="310" y2="200" />
+    <line x1="310" y1="40" x2="310" y2="200" />
+    <line x1="310" y1="40" x2="440" y2="40" />
+    <line x1="310" y1="200" x2="440" y2="200" />
+    <line x1="440" y1="40" x2="440" y2="200" />
+    <line x1="440" y1="40" x2="560" y2="120" />
+    <line x1="440" y1="200" x2="560" y2="120" />
+  </g>
+
+  <!-- Edge Weights -->
+  <g fill="#111" font-style="normal" font-size="14px" text-anchor="middle">
+    <text x="110" y="70">4</text>
+    <text x="110" y="180">3</text>
+    <text x="170" y="125">2</text>
+    <text x="245" y="30">5</text>
+    <text x="235" y="115">3</text>
+    <text x="245" y="218">6</text>
+    <text x="320" y="125">1</text>
+    <text x="375" y="30">5</text>
+    <text x="375" y="218">5</text>
+    <text x="430" y="125">2</text>
+    <text x="510" y="70">7</text>
+    <text x="510" y="180">4</text>
+  </g>
+
+  <!-- Nodes (Dots) -->
+  <g fill="#000">
+    <circle cx="60" cy="120" r="4.5" />
+    <circle cx="180" cy="40" r="4.5" />
+    <circle cx="180" cy="200" r="4.5" />
+    <circle cx="310" cy="40" r="4.5" />
+    <circle cx="310" cy="200" r="4.5" />
+    <circle cx="440" cy="40" r="4.5" />
+    <circle cx="440" cy="200" r="4.5" />
+    <circle cx="560" cy="120" r="4.5" />
+  </g>
+
+  <!-- Vertex Labels -->
+  <g fill="#000" font-size="16px">
+    <text x="40" y="125">a</text>
+    <text x="176" y="26">b</text>
+    <text x="177" y="222">c</text>
+    <text x="306" y="26">d</text>
+    <text x="307" y="222">e</text>
+    <text x="437" y="26">f</text>
+    <text x="437" y="222">g</text>
+    <text x="572" y="125">z</text>
+  </g>
+</svg>
 - **(c)** Suppose that a connected planar simple graph has 20 vertices, each of degree 3. Into how many regions does a representation of this planar graph split the plane? `(4)`
 
 **7.**
