@@ -405,9 +405,9 @@ Instructions: Answer any 5 (five) questions.
    c. What does a break statement do? 2
    d. Write a menu-driven program, where the user will be asked to perform which operation she wants to perform from the following functions: Addition, Subtraction, Multiplication, and Division. The program will continuously run until the user selects the Exit function. If any error occurs your program should also be able to inform that. 4
 
-4. a. int *a[10]; int (*b)[10]; Then what are a and b represents? 2
-   b. Are the expressions *ptr++ and ++*ptr same? Explain. 2
-   c. What will be the output of the following 'C' code? int a = 0x11223344; unsigned char *c = (unsigned char *) &a; printf("%02X\n", *c); 2
+4. a. int a[10]; int (\*b)[10]; Then what are a and b represents? 2
+   b. Are the expressions \*ptr++ and ++\*ptr same? Explain. 2
+   c. What will be the output of the following 'C' code? int a = 0x11223344; unsigned char \*c = (unsigned char \*) &a; printf("%02X\n", \*c); 2
    d. What would be the equivalent pointer expression for referring to the same element as a[p][q][r][s]? 3
    e. Write a program in C to find the sum and mean of all elements in an array using pointers. 3
 
