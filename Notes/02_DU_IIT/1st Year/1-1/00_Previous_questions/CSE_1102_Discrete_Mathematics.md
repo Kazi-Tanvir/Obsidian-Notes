@@ -247,9 +247,25 @@ Write these propositions using p, q, and r and logical connectives (including ne
    d. What is a well-ordered set? Give example. [1]
 
 4. a. Suppose that the relations R1 and R2 on a set A are represented by the matrices M_R1 and M_R2. What are the matrices representing R1 ∪ R2 and R1 ∩ R2? [4]
+MR1 = $$
+\begin{bmatrix}
+1 & 0 & 1 \\
+1 & 0 & 0 \\
+0 & 1 & 0
+\end{bmatrix}
+$$
+
+MR2 = 
+$$
+\begin{bmatrix}
+1 & 0 & 1 \\
+0 & 1 & 1 \\
+1 & 0 & 0
+\end{bmatrix}
+$$
+
    b. Identify following as one-to-one, onto, both, neither, or not a function. [5]
    c. Find the adjacency matrix of the given directed multigraph. [3]
-
 5. a. How many bit strings are there of length six or less, not counting the empty string? [2]
    b. How many bit strings of length ten both begin and end with a 1? [2]
    c. How many license plates consisting of three letters followed by three digits contain no letter or digit twice? [3]
