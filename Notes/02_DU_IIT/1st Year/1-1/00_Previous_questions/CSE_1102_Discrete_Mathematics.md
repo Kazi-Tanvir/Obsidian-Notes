@@ -273,9 +273,21 @@ $$
    e. A coin is flipped eight times: i. total outcomes? ii. exactly three heads? iii. at least three heads? [3]
 
 6. a. Construct a precedence graph for the following program. [4]
-   b. Bipartite matching problem with employees and responsibilities. [8]
-   c. i. How many edges does a full binary tree with 1000 internal vertices have? ii. How many leaves does a full 3-ary tree with 100 vertices have? [6]
-   d. Perform Preorder traversal of the following tree. [6]
+		S1: x:=0
+		S2: x:x+1
+		S3: y:=2
+		S4: z:=y
+		S5: x:=x+2
+		S6: y:=x+z
+		S7: z:=4
+	b. Suppose that a new company has five employees: Zaman, Ahmed, Siddique, Chowdhury, and Mahmud. Each employee will assume one of six responsibilities: planning, publicity, sales, marketing, development, and industry relations. Each employee is capable of doing one or more of these jobs: Zaman could do planning, sales, marketing, or industry relations; Ahmed could do planning or development; Siddique could do publicity, sales, or industry relations; Chowdhury could do planning, sales, or industry relations; and Mahmud could do planning, publicity, sales, or industry relations. **[8]**
+		i. Model the capabilities of these employees using a partite graph.
+		ii. Find an assignment of responsibilities such that each employee is assigned one responsibility.
+		iii. Is the matching of responsibilities you found in part (b) a complete matching?
+		iv. Is it a maximum matching?
+7. a. i. How many edges does a full binary tree with 1000 internal vertices have? 
+        ii. How many leaves does a full 3-ary tree with 100 vertices have? [6]
+   b. Perform Preorder traversal of the following tree. [6]
 
 ### 15th Batch
 
