@@ -662,3 +662,5 @@ $$
 7. (a) What is a tree? Prove n vertices → n-1 edges. (5)
    (b) Define graph isomorphism. Determine if two graphs are isomorphic. (4)
    (c) Chromatic number of Petersen graph. (3)
+
+
