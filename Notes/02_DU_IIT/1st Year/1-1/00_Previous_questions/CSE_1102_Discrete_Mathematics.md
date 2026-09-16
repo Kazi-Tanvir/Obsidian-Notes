@@ -265,7 +265,251 @@ $$
 $$
 
    b. Identify following as one-to-one, onto, both, neither, or not a function. [5]
+   <div style="max-width: 500px; margin: auto;">
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="15 10 505 340" width="100%" height="100%">
+  <defs>
+    <marker id="arrow" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M 0 0 L 6 3 L 0 6 z" fill="#fff" />
+    </marker>
+  </defs>
+
+  <g stroke="#fff" stroke-width="1.3" fill="none" stroke-linecap="round" marker-end="url(#arrow)">
+    <!-- Diagram i -->
+    <path d="M 55,35 Q 90,45 129,91" />
+    <path d="M 55,75 Q 85,85 129,127" />
+    <path d="M 55,115 L 129,24" />
+
+    <!-- Diagram ii -->
+    <path d="M 235,22 Q 280,35 309,73" />
+    <path d="M 235,58 Q 265,60 309,40" />
+    <path d="M 235,94 Q 275,100 309,112" />
+    <path d="M 235,130 Q 280,115 309,79" />
+
+    <!-- Diagram iii -->
+    <path d="M 415,22 Q 445,45 489,126" />
+    <path d="M 415,58 L 489,24" />
+    <path d="M 415,94 L 489,94" />
+    <path d="M 415,130 Q 450,115 489,61" />
+
+    <!-- Diagram iv -->
+    <path d="M 55,202 L 129,236" />
+    <path d="M 55,238 L 129,204" />
+    <path d="M 55,274 L 129,240" />
+    <path d="M 55,310 L 129,276" />
+
+    <!-- Diagram v -->
+    <path d="M 235,215 Q 270,215 309,236" />
+    <path d="M 235,215 Q 265,245 309,306" />
+    <path d="M 235,255 L 309,204" />
+    <path d="M 235,295 Q 275,290 309,276" />
+  </g>
+
+  <!-- Nodes -->
+  <g fill="#fff">
+    <!-- i -->
+    <circle cx="55" cy="35" r="2.5" />
+    <circle cx="55" cy="75" r="2.5" />
+    <circle cx="55" cy="115" r="2.5" />
+    <circle cx="135" cy="22" r="2.5" />
+    <circle cx="135" cy="58" r="2.5" />
+    <circle cx="135" cy="94" r="2.5" />
+    <circle cx="135" cy="130" r="2.5" />
+
+    <!-- ii -->
+    <circle cx="235" cy="22" r="2.5" />
+    <circle cx="235" cy="58" r="2.5" />
+    <circle cx="235" cy="94" r="2.5" />
+    <circle cx="235" cy="130" r="2.5" />
+    <circle cx="315" cy="38" r="2.5" />
+    <circle cx="315" cy="76" r="2.5" />
+    <circle cx="315" cy="114" r="2.5" />
+
+    <!-- iii -->
+    <circle cx="415" cy="22" r="2.5" />
+    <circle cx="415" cy="58" r="2.5" />
+    <circle cx="415" cy="94" r="2.5" />
+    <circle cx="415" cy="130" r="2.5" />
+    <circle cx="495" cy="22" r="2.5" />
+    <circle cx="495" cy="58" r="2.5" />
+    <circle cx="495" cy="94" r="2.5" />
+    <circle cx="495" cy="130" r="2.5" />
+
+    <!-- iv -->
+    <circle cx="55" cy="202" r="2.5" />
+    <circle cx="55" cy="238" r="2.5" />
+    <circle cx="55" cy="274" r="2.5" />
+    <circle cx="55" cy="310" r="2.5" />
+    <circle cx="135" cy="202" r="2.5" />
+    <circle cx="135" cy="238" r="2.5" />
+    <circle cx="135" cy="274" r="2.5" />
+    <circle cx="135" cy="310" r="2.5" />
+
+    <!-- v -->
+    <circle cx="235" cy="215" r="2.5" />
+    <circle cx="235" cy="255" r="2.5" />
+    <circle cx="235" cy="295" r="2.5" />
+    <circle cx="315" cy="202" r="2.5" />
+    <circle cx="315" cy="238" r="2.5" />
+    <circle cx="315" cy="274" r="2.5" />
+    <circle cx="315" cy="310" r="2.5" />
+  </g>
+
+  <!-- Labels -->
+  <g fill="#fff" font-family="serif" font-size="13" dominant-baseline="central">
+    <!-- Left Labels (Italic) -->
+    <g font-style="italic" text-anchor="end">
+      <!-- i -->
+      <text x="45" y="35">a</text>
+      <text x="45" y="75">b</text>
+      <text x="45" y="115">c</text>
+
+      <!-- ii -->
+      <text x="225" y="22">a</text>
+      <text x="225" y="58">b</text>
+      <text x="225" y="94">c</text>
+      <text x="225" y="130">d</text>
+
+      <!-- iii -->
+      <text x="405" y="22">a</text>
+      <text x="405" y="58">b</text>
+      <text x="405" y="94">c</text>
+      <text x="405" y="130">d</text>
+
+      <!-- iv -->
+      <text x="45" y="202">a</text>
+      <text x="45" y="238">b</text>
+      <text x="45" y="274">c</text>
+      <text x="45" y="310">d</text>
+
+      <!-- v -->
+      <text x="225" y="215">a</text>
+      <text x="225" y="255">b</text>
+      <text x="225" y="295">c</text>
+    </g>
+
+    <!-- Right Labels -->
+    <g text-anchor="start">
+      <!-- i -->
+      <text x="145" y="22">1</text>
+      <text x="145" y="58">2</text>
+      <text x="145" y="94">3</text>
+      <text x="145" y="130">4</text>
+
+      <!-- ii -->
+      <text x="325" y="38">1</text>
+      <text x="325" y="76">2</text>
+      <text x="325" y="114">3</text>
+
+      <!-- iii -->
+      <text x="505" y="22">1</text>
+      <text x="505" y="58">2</text>
+      <text x="505" y="94">3</text>
+      <text x="505" y="130">4</text>
+
+      <!-- iv -->
+      <text x="145" y="202">1</text>
+      <text x="145" y="238">2</text>
+      <text x="145" y="274">3</text>
+      <text x="145" y="310">4</text>
+
+      <!-- v -->
+      <text x="325" y="202">1</text>
+      <text x="325" y="238">2</text>
+      <text x="325" y="274">3</text>
+      <text x="325" y="310">4</text>
+    </g>
+
+    <!-- Subfigure Roman Numerals -->
+    <g font-size="14" font-weight="bold">
+      <text x="25" y="150">i.</text>
+      <text x="205" y="150">ii.</text>
+      <text x="385" y="150">iii.</text>
+      <text x="25" y="330">iv.</text>
+      <text x="205" y="330">v.</text>
+    </g>
+  </g>
+</svg>
+   </div>
+
    c. Find the adjacency matrix of the given directed multigraph. [3]
+<div style="max-width: 400px; margin: auto;">
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="30 25 285 270" width="100%" height="100%">
+  <!-- Edges -->
+  <g stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round">
+    <!-- Loops -->
+    <path d="M 98,77 C 88,38 48,40 46,62 C 44,82 72,96 95,84" />
+    <path d="M 95,236 C 72,224 44,238 46,258 C 48,280 88,282 98,243" />
+
+    <!-- Between a and b -->
+    <path d="M 100,80 Q 180,52 260,80" />
+    <path d="M 260,80 Q 180,108 100,80" />
+
+    <!-- Between a and c -->
+    <path d="M 100,80 Q 72,160 100,240" />
+    <line x1="100" y1="240" x2="100" y2="80" />
+    <path d="M 100,80 Q 128,160 100,240" />
+
+    <!-- Diagonal a to d -->
+    <line x1="100" y1="80" x2="260" y2="240" />
+
+    <!-- Between b and d -->
+    <path d="M 260,240 Q 212,160 260,80" />
+    <path d="M 260,80 Q 242,160 260,240" />
+    <path d="M 260,80 Q 278,160 260,240" />
+    <path d="M 260,240 Q 308,160 260,80" />
+
+    <!-- Between c and d -->
+    <path d="M 260,240 Q 180,212 100,240" />
+    <path d="M 260,240 Q 180,268 100,240" />
+  </g>
+
+  <!-- Arrowheads -->
+  <g fill="#fff">
+    <!-- Loop a -->
+    <polygon points="94,84 85,83 89,90" />
+    <!-- Loop c -->
+    <polygon points="97,244 92,253 87,248" />
+
+    <!-- a -> b and b -> a -->
+    <polygon points="184,66 176,62 176,70" />
+    <polygon points="176,94 184,90 184,98" />
+
+    <!-- a -> c (left, right) and c -> a (middle) -->
+    <polygon points="86,164 82,156 90,156" />
+    <polygon points="100,156 96,164 104,164" />
+    <polygon points="114,164 110,156 118,156" />
+
+    <!-- Diagonal a -> d -->
+    <polygon points="183.5,163.5 175,159.5 179.5,155" />
+
+    <!-- b <-> d (outer up, inner down) -->
+    <polygon points="239,131.5 234,138 242,137" />
+    <polygon points="252,180 248,172 256,173" />
+    <polygon points="268,180 264,173 272,172" />
+    <polygon points="281,131.5 278,137 286,138" />
+
+    <!-- d -> c (both upper and lower) -->
+    <polygon points="176,226 184,222 184,230" />
+    <polygon points="176,254 184,250 184,258" />
+  </g>
+
+  <!-- Nodes -->
+  <g fill="#fff">
+    <circle cx="100" cy="80" r="3.5" />
+    <circle cx="260" cy="80" r="3.5" />
+    <circle cx="100" cy="240" r="3.5" />
+    <circle cx="260" cy="240" r="3.5" />
+  </g>
+
+  <!-- Labels -->
+  <g fill="#fff" font-family="serif" font-style="italic" font-size="15">
+    <text x="108" y="74">a</text>
+    <text x="246" y="74">b</text>
+    <text x="108" y="254">c</text>
+    <text x="260" y="258" text-anchor="middle">d</text>
+  </g>
+</svg>
+</div>
 5. a. How many bit strings are there of length six or less, not counting the empty string? [2]
    b. How many bit strings of length ten both begin and end with a 1? [2]
    c. How many license plates consisting of three letters followed by three digits contain no letter or digit twice? [3]
@@ -288,6 +532,65 @@ $$
 7. a. i. How many edges does a full binary tree with 1000 internal vertices have? 
         ii. How many leaves does a full 3-ary tree with 100 vertices have? [6]
    b. Perform Preorder traversal of the following tree. [6]
+ <svg xmlns="http://www.w3.org/2000/svg" viewBox="10 0 425 265" width="70%" height="70%">
+  <!-- Edges -->
+  <path d="
+    M240,20 L120,75 M240,20 V75 M240,20 L360,75
+    M120,75 L60,130 M120,75 V130 M120,75 L180,130
+    M60,130 L25,185 M60,130 V185 M60,130 L95,185
+    M180,130 V185 L155,240 M180,185 L205,240
+    M360,75 L305,130 V185
+    M360,75 V185
+    M360,75 L415,130 V185" 
+    stroke="#fff" stroke-width="1.5" stroke-linecap="round" fill="none" />
+
+  <!-- Nodes -->
+  <g fill="#fff">
+    <circle cx="240" cy="20" r="2.5" />
+    <circle cx="120" cy="75" r="2.5" />
+    <circle cx="240" cy="75" r="2.5" />
+    <circle cx="360" cy="75" r="2.5" />
+    <circle cx="60" cy="130" r="2.5" />
+    <circle cx="120" cy="130" r="2.5" />
+    <circle cx="180" cy="130" r="2.5" />
+    <circle cx="305" cy="130" r="2.5" />
+    <circle cx="360" cy="130" r="2.5" />
+    <circle cx="415" cy="130" r="2.5" />
+    <circle cx="25" cy="185" r="2.5" />
+    <circle cx="60" cy="185" r="2.5" />
+    <circle cx="95" cy="185" r="2.5" />
+    <circle cx="180" cy="185" r="2.5" />
+    <circle cx="305" cy="185" r="2.5" />
+    <circle cx="360" cy="185" r="2.5" />
+    <circle cx="415" cy="185" r="2.5" />
+    <circle cx="155" cy="240" r="2.5" />
+    <circle cx="205" cy="240" r="2.5" />
+  </g>
+
+  <!-- Labels -->
+  <g fill="#fff" font-family="serif" font-style="italic" font-size="13" text-anchor="middle">
+    <text x="240" y="11">a</text>
+    <text x="108" y="72">b</text>
+    <text x="240" y="92">c</text>
+    <text x="372" y="72">d</text>
+    <text x="49" y="127">e</text>
+    <text x="120" y="147">f</text>
+    <text x="191" y="127">g</text>
+    <text x="294" y="127">h</text>
+    <text x="372" y="127">i</text>
+    <text x="426" y="127">j</text>
+    <text x="25" y="201">k</text>
+    <text x="60" y="201">l</text>
+    <text x="95" y="201">m</text>
+    <text x="192" y="188" text-anchor="start">n</text>
+    <text x="305" y="201">o</text>
+    <text x="360" y="201">p</text>
+    <text x="415" y="201">q</text>
+    <text x="155" y="256">r</text>
+    <text x="205" y="256">s</text>
+  </g>
+</svg>
+
 
 ### 15th Batch
 
