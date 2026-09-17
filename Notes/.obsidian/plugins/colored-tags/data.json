@@ -955,7 +955,8 @@
     "registry": 763,
     "txId": 764,
     "isActive": 765,
-    "vm": 766
+    "vm": 766,
+    "Duration": 767
   },
   "_version": 3
 }
