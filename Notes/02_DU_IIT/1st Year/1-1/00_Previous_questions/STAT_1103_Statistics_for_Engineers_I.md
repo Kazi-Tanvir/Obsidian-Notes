@@ -17,61 +17,42 @@
 ## 1. Final Examination 2025
 
 **Institute of Information Technology, University of Dhaka**
-
 **Bachelor of Science in Software Engineering (BSSE)**
-
 **1st Year 1st Semester Final Examination, 2025**
-
 **STAT 1103: Statistics for Engineers I**
-
 **Marks: 60 | Duration: 3 hours**
-
 > [Answer any 5 (five) of the following questions. When answering a question, please answer all the subsections of it at once]
-
 ---
-
 ### Question 1
 
 **(a)** A couple has two children. What is the probability that both are girls if the eldest is a girl? **[2]**
-
 **(b)** Two dice are thrown. Let $E$ be the event that the sum of the dice is odd, let $F$ be the event that the first die lands on 1, and let $G$ be the event that the sum is 5. Describe the events $EF$, $E \cup F$, $FG$, $EF^c$, $EFG$. **[4]**
-
-**(c)** Five independent flips of a fair coin are made. Find the probability that (i) the first three flips are the same; (ii) either the first three flips are the same, or the last three flips are the same; (iii) there are at least two heads among the first three flips, and at least two tails among the last three flips. **[6]**
+**(c)** Five independent flips of a fair coin are made. Find the probability that 
+	(i) the first three flips are the same;
+	(ii) either the first three flips are the same, or the last three flips are the same; 
+	(iii) there are at least two heads among the first three flips, and at least two tails among the last three flips. **[6]**
 
 ---
-
 ### Question 2
 
 **(a)** Explain the concepts of probability mass and density functions with appropriate properties. **[4]**
-
 **(b)** What is a random variable? Compute $V(X)$, where $X$ represents an outcome when we roll a fair dice. **[4]**
-
 **(c)** Suppose that the Rockwell hardness $X$ and abrasion loss $Y$ of a specimen have a joint density given by:
-
 $$f(x, y) = x + y, \quad 0 \le x \le 1;\; 0 \le y \le 1$$
-
 Obtain the expression of covariance of $X$ and $Y$. **[4]**
 
 ---
-
 ### Question 3
 
 **(a)** Derive the moment generating function of $X$, where the probability mass function of $X$ is given below: **[4]**
-
 $$P(X = x) = \binom{n}{x} p^x (1-p)^{n-x}, \quad x = 0, 1, \ldots, n$$
-
 **(b)** Using the moment generating function obtained in 3(a), determine the expressions of expected value and variance of the random variable $X$. **[3]**
-
 **(c)** Time required to repair a machine is an exponentially distributed random variable with parameter $\lambda = 1.5$. (i) What is the probability that the repair time exceeds 2 hours? (ii) What is the median repair time? **[5]**
 
 ---
-
 ### Question 4
-
 **(a)** What is a sampling distribution? Describe the theorem associated with deriving the distribution of the sample mean. **[3]**
-
 **(b)** Describe $t$ and chi-square distribution with appropriate properties. **[3]**
-
 **(c)** Suppose 12 percent of the population is left-handers. Find the exact and approximate probability that there are between 11 and 14 left-handers in a random sample of 90 members of this population. You need to clearly mention the associated distributions for calculating exact and approximate probabilities. **[6]**
 
 ---
@@ -85,38 +66,26 @@ A discrete random variable $X$ has the following probability distribution:
 | $f(x_i)$ | 0.10 | 0.15 | 0.30 | 0.25 | 0.20 |
 
 **(a)** Verify whether this is a valid probability distribution. **[3]**
-
 **(b)** Plot the probability distribution of $X$. **[2]**
-
 **(c)** Construct and plot the cumulative distribution function. **[2]**
-
 **(d)** Calculate the variance and standard deviation of $X$. **[5]**
 
 ---
-
 ### Question 6
 
 **(a)** The lifetime (in hours) of a type of electric bulb has an expected value of 500 and a standard deviation of 80 hours. Approximate the probability that the sample mean of $n$ such bulbs is greater than 525 hours when (i) $n = 4$, (ii) $n = 16$, (iii) $n = 36$. What conclusion can you draw from it? **[6]**
-
 **(b)** The following are burning times (in seconds) of floating smoke pots of two different types.
-
 - **Type I:** 481, 506, 527, 661, 501, 572, 561, 501, 487, 524
 - **Type II:** 526, 511, 556, 542, 491, 537, 582, 605, 558, 578
-
 Assume burning time follows normal distributions with mean $\mu_1$ and $\mu_2$ for Type I and II pots, respectively, and $\sigma^2$ is the common variance. Find a 95% confidence interval for $(\mu_1 - \mu_2)$ and interpret it. **[6]**
 
 ---
-
 ### Question 7
 
 **(a)** What is a likelihood function? Define the maximum likelihood estimator and describe the procedure for obtaining the maximum likelihood estimator. **[4]**
-
 **(b)** Let $X_1, \ldots, X_n$ be a random sample from a distribution whose probability density function is:
-
 $$f(x) = \begin{cases} e^{-(x-\theta)} & x \ge \theta \\ 0 & \text{otherwise} \end{cases}$$
-
 Obtain the maximum likelihood estimator of $\theta$. **[4]**
-
 **(c)** A random sample of 300 CitiBank VISA cardholder accounts indicated a sample mean debt of USD 1220 with a sample standard deviation of USD 840. Construct a 90% confidence interval estimate of the average debt of all cardholders. Interpret the estimated confidence interval. **[4]**
 
 ---
