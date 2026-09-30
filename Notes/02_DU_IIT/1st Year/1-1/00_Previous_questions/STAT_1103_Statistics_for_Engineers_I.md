@@ -47,7 +47,9 @@ Obtain the expression of covariance of $X$ and $Y$. **[4]**
 **(a)** Derive the moment generating function of $X$, where the probability mass function of $X$ is given below: **[4]**
 $$P(X = x) = \binom{n}{x} p^x (1-p)^{n-x}, \quad x = 0, 1, \ldots, n$$
 **(b)** Using the moment generating function obtained in 3(a), determine the expressions of expected value and variance of the random variable $X$. **[3]**
-**(c)** Time required to repair a machine is an exponentially distributed random variable with parameter $\lambda = 1.5$. (i) What is the probability that the repair time exceeds 2 hours? (ii) What is the median repair time? **[5]**
+**(c)** Time required to repair a machine is an exponentially distributed random variable with parameter $\lambda = 1.5$. 
+    (i) What is the probability that the repair time exceeds 2 hours? 
+    (ii) What is the median repair time? **[5]**
 
 ---
 ### Question 4
