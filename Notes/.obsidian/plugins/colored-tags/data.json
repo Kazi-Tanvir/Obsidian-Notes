@@ -956,7 +956,14 @@
     "txId": 764,
     "isActive": 765,
     "vm": 766,
-    "Duration": 767
+    "Duration": 767,
+    "windows": 768,
+    "cleanup": 769,
+    "disk-space": 770,
+    "cmd": 771,
+    "node": 772,
+    "privateName": 773,
+    "tech": 774
   },
   "_version": 3
 }
