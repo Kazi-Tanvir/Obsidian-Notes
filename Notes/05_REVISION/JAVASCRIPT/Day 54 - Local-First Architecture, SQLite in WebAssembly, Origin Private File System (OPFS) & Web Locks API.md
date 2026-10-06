@@ -82,9 +82,8 @@ To obtain an exclusive, high-performance synchronous access handle:
 
 // worker.js (Dedicated Web Worker)
 
-async function initializeOPFSStorage() {
-
 ```typescript
+async function initializeOPFSStorage() {
   // 1. Obtain root directory of the Origin Private File System
   const root = await navigator.storage.getDirectory();
   // 2. Open or create a binary database file handle
@@ -121,10 +120,9 @@ We resolve multi-tab coordination using the **Web Locks API** combined with Broa
 
 // multi-tab-coordination.js
 
-async function runWithDatabaseLock(callback) {
-
 ```typescript
-// Request an exclusive lock across all tabs of this origin
+async function runWithDatabaseLock(callback) {
+  // Request an exclusive lock across all tabs of this origin
 await navigator.locks.request('sqlite-db-exclusive-lock', async (lock) => {
   console.log('Acquired exclusive lock! Initializing SQLite Wasm on OPFS...');
   const worker = new Worker('sqlite-worker.js', { type: 'module' });

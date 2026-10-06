@@ -103,41 +103,26 @@ role: String! \@shareable # Both Auth Subgraph and Users Subgraph can resolve ro
 
 When the Apollo Router executes a Query Plan requiring fields across subgraphs, it calls the entity reference resolver:
 
+```typescript
 // inventory-subgraph/resolvers.ts
-
 export const resolvers = {
-
-Product: {
-
-// Apollo Router invokes this when hydrating a Product from another subgraph!
-
-__resolveReference: async (reference: { id: string; weight?: number }, { dataSources }: any) => {
-
-const stock = await dataSources.inventoryDb.getStockByProductId(reference.id);
-
-return {
-
-id: reference.id,
-
-weight: reference.weight, // Provided by Router via \@requires!
-
-inStock: stock > 0,
-
+  Product: {
+    // Apollo Router invokes this when hydrating a Product from another subgraph!
+    __resolveReference: async (reference: { id: string; weight?: number }, { dataSources }: any) => {
+      const stock = await dataSources.inventoryDb.getStockByProductId(reference.id);
+      return {
+        id: reference.id,
+        weight: reference.weight, // Provided by Router via @requires!
+        inStock: stock > 0,
+      };
+    },
+    shippingEstimate: (product: { weight: number }) => {
+      // Direct access to required field from external subgraph
+      return product.weight * 1.75 + 5.00;
+    },
+  },
 };
-
-},
-
-shippingEstimate: (product: { weight: number }) => {
-
-// Direct access to required field from external subgraph
-
-return product.weight * 1.75 + 5.00;
-
-},
-
-},
-
-};
+```
 
 ### 4. Mitigating Subgraph N+1 Network Cascades
 

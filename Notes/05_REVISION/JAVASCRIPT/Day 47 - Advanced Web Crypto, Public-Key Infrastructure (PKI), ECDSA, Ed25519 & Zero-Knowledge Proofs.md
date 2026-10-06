@@ -154,27 +154,20 @@ const bobSharedKey = await crypto.subtle.deriveKey(
 
 Analyze the following key creation call:
 
+```typescript
 const keys = await crypto.subtle.generateKey(
-
-{ name: 'ECDSA', namedCurve: 'P-256' },
-
-false, // extractable
-
-['sign', 'verify']
-
+  { name: 'ECDSA', namedCurve: 'P-256' },
+  false, // extractable
+  ['sign', 'verify']
 );
 
 // Attacker injection attempt:
-
 try {
-
-const exported = await crypto.subtle.exportKey('pkcs8', keys.privateKey);
-
+  const exported = await crypto.subtle.exportKey('pkcs8', keys.privateKey);
 } catch (err) {
-
-console.log("Attacker caught:", err.name);
-
+  console.log("Attacker caught:", err.name);
 }
+```
 
 *Question*: What specific exception is thrown when attempting to export a non-extractable key (InvalidAccessError vs NotSupportedError)? Explain how the browser's native crypto sandbox ensures that even an XSS vulnerability cannot extract the raw private key material from memory.
 

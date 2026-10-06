@@ -109,39 +109,25 @@ function processFrame(sourceFrame) {
 
 When encoding video frames (e.g. recording a canvas, streaming a screen share), the hardware video encoder runs at a finite processing speed. If frames are queued faster than the encoder can process, memory explodes. VideoEncoder.encodeQueueSize provides native backpressure monitoring:
 
+```typescript
 const videoEncoder = new VideoEncoder({
-
-output: (chunk, metadata) => {
-
-// chunk is an EncodedVideoChunk ready for transmission or muxing
-
-transmitOverNetwork(chunk.data, chunk.type, chunk.timestamp);
-
-},
-
-error: (e) => console.error(e)
-
+  output: (chunk, metadata) => {
+    // chunk is an EncodedVideoChunk ready for transmission or muxing
+    transmitOverNetwork(chunk.data, chunk.type, chunk.timestamp);
+  },
+  error: (e) => console.error(e)
 });
 
 videoEncoder.configure({
-
-codec: 'vp09.00.10.08', // VP9 Profile 0, Level 1, 8-bit
-
-width: 1280,
-
-height: 720,
-
-bitrate: 2_000_000, // 2 Mbps
-
-framerate: 30,
-
-latencyMode: 'realtime', // Optimizes for lowest latency over compression efficiency
-
+  codec: 'vp09.00.10.08', // VP9 Profile 0, Level 1, 8-bit
+  width: 1280,
+  height: 720,
+  bitrate: 2_000_000, // 2 Mbps
+  framerate: 30,
+  latencyMode: 'realtime', // Optimizes for lowest latency over compression efficiency
 });
 
 async function captureAndEncodeLoop(canvas) {
-
-```typescript
   let frameIndex = 0;
   while (isRecording) {
     // BACKPRESSURE CHECK: If hardware encoder is falling behind, drop or throttle frames
@@ -150,6 +136,22 @@ async function captureAndEncodeLoop(canvas) {
       await new Promise(resolve => setTimeout(resolve, 33));
       continue;
     }
+
+    const timestampMicros = performance.now() * 1000;
+    // Create VideoFrame directly from Canvas without getImageData()
+    const frame = new VideoFrame(canvas, { timestamp: timestampMicros });
+
+    // Force a key frame every 60 frames (every 2 seconds at 30 FPS)
+    const isKeyFrame = (frameIndex % 60 === 0);
+    videoEncoder.encode(frame, { keyFrame: isKeyFrame });
+
+    // Release JavaScript handle to the frame
+    frame.close();
+    frameIndex++;
+
+    await new Promise(r => requestAnimationFrame(r));
+  }
+}
 ```
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET

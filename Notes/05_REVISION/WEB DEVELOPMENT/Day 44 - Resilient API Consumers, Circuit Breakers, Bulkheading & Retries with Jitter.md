@@ -53,19 +53,16 @@ When a downstream dependency experiences degraded latency (e.g. response time in
 
 Never allow an outgoing HTTP call to execute without an explicit, bounded timeout:
 
+```typescript
 const controller = new AbortController();
-
 const timeoutId = setTimeout(() => controller.abort(), 2000); // 2-second timeout
 
 try {
-
-const res = await fetch('https://api.thirdparty.com/v1/charge', { signal: controller.signal });
-
+  const res = await fetch('https://api.thirdparty.com/v1/charge', { signal: controller.signal });
 } finally {
-
-clearTimeout(timeoutId);
-
+  clearTimeout(timeoutId);
 }
+```
 
 #### 2. Exponential Backoff with Full Jitter
 
