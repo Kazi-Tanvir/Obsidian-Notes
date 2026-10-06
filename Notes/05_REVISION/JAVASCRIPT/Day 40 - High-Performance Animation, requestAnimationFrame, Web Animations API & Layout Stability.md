@@ -31,35 +31,23 @@ To engineer 60 FPS (and 120 FPS on ProMotion displays) animations without frame 
 
 5.  **Composite**: Dispatches bitmap layers to the GPU to be positioned, scaled, and blended onto the physical display screen.
 
+```text
 ┌────────────────────────────────────── The Rendering Cost Spectrum ──────────────────────────────────────┐
-
-│ │
-
-│ Triggering Reflow (Avoid in loops! ⚠️) │
-
-│ [ JS / CSS ] ──► [ Style ] ──► [ Layout (Reflow) ] ──► [ Paint ] ──► [ Composite ] │
-
-│ Mutating `width`, `height`, `margin`, `top`, `left`, `fontSize` recomputes the entire render tree! │
-
-│ │
-
-│ Triggering Repaint (Medium Cost ⚠️) │
-
-│ [ JS / CSS ] ──► [ Style ] ──► [ Paint ] ──► [ Composite ] │
-
-│ Mutating `background-color`, `color`, `box-shadow`, `border-radius` bypasses layout but rerasters! │
-
-│ │
-
-│ GPU Compositor-Only (Ultra-Fast 60/120 FPS! 🚀) │
-
-│ [ JS / CSS ] ──► [ Style ] ──► [ Composite (GPU) ] │
-
-│ Mutating `transform` and `opacity` runs strictly on the GPU compositor thread without touching CPU! │
-
-│ │
-
+│                                                                                                          │
+│  Triggering Reflow (Avoid in loops! ⚠️)                                                                   │
+│  [ JS / CSS ] ──► [ Style ] ──► [ Layout (Reflow) ] ──► [ Paint ] ──► [ Composite ]                      │
+│  Mutating `width`, `height`, `margin`, `top`, `left`, `fontSize` recomputes the entire render tree!      │
+│                                                                                                          │
+│  Triggering Repaint (Medium Cost ⚠️)                                                                      │
+│  [ JS / CSS ] ──► [ Style ] ──► [ Paint ] ──► [ Composite ]                                              │
+│  Mutating `background-color`, `color`, `box-shadow`, `border-radius` bypasses layout but rerasters!      │
+│                                                                                                          │
+│  GPU Compositor-Only (Ultra-Fast 60/120 FPS! 🚀)                                                         │
+│  [ JS / CSS ] ──► [ Style ] ──► [ Composite (GPU) ]                                                      │
+│  Mutating `transform` and `opacity` runs strictly on the GPU compositor thread without touching CPU!    │
+│                                                                                                          │
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 #### Promoting Elements with will-change:
 

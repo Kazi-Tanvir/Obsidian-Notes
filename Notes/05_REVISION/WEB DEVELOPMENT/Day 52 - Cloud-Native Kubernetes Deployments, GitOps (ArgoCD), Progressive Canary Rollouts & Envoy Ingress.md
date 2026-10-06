@@ -29,41 +29,26 @@ Traditional Kubernetes deployments rely on basic **Rolling Updates** (strategy.t
 
 **Progressive Delivery** via **Argo Rollouts** and **GitOps (ArgoCD)** eliminates these risks by coupling deployment progression with real-time automated metric analysis:
 
+```text
 ┌────────────────────────────────────── Progressive Canary Delivery Flow ──────────────────────────────────────┐
-
-│ │
-
-│ Git Repository (Declarative Desired State) ──► ArgoCD Sync ──► Kubernetes Cluster │
-
-│ │
-
-│ Argo Rollout Canary Progression: │
-
-│ ┌───────────────────────────────────────────────────────────────────────────────────────────────────────┐ │
-
-│ │ Step 1: Route 5% traffic to Canary Pods ──► Prometheus evaluates HTTP 5xx & p99 latency for 5m. │ │
-
-│ │ ├── If Metrics Pass ──► Proceed to Step 2 │ │
-
-│ │ └── If Error Rate > 1% ──► 🚨 AUTOMATIC INSTANT ROLLBACK! (0% to Canary, 100% to Stable) │ │
-
-│ ├───────────────────────────────────────────────────────────────────────────────────────────────────────┤ │
-
-│ │ Step 2: Route 20% traffic to Canary Pods ──► Analyze metrics for 15m. │ │
-
-│ ├───────────────────────────────────────────────────────────────────────────────────────────────────────┤ │
-
-│ │ Step 3: Route 50% traffic to Canary Pods ──► Analyze metrics for 30m. │ │
-
-│ ├───────────────────────────────────────────────────────────────────────────────────────────────────────┤ │
-
-│ │ Step 4: Promote to 100% Stable! Old replica set cleanly decommissioned. │ │
-
-│ └───────────────────────────────────────────────────────────────────────────────────────────────────────┘ │
-
-│ │
-
+│                                                                                                              │
+│  Git Repository (Declarative Desired State) ──► ArgoCD Sync ──► Kubernetes Cluster                           │
+│                                                                                                              │
+│  Argo Rollout Canary Progression:                                                                            │
+│  ┌───────────────────────────────────────────────────────────────────────────────────────────────────────┐  │
+│  │ Step 1: Route 5% traffic to Canary Pods ──► Prometheus evaluates HTTP 5xx & p99 latency for 5m.       │  │
+│  │   ├── If Metrics Pass ──► Proceed to Step 2                                                           │  │
+│  │   └── If Error Rate > 1% ──► 🚨 AUTOMATIC INSTANT ROLLBACK! (0% to Canary, 100% to Stable)            │  │
+│  ├───────────────────────────────────────────────────────────────────────────────────────────────────────┤  │
+│  │ Step 2: Route 20% traffic to Canary Pods ──► Analyze metrics for 15m.                                 │  │
+│  ├───────────────────────────────────────────────────────────────────────────────────────────────────────┤  │
+│  │ Step 3: Route 50% traffic to Canary Pods ──► Analyze metrics for 30m.                                 │  │
+│  ├───────────────────────────────────────────────────────────────────────────────────────────────────────┤  │
+│  │ Step 4: Promote to 100% Stable! Old replica set cleanly decommissioned.                               │  │
+│  └───────────────────────────────────────────────────────────────────────────────────────────────────────┘  │
+│                                                                                                              │
 └─────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. The GitOps Architecture with ArgoCD
 
@@ -75,39 +60,25 @@ Traditional Kubernetes deployments rely on basic **Rolling Updates** (strategy.t
 
 3.  **Drift Detection & Automated Self-Healing**: If an engineer manually edits a deployment inside the cluster (kubectl edit), ArgoCD instantly flags the **Out-of-Sync** drift and automatically reconciles the live state back to what is declared in Git!
 
+```text
 ┌────────────────────────────────────── GitOps Reconciliation Engine ──────────────────────────────────────┐
-
-│ │
-
-│ Developer Git Push (PR Merge to main) │
-
-│ │ │
-
-│ ▼ Webhook / Polling │
-
-│ ArgoCD Server (Control Plane) │
-
-│ ┌──────────────────────────────────────────────────────────────────────────────────────────────────┐ │
-
-│ │ 1. Pull Git Repository (Helm / Kustomize / Raw Manifests) │ │
-
-│ │ 2. Query Kubernetes API Server (Live Cluster State) │ │
-
-│ │ 3. Diff Engine: Calculate structural delta │ │
-
-│ │ 4. Sync Phase: Issue deterministic kubectl apply / pruning commands │ │
-
-│ └──────────────────────────────────────────────────────────────────────────────────────────────────┘ │
-
-│ │ │
-
-│ ▼ Mutual TLS (mTLS) Connection │
-
-│ Kubernetes Worker Nodes (Pod Lifecycle Enforced) │
-
-│ │
-
+│                                                                                                          │
+│  Developer Git Push (PR Merge to main)                                                                   │
+│       │                                                                                                  │
+│       ▼ Webhook / Polling                                                                                │
+│  ArgoCD Server (Control Plane)                                                                           │
+│  ┌──────────────────────────────────────────────────────────────────────────────────────────────────┐    │
+│  │ 1. Pull Git Repository (Helm / Kustomize / Raw Manifests)                                        │    │
+│  │ 2. Query Kubernetes API Server (Live Cluster State)                                              │    │
+│  │ 3. Diff Engine: Calculate structural delta                                                       │    │
+│  │ 4. Sync Phase: Issue deterministic kubectl apply / pruning commands                              │    │
+│  └──────────────────────────────────────────────────────────────────────────────────────────────────┘    │
+│       │                                                                                                  │
+│       ▼ Mutual TLS (mTLS) Connection                                                                     │
+│  Kubernetes Worker Nodes (Pod Lifecycle Enforced)                                                        │
+│                                                                                                          │
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 3. Envoy Ingress Gateway & Traffic Splitting
 

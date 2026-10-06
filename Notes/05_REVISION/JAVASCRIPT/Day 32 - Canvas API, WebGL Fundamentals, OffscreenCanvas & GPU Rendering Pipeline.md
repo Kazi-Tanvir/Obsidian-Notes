@@ -25,27 +25,19 @@ Modern web browsers split rendering across the **Main Thread (CPU)** and the **C
 
 - **WebGL / WebGPU**: Direct low-level access to the GPU graphics pipeline via OpenGL ES / hardware shading languages (GLSL/WGSL), executing parallel vertex and fragment transformations across thousands of GPU cores simultaneously.
 
+```text
 ┌────────────────────────────────────── Browser Graphics Pipeline ──────────────────────────────────────┐
-
 │                                                                                                       │
-
 │  1. JavaScript Code (App Logic / Physics) ──► CPU Main Thread or Web Worker                           │
-
 │                                                                                                       │
-
 │  2. Draw Commands / Shaders ──► Skia (2D) or WebGL / WebGPU Drivers                                   │
-
 │                                                                                                       │
-
 │  3. GPU Pipeline: Vertex Shader ──► Rasterization ──► Fragment (Pixel) Shader ──► Framebuffer Buffer  │
-
 │                                                                                                       │
-
 │  4. Display Screen (VSync Refresh: 60Hz = 16.6ms budget / 120Hz = 8.3ms budget)                       │
-
 │                                                                                                       │
-
 └───────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. High-DPI Display Scaling & Delta-Timed Animation Loops
 

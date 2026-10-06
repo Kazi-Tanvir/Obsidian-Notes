@@ -19,13 +19,31 @@ date: 2026-08-30
 
 **WebRTC (Web Real-Time Communication)** enables direct peer-to-peer (P2P) audio, video, and arbitrary binary data streaming between browsers with sub-100ms latency. Because most client devices sit behind Network Address Translation (NAT) firewalls and routers, direct peer connection requires **Interactive Connectivity Establishment (ICE)**.
 
+```text
 ┌───────────────────────────────┐                             ┌───────────────────────────────┐
-
 │       Browser Peer A          │                             │       Browser Peer B          │
-
 │  (Behind NAT / Symmetric)     │                             │  (Behind NAT / Port Restricted)│
-
 └──────────────┬────────────────┘                             └──────────────┬────────────────┘
+               │                                                             │
+               │   1. Out-of-band SDP Signaling (WebSocket / Server)         │
+               ├─────────────────────────────────────────────────────────────┤
+               │   • Peer A creates Offer SDP ──► Sent via Signaling Server  │
+               │   • Peer B creates Answer SDP ◄── Sent via Signaling Server │
+               │                                                             │
+               │   2. NAT Discovery via STUN Server                          │
+               ├─────────────────────────┬───────────────────────────────────┤
+               │                         │ STUN Binding Request              │
+               │                         ▼                                   │
+               │             ┌───────────────────────┐                       │
+               │             │      STUN Server      │                       │
+               │             │  (Discovers Public    │                       │
+               │             │   IP:Port Mapping)    │                       │
+               │             └───────────────────────┘                       │
+               │                                                             │
+               │   3. Direct P2P Media / DataChannel Stream (SRTP / SCTP)    │
+               │◄═══════════════════════════════════════════════════════════►│
+               │   (If P2P fails due to Symmetric NAT: Relayed via TURN)     │
+```
 
 ```javascript
                │                                                             │

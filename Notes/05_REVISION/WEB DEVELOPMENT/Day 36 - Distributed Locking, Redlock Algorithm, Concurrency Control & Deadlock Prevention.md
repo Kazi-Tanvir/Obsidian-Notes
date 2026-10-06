@@ -26,37 +26,24 @@ Without distributed coordination, concurrent requests create severe data anomali
 - **Lost Updates**: Worker A overwrites Worker B's state without knowing Worker B modified it.
 - **Split-Brain**: Network partitions cause two distinct nodes to each believe they hold the lock.
 
+```text
 ┌───────────────────────────────────── The Distributed Locking Pitfall ─────────────────────────────────────┐
-
 │                                                                                                          │
-
 │   Worker 1 (Instance A)                       Worker 2 (Instance B)                Shared Resource       │
-
 │   ┌─────────────────────┐                     ┌─────────────────────┐              ┌──────────────────┐  │
-
 │   │ 1. Acquire Lock     │                     │                     │              │ Bank Balance     │  │
-
-│   │    (TTL \= 10s)      │                     │                     │              │ $1000            │  │
-
+│   │    (TTL = 10s)      │                     │                     │              │ $1000            │  │
 │   │ 2. Long GC Pause /  │                     │                     │              └────────┬─────────┘  │
-
 │   │    Disk I/O Delay   │                     │                     │                       │            │
-
 │   │    (Stalls for 12s) │                     │                     │                       │            │
-
 │   │   [Lock Expires!]   │                     │ 3. Acquires Lock    │                       │            │
-
 │   │                     │                     │    (Writes $800)    │ ═════════════════════►│ $800       │
-
 │   │ 4. Wakes Up & Writes│                     │                     │                       │            │
-
 │   │    (Writes $900) ───┼─────────────────────┼─────────────────────┼──────────────────────►│ $900       │
-
 │   └─────────────────────┘                     └─────────────────────┘              (Lost Update! 💥)     │
-
 │                                                                                                          │
-
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ---
 

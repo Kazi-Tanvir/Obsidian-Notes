@@ -22,33 +22,22 @@ date: 2026-09-11
 
 Week 6 explored JavaScript not merely as an application scripting language, but as a high-performance systems runtime interfacing directly with the V8 engine, operating system primitives, foreign language ABIs, and raw hardware memory buffers.
 
+```text
 ┌────────────────────────────────────── Advanced V8 & Systems Architecture ──────────────────────────────────────┐
-
-│ │
-
-│ Application Layer (JavaScript / TypeScript) │
-
-│ • Explicit Resource Management (`await using` + `Symbol.asyncDispose`) │
-
-│ • Memory-sensitive caching (`WeakRef` + `FinalizationRegistry`) │
-
-│ │ │
-
-│ ├───────────────────────────────┬──────────────────────────────────┬───────────────────────────────────┤
-
-│ ▼ ▼ ▼ │
-
-│ Native Interop (Node-API) Execution Sandboxing Memory & Serialization High-Speed Text │
-
-│ • Rust (`napi-rs`) / C++ • V8 Isolates (`isolated-vm`) • `ArrayBuffer` & `DataView`• Irregexp JIT │
-
-│ • Stable ABI across versions • Separate heap & CPU timeouts • Zero-Copy FlatBuffers • Sticky (`y`) │
-
-│ • Libuv threadpool tasks • Hardened JS (SES Compartments) • Varints & ZigZag encoding • ReDoS Defense │
-
-│ │
-
+│                                                                                                                │
+│  Application Layer (JavaScript / TypeScript)                                                                   │
+│  • Explicit Resource Management (`await using` + `Symbol.asyncDispose`)                                       │
+│  • Memory-sensitive caching (`WeakRef` + `FinalizationRegistry`)                                               │
+│         │                                                                                                      │
+│         ├───────────────────────────────┬──────────────────────────────────┬───────────────────────────────────┤
+│         ▼                               ▼                                  ▼                                   │
+│  Native Interop (Node-API)      Execution Sandboxing               Memory & Serialization      High-Speed Text │
+│  • Rust (`napi-rs`) / C++       • V8 Isolates (`isolated-vm`)      • `ArrayBuffer` & `DataView`• Irregexp JIT  │
+│  • Stable ABI across versions   • Separate heap & CPU timeouts     • Zero-Copy FlatBuffers     • Sticky (`y`)  │
+│  • Libuv threadpool tasks       • Hardened JS (SES Compartments)   • Varints & ZigZag encoding • ReDoS Defense │
+│                                                                                                                │
 └────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. Cross-Cutting Systems Engineering Paradigms
 

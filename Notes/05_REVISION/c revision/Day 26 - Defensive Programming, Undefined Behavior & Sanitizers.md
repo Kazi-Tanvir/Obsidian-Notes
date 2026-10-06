@@ -154,21 +154,20 @@ How does -fsanitize=address detect an out-of-bounds write without slowing down t
 
 Application Memory (8 Bytes): Shadow Memory (1 Byte):
 
-┌───┬───┬───┬───┬───┬───┬───┬───┐ ┌────────┐
-
-│ B0│ B1│ B2│ B3│ B4│ B5│ B6│ B7│ ───────► │ 0x00 │ (Valid)
-
-└───┴───┴───┴───┴───┴───┴───┴───┘ └────────┘
+```text
+┌───┬───┬───┬───┬───┬───┬───┬───┐          ┌────────┐
+│ B0│ B1│ B2│ B3│ B4│ B5│ B6│ B7│ ───────► │  0x00  │ (Valid)
+└───┴───┴───┴───┴───┴───┴───┴───┘          └────────┘
+```
 
 Heap Allocation with Redzones:
 
+```text
 ┌────────────────────┬───────────────────────┬────────────────────┐
-
 │ Redzone (Poisoned) │ User Object (8 Bytes) │ Redzone (Poisoned) │
-
-│ Shadow: 0xFA │ Shadow: 0x00 │ Shadow: 0xFA │
-
+│    Shadow: 0xFA    │     Shadow: 0x00      │    Shadow: 0xFA    │
 └────────────────────┴───────────────────────┴────────────────────┘
+```
 
 - **Instruction Instrumentation:** Before every 1-byte read or store, the compiler inserts:movq %rax, %rcx
 

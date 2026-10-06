@@ -19,41 +19,53 @@ date: 2026-08-21
 
 Week 3 explored advanced engine-level JavaScript capabilities, bridging high-level language ergonomics with low-level memory and compiler mechanics:
 
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
-
 │ High-Level Metaprogramming & Reflection (Symbols, Proxy, Reflect, Descriptors)│
-
 └──────────────────────────────────────┬──────────────────────────────────────┘
-
-```javascript
                                        │
-```
-
 ┌──────────────────────────────────────▼──────────────────────────────────────┐
-
 │ Compiler & Pipeline Engineering (ASTs, Babel Visitor Pattern, SWC / ESBuild) │
-
 └──────────────────────────────────────┬──────────────────────────────────────┘
-
-```javascript
                                        │
-```
-
 ┌──────────────────────────────────────▼──────────────────────────────────────┐
-
 │ Data Ingestion & Flow Control (WHATWG Web Streams, Backpressure, desiredSize)│
-
 └──────────────────────────────────────┬──────────────────────────────────────┘
+                                       │
+┌──────────────────────────────────────▼──────────────────────────────────────┐
+│ Low-Level Concurrency & Binary Interop (SharedArrayBuffer, Atomics, Wasm)   │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
 
 ```javascript
                                        │
 ```
 
+```text
 ┌──────────────────────────────────────▼──────────────────────────────────────┐
+│ Compiler & Pipeline Engineering (ASTs, Babel Visitor Pattern, SWC / ESBuild) │
+└──────────────────────────────────────┬──────────────────────────────────────┘
+```
 
+```javascript
+                                       │
+```
+
+```text
+┌──────────────────────────────────────▼──────────────────────────────────────┐
+│ Data Ingestion & Flow Control (WHATWG Web Streams, Backpressure, desiredSize)│
+└──────────────────────────────────────┬──────────────────────────────────────┘
+```
+
+```javascript
+                                       │
+```
+
+```text
+┌──────────────────────────────────────▼──────────────────────────────────────┐
 │ Low-Level Concurrency & Binary Interop (SharedArrayBuffer, Atomics, Wasm)   │
-
 └─────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. Core Architectural Pillars Reviewed
 

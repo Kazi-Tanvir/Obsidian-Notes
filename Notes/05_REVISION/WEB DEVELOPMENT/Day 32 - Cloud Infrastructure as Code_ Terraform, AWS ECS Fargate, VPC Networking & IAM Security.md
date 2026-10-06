@@ -25,30 +25,32 @@ Managing cloud infrastructure through manual web consoles leads to configuration
 
 - **State File Management (**`terraform.tfstate`**)**: Acts as the single source of truth mapping declared configuration to actual cloud resource IDs. In production, the state file **must** be stored remotely in **AWS S3 with server-side encryption and DynamoDB state locking** to prevent race condition corruptions during team executions.
 
+```text
 ┌────────────────────────────────────── Production AWS VPC Topology ──────────────────────────────────────┐
-│                                                                                                         │
-│  AWS Region (e.g. us-east-1)                                                                            │
-│  ┌────────────────────────────────────────────── VPC (10.0.0.0/16) ──────────────────────────────────┐  │
-│  │                                                                                                   │  │
-│  │  ┌───────────────────────── Availability Zone A ────────────┐  ┌─── Availability Zone B ────────┐ │  │
-│  │  │                                                          │  │                                │ │  │
-│  │  │  Public Subnet A (10.0.1.0/24)                           │  │  Public Subnet B (10.0.2.0/24) │ │  │
-│  │  │  • Internet Gateway (IGW)                                │  │  • Application Load Balancer   │ │  │
-│  │  │  • NAT Gateway A (Outbound Internet for Private Subnets) │  │  • NAT Gateway B               │ │  │
-│  │  └──────────────────────────────┬───────────────────────────┘  └────────────────────────────────┘ │  │
-│  │                                 │ Route Table: 0.0.0.0/0 -> NAT GW                                │  │
-│  │  ┌──────────────────────────────▼───────────────────────────┐  ┌────────────────────────────────┐ │  │
-│  │  │  Private App Subnet A (10.0.11.0/24)                     │  │  Private App Subnet B          │ │  │
-│  │  │  • AWS ECS Fargate Container Tasks (Node.js/Next.js APIs)│  │  • AWS ECS Fargate Tasks       │ │  │
-│  │  │  • No Direct Public IP / Protected from Internet         │  │                                │ │  │
-│  │  └──────────────────────────────┬───────────────────────────┘  └────────────────────────────────┘ │  │
-│  │                                 │ Security Group: Allow port 5432 from App Subnets ONLY           │  │
-│  │  ┌──────────────────────────────▼───────────────────────────┐  ┌────────────────────────────────┐ │  │
-│  │  │  Isolated DB Subnet A (10.0.21.0/24)                     │  │  Isolated DB Subnet B          │ │  │
-│  │  │  • Amazon RDS Aurora PostgreSQL (Primary Writer)         │  │  • Aurora Read Replica         │ │  │
-│  │  └──────────────────────────────────────────────────────────┘  └────────────────────────────────┘ │  │
-│  └───────────────────────────────────────────────────────────────────────────────────────────────────┘  │
+│                                                                                                        │
+│  AWS Region (e.g. us-east-1)                                                                           │
+│  ┌────────────────────────────────────────────── VPC (10.0.0.0/16) ──────────────────────────────────┐ │
+│  │                                                                                                   │ │
+│  │  ┌───────────────────────── Availability Zone A ────────────┐  ┌─── Availability Zone B ────────┐ │ │
+│  │  │                                                          │  │                                │ │ │
+│  │  │  Public Subnet A (10.0.1.0/24)                           │  │  Public Subnet B (10.0.2.0/24) │ │ │
+│  │  │  • Internet Gateway (IGW)                                │  │  • Application Load Balancer   │ │ │
+│  │  │  • NAT Gateway A (Outbound Internet for Private Subnets) │  │  • NAT Gateway B               │ │ │
+│  │  └──────────────────────────────┬───────────────────────────┘  └────────────────────────────────┘ │ │
+│  │                                 │ Route Table: 0.0.0.0/0 -> NAT GW                                │ │
+│  │  ┌──────────────────────────────▼───────────────────────────┐  ┌────────────────────────────────┐ │ │
+│  │  │  Private App Subnet A (10.0.11.0/24)                     │  │  Private App Subnet B          │ │ │
+│  │  │  • AWS ECS Fargate Container Tasks (Node.js/Next.js APIs)│  │  • AWS ECS Fargate Tasks       │ │ │
+│  │  │  • No Direct Public IP / Protected from Internet         │  │                                │ │ │
+│  │  └──────────────────────────────┬───────────────────────────┘  └────────────────────────────────┘ │ │
+│  │                                 │ Security Group: Allow port 5432 from App Subnets ONLY           │ │
+│  │  ┌──────────────────────────────▼───────────────────────────┐  ┌────────────────────────────────┐ │ │
+│  │  │  Isolated DB Subnet A (10.0.21.0/24)                     │  │  Isolated DB Subnet B          │ │ │
+│  │  │  • Amazon RDS Aurora PostgreSQL (Primary Writer)        │  │  • Aurora Read Replica         │ │ │
+│  │  └──────────────────────────────────────────────────────────┘  └────────────────────────────────┘ │ │
+│  └───────────────────────────────────────────────────────────────────────────────────────────────────┘ │
 └────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. Serverless Container Orchestration on AWS ECS Fargate
 
@@ -168,23 +170,17 @@ resource "aws_appautoscaling_policy" "ecs_cpu" {
 
 ### Security Group Ingress / Egress Rule Matrix:
 
+```text
 ┌────────────────────────────────────── Security Group Chain ──────────────────────────────────────┐
-
 │                                                                                                  │
-
 │  1. ALB Security Group: Ingress: 0.0.0.0/0 (Ports 80/443) ──► Egress: Port 8080 to ECS SG Only   │
-
 │                                                                                                  │
-
 │  2. ECS Security Group: Ingress: Port 8080 from ALB SG Only ──► Egress: Port 5432 to DB SG Only  │
-
 │                                                                                                  │
-
 │  3. RDS Security Group: Ingress: Port 5432 from ECS SG Only ──► Egress: None                     │
-
 │                                                                                                  │
-
 └──────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ## SECTION 3: WEEKLY SYSTEM DESIGN & CODING PROBLEMS
 

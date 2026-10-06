@@ -19,19 +19,15 @@ date: 2026-08-29
 
 Authentication in Next.js App Router spans both server-side React Server Components (RSC), Edge Middleware, Client Components, and asynchronous Server Actions.
 
+```text
 ┌─────────────────────────────────────── Next.js App Router Architecture ───────────────────────────────────────┐
-
 │                                                                                                               │
-
 │  [ Edge Middleware ] ────────► [ Server Components (RSC) ] ────────► [ Server Actions / Route Handlers ]       │
-
 │  • Edge JWT verification      • Universal auth() read                • Mutating state with CSRF check         │
-
 │  • Fast URL redirect/rewrite   • Zero bundle size on client           • Set-Cookie chunked encryption         │
-
 │                                                                                                               │
-
 └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 #### Authentication Strategy Comparison:
 

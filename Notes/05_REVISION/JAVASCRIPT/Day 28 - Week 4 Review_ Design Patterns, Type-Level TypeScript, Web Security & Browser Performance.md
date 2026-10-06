@@ -19,41 +19,53 @@ date: 2026-08-28
 
 Week 4 bridged advanced software design patterns, type-level TypeScript metaprogramming, client-side security hardening, native cryptography, and browser rendering engine mechanics:
 
+```text
 ┌──────────────────────────────────────────────────────────────────────────────┐
-
 │ 1. Design Patterns & Architecture (Creational, Structural, Behavioral)       │
-
 └──────────────────────────────────────┬───────────────────────────────────────┘
-
-```javascript
                                        │
-```
-
 ┌──────────────────────────────────────▼───────────────────────────────────────┐
-
 │ 2. Type-Level Programming (Conditionals, infer, Mapped & Template Literals)  │
-
 └──────────────────────────────────────┬───────────────────────────────────────┘
-
-```javascript
                                        │
-```
-
 ┌──────────────────────────────────────▼───────────────────────────────────────┐
-
 │ 3. Web Security & Cryptography (XSS/Trusted Types, Prototype Guard, WebCrypto)│
-
 └──────────────────────────────────────┬───────────────────────────────────────┘
+                                       │
+┌──────────────────────────────────────▼───────────────────────────────────────┐
+│ 4. Browser Rendering & Frame Budgets (rAF, rIC, Layout Thrashing, FastDOM)   │
+└──────────────────────────────────────────────────────────────────────────────┘
+```
 
 ```javascript
                                        │
 ```
 
+```text
 ┌──────────────────────────────────────▼───────────────────────────────────────┐
+│ 2. Type-Level Programming (Conditionals, infer, Mapped & Template Literals)  │
+└──────────────────────────────────────┬───────────────────────────────────────┘
+```
 
+```javascript
+                                       │
+```
+
+```text
+┌──────────────────────────────────────▼───────────────────────────────────────┐
+│ 3. Web Security & Cryptography (XSS/Trusted Types, Prototype Guard, WebCrypto)│
+└──────────────────────────────────────┬───────────────────────────────────────┘
+```
+
+```javascript
+                                       │
+```
+
+```text
+┌──────────────────────────────────────▼───────────────────────────────────────┐
 │ 4. Browser Rendering & Frame Budgets (rAF, rIC, Layout Thrashing, FastDOM)   │
-
 └──────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. Core Architectural Pillars Reviewed
 

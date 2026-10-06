@@ -23,33 +23,22 @@ date: 2026-09-04
 
 Week 5 examined the browser not merely as a document viewer, but as a full-fledged, multi-threaded operating system runtime. Integrating these foundational platform capabilities creates applications that are offline-resilient, GPU-accelerated, peer-to-peer capable, and modularly encapsulated:
 
+```text
 ┌────────────────────────────────────── Modern Web Platform Architecture ──────────────────────────────────────┐
-
 │                                                                                                              │
-
 │  UI / Component Layer (Main Thread)                                                                          │
-
 │  • Autonomous Custom Elements & Shadow DOM (`<custom-element>`)                                              │
-
-│  • Style & DOM Isolation (`attachShadow({ mode: 'open' })`) \+ Declarative Shadow DOM (SSR)                   │
-
+│  • Style & DOM Isolation (`attachShadow({ mode: 'open' })`) + Declarative Shadow DOM (SSR)                   │
 │         │                                                                                                    │
-
 │         ├───────────────────────────────┬──────────────────────────────────┬─────────────────────────────────┤
-
 │         ▼                               ▼                                  ▼                                 │
-
 │  Offline Persistence            Multi-Threaded Compute           Hardware Acceleration        Real-Time P2P  │
-
 │  • IndexedDB (Object Stores)    • Web Workers (Dedicated)        • OffscreenCanvas & WebGL2   • WebRTC       │
-
 │  • Service Worker (Cache API)   • Service Workers (Fetch/Sync)   • GPU Render Pipeline        • DataChannels │
-
 │  • Background Sync Queue        • Atomics & SharedArrayBuffer    • Frame Delta Loops          • STUN / TURN  │
-
 │                                                                                                              │
-
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ---
 
@@ -117,37 +106,24 @@ customElements.define('gpu-visualizer', GpuVisualizer);
 
 ### 3. Resilient Offline-First Data Synchronization Loop
 
+```text
 ┌──────────────────────────────────── Offline-First Mutation Lifecycle ────────────────────────────────────┐
-
 │                                                                                                          │
-
 │  1. User Performs Action (e.g. Save Document / Draw Stroke)                                              │
-
 │     │                                                                                                    │
-
 │     ▼                                                                                                    │
-
 │  2. Optimistic Local Persistence ──► Write to IndexedDB (Immediate local UI update)                      │
-
 │     │                                                                                                    │
-
 │     ├──[Online]────────► Dispatch fetch() request with Idempotency Key ──► Remote Server Success        │
-
 │     │                                                                                                    │
-
 │     └──[Offline]───────► Register Service Worker Background Sync ('sync-mutations')                     │
-
 │                            │                                                                             │
-
 │                            ▼ (Network Connectivity Restores)                                             │
-
 │                          Service Worker wakes up in background ──► Reads IndexedDB Pending Queue         │
-
 │                            └──► Replays HTTP requests with Idempotency Key ──► Mark Synced               │
-
 │                                                                                                          │
-
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ---
 

@@ -29,45 +29,28 @@ Traditional operating system interfaces (POSIX) grant applications ambient acces
 
 - A compromised dependency cannot traverse directories or open unauthorized network connections outside granted capabilities.
 
+```text
 ┌────────────────────────────────────── WASI Capability-Based Security ──────────────────────────────────────┐
-
-│ │
-
-│ Host Runtime (Node.js / Wasmer / Wasmtime) │
-
-│ ┌──────────────────────────────────────────────────────────────────────────────────────────────────────┐ │
-
-│ │ Explicit Capability Grants: │ │
-
-│ │ • preopens: { '/sandbox': './data/tenant_1' } ──► Host explicitly restricts FS to tenant directory │ │
-
-│ │ • env: { API_KEY: 'xxx' } ──► No ambient host process.env access │ │
-
-│ │ │ │
-
-│ │ ┌─── WebAssembly Instance (Isolated Linear Memory) ─────────────────────────────────────────────┐ │ │
-
-│ │ │ │ │ │
-
-│ │ │ Guest Code (Compiled from Rust / C / AssemblyScript) │ │ │
-
-│ │ │ • Sandboxed 64KB Linear Memory Pages (Hardware Bounds Checking) │ │ │
-
-│ │ │ • System calls intercepted by WASI Imports: │ │ │
-
-│ │ │ wasi_snapshot_preview1.fd_read() ──► Resolves strictly inside '/sandbox' │ │ │
-
-│ │ │ wasi_snapshot_preview1.fd_write() │ │ │
-
-│ │ │ │ │ │
-
-│ │ └───────────────────────────────────────────────────────────────────────────────────────────────┘ │ │
-
-│ └──────────────────────────────────────────────────────────────────────────────────────────────────────┘ │
-
-│ │
-
+│                                                                                                            │
+│  Host Runtime (Node.js / Wasmer / Wasmtime)                                                                │
+│  ┌──────────────────────────────────────────────────────────────────────────────────────────────────────┐  │
+│  │ Explicit Capability Grants:                                                                          │  │
+│  │ • preopens: { '/sandbox': './data/tenant_1' } ──► Host explicitly restricts FS to tenant directory  │  │
+│  │ • env: { API_KEY: 'xxx' }                      ──► No ambient host process.env access                │  │
+│  │                                                                                                      │  │
+│  │   ┌─── WebAssembly Instance (Isolated Linear Memory) ─────────────────────────────────────────────┐  │  │
+│  │   │                                                                                               │  │  │
+│  │   │   Guest Code (Compiled from Rust / C / AssemblyScript)                                        │  │  │
+│  │   │   • Sandboxed 64KB Linear Memory Pages (Hardware Bounds Checking)                             │  │  │
+│  │   │   • System calls intercepted by WASI Imports:                                                 │  │  │
+│  │   │     wasi_snapshot_preview1.fd_read() ──► Resolves strictly inside '/sandbox'                  │  │  │
+│  │   │     wasi_snapshot_preview1.fd_write()                                                         │  │  │
+│  │   │                                                                                               │  │  │
+│  │   └───────────────────────────────────────────────────────────────────────────────────────────────┘  │  │
+│  └──────────────────────────────────────────────────────────────────────────────────────────────────────┘  │
+│                                                                                                            │
 └────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. Node.js WASI Implementation with node:wasi
 

@@ -27,35 +27,23 @@ The primary culprit is **PostgreSQL Table Locking**:
 - An `ACCESS EXCLUSIVE` lock conflicts with **all other locks**, including simple `SELECT` queries.
 - Even if the DDL command takes 2 milliseconds to run, if it is queued behind a long-running 10-second `SELECT` statement, **every subsequent query on that table queues behind the migration lock**. Within seconds, your backend connection pool exhausts, returning 500 errors to users.
 
+```text
 ┌────────────────────────────────────── Lock Queue Contention Scenario ──────────────────────────────────────┐
-
 │                                                                                                              │
-
 │  1. Long-Running Query:                                                                                      │
-
 │     SELECT * FROM orders WHERE ... (Running for 8 seconds, holds ACCESS SHARE lock)                          │
-
 │                                                                                                              │
-
 │  2. Inbound DDL Migration:                                                                                   │
-
 │     ALTER TABLE orders ADD COLUMN status VARCHAR(50); (Requests ACCESS EXCLUSIVE lock)                       │
-
 │     └─► BLOCKED! Must wait for Query 1 to finish.                                                            │
-
 │                                                                                                              │
-
 │  3. Inbound Production Traffic:                                                                              │
-
 │     SELECT / INSERT / UPDATE queries arrive at 2,000 requests/sec.                                            │
-
 │     └─► BLOCKED! Cannot acquire ACCESS SHARE lock because DDL request is pending!                            │
-
 │     └─► Connection pool exhausts ──► Cascading 504 Gateway Timeout Outage! 💥                                │
-
 │                                                                                                              │
-
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ---
 
@@ -63,49 +51,30 @@ The primary culprit is **PostgreSQL Table Locking**:
 
 To achieve true zero-downtime migrations when renaming fields, splitting tables, or modifying constraints, architects employ the **Expand and Contract Pattern** across multiple independent deployments:
 
+```text
 ┌────────────────────────────────────── The 5 Phases of Expand & Contract ──────────────────────────────────────┐
-
 │                                                                                                               │
-
 │  Phase 1: Expand (Database Migration)                                                                         │
-
-│  • Add the new column `new\_status` as nullable without altering `old\_status`.                                 │
-
+│  • Add the new column `new_status` as nullable without altering `old_status`.                                 │
 │                                                                                                               │
-
-│  Phase 2: Dual-Writing (Application Deployment 1\)                                                             │
-
-│  • Application reads from `old\_status`.                                                                       │
-
-│  • Application writes to BOTH `old\_status` AND `new\_status` on every mutation.                                │
-
+│  Phase 2: Dual-Writing (Application Deployment 1)                                                             │
+│  • Application reads from `old_status`.                                                                       │
+│  • Application writes to BOTH `old_status` AND `new_status` on every mutation.                                │
 │                                                                                                               │
-
 │  Phase 3: Backfill (Background Worker)                                                                        │
-
 │  • An asynchronous, throttled worker backfills existing historical rows:                                      │
-
-│    `UPDATE orders SET new\_status \= old\_status WHERE new\_status IS NULL LIMIT 1000;`                           │
-
+│    `UPDATE orders SET new_status = old_status WHERE new_status IS NULL LIMIT 1000;`                           │
 │                                                                                                               │
-
-│  Phase 4: Read Cutover (Application Deployment 2\)                                                             │
-
-│  • Application switches reading to `new\_status`.                                                              │
-
+│  Phase 4: Read Cutover (Application Deployment 2)                                                             │
+│  • Application switches reading to `new_status`.                                                              │
 │  • Application continues writing to both fields for rollback safety.                                          │
-
 │                                                                                                               │
-
 │  Phase 5: Contract (Application Deployment 3 & Database Migration)                                            │
-
-│  • Application stops writing to `old\_status`.                                                                 │
-
-│  • Safely drop `old\_status` column from the database asynchronously.                                          │
-
+│  • Application stops writing to `old_status`.                                                                 │
+│  • Safely drop `old_status` column from the database asynchronously.                                          │
 │                                                                                                               │
-
 └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ---
 

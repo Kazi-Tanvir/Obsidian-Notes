@@ -27,39 +27,25 @@ For decades, JavaScript's built-in `Date` object has been one of its most critic
 
 The **TC39 Temporal API** resolves these issues by introducing immutable, domain-specific data types:
 
+```text
 ┌────────────────────────────────────── Temporal API Type System ──────────────────────────────────────┐
-
 │                                                                                                      │
-
 │  Exact Time (Global Timeline)                                                                        │
-
 │  • Temporal.Instant ──► Nanoseconds since Unix Epoch (UTC only, no timezone knowledge)              │
-
 │                                                                                                      │
-
-│  Zoned Time (Exact Time \+ Timezone \+ Calendar)                                                       │
-
-│  • Temporal.ZonedDateTime ──► Full representation: Instant \+ IANA Timezone (e.g. "Asia/Dhaka")       │
-
+│  Zoned Time (Exact Time + Timezone + Calendar)                                                       │
+│  • Temporal.ZonedDateTime ──► Full representation: Instant + IANA Timezone (e.g. "Asia/Dhaka")       │
 │                                                                                                      │
-
 │  Plain Time (Wall-Clock / Date Without Timezone)                                                     │
-
 │  • Temporal.PlainDate ──► Calendar date only (e.g. "2026-09-02")                                     │
-
 │  • Temporal.PlainTime ──► Wall-clock time only (e.g. "14:30:00")                                     │
-
 │  • Temporal.PlainDateTime ──► Combined calendar date & time without timezone offset                │
-
 │                                                                                                      │
-
 │  Differences & Durations                                                                             │
-
 │  • Temporal.Duration ──► Represents a span of time (e.g. 2 hours, 15 minutes, 3 days)                │
-
 │                                                                                                      │
-
 └──────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ---
 

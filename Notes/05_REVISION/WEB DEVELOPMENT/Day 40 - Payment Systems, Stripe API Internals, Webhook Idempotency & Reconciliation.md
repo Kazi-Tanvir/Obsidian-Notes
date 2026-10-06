@@ -33,51 +33,31 @@ The **Stripe PaymentIntents API** represents the canonical transaction state mac
 
 5.  succeeded: Terminal success state; funds captured and ready for product provisioning.
 
+```text
 ┌────────────────────────────────────── Payment & Webhook Architecture ──────────────────────────────────────┐
-
-│ │
-
-│ Client (Browser/App) Your Backend (Node.js/Next) Stripe Engine │
-
-│ │ │ │ │
-
-│ │── 1. Create Checkout Session ──────►│ │ │
-
-│ │ │── 2. Create PaymentIntent ───────────►│ │
-
-│ │ │◄─ 3. Returns Client Secret ───────────│ │
-
-│ │◄─ 4. Passes Client Secret ──────────│ │ │
-
-│ │ │ │
-
-│ │── 5. Submits Card Data Directly to Stripe (PCI Compliant!) ────────────────►│ │
-
-│ │ │ │
-
-│ │ (Never trust client redirect! Asynchronous webhook is source of truth) │ │
-
-│ │ │ │ │
-
-│ │ │◄─ 6. Webhook Event: payment_intent.succeeded ─────────────── │
-
-│ │ │ (Cryptographic HMAC signature!) │ │
-
-│ │ ├───────────────────────────────┐ │ │
-
-│ │ │ Check Idempotency Key in DB │ │ │
-
-│ │ │ In Double-Entry Ledger │ │ │
-
-│ │ │ Provision Product Order │ │ │
-
-│ │ └───────────────────────────────┘ │ │
-
-│ │ │── 7. HTTP 200 OK Ack ────────────────►│ │
-
-│ │
-
+│                                                                                                             │
+│  Client (Browser/App)           Your Backend (Node.js/Next)                    Stripe Engine                │
+│        │                                     │                                       │                      │
+│        │── 1. Create Checkout Session ──────►│                                       │                      │
+│        │                                     │── 2. Create PaymentIntent ───────────►│                      │
+│        │                                     │◄─ 3. Returns Client Secret ───────────│                      │
+│        │◄─ 4. Passes Client Secret ──────────│                                       │                      │
+│        │                                                                             │                      │
+│        │── 5. Submits Card Data Directly to Stripe (PCI Compliant!) ────────────────►│                      │
+│        │                                                                             │                      │
+│        │   (Never trust client redirect! Asynchronous webhook is source of truth)    │                      │
+│        │                                     │                                       │                      │
+│        │                                     │◄─ 6. Webhook Event: payment_intent.succeeded ─────────────── │
+│        │                                     │      (Cryptographic HMAC signature!)  │                      │
+│        │                                     ├───────────────────────────────┐       │                      │
+│        │                                     │ Check Idempotency Key in DB   │       │                      │
+│        │                                     │ In Double-Entry Ledger        │       │                      │
+│        │                                     │ Provision Product Order       │       │                      │
+│        │                                     └───────────────────────────────┘       │                      │
+│        │                                     │── 7. HTTP 200 OK Ack ────────────────►│                      │
+│                                                                                                             │
 └─────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. Webhook Delivery Realities & Cryptographic Verification
 

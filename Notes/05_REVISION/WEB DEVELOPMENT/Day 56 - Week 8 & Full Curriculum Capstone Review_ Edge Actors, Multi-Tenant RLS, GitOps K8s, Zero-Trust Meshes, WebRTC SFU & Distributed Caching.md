@@ -18,47 +18,29 @@ tags:
 
 Day 56 marks the grand finale of our 8-week Web Development and Distributed Cloud Architecture roadmap. Over the past 56 days, we traversed fullstack engineering from Next.js App Router rendering and Turborepo monorepos to microservice message meshes, sharding pipelines, multi-region consensus, and planetary zero-trust infrastructure.
 
+```text
 ┌────────────────────────────────────── Week 8 & Capstone Architecture Map ──────────────────────────────────────┐
-
 │                                                                                                                 │
-
 │  Stateful Edge & Multi-Tenant Data Isolation:                                                                   │
-
 │  • Edge Actors & Durable Objects (Day 50): Global singleton coordinates, embedded SQLite (ctx.storage.sql),    │
-
 │    and WebSocket Hibernation API decoupling persistent connections from RAM billing.                             │
-
 │  • Multi-Tenant SaaS Isolation (Day 51): PostgreSQL Row-Level Security (RLS), FORCE ROW LEVEL SECURITY,         │
-
 │    transaction-scoped SET LOCAL app.current_tenant_id, and Node.js AsyncLocalStorage propagation.               │
-
 │                                                                                                                 │
-
 │  Cloud-Native Delivery & Zero-Trust Mesh:                                                                       │
-
 │  • GitOps & Progressive Delivery (Day 52): ArgoCD declarative reconciliation loops, Argo Rollouts canary       │
-
 │    traffic splitting, and automated self-aborting deployments driven by Prometheus metric analysis.             │
-
 │  • Zero-Trust Service Mesh (Day 53): NIST SP 800-207, transparent mTLS via Istio Envoy sidecars with 24h cert    │
-
 │    rotations, SPIFFE/SPIRE cryptographic workload attestation, and HashiCorp Vault dynamic ephemeral DB secrets.│
-
 │                                                                                                                 │
-
 │  Planet-Scale Real-Time & Caching Topologies:                                                                   │
-
 │  • Real-Time Media Streaming (Day 54): WebRTC Selective Forwarding Units (LiveKit SFU), WHIP ingestion &      │
-
 │    WHEP egress replacing RTMP, Simulcast / SVC adaptive bitrate layers, and kernel UDP socket tuning.          │
-
 │  • High-Performance Distributed Caching (Day 55): Cache Stampede (Thundering Herd) mitigation via Singleflight │
-
 │    request coalescing, XFetch probabilistic early expiration, multi-tier caching (L1/L2/L3), and Surrogate-Keys.│
-
 │                                                                                                                 │
-
 └─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ---
 

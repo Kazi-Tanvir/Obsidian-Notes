@@ -28,37 +28,24 @@ While symmetric cryptography like AES-256-GCM (covered on Day 26) is ideal for b
 
 - **Private Key**: Kept strictly confidential by the owner; used to decrypt messages or generate non-forgeable cryptographic signatures.
 
+```text
 ┌────────────────────────────────────── Asymmetric Key Operations ──────────────────────────────────────┐
-
-│ │
-
-│ Digital Signing (Authentication & Non-Repudiation): │
-
-│ [ Sender: Private Key ] ──► crypto.subtle.sign() ──► Digital Signature (Attached to payload) │
-
-│ │ │
-
-│ ▼ (Public Network) │
-
-│ [ Verifier: Public Key ] ─► crypto.subtle.verify() ◄────────┘ │
-
-│ • Proves the payload was authored by the Private Key owner! │
-
-│ • Proves the payload was NOT tampered with in transit! │
-
-│ │
-
-│ Key Agreement (Diffie-Hellman / ECDH): │
-
-│ [ Alice: Private Key ] + [ Bob: Public Key ] ──► crypto.subtle.deriveKey() ──► Shared Secret (K) │
-
-│ [ Bob: Private Key ] + [ Alice: Public Key ] ──► crypto.subtle.deriveKey() ──► Shared Secret (K) │
-
-│ • Both parties arrive at the EXACT same AES-256-GCM symmetric key without transmitting it! │
-
-│ │
-
+│                                                                                                       │
+│  Digital Signing (Authentication & Non-Repudiation):                                                  │
+│  [ Sender: Private Key ] ──► crypto.subtle.sign() ──► Digital Signature (Attached to payload)        │
+│                                                              │                                        │
+│                                                              ▼ (Public Network)                       │
+│  [ Verifier: Public Key ] ─► crypto.subtle.verify() ◄────────┘                                        │
+│  • Proves the payload was authored by the Private Key owner!                                          │
+│  • Proves the payload was NOT tampered with in transit!                                               │
+│                                                                                                       │
+│  Key Agreement (Diffie-Hellman / ECDH):                                                               │
+│  [ Alice: Private Key ] + [ Bob: Public Key ]   ──► crypto.subtle.deriveKey() ──► Shared Secret (K)   │
+│  [ Bob: Private Key ]   + [ Alice: Public Key ] ──► crypto.subtle.deriveKey() ──► Shared Secret (K)   │
+│  • Both parties arrive at the EXACT same AES-256-GCM symmetric key without transmitting it!           │
+│                                                                                                       │
 └───────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. Elliptic Curve Cryptography: ECDSA vs. Ed25519
 

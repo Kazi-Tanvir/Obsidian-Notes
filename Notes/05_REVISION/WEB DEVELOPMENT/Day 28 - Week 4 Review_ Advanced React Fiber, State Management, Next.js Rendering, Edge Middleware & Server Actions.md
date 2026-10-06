@@ -20,41 +20,53 @@ date: 2026-08-28
 
 Week 4 explored the full lifecycle of modern React and Next.js applications, connecting client-side reconciliation internals with Edge routing and server mutation pipelines:
 
+```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
-
 │ 1. Edge Layer (Next.js Edge Middleware, JWT Auth, Subdomain Multi-Tenancy)  │
-
 └──────────────────────────────────────┬──────────────────────────────────────┘
-
-```typescript
                                        │
-```
-
 ┌──────────────────────────────────────▼───────────────────────────────────────┐
-
 │ 2. Rendering & Caching (SSG, Time/Tag ISR, Partial Prerendering, Suspense)   │
-
 └──────────────────────────────────────┬───────────────────────────────────────┘
-
-```typescript
                                        │
-```
-
 ┌──────────────────────────────────────▼───────────────────────────────────────┐
-
 │ 3. React Reconciler Internals (Fiber Scheduler, Double Buffering, Lanes)     │
-
 └──────────────────────────────────────┬───────────────────────────────────────┘
+                                       │
+┌──────────────────────────────────────▼───────────────────────────────────────┐
+│ 4. State & Mutation Architecture (useSyncExternalStore, Zustand, Actions)    │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
 
 ```typescript
                                        │
 ```
 
+```text
 ┌──────────────────────────────────────▼───────────────────────────────────────┐
+│ 2. Rendering & Caching (SSG, Time/Tag ISR, Partial Prerendering, Suspense)   │
+└──────────────────────────────────────┬───────────────────────────────────────┘
+```
 
+```typescript
+                                       │
+```
+
+```text
+┌──────────────────────────────────────▼───────────────────────────────────────┐
+│ 3. React Reconciler Internals (Fiber Scheduler, Double Buffering, Lanes)     │
+└──────────────────────────────────────┬───────────────────────────────────────┘
+```
+
+```typescript
+                                       │
+```
+
+```text
+┌──────────────────────────────────────▼───────────────────────────────────────┐
 │ 4. State & Mutation Architecture (useSyncExternalStore, Zustand, Actions)    │
-
 └─────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. Core Architectural Pillars Reviewed
 

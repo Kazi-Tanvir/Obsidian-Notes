@@ -29,35 +29,23 @@ When a downstream dependency experiences degraded latency (e.g. response time in
 
 3.  **Cascading Collapse**: Failure ripples backward through API Gateways to frontends, taking down unrelated healthy business services.
 
+```text
 ┌────────────────────────────────────── Cascading Microservice Failure ──────────────────────────────────────┐
-
-│ │
-
-│ Incoming Users (2,000 req/sec) │
-
-│ │ │
-
-│ ▼ │
-
-│ [ Checkout Service ] ─────────────────────────► Exhausts all 100 available HTTP client connections! │
-
-│ │ │
-
-│ ├──► Sits blocked waiting for slow API\... (25s latency per call) │
-
-│ │ │
-
-│ ▼ │
-
-│ [ Third-Party Fraud API ] ──► Experiencing network outage / packet drop! │
-
-│ │
-
-│ Consequence: Checkout crashes ──► API Gateway times out ──► Entire platform offline! 💥 │
-
-│ │
-
+│                                                                                                            │
+│   Incoming Users (2,000 req/sec)                                                                           │
+│        │                                                                                                   │
+│        ▼                                                                                                   │
+│   [ Checkout Service ] ─────────────────────────► Exhausts all 100 available HTTP client connections!       │
+│        │                                                                                                   │
+│        ├──► Sits blocked waiting for slow API... (25s latency per call)                                    │
+│        │                                                                                                   │
+│        ▼                                                                                                   │
+│   [ Third-Party Fraud API ] ──► Experiencing network outage / packet drop!                                 │
+│                                                                                                            │
+│   Consequence: Checkout crashes ──► API Gateway times out ──► Entire platform offline! 💥                  │
+│                                                                                                            │
 └────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. The 4 Pillars of Resilient Client Architecture
 
@@ -95,41 +83,26 @@ The **Circuit Breaker** acts as an automatic electrical breaker protecting your 
 
 - **HALF_OPEN (Probing Recovery)**: After a sleep cooldown (e.g. 15s), the breaker allows a single test probe through. If successful, it resets to CLOSED; if it fails, it trips back to OPEN.
 
+```text
 ┌────────────────────────────────────── Circuit Breaker State Machine ──────────────────────────────────────┐
-
-│ │
-
-│ ┌──────────────────────────────────────────────────────────┐ │
-
-│ │ │ │
-
-│ ▼ │ Success Probe │
-
-│ ┌───────────────┐ Failure Rate > 50% in window ┌───────────────┐ │
-
-│ │ CLOSED │ ───────────────────────────────────────► │ OPEN │ │
-
-│ │ (Normal Flow) │ │ (Fail Fast) │ │
-
-│ └───────────────┘ └───────┬───────┘ │
-
-│ ▲ │ │
-
-│ │ │ Cooldown Expired (15s) │
-
-│ │ ▼ │
-
-│ │ Probe Failed ┌───────────────┐ │
-
-│ └───────────────────────────────────────────────── │ HALF_OPEN │ │
-
-│ │ (Single Test) │ │
-
-│ └───────────────┘ │
-
-│ │
-
+│                                                                                                           │
+│                 ┌──────────────────────────────────────────────────────────┐                              │
+│                 │                                                          │                              │
+│                 ▼                                                          │ Success Probe                │
+│         ┌───────────────┐     Failure Rate > 50% in window         ┌───────────────┐                      │
+│         │    CLOSED     │ ───────────────────────────────────────► │     OPEN      │                      │
+│         │ (Normal Flow) │                                          │  (Fail Fast)  │                      │
+│         └───────────────┘                                          └───────┬───────┘                      │
+│                 ▲                                                          │                              │
+│                 │                                                          │ Cooldown Expired (15s)       │
+│                 │                                                          ▼                              │
+│                 │              Probe Failed                        ┌───────────────┐                      │
+│                 └───────────────────────────────────────────────── │   HALF_OPEN   │                      │
+│                                                                    │ (Single Test) │                      │
+│                                                                    └───────────────┘                      │
+│                                                                                                           │
 └───────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 4. Bulkheading: Fault Domain Isolation
 

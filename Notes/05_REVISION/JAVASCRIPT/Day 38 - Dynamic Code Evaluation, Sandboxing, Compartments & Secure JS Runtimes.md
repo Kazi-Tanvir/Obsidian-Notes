@@ -27,39 +27,25 @@ Dynamic code execution has existed in JavaScript since its inception through `ev
    - **Direct Eval**: `eval("...")` executes within the local lexical scope, capable of reading and mutating local variables.
    - **Indirect Eval**: `(0, eval)("...")` or `const geval = eval; geval("...")` executes strictly in the global scope, preventing local variable leakage but still having full access to global state.
 
+```text
 ┌────────────────────────────────────── The Dynamic Execution Spectrum ──────────────────────────────────────┐
-
 │                                                                                                              │
-
 │  Unsafe: Local Scope Access                                                                                  │
-
 │  eval("code") ────────────────────────► Reads & mutates caller's local scope. De-optimizes entire function.  │
-
 │                                                                                                              │
-
 │  Marginally Safer: Global Scope Only                                                                         │
-
 │  (0, eval)("code") / new Function() ──► Executes in Global Scope. Cannot access local variables.             │
-
 │                                         (Still accesses `globalThis`, `process`, and prototypes!)            │
-
 │                                                                                                              │
-
 │  Flawed Isolation: Node.js VM                                                                                │
-
 │  vm.runInContext(code, context) ──────► Escapable via constructor chaining:                                  │
-
 │                                         `this.constructor.constructor("return process")()`                  │
-
 │                                                                                                              │
-
 │  True Process/Engine Isolation:                                                                              │
-
 │  isolated-vm / WebAssembly ──────────► Separate V8 Isolate, separate memory heap, strict CPU/RAM limits.     │
-
 │                                                                                                              │
-
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ---
 

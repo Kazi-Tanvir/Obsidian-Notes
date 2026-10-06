@@ -22,45 +22,28 @@ date: 2026-09-04
 
 Week 5 synthesized production infrastructure, database scalability, automated delivery, and modern search into a cohesive cloud architecture:
 
+```text
 ┌──────────────────────────────────── Enterprise Full-Stack Cloud Topology ────────────────────────────────────┐
-
 │                                                                                                              │
-
-│  Global Edge Layer (Cloudflare / Route 53 \+ AWS CloudFront)                                                  │
-
+│  Global Edge Layer (Cloudflare / Route 53 + AWS CloudFront)                                                  │
 │  • Edge Middleware: Geo-Routing, Subdomain Multi-Tenancy, DDoS Throttling                                   │
-
 │  • Edge Authentication: JWT Verification & Cookie Validation                                                │
-
 │         │                                                                                                    │
-
 │         ▼                                                                                                    │
-
 │  Application Layer (AWS ECS Fargate Container Mesh / Vercel Serverless)                                      │
-
 │  • Next.js App Router (RSC, Server Actions, Partial Prerendering)                                            │
-
 │  • Fastify / Express Microservices (OpenTelemetry Distributed Tracing & Pino Logging)                       │
-
 │  • Observability Sidecars: OpenTelemetry Collector ──► Prometheus & Grafana Tempo                            │
-
 │         │                                                                                                    │
-
 │         ├─────────────────────────────────┬────────────────────────────────┬─────────────────────────────────┤
-
 │         ▼                                 ▼                                ▼                                 ▼
-
 │  Caching Layer                    Primary Database Cluster         Search & Retrieval Layer          CI/CD Automation
-
 │  • Redis Cluster (Pub/Sub,        • PostgreSQL Master (Writes)     • Elasticsearch (BM25 Lexical)    • GitHub Actions
-
 │    Sliding-Window Rate Limiting,  • Read Replicas (PgBouncer)      • pgvector (HNSW Semantic)        • Turborepo Remote Cache
-
 │    Session Revocation Store)      • Declarative Table Partitioning • Reciprocal Rank Fusion (RRF)    • Docker Multi-Stage Builds
-
 │                                                                                                              │
-
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ---
 

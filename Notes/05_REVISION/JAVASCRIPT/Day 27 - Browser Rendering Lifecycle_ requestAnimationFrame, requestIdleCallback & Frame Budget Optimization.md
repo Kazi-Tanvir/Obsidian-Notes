@@ -18,15 +18,13 @@ date: 2026-08-27
 
 Modern displays refresh at 60Hz (16.6ms per frame) or 120Hz (8.33ms per frame). Within this single **Frame Budget**, the browser must execute JavaScript, resolve microtasks, calculate styles, compute layouts, rasterize pixels, and composite GPU layers.
 
+```text
 ┌──────────────────────────────────────── 16.6ms Frame Budget (60 FPS) ────────────────────────────────────────┐
-
 │                                                                                                              │
-
 │  [ Task / Macrotask ] ──► [ Microtask Queue ] ──► [ rAF Callbacks ] ──► [ Style / Layout / Paint / Composite ]  │
-
 │                                                                                                              │
-
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 If JavaScript execution or rendering takes longer than 16.6ms, the browser drops frames, resulting in visible **UI jank** and degrading **INP (Interaction to Next Paint)**.
 

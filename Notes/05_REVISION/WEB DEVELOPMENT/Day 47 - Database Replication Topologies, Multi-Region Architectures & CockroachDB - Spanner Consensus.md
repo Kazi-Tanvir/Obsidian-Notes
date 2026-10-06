@@ -28,39 +28,25 @@ When web applications serve users across North America, Europe, and Asia, single
 
 - The **CAP Theorem** dictates that in the presence of a network partition between continents, a distributed database must choose between **Consistency** (reject writes) or **Availability** (accept writes and risk split-brain divergence).
 
+```text
 ┌────────────────────────────────────── Multi-Region Database Topologies ──────────────────────────────────────┐
-
-│ │
-
-│ Topology A: Single-Primary with Cross-Region Read Replicas │
-
-│ • US Primary (All Writes) ──► Asynchronously streams WAL to EU & APAC Read Replicas │
-
-│ • Latency: Local reads (5ms), but cross-continental writes (250ms+). Risk: Stale reads due to repl lag. │
-
-│ │
-
-│ Topology B: Multi-Primary (Active-Active Master) ⚠️ │
-
-│ • Both US and EU accept writes independently. │
-
-│ • Fatal flaw: Write-write conflicts! Requires complex asynchronous conflict resolution (Last-Write-Wins │
-
-│ causes silent data loss; CRDTs are limited to commutative operations). │
-
-│ │
-
-│ Topology C: Distributed SQL (Google Spanner / CockroachDB / YugabyteDB) 🚀 │
-
-│ • Single logical ACID database spanning the globe. │
-
-│ • Partitions data into contiguous ranges; each range is replicated via Raft Consensus across 3+ regions. │
-
-│ • Enforces Strict Serializable Transactions using Hybrid Logical Clocks (HLC) or GPS/Atomic TrueTime. │
-
-│ │
-
+│                                                                                                              │
+│  Topology A: Single-Primary with Cross-Region Read Replicas                                                  │
+│  • US Primary (All Writes) ──► Asynchronously streams WAL to EU & APAC Read Replicas                         │
+│  • Latency: Local reads (5ms), but cross-continental writes (250ms+). Risk: Stale reads due to repl lag.     │
+│                                                                                                              │
+│  Topology B: Multi-Primary (Active-Active Master) ⚠️                                                          │
+│  • Both US and EU accept writes independently.                                                               │
+│  • Fatal flaw: Write-write conflicts! Requires complex asynchronous conflict resolution (Last-Write-Wins      │
+│    causes silent data loss; CRDTs are limited to commutative operations).                                    │
+│                                                                                                              │
+│  Topology C: Distributed SQL (Google Spanner / CockroachDB / YugabyteDB) 🚀                                  │
+│  • Single logical ACID database spanning the globe.                                                          │
+│  • Partitions data into contiguous ranges; each range is replicated via Raft Consensus across 3+ regions.   │
+│  • Enforces Strict Serializable Transactions using Hybrid Logical Clocks (HLC) or GPS/Atomic TrueTime.      │
+│                                                                                                              │
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. Distributed Consensus via Raft & Multi-Raft Partitioning
 
@@ -72,29 +58,20 @@ In Distributed SQL databases like **CockroachDB**, data is divided into 64MB chu
 
 - Writes to that range require acknowledgment from a quorum (majority: 2 of 3 nodes).
 
+```text
 ┌────────────────────────────────────── CockroachDB Range Locality ──────────────────────────────────────┐
-
-│ │
-
-│ Range 1 (US Customer Data) │
-
-│ • Leaseholder: US-East Node ──► Quorum achieved across US-East + US-Central (Sub-20ms writes! ⚡) │
-
-│ │
-
-│ Range 2 (EU Customer Data) │
-
-│ • Leaseholder: EU-West Node ──► Quorum achieved across EU-West + EU-Central (Sub-15ms writes! ⚡) │
-
-│ │
-
-│ Cross-Region Write (When User in EU transfers money to US): │
-
-│ • Two-Phase Commit (2PC) coordinated across Raft groups with atomic write intents. │
-
-│ │
-
+│                                                                                                        │
+│  Range 1 (US Customer Data)                                                                            │
+│  • Leaseholder: US-East Node ──► Quorum achieved across US-East + US-Central (Sub-20ms writes! ⚡)     │
+│                                                                                                        │
+│  Range 2 (EU Customer Data)                                                                            │
+│  • Leaseholder: EU-West Node ──► Quorum achieved across EU-West + EU-Central (Sub-15ms writes! ⚡)     │
+│                                                                                                        │
+│  Cross-Region Write (When User in EU transfers money to US):                                           │
+│  • Two-Phase Commit (2PC) coordinated across Raft groups with atomic write intents.                    │
+│                                                                                                        │
 └────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 3. Table Locality Patterns: Regional by Row
 

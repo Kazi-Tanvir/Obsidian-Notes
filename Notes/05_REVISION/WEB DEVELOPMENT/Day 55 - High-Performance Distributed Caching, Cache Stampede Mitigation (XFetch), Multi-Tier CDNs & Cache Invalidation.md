@@ -27,33 +27,22 @@ In high-throughput distributed architectures, caching serves as the primary shie
 
 - **Cascading Outage**: Database CPU surges to 100%, connection pools exhaust, query latencies spike from \$5\\text{ms}\$ to \$30\\text{s}\$, health checks fail, Kubernetes pods crash, and the entire platform collapses.
 
+```text
 ┌────────────────────────────────────── Cache Stampede Collapse vs. Mitigation ──────────────────────────────────────┐
-
-│ │
-
-│ Unmitigated Cache Expiration ⚠️: │
-
-│ 50,000 req/sec ──► [ Cache MISS ] ──► 50,000 Simultaneous DB Queries! ──► 🚨 Database OOM & Crash! │
-
-│ │
-
-│ Mitigated Architecture (XFetch & Singleflight) 🚀: │
-
-│ 50,000 req/sec ──► [ Singleflight Coalescing ] ──► Exactly 1 Worker Recomputes DB Query! ⚡ │
-
-│ │ │
-
-│ └──► 49,999 Waiting Requests Share the Single Returned Result! │
-
-│ │
-
-│ Probabilistic Early Expiration (XFetch): │
-
-│ Recomputes hot entries in the background BEFORE the key officially expires! Zero user-facing latency spikes! │
-
-│ │
-
+│                                                                                                                     │
+│  Unmitigated Cache Expiration ⚠️:                                                                                   │
+│  50,000 req/sec ──► [ Cache MISS ] ──► 50,000 Simultaneous DB Queries! ──► 🚨 Database OOM & Crash!                │
+│                                                                                                                     │
+│  Mitigated Architecture (XFetch & Singleflight) 🚀:                                                                 │
+│  50,000 req/sec ──► [ Singleflight Coalescing ] ──► Exactly 1 Worker Recomputes DB Query! ⚡                        │
+│                           │                                                                                         │
+│                           └──► 49,999 Waiting Requests Share the Single Returned Result!                            │
+│                                                                                                                     │
+│  Probabilistic Early Expiration (XFetch):                                                                           │
+│  Recomputes hot entries in the background BEFORE the key officially expires! Zero user-facing latency spikes!      │
+│                                                                                                                     │
 └─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. The Three Stampede Defense Strategies
 
@@ -93,35 +82,23 @@ Introduced by Vattani, Chierichetti, and Lowenstein, **XFetch** uses optimal pro
 
 Planet-scale architectures do not rely on a single Redis instance; they construct a **hierarchical multi-tier caching topology**:
 
+```text
 ┌────────────────────────────────────── Multi-Tier Caching Architecture ──────────────────────────────────────┐
-
-│ │
-
-│ Tier 1: In-Memory L1 Process Cache (LRU / TinyLFU inside Node.js Heap) │
-
-│ • Microsecond read latency (<0.01ms), zero network serialization. │
-
-│ • Short TTL (5s - 30s) with stale-while-revalidate. │
-
-│ │
-
-│ Tier 2: Distributed L2 Cache (Redis Cluster / Dragonfly / KeyDB) │
-
-│ • Shared cluster-wide state, 1ms - 3ms latency over VPC network. │
-
-│ • Stores enriched domain models, serialized JSON/Protobuf, XFetch metadata. │
-
-│ │
-
-│ Tier 3: Edge L3 CDN (Cloudflare / Fastly Edge Network) │
-
-│ • Terminated at 300+ global Anycast edge points of presence (PoPs). │
-
-│ • Serves full HTTP HTML/JSON payloads with sub-20ms TTFB directly to users worldwide. │
-
-│ │
-
+│                                                                                                             │
+│  Tier 1: In-Memory L1 Process Cache (LRU / TinyLFU inside Node.js Heap)                                      │
+│  • Microsecond read latency (<0.01ms), zero network serialization.                                          │
+│  • Short TTL (5s - 30s) with stale-while-revalidate.                                                        │
+│                                                                                                             │
+│  Tier 2: Distributed L2 Cache (Redis Cluster / Dragonfly / KeyDB)                                           │
+│  • Shared cluster-wide state, 1ms - 3ms latency over VPC network.                                           │
+│  • Stores enriched domain models, serialized JSON/Protobuf, XFetch metadata.                                │
+│                                                                                                             │
+│  Tier 3: Edge L3 CDN (Cloudflare / Fastly Edge Network)                                                    │
+│  • Terminated at 300+ global Anycast edge points of presence (PoPs).                                        │
+│  • Serves full HTTP HTML/JSON payloads with sub-20ms TTFB directly to users worldwide.                      │
+│                                                                                                             │
 └─────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 4. Distributed Cache Invalidation via Surrogate-Keys (Cache-Tags)
 

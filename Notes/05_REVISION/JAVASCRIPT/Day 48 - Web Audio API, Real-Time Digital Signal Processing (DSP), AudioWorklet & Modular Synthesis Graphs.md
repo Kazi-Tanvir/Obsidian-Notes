@@ -25,37 +25,24 @@ The Web Audio API is fundamentally different from the simple HTML5 <audio> eleme
 
 Audio requires continuous, glitch-free execution. If an audio buffer misses its delivery window by even \$5\\text{ms}\$, the operating system's audio output hardware suffers a **buffer underrun**, producing an audible click, pop, or drop-out.
 
+```text
 ┌────────────────────────────────────── Web Audio Dual-Thread Architecture ──────────────────────────────────────┐
-
-│ │
-
-│ Main Browser Thread (V8 JavaScript Engine) │
-
-│ • Manages DOM, styling, layout, user clicks, React renders, garbage collection pauses. │
-
-│ • Constructs the Audio Graph: ctx.createGain(), ctx.createOscillator(), nodeA.connect(nodeB). │
-
-│ • Dispatches automation timelines: param.setValueAtTime(), param.exponentialRampToValueAtTime(). │
-
-│ │
-
-│ ══════════════════════════════ Boundary: Non-blocking IPC / Lock-free Queues ═══════════════════════════════ │
-
-│ │
-
-│ Real-Time Audio Rendering Thread (Native OS High-Priority Thread) │
-
-│ • Pulls 128-sample audio frames ("render quanta") at fixed sample rates (44.1 kHz or 48 kHz). │
-
-│ • At 48 kHz, 128 samples must be computed every 2.67 milliseconds! (128 / 48000 ≈ 0.00267s) │
-
-│ • Runs entirely in C++ (Blink/Gecko native core) or inside dedicated AudioWorklet sandboxes. │
-
-│ • Completely immune to Main Thread UI freezes, layout recalculations, and JS GC pauses! ⚡ │
-
-│ │
-
+│                                                                                                                │
+│  Main Browser Thread (V8 JavaScript Engine)                                                                    │
+│  • Manages DOM, styling, layout, user clicks, React renders, garbage collection pauses.                        │
+│  • Constructs the Audio Graph: ctx.createGain(), ctx.createOscillator(), nodeA.connect(nodeB).                 │
+│  • Dispatches automation timelines: param.setValueAtTime(), param.exponentialRampToValueAtTime().             │
+│                                                                                                                │
+│  ══════════════════════════════ Boundary: Non-blocking IPC / Lock-free Queues ═══════════════════════════════  │
+│                                                                                                                │
+│  Real-Time Audio Rendering Thread (Native OS High-Priority Thread)                                            │
+│  • Pulls 128-sample audio frames ("render quanta") at fixed sample rates (44.1 kHz or 48 kHz).                 │
+│  • At 48 kHz, 128 samples must be computed every 2.67 milliseconds! (128 / 48000 ≈ 0.00267s)                  │
+│  • Runs entirely in C++ (Blink/Gecko native core) or inside dedicated AudioWorklet sandboxes.                  │
+│  • Completely immune to Main Thread UI freezes, layout recalculations, and JS GC pauses! ⚡                    │
+│                                                                                                                │
 └────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. AudioWorklet vs. Deprecated ScriptProcessorNode
 
@@ -201,31 +188,21 @@ gainNode.gain.setValueAtTime(gainNode.gain.value, now);
 
 gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.3); // 300ms smooth fadeout
 
+```text
 ┌────────────────────────────────────── AudioParam Automation Curves ──────────────────────────────────────┐
-
-│ Gain │
-
-│ 1.0 ┬───────┐ (setValueAtTime) │
-
-│ │ \\ │
-
-│ │ \\ linearRampToValueAtTime() │
-
-│ │ \\ │
-
-│ 0.5 │ └───┐ (setValueAtTime) │
-
-│ │ \\ │
-
-│ │ `. exponentialRampToValueAtTime() (Natural acoustic decay) │
-
-│ │ `.. │
-
-│ 0.0 ┴──────────────────────┴──────────────────────► Time │
-
-│ t=0 t=1 t=2 t=3 │
-
+│ Gain                                                                                                     │
+│ 1.0 ┬───────┐ (setValueAtTime)                                                                           │
+│     │        \                                                                                           │
+│     │         \  linearRampToValueAtTime()                                                               │
+│     │          \                                                                                         │
+│ 0.5 │           └───┐ (setValueAtTime)                                                                   │
+│     │                \                                                                                   │
+│     │                 `.  exponentialRampToValueAtTime() (Natural acoustic decay)                         │
+│     │                   `..                                                                              │
+│ 0.0 ┴──────────────────────┴──────────────────────► Time                                                 │
+│    t=0             t=1     t=2                    t=3                                                    │
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 4. Fast Fourier Transform (FFT) & Real-Time Spectral Analysis
 

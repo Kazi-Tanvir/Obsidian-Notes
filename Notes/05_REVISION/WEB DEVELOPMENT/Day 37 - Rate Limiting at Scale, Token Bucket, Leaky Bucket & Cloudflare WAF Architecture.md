@@ -27,39 +27,25 @@ A production rate-limiting strategy requires **defense-in-depth**:
 2. **API Gateway / Reverse Proxy Tier (Kong / Nginx / Envoy)**: Enforces IP-based and client-credential rate limits globally across all upstream microservices.
 3. **Application Tier (Node.js \+ Redis)**: Enforces granular, business-logic rate limits (e.g. per-user billing tiers, dynamic cost per endpoint, free vs. premium allowances).
 
+```text
 ┌────────────────────────────────────── Multi-Tier Rate Limiting Architecture ──────────────────────────────────────┐
-
 │                                                                                                                   │
-
 │   Inbound HTTP Requests (DDoS Attack / Bot Traffic / Legitimate Users)                                            │
-
 │         │                                                                                                         │
-
 │         ▼                                                                                                         │
-
 │  [ Tier 1: Cloudflare WAF / Edge Layer ] ────────► Drops IP reputation anomalies & L7 volumetric floods           │
-
 │         │ (Traffic reduced by 85%)                                                                                │
-
 │         ▼                                                                                                         │
-
 │  [ Tier 2: Envoy / Kong API Gateway ] ───────────► Drops unauthorized traffic & unauthenticated IP floods         │
-
 │         │ (Global rate limits enforced via Redis)                                                                 │
-
 │         ▼                                                                                                         │
-
 │  [ Tier 3: Application Layer (Fastify/Node.js) ] ─► Fine-grained business logic limits (Token Bucket via Redis)   │
-
 │         │                                                                                                         │
-
 │         ▼                                                                                                         │
-
 │   Protected Microservices & Database                                                                              │
-
 │                                                                                                                   │
-
 └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ---
 

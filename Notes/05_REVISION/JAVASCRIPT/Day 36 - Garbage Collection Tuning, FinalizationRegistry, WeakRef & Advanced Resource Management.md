@@ -27,35 +27,23 @@ JavaScript provides two complementary tiers of weak retention:
 2. **First-Class Weak References (`WeakRef`)**: An explicit wrapper that holds a weak reference to a target object without preventing its collection, accessed via `weakRef.deref()`.
 3. **Cleanup Lifecycle Callbacks (`FinalizationRegistry`)**: Registers cleanup callbacks invoked by the host environment after a target object has been collected by the Garbage Collector.
 
+```text
 ┌────────────────────────────────────── Reference Strength & GC Reachability ──────────────────────────────────────┐
-
 │                                                                                                                  │
-
 │  Strong Reference:                                                                                               │
-
 │  [ GC Root ] ══════════════════════════════════════════════════════════════════════════► [ Target Object ]       │
-
 │  (Target CANNOT be collected under any GC cycle)                                                                 │
-
 │                                                                                                                  │
-
 │  WeakRef / WeakMap Key:                                                                                          │
-
 │  [ GC Root ] -------------------------------- (Weak Pointer) ------------------------► [ Target Object ]       │
-
 │  (Target CAN be reclaimed during Minor/Major GC if no strong references exist)                                   │
-
 │                                                                                                                  │
-
 │  When Target is reclaimed:                                                                                       │
-
 │  [ WeakRef.deref() ] ──► Returns `undefined`                                                                     │
-
 │  [ FinalizationRegistry ] ──► Invokes cleanup callback with uncollected heldValue                                │
-
 │                                                                                                                  │
-
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ---
 

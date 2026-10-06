@@ -28,31 +28,21 @@ At its theoretical foundation, V8 uses a **Nondeterministic Finite Automaton (NF
 
 3.  **The Catastrophic Backtracking Hazard (ReDoS)**: When an expression contains nested quantifiers or overlapping alternatives (e.g., (a+)+\$), an input consisting of many a's followed by an unmatched character forces the NFA engine into **exponential computational complexity** (\$O(2^N)\$ or \$O(N^K)\$). A 30-character string can trigger billions of backtracking steps, locking the single-threaded JavaScript Event Loop at 100% CPU.
 
+```text
 ┌────────────────────────────────────── Catastrophic Backtracking Mechanics ──────────────────────────────────────┐
-
-│ │
-
-│ Pattern: /(x+x+)+y/ │
-
-│ Input: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx!" │
-
-│ │
-
-│ Step 1: Greedy match consumes all 'x' characters. │
-
-│ Step 2: Engine expects 'y', encounters '!' ──► FAILS! │
-
-│ Step 3: Engine backtracks: splits characters between first (x+) and second (x+). │
-
-│ Step 4: Repeated across all outer permutations of the group: │
-
-│ 2^10 steps for 10 'x's (~1,000 steps) │
-
-│ 2^30 steps for 30 'x's (~1,073,741,824 steps!) ──► Blocks V8 Event Loop for minutes! 💥 │
-
-│ │
-
+│                                                                                                                  │
+│  Pattern: /(x+x+)+y/                                                                                             │
+│  Input:   "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx!"                                                                    │
+│                                                                                                                  │
+│  Step 1: Greedy match consumes all 'x' characters.                                                               │
+│  Step 2: Engine expects 'y', encounters '!' ──► FAILS!                                                           │
+│  Step 3: Engine backtracks: splits characters between first (x+) and second (x+).                                │
+│  Step 4: Repeated across all outer permutations of the group:                                                    │
+│          2^10 steps for 10 'x's (~1,000 steps)                                                                  │
+│          2^30 steps for 30 'x's (~1,073,741,824 steps!) ──► Blocks V8 Event Loop for minutes! 💥                │
+│                                                                                                                  │
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. Modern ECMAScript RegExp Features
 

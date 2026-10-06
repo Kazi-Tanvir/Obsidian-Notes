@@ -29,37 +29,24 @@ As engineering organizations scale past 50+ developers, frontend single-page app
 
 **Micro-Frontends** decompose monolithic frontends into autonomous, independently deployable web applications that co-exist in a single unified user experience.
 
+```text
 ┌────────────────────────────────────── Micro-Frontend Integration Styles ──────────────────────────────────────┐
-
-│ │
-
-│ Build-Time Integration (npm Packages) ⚠️ │
-
-│ • Components published as private npm modules. │
-
-│ • Disadvantage: Host app must be rebuilt and redeployed whenever a package updates (Coupled release cycles!).│
-
-│ │
-
-│ Run-Time Integration: iframes ⚠️ │
-
-│ • Perfect CSS and JS isolation. │
-
-│ • Disadvantage: High memory overhead, broken UX (modals trapped in iframe), slow routing, deep linking pain. │
-
-│ │
-
-│ Modern Run-Time Integration: Module Federation (Webpack 5 / Vite) 🚀 │
-
-│ • Independent deployments load dynamic remote JS bundles directly in browser memory. │
-
-│ • Shared dependency negotiation (Single copy of React / UI library across remotes!). │
-
-│ • Full native browser performance, shared routing, and seamless DOM composition. │
-
-│ │
-
+│                                                                                                               │
+│  Build-Time Integration (npm Packages) ⚠️                                                                      │
+│  • Components published as private npm modules.                                                               │
+│  • Disadvantage: Host app must be rebuilt and redeployed whenever a package updates (Coupled release cycles!).│
+│                                                                                                               │
+│  Run-Time Integration: iframes ⚠️                                                                             │
+│  • Perfect CSS and JS isolation.                                                                              │
+│  • Disadvantage: High memory overhead, broken UX (modals trapped in iframe), slow routing, deep linking pain. │
+│                                                                                                               │
+│  Modern Run-Time Integration: Module Federation (Webpack 5 / Vite) 🚀                                         │
+│  • Independent deployments load dynamic remote JS bundles directly in browser memory.                         │
+│  • Shared dependency negotiation (Single copy of React / UI library across remotes!).                         │
+│  • Full native browser performance, shared routing, and seamless DOM composition.                            │
+│                                                                                                               │
 └───────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. Webpack 5 Module Federation Architecture
 

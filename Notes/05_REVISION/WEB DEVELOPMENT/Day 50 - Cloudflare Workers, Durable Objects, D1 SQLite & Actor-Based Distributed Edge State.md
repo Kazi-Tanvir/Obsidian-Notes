@@ -27,35 +27,23 @@ However, this created the **Edge State Dilemma**:
 
 - **Centralized Database Penalty**: To achieve consistency, stateless edge functions must connect back to a centralized PostgreSQL database in us-east-1, completely destroying edge latency advantages (\$250\\text{ms}+\$ round-trip cross-ocean latency).
 
+```text
 ┌────────────────────────────────────── The Edge Architecture Spectrum ──────────────────────────────────────┐
-
-│ │
-
-│ Traditional Edge (Stateless): │
-
-│ • Edge Node (London) ────► Central DB (us-east-1) ◄──── Edge Node (Tokyo) │
-
-│ • Incur high latency (250ms+) on EVERY write/read requiring synchronization! │
-
-│ │
-
-│ Durable Objects (Stateful Actor Model): │
-
-│ • Client (London) ──────┐ │
-
-│ ▼ (Sub-millisecond local routing) │
-
-│ • Client (Berlin) ─────► [ Durable Object Instance: "room-abc" ] │
-
-│ ▲ (Global Singleton Coordinate with In-Memory State & Embedded SQLite!) │
-
-│ • Client (Paris) ───────┘ │
-
-│ • Requests for ID "room-abc" route directly to the EXACT SAME physical instance globally! ⚡ │
-
-│ │
-
+│                                                                                                            │
+│  Traditional Edge (Stateless):                                                                             │
+│  • Edge Node (London) ────► Central DB (us-east-1) ◄──── Edge Node (Tokyo)                                 │
+│  • Incur high latency (250ms+) on EVERY write/read requiring synchronization!                              │
+│                                                                                                            │
+│  Durable Objects (Stateful Actor Model):                                                                    │
+│  • Client (London) ──────┐                                                                                 │
+│                          ▼ (Sub-millisecond local routing)                                                 │
+│  • Client (Berlin) ─────► [ Durable Object Instance: "room-abc" ]                                          │
+│                          ▲ (Global Singleton Coordinate with In-Memory State & Embedded SQLite!)           │
+│  • Client (Paris) ───────┘                                                                                 │
+│  • Requests for ID "room-abc" route directly to the EXACT SAME physical instance globally! ⚡               │
+│                                                                                                            │
 └────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. The Actor Model via Durable Objects
 

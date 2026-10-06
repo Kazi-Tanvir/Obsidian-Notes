@@ -18,13 +18,13 @@ date: 2026-08-29
 
 A **Service Worker** is a client-side programmable network proxy running in a background worker thread separate from the DOM. It intercepts network requests, manages client-side caching, and enables offline capabilities, background synchronization, and push notifications.
 
+```text
 ┌─────────────────┐        HTTP Request        ┌──────────────────────┐        Network Fetch       ┌─────────────────┐
-
 │ Browser / DOM   │ ─────────────────────────► │ Service Worker Proxy │ ─────────────────────────► │ Origin Server   │
-
 │ Client Context  │ ◄───────────────────────── │ (Fetch Event Handler)│ ◄───────────────────────── │ (Remote API/CDN)│
-
 └─────────────────┘        HTTP Response       └──────────┬───────────┘        HTTP Response       └─────────────────┘
+                                                          │
+```
 
 ```javascript
                                                           │

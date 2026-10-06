@@ -63,36 +63,30 @@ React maintains two Fiber trees simultaneously in memory:
 
 ### 3. The 2 Phases of React Rendering
 
+```text
 ┌─────────────────────────────────────────────────────────────┐
-
 │ 1. Render / Reconciliation Phase (Asynchronous)             │
-
 │    - Pure calculations without DOM mutations                │
-
 │    - Interruptible & restartable by scheduler               │
-
 │    - Invokes component render functions and Hook reducers    │
-
 └──────────────────────────────┬──────────────────────────────┘
+                               │
+```
 
 ```typescript
                                │
                                ▼
 ```
 
+```text
 ┌─────────────────────────────────────────────────────────────┐
-
 │ 2. Commit Phase (Synchronous)                               │
-
 │    - Uninterruptible DOM mutations (appendChild, remove)    │
-
 │    - Invokes useLayoutEffect (synchronous before paint)      │
-
 │    - Browser Paints Screen                                  │
-
 │    - Invokes useEffect (asynchronous after paint)           │
-
 └─────────────────────────────────────────────────────────────┘
+```
 
 ### 4. Concurrent Mode & Lanes Priority Scheduling
 

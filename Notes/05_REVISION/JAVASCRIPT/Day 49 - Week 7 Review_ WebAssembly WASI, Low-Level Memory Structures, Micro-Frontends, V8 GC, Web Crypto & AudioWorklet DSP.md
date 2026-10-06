@@ -20,45 +20,28 @@ date: 2026-09-18
 
 Week 7 advanced into the deepest layers of browser architecture, low-level systems integration, runtime memory management, and distributed client orchestration. As Principal JavaScript Architects, we master the convergence of hardware capabilities with JavaScript runtimes.
 
+```text
 ┌────────────────────────────────────── Week 7 Architectural Map ──────────────────────────────────────┐
-
-│ │
-
-│ Systems & Hardware Boundaries: │
-
-│ • WebAssembly WASI (Day 43): Capability-based sandboxing, component model, zero ambient OS access. │
-
-│ • Memory Structures (Day 44): Contiguous TypedArrays, bitsets, cache line locality, O(1) bitwise │
-
-│ ring buffers replacing V8 array reallocations. │
-
-│ │
-
-│ Distributed Client & Enterprise Runtimes: │
-
-│ • Micro-Frontends (Day 45): Webpack 5 / Vite Module Federation, shared scopes, window proxy │
-
-│ sandboxing, dynamic remote loading. │
-
-│ │
-
-│ Engine Internals & Mathematical Guarantees: │
-
-│ • V8 GC Internals (Day 46): Generational hypothesis, Scavenger minor GC, tri-color concurrent │
-
-│ marking, write barriers, closure retained size leaks. │
-
-│ • Asymmetric Web Crypto (Day 47): ECDSA/Ed25519 signatures, hardware-guarded non-extractable keys, │
-
-│ ECDH key agreement for zero-trust key exchange. │
-
-│ • Real-Time Audio DSP (Day 48): AudioWorklet thread isolation, 128-sample render quanta (2.67ms), │
-
-│ zero-allocation real-time loops, sample-accurate AudioParam automation. │
-
-│ │
-
+│                                                                                                      │
+│  Systems & Hardware Boundaries:                                                                      │
+│  • WebAssembly WASI (Day 43): Capability-based sandboxing, component model, zero ambient OS access.  │
+│  • Memory Structures (Day 44): Contiguous TypedArrays, bitsets, cache line locality, O(1) bitwise    │
+│    ring buffers replacing V8 array reallocations.                                                    │
+│                                                                                                      │
+│  Distributed Client & Enterprise Runtimes:                                                           │
+│  • Micro-Frontends (Day 45): Webpack 5 / Vite Module Federation, shared scopes, window proxy         │
+│    sandboxing, dynamic remote loading.                                                               │
+│                                                                                                      │
+│  Engine Internals & Mathematical Guarantees:                                                         │
+│  • V8 GC Internals (Day 46): Generational hypothesis, Scavenger minor GC, tri-color concurrent       │
+│    marking, write barriers, closure retained size leaks.                                             │
+│  • Asymmetric Web Crypto (Day 47): ECDSA/Ed25519 signatures, hardware-guarded non-extractable keys,   │
+│    ECDH key agreement for zero-trust key exchange.                                                   │
+│  • Real-Time Audio DSP (Day 48): AudioWorklet thread isolation, 128-sample render quanta (2.67ms),    │
+│    zero-allocation real-time loops, sample-accurate AudioParam automation.                           │
+│                                                                                                      │
 └──────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 1. WebAssembly WASI & Capability-Based Sandboxing (Day 43)
 

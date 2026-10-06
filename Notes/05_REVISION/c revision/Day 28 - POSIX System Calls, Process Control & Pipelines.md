@@ -97,25 +97,22 @@ close(pipefd[1]); // Close original descriptor after dup2!
 
 When a C process performs I/O, the operating system kernel maintains three distinct data structures:Process A (PID 1001) Open File Description Table (Kernel) Inode Table (VFS / Disk)
 
-┌───────────────────────┐ ┌─────────────────────────────┐ ┌────────────────────────┐
-
-│ FD 0 (stdin) │ │ File Offset: 1024 │ │ Inode #99211 (file.txt)│
-
-│ FD 1 (stdout) │ │ Status Flags: O_RDWR │ ──────► │ File Size: 4096 bytes │
-
-│ FD 3 ─────────────────┼───────────► │ Ref Count: 2 │ │ Permissions: -rw-r--r--│
-
-└───────────────────────┘ └──────────────┬──────────────┘ └────────────────────────┘
+```text
+┌───────────────────────┐             ┌─────────────────────────────┐         ┌────────────────────────┐
+│ FD 0 (stdin)          │             │ File Offset: 1024           │         │ Inode #99211 (file.txt)│
+│ FD 1 (stdout)         │             │ Status Flags: O_RDWR        │ ──────► │ File Size: 4096 bytes  │
+│ FD 3 ─────────────────┼───────────► │ Ref Count: 2                │         │ Permissions: -rw-r--r--│
+└───────────────────────┘             └──────────────┬──────────────┘         └────────────────────────┘
+```
 
 ▲
 
-Process B (Child PID 1002) │
-
-┌───────────────────────┐ │
-
+```text
+Process B (Child PID 1002)                           │
+┌───────────────────────┐                            │
 │ FD 3 (Inherited) ─────┼────────────────────────────┘
-
 └───────────────────────┘
+```
 
 1.  **Per-Process File Descriptor Table:** An array indexed by the integer FD. Each entry holds flags (e.g. FD_CLOEXEC) and a pointer to an Open File Description in kernel space.
 

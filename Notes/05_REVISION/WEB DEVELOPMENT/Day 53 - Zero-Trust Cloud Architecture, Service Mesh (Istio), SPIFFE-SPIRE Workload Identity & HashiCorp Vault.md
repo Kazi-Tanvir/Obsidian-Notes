@@ -35,55 +35,33 @@ For decades, enterprise security relied on the **Castle-and-Moat model**:
 
 3.  **Least Privilege & Dynamic Ephemeral Credentials**: Static secrets stored in .env files or Git repositories are strictly prohibited. Credentials must be short-lived, dynamically generated, and automatically rotated.
 
+```text
 ┌────────────────────────────────────── Zero-Trust Mesh Architecture ──────────────────────────────────────┐
-
-│ │
-
-│ Traditional Perimeter (Castle-and-Moat) ⚠️: │
-
-│ [ Public WAF ] ──► [ Internal Flat Network: Unencrypted HTTP / Hardcoded Static DB Passwords ] │
-
-│ • Any compromised container compromises the entire fleet! │
-
-│ │
-
-│ Zero-Trust Cloud Mesh (Istio + SPIRE + Vault) 🛡️: │
-
-│ Pod A (Billing Service) Pod B (Payment Service) │
-
-│ ┌──────────────────────┐ ┌──────────────────────┐ │
-
-│ │ Node.js Application │ │ Next.js Application │ │
-
-│ └──────────┬───────────┘ └──────────▲───────────┘ │
-
-│ │ localhost (UDS) │ localhost (UDS) │
-
-│ ┌──────────▼───────────┐ Mutual TLS (mTLS) ┌─────────┴──────────┐ │
-
-│ │ Envoy Sidecar Proxy ├═══════════════════►│ Envoy Sidecar Proxy │ │
-
-│ └──────────┬───────────┘ (SPIFFE x509 SVID) └─────────┬──────────┘ │
-
-│ │ │ │
-
-│ └───────────────────┬──────────────────────┘ │
-
-│ │ Attestation & Ephemeral Secrets │
-
-│ ┌───────────────▼───────────────┐ │
-
-│ │ SPIRE Agent & HashiCorp Vault │ │
-
-│ │ • 1-hour rotating x509 certs │ │
-
-│ │ • Just-in-Time DB credentials │ │
-
-│ └───────────────────────────────┘ │
-
-│ │
-
+│                                                                                                          │
+│  Traditional Perimeter (Castle-and-Moat) ⚠️:                                                             │
+│  [ Public WAF ] ──► [ Internal Flat Network: Unencrypted HTTP / Hardcoded Static DB Passwords ]          │
+│                       • Any compromised container compromises the entire fleet!                          │
+│                                                                                                          │
+│  Zero-Trust Cloud Mesh (Istio + SPIRE + Vault) 🛡️:                                                        │
+│  Pod A (Billing Service)                    Pod B (Payment Service)                                      │
+│  ┌──────────────────────┐                   ┌──────────────────────┐                                     │
+│  │ Node.js Application  │                   │ Next.js Application  │                                     │
+│  └──────────┬───────────┘                   └──────────▲───────────┘                                     │
+│             │ localhost (UDS)                          │ localhost (UDS)                                 │
+│  ┌──────────▼───────────┐  Mutual TLS (mTLS) ┌─────────┴──────────┐                                     │
+│  │ Envoy Sidecar Proxy  ├═══════════════════►│ Envoy Sidecar Proxy │                                     │
+│  └──────────┬───────────┘ (SPIFFE x509 SVID) └─────────┬──────────┘                                     │
+│             │                                          │                                                 │
+│             └───────────────────┬──────────────────────┘                                                 │
+│                                 │ Attestation & Ephemeral Secrets                                        │
+│                 ┌───────────────▼───────────────┐                                                        │
+│                 │ SPIRE Agent & HashiCorp Vault │                                                        │
+│                 │ • 1-hour rotating x509 certs  │                                                        │
+│                 │ • Just-in-Time DB credentials │                                                        │
+│                 └───────────────────────────────┘                                                        │
+│                                                                                                          │
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. Service Mesh Architecture & Transparent Mutual TLS (mTLS)
 

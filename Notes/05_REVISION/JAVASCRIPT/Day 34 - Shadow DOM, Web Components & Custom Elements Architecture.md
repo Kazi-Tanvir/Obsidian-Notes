@@ -24,41 +24,26 @@ Web Components provide a native, framework-agnostic component model built direct
 2. **Shadow DOM**: Provides true scoped CSS encapsulation and DOM tree isolation, preventing global styles and scripts from leaking in or out.
 3. **HTML Templates (`<template>` & `<slot>`)**: User-defined HTML fragments parsed at page load but inert until cloned and rendered, with slots providing content projection.
 
+```text
 ┌────────────────────────────────────── Web Component DOM Hierarchy ──────────────────────────────────────┐
-
 │                                                                                                         │
-
 │  Light DOM (Document Scope)                                                                             │
-
 │  ┌───────────────────────────────────────────────────────────────────────────────────────────────────┐  │
-
 │  │ <user-card avatar="/img.png">                                                                     │  │
-
 │  │   <span slot="username">Alice Walker</span> ──► Light DOM Slotted Element                         │  │
-
 │  │                                                                                                   │  │
-
 │  │   ┌─── #shadow-root (open) ────────────────────────────────────────────────────────────────────┐  │  │
-
 │  │   │  Scoped CSS: :host { display: block; border: 1px solid #ccc; }                             │  │  │
-
 │  │   │  <div class="card-inner">                                                                  │  │  │
-
 │  │   │    <img class="avatar" src="/img.png" />                                                   │  │  │
-
 │  │   │    <slot name="username"></slot> ◄── Projected from Light DOM!                             │  │  │
-
 │  │   │  </div>                                                                                    │  │  │
-
 │  │   └────────────────────────────────────────────────────────────────────────────────────────────┘  │  │
-
 │  │ </user-card>                                                                                      │  │
-
 │  └───────────────────────────────────────────────────────────────────────────────────────────────────┘  │
-
 │                                                                                                         │
-
 └─────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ---
 

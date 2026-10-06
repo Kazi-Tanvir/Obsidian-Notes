@@ -29,53 +29,32 @@ When write throughput exceeds hardware limits (\$> 50,000\$ writes/second) or to
 
 - Sharding scales **both write capacity and storage capacity linearly**.
 
+```text
 ┌────────────────────────────────────── Consistent Hashing Ring Topology ──────────────────────────────────────┐
-
-│ │
-
-│ Hash Ring: [0 to 2^32 - 1] │
-
-│ │
-
-│ Shard A (Node A - vnode 1) │
-
-│ (0) │
-
-│ ▲ ▲ │
-
-│ ┌──────┘ └──────┐ │
-
-│ │ │ │
-
-│ Key "user_42" │ │
-
-│ (Hashes to 400M) │ │
-
-│ │ │ │
-
-│ Shard C (Node C - vnode 1) ───┤ ├─── Shard B (Node B - vnode 1) │
-
-│ (3,000,000,000) │ │ (1,000,000,000) │
-
-│ │ │ │
-
-│ └──────┐ ┌──────┘ │
-
-│ ▼ ▼ │
-
-│ Shard A (Node A - vnode 2) │
-
-│ (2,000,000,000) │
-
-│ │
-
-│ Routing Rule: Hash the shard key (e.g. user_id). Walk clockwise along the ring. │
-
-│ The first encountered node (or virtual node) owns the data! │
-
-│ │
-
+│                                                                                                              │
+│                                           Hash Ring: [0 to 2^32 - 1]                                         │
+│                                                                                                              │
+│                                           Shard A (Node A - vnode 1)                                         │
+│                                                     (0)                                                      │
+│                                                  ▲       ▲                                                   │
+│                                           ┌──────┘       └──────┐                                            │
+│                                           │                     │                                            │
+│                                    Key "user_42"                │                                            │
+│                                (Hashes to 400M)                 │                                            │
+│                                           │                     │                                            │
+│             Shard C (Node C - vnode 1) ───┤                     ├─── Shard B (Node B - vnode 1)              │
+│                  (3,000,000,000)          │                     │            (1,000,000,000)                 │
+│                                           │                     │                                            │
+│                                           └──────┐       ┌──────┘                                            │
+│                                                  ▼       ▼                                                   │
+│                                           Shard A (Node A - vnode 2)                                         │
+│                                                 (2,000,000,000)                                              │
+│                                                                                                              │
+│   Routing Rule: Hash the shard key (e.g. user_id). Walk clockwise along the ring.                             │
+│                 The first encountered node (or virtual node) owns the data!                                  │
+│                                                                                                              │
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. The Flaw of Modular Hashing vs. Consistent Hashing
 

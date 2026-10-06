@@ -27,19 +27,20 @@ In a traditional linked list, every insertion and deletion requires branching co
 - Are we deleting the very first or very last element?
 
 A **Circular Doubly Linked List with a Dummy Sentinel Node** completely eliminates all edge cases.t Empty List (Sentinel points to itself):
-┌──────────────────────┐
-▼ │
-┌──────┐ │
-│ Head │ ─── next/prev ───┘
-└──────┘
+```text
+A Circular Doubly Linked List with a Dummy Sentinel Node completely eliminates all edge cases.tEmpty List (Sentinel points to itself):┌──────────────────────┐▼                      │┌──────┐                  ││ Head │ ─── next/prev ───┘└──────┘
+Populated List with 2 Elements:┌──────┐  next  ┌──────┐  next  ┌──────┐  next│ Head │ ─────► │ Elm1 │ ─────► │ Elm2 │ ─────┐│ (Dum)│ ◄───── │      │ ◄───── │      │ ◄───┘└──────┘  prev  └──────┘  prev  └──────┘  prev▲                                         │└─────────────────────────────────────────┘
+```
 
 Populated List with 2 Elements:
+```text
 ┌──────┐ next ┌──────┐ next ┌──────┐ next
 │ Head │ ─────► │ Elm1 │ ─────► │ Elm2 │ ─────┐
 │ (Dum)│ ◄───── │ │ ◄───── │ │ ◄───┘
 └──────┘ prev └──────┘ prev └──────┘ prev
 ▲ │
 └─────────────────────────────────────────┘
+```
 
 #### Core Operations (Zero Branching, \$O(1)\$ Time)
 

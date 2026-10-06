@@ -25,27 +25,19 @@ As relational databases (PostgreSQL, MySQL) scale to tens of millions of records
 
 - **Table Bloat & Index Degradation**: B-Tree indexes on single tables exceeding 100M+ rows no longer fit into RAM (`shared_buffers`), resulting in random disk seeks.
 
+```text
 ┌────────────────────────────────────── Database Scaling Evolution ──────────────────────────────────────┐
-
 │                                                                                                        │
-
 │  Phase 1: Connection Pooling (PgBouncer / RDS Proxy) ──► Reuses small connection pools (e.g. 50 conns) │
-
 │                                                                                                        │
-
 │  Phase 2: Read/Write Splitting ──► 1 Primary (Writes) + N Read Replicas (WAL Streaming Replication)    │
-
 │                                                                                                        │
-
 │  Phase 3: Declarative Partitioning ──► Splits single huge table into Range/Hash partitions in 1 DB     │
-
 │                                                                                                        │
-
 │  Phase 4: Horizontal Sharding ──► Distributes distinct rows across multiple independent physical DBs   │
-
 │                                                                                                        │
-
 └────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. Connection Pooling Architecture (PgBouncer & AWS RDS Proxy)
 
@@ -67,13 +59,18 @@ Connection poolers act as a high-performance proxy layer that maintains a persis
 
 In an asynchronous replication topology, the Primary server writes changes to the **Write-Ahead Log (WAL)** and streams them to Read Replicas.
 
+```text
 ┌─────────────────┐       Writes (INSERT/UPDATE/DELETE)       ┌────────────────────────┐
-
 │ App Server /    │ ────────────────────────────────────────► │   Primary PostgreSQL   │
-
 │ Prisma Client   │                                           │       (Read/Write)     │
-
 └────────┬────────┘                                           └───────────┬────────────┘
+         │                                                                │ WAL Streaming
+         │                Reads (SELECT)                                  ▼ (Async Replication)
+         │ ──────────────────────────────────────────────────► ┌────────────────────────┐
+         │                                                     │  Read Replica 1 & 2    │
+         │                                                     │       (Read-Only)      │
+         └─────────────────────────────────────────────────────┴────────────────────────┘
+```
 
 ```typescript
          │                                                                │ WAL Streaming

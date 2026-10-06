@@ -132,21 +132,16 @@ Call Stack:
 
 main() [setjmp saved: RSP_0, RBP_0, RIP_0]
 
-│
-
-└──► parse_request()
-
-│
-
-└──► decode_token()
-
-│
-
-└──► longjmp(env, ERR_CORRUPT)
-
-│
-
-│ [CPU Registers Overwritten: RSP=RSP_0, RBP=RBP_0, RIP=RIP_0]
+```text
+  │
+  └──► parse_request()
+         │
+         └──► decode_token()
+                │
+                └──► longjmp(env, ERR_CORRUPT)
+                       │
+                       │ [CPU Registers Overwritten: RSP=RSP_0, RBP=RBP_0, RIP=RIP_0]
+```
 
 ▼
 

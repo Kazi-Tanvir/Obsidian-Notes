@@ -25,45 +25,28 @@ Modern application search has evolved past basic SQL `LIKE '%keyword%'` queries:
 - **Semantic Vector Search (Embeddings / ANN)**: Encodes text into high-dimensional vector representations (e.g. 1536-dimensional float arrays from OpenAI `text-embedding-3-small` or Cohere). Matches conceptual similarity (e.g. "comfy winter clothing" matches "wool sweater"), but struggles with exact SKU numbers or rare keywords.
 - **Hybrid Search**: Fuses sparse lexical scores (BM25) with dense semantic vector distances using algorithms like **Reciprocal Rank Fusion (RRF)**.
 
+```text
 ┌────────────────────────────────────── Hybrid Search Architecture ──────────────────────────────────────┐
-
 │                                                                                                        │
-
 │  User Search Query: "lightweight waterproof hiking jacket"                                             │
-
 │  ┌───────────────────────────────────────────────┬──────────────────────────────────────────────────┐  │
-
 │  │                                               │                                                  │  │
-
 │  ▼                                               ▼                                                  ▼  │
-
 │  Lexical Pipeline (Elasticsearch / BM25)         Vector Pipeline (pgvector / HNSW)                     │  │
-
 │  • Tokenization & Stemming: ["lightweight", ...] • Generate Embedding (1536d Float32 Array)        │  │
-
 │  • Matches exact product specs and keywords      • Approximate Nearest Neighbor (ANN) Cosine Search │  │
-
 │  │                                               │                                                  │  │
-
 │  └───────────────────────┬───────────────────────┴──────────────────────────┬───────────────────────┘  │
-
 │                          │ Top 50 Ranked Lexical Results                    │ Top 50 Ranked Vector Results     │
-
 │                          ▼                                                  ▼                                  │
-
 │                 ┌────────────────────────────────────────────────────────────────────┐                         │
-
-│                 │ Reciprocal Rank Fusion (RRF) Scorer: RRF(d) \= Σ 1 / (60 \+ rank(d)) │                         │
-
+│                 │ Reciprocal Rank Fusion (RRF) Scorer: RRF(d) = Σ 1 / (60 + rank(d)) │                         │
 │                 └─────────────────────────────────┬──────────────────────────────────┘                         │
-
 │                                                   ▼                                                            │
-
 │                                       Unified Final Ranked Top 20                                              │
-
 │                                                                                                        │
-
 └────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ---
 

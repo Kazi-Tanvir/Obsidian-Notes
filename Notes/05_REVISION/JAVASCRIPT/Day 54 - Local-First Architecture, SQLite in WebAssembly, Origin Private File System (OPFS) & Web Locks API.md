@@ -33,29 +33,20 @@ For two decades, web applications operated on the **Cloud-First Thin-Client mode
 
   4.  **User Data Ownership**: Data lives in durable, local storage on the user's hardware.
 
+```text
 ┌────────────────────────────────────── Cloud-First vs. Local-First ──────────────────────────────────────┐
-
-│ │
-
-│ Cloud-First (Traditional SPA) ⚠️: │
-
-│ UI Event ──► Network Request (HTTP/RPC) ──► Central Cloud DB ──► Network Response ──► UI Updates │
-
-│ • High latency (50-300ms), spinner fatigue, breaks completely when offline. │
-
-│ │
-
-│ Local-First (Modern Reactive Client) 🚀: │
-
-│ UI Event ──► Local Wasm SQLite / OPFS ──► Instant UI Update (<1ms!) ⚡ │
-
-│ │ │
-
-│ └──► Asynchronous Background Sync ──► Cloud Edge Replica │
-
-│ │
-
+│                                                                                                         │
+│  Cloud-First (Traditional SPA) ⚠️:                                                                      │
+│  UI Event ──► Network Request (HTTP/RPC) ──► Central Cloud DB ──► Network Response ──► UI Updates       │
+│  • High latency (50-300ms), spinner fatigue, breaks completely when offline.                           │
+│                                                                                                         │
+│  Local-First (Modern Reactive Client) 🚀:                                                               │
+│  UI Event ──► Local Wasm SQLite / OPFS ──► Instant UI Update (<1ms!) ⚡                                 │
+│                     │                                                                                   │
+│                     └──► Asynchronous Background Sync ──► Cloud Edge Replica                            │
+│                                                                                                         │
 └─────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. The Storage Engine Bottleneck: Why IndexedDB Fails & OPFS Succeeds
 
@@ -67,35 +58,23 @@ Historically, client-side browser storage relied on **IndexedDB**:
 
 - **FileSystemSyncAccessHandle**: On dedicated **Web Workers**, OPFS provides synchronous in-place byte operations (read(), write(), flush(), truncate()). It completely bypasses the main thread's asynchronous message queue, granting WebAssembly near-native NVMe disk I/O performance!
 
+```text
 ┌────────────────────────────────────── OPFS High-Speed Architecture ──────────────────────────────────────┐
-
-│ │
-
-│ Web Worker Thread (Off-Main-Thread Sandbox) │
-
-│ ┌──────────────────────────────────────────────────────────────────────────────────────────────────┐ │
-
-│ │ SQLite / PostgreSQL (PGlite) compiled to WebAssembly │ │
-
-│ │ │ │
-
-│ │ Virtual File System (VFS) Layer (C/Wasm POSIX Calls) │ │
-
-│ └───────────────────────────────────┬──────────────────────────────────────────────────────────────┘ │
-
-│ │ Synchronous read() / write() (Raw Binary Pointers) │
-
-│ ▼ │
-
-│ FileSystemSyncAccessHandle (OPFS File Descriptor) │
-
-│ • Executes synchronous in-place byte modifications on NVMe disk! │
-
-│ • 100x faster than IndexedDB transactions! ⚡ │
-
-│ │
-
+│                                                                                                          │
+│  Web Worker Thread (Off-Main-Thread Sandbox)                                                             │
+│  ┌──────────────────────────────────────────────────────────────────────────────────────────────────┐    │
+│  │ SQLite / PostgreSQL (PGlite) compiled to WebAssembly                                             │    │
+│  │                                                                                                  │    │
+│  │  Virtual File System (VFS) Layer (C/Wasm POSIX Calls)                                            │    │
+│  └───────────────────────────────────┬──────────────────────────────────────────────────────────────┘    │
+│                                      │ Synchronous read() / write() (Raw Binary Pointers)                │
+│                                      ▼                                                                   │
+│  FileSystemSyncAccessHandle (OPFS File Descriptor)                                                       │
+│  • Executes synchronous in-place byte modifications on NVMe disk!                                        │
+│  • 100x faster than IndexedDB transactions! ⚡                                                           │
+│                                                                                                          │
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 3. Native OPFS Worker Access Handles
 

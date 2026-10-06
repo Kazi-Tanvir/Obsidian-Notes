@@ -74,32 +74,21 @@ When you compile a multi-file project with gcc -c main.c -o main.o and gcc -c ma
 
  main.o Merged Executable (ELF):
 
-┌─────────────────────────┐ ┌─────────────────────────┐
-
-│ .text: │ │ .text: │
-
-│ call 0x00000000 [?] │ ───┐ │ main() starts 0x401000 │
-
-│ .rela.text: │ │ │ call 0x401120 ─────────┼──┐
-
-│ Fixup: math_add @ 0x14 │ │ │ │ │
-
-└─────────────────────────┘ │ Linker (ld) │ math_add() @ 0x401120 ◄┼──┘
-
-math.o ├── Resolves Symbols │ │
-
-┌─────────────────────────┐ │ & Relocates Addrs
-└─────────────────────────┘
-
-│ .text: │ │
-
-│ math_add: [machine code│ ───┘
-
-│ .symtab: │
-
-│ math_add (GLOBAL) │
-
-└─────────────────────────┘
+```text
+  ┌─────────────────────────┐                               ┌─────────────────────────┐
+  │ .text:                  │                               │ .text:                  │
+  │  call 0x00000000 [?]    │ ───┐                          │  main() starts 0x401000 │
+  │ .rela.text:             │    │                          │  call 0x401120 ─────────┼──┐
+  │  Fixup: math_add @ 0x14 │    │                          │                         │  │
+  └─────────────────────────┘    │  Linker (ld)             │  math_add() @ 0x401120 ◄┼──┘
+       math.o                    ├── Resolves Symbols       │                         │
+  ┌─────────────────────────┐    │   &amp; Relocates Addrs      └─────────────────────────┘
+  │ .text:                  │    │
+  │  math_add: [machine code│ ───┘
+  │ .symtab:                │
+  │  math_add (GLOBAL)      │
+  └─────────────────────────┘
+```
 
 
 
@@ -161,23 +150,17 @@ Set up a modular, multi-file C architecture with proper header hygiene, internal
 
 project_root/
 
+```text
 ├── Makefile
-
 ├── include/
-
-│ ├── common.h
-
-│ ├── math_engine.h
-
-│ └── logger.h
-
+│   ├── common.h
+│   ├── math_engine.h
+│   └── logger.h
 └── src/
-
-├── math_engine.c
-
-├── logger.c
-
-└── main.c
+    ├── math_engine.c
+    ├── logger.c
+    └── main.c
+```
 
 
 

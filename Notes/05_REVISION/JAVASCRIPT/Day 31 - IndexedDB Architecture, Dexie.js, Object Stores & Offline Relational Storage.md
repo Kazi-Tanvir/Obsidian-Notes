@@ -20,51 +20,36 @@ While `localStorage` and `sessionStorage` provide simple synchronous key-value s
 
 **IndexedDB** is an asynchronous, transactional, object-oriented database built into the browser. It supports multi-gigabyte storage (governed by browser disk quotas), structured cloning (objects, Arrays, `Blob`, `ArrayBuffer`, `File`, `CryptoKey`), compound indexing, and transactional guarantees.
 
+```text
 ┌────────────────────────────────────── Browser Storage Comparison ──────────────────────────────────────┐
-
 │                                                                                                        │
-
 │  Storage API     │ Execution Model │ Capacity       │ Data Types       │ Indexing / Transactions      │
-
 │ ─────────────────┼─────────────────┼────────────────┼──────────────────┼───────────────────────────── │
-
 │  localStorage    │ Synchronous (UI)│ ~5 MB          │ Strings only     │ None / No transactions       │
-
 │  Cache Storage   │ Asynchronous    │ % of Disk (GB) │ Request/Response │ URL matching only            │
-
 │  IndexedDB       │ Asynchronous    │ % of Disk (GB) │ Structured Clone │ Multi-Index, ACID Transact.  │
-
 │                                                                                                        │
-
 └────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. Core IndexedDB Architecture & Database Lifecycle
 
 IndexedDB operates on **Object Stores** (analogous to tables in SQL or collections in MongoDB) containing records indexed by primary keys.
 
+```text
 ┌────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-
 │                                      IndexedDB Database: "AppDB" (v2)                                  │
-
 │                                                                                                        │
-
 │  ┌──────────────────────────────────────────────────────────────────────────────────────────────────┐  │
-
 │  │ Object Store: "documents" (keyPath: "id", autoIncrement: false)                                  │  │
-
 │  │                                                                                                  │  │
-
 │  │  Indexes:                                                                                        │  │
-
 │  │  • "by_folder" (keyPath: "folderId", unique: false)                                              │  │
-
 │  │  • "by_tags"   (keyPath: "tags", multiEntry: true) ──► Indexes individual array items!           │  │
-
 │  │  • "by_updated"(keyPath: "updatedAt", unique: false)                                             │  │
-
 │  └──────────────────────────────────────────────────────────────────────────────────────────────────┘  │
-
 └────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 #### Lifecycle & Schema Migrations (`onupgradeneeded`):
 

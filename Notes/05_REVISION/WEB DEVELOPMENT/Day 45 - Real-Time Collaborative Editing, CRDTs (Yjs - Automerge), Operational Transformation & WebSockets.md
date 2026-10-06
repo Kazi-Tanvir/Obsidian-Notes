@@ -27,21 +27,23 @@ Enabling multiple users to type, edit, and draw in real-time across high-latency
 
 - **Offline Resynchronization**: A user edits a document offline on a flight for 3 hours, then reconnects to a document that has undergone hundreds of peer modifications.
 
+```text
 ┌────────────────────────────────────── OT vs. CRDT Architecture ──────────────────────────────────────┐
-│ │
-│ Operational Transformation (OT) - Centralized Server Model ⚠️ │
-│ • Client sends raw index operations: Insert(pos: 5, char: 'A'). │
-│ • Requires a central authoritative server to transform operations against all concurrent edits. │
-│ • Severe weakness: High computational complexity (\$O(N^2)\$ transformation matrix), │
-│ fails in peer-to-peer networks, fragile offline reconciliation. │
-│ │
-│ Conflict-Free Replicated Data Types (CRDT) - Decentralized Math 🚀 │
-│ • Data structures designed mathematically so that any two replicas that have received the same set │
-│ of updates in ANY order are guaranteed to arrive at the EXACT same state! │
-│ • Strong Eventual Consistency (SEC): Operations are Commutative, Associative, and Idempotent. │
-│ • Functions peer-to-peer, offline-first, client-server, and scales seamlessly. │
-│ │
+│                                                                                                       │
+│  Operational Transformation (OT) - Centralized Server Model ⚠️                                        │
+│  • Client sends raw index operations: Insert(pos: 5, char: 'A').                                      │
+│  • Requires a central authoritative server to transform operations against all concurrent edits.      │
+│  • Severe weakness: High computational complexity ($O(N^2)$ transformation matrix),                   │
+│    fails in peer-to-peer networks, fragile offline reconciliation.                                    │
+│                                                                                                       │
+│  Conflict-Free Replicated Data Types (CRDT) - Decentralized Math 🚀                                   │
+│  • Data structures designed mathematically so that any two replicas that have received the same set  │
+│    of updates in ANY order are guaranteed to arrive at the EXACT same state!                         │
+│  • Strong Eventual Consistency (SEC): Operations are Commutative, Associative, and Idempotent.        │
+│  • Functions peer-to-peer, offline-first, client-server, and scales seamlessly.                      │
+│                                                                                                       │
 └───────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. Anatomy of a Sequence CRDT (Yjs / YATA Algorithm)
 
@@ -53,41 +55,26 @@ Modern collaborative text systems rely on Sequence CRDTs. **Yjs** implements the
 
 3.  **Deterministic Conflict Resolution**: When two users insert a character at the exact same location, the tie is broken deterministically by comparing client IDs (client_A < client_B), ensuring mathematical convergence across all nodes without a central server.
 
+```text
 ┌────────────────────────────────────── Yjs State Vector Synchronization ──────────────────────────────────────┐
-
-│ │
-
-│ Peer A (Client 1) Peer B (Client 2) │
-
-│ ┌─────────────────────────────────┐ ┌─────────────────────────┐ │
-
-│ │ State: Clocks { 1: 15, 2: 8 } │ │ State: Clocks { 1: 10 } │ │
-
-│ └────────────────┬────────────────┘ └────────────┬────────────┘ │
-
-│ │ │ │
-
-│ │ 1. Step 1: Send State Vector [ Client 2 has processed up to clock 10 ] │ │
-
-│ │ ◄────────────────────────────────────────────────────────────────────────┤ │
-
-│ │ │ │
-
-│ │ 2. Step 2: Compute Delta (Send only updates for Client 1 > 10 & Client 2)│ │
-
-│ ├─────────────────────────────────────────────────────────────────────────►│ │
-
-│ │ Binary Encoded Update Payload │ │
-
-│ │ │ │
-
-│ ▼ ▼ │
-
-│ [ Both Peers Converge to Identical Cryptographic State in O(N) Time! ⚡ ] │
-
-│ │
-
+│                                                                                                              │
+│  Peer A (Client 1)                                                               Peer B (Client 2)           │
+│  ┌─────────────────────────────────┐                                            ┌─────────────────────────┐  │
+│  │ State: Clocks { 1: 15, 2: 8 }   │                                            │ State: Clocks { 1: 10 } │  │
+│  └────────────────┬────────────────┘                                            └────────────┬────────────┘  │
+│                   │                                                                          │               │
+│                   │ 1. Step 1: Send State Vector [ Client 2 has processed up to clock 10 ]   │               │
+│                   │ ◄────────────────────────────────────────────────────────────────────────┤               │
+│                   │                                                                          │               │
+│                   │ 2. Step 2: Compute Delta (Send only updates for Client 1 > 10 & Client 2)│               │
+│                   ├─────────────────────────────────────────────────────────────────────────►│               │
+│                   │    Binary Encoded Update Payload                                         │               │
+│                   │                                                                          │               │
+│                   ▼                                                                          ▼               │
+│             [ Both Peers Converge to Identical Cryptographic State in O(N) Time! ⚡ ]                        │
+│                                                                                                              │
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 3. Production Node.js WebSocket CRDT Sync Server
 

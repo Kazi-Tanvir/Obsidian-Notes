@@ -29,39 +29,25 @@ When organizations transition from REST to GraphQL, they frequently construct a 
 
 **Apollo Federation 2** decomposes the monolithic schema into autonomous, independently deployable **Subgraphs** owned by individual microservice teams, unified by an **Apollo Router / Gateway** into a single cohesive **Supergraph**:
 
+```text
 ┌────────────────────────────────────── Apollo Federation 2 Architecture ──────────────────────────────────────┐
-
-│ │
-
-│ Client Application (Mobile / Browser / Web) │
-
-│ │ │
-
-│ ▼ HTTP POST (Single Unified GraphQL Supergraph Query) │
-
-│ [ Apollo Router (Rust Engine) ] │
-
-│ • Validates incoming query against composed Supergraph Schema │
-
-│ • Compiles optimized Query Plan (Parallel DAG execution across subgraphs) │
-
-│ │ │
-
-│ ├───────────────────────────────┬──────────────────────────────────┬──────────────────────────────────┤
-
-│ ▼ ▼ ▼ ▼
-
-│ [ Subgraph: Users ] [ Subgraph: Products ] [ Subgraph: Inventory ] [ Subgraph: Reviews ] │
-
-│ • Owns `User` entity • Owns `Product` entity • Extends `Product` • Extends `Product` │
-
-│ • Resolves profile, auth • Resolves SKU, title • Resolves stock, shipping • Resolves ratings │
-
-│ • Service A (Node.js/Prisma) • Service B (Fastify/SQL) • Service C (Go/gRPC) • Service D (Python) │
-
-│ │
-
+│                                                                                                              │
+│   Client Application (Mobile / Browser / Web)                                                                │
+│        │                                                                                                     │
+│        ▼ HTTP POST (Single Unified GraphQL Supergraph Query)                                                 │
+│   [ Apollo Router (Rust Engine) ]                                                                            │
+│   • Validates incoming query against composed Supergraph Schema                                              │
+│   • Compiles optimized Query Plan (Parallel DAG execution across subgraphs)                                  │
+│        │                                                                                                     │
+│        ├───────────────────────────────┬──────────────────────────────────┬──────────────────────────────────┤
+│        ▼                               ▼                                  ▼                                  ▼
+│   [ Subgraph: Users ]          [ Subgraph: Products ]     [ Subgraph: Inventory ]    [ Subgraph: Reviews ]   │
+│   • Owns `User` entity         • Owns `Product` entity    • Extends `Product`        • Extends `Product`     │
+│   • Resolves profile, auth     • Resolves SKU, title      • Resolves stock, shipping • Resolves ratings      │
+│   • Service A (Node.js/Prisma) • Service B (Fastify/SQL)  • Service C (Go/gRPC)      • Service D (Python)    │
+│                                                                                                              │
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. Core Federation 2 Directives
 

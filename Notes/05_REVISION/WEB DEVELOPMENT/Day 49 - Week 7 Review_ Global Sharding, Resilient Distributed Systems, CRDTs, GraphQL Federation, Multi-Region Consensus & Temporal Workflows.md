@@ -18,28 +18,30 @@ tags:
 
 Week 7 established the foundations of planet-scale distributed systems, fault tolerance, multi-region data sovereignty, and durable execution engines. As Senior Tech Leads, we architect systems that operate seamlessly across unreliable networks and physical hardware limits.
 
-┌────────────────────────────────────── Week 7 Distributed Architecture Map ──────────────────────────────────────┐  
-│                                                                                                                 │  
-│  Data Partitioning & Planetary Consensus:                                                                       │  
-│  • Database Sharding (Day 43): Consistent hashing rings, virtual vnodes, zero-downtime resharding pipelines.    │  
-│  • Multi-Region Distributed SQL (Day 47): Multi-Raft consensus ranges (CockroachDB), Hybrid Logical Clocks      │  
-│    (HLC), regional-by-row data locality for GDPR compliance.                                                    │  
-│                                                                                                                 │  
-│  Resilience & Self-Healing Primitives:                                                                          │  
-│  • Resilient API Consumption (Day 44): Three-state Circuit Breakers (Closed/Open/Half-Open), bulkhead thread/    │  
-│    connection pools, exponential backoff with full jitter to avoid thundering herds.                            │  
-│                                                                                                                 │  
-│  Real-Time Collaborative State & Distributed API Composition:                                                   │  
-│  • CRDTs & Collaborative Editing (Day 45): Conflict-Free Replicated Data Types (Yjs/Automerge), mathematical    │  
-│    strong eventual consistency (commutative, associative, idempotent), WebSockets sync.                       │  
-│  • GraphQL Federation 2.0 (Day 46): Subgraphs, entity composition via @key, @provides, @requires, Apollo        │  
-│    Gateway query planner executing parallel fetch graphs.                                                       │  
-│                                                                                                                 │  
-│  Durable Orchestration & Sagas:                                                                                 │  
-│  • Durable Execution Engines (Day 48): Temporal.io, Event History Replay, strict workflow determinism,          │  
-│    non-deterministic activities, durable timers (sleep), Signals, Queries, and automated Saga rollbacks.        │  
-│                                                                                                                 │  
-└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘  
+```text
+┌────────────────────────────────────── Week 7 Distributed Architecture Map ──────────────────────────────────────┐
+│                                                                                                                 │
+│  Data Partitioning & Planetary Consensus:                                                                       │
+│  • Database Sharding (Day 43): Consistent hashing rings, virtual vnodes, zero-downtime resharding pipelines.    │
+│  • Multi-Region Distributed SQL (Day 47): Multi-Raft consensus ranges (CockroachDB), Hybrid Logical Clocks      │
+│    (HLC), regional-by-row data locality for GDPR compliance.                                                    │
+│                                                                                                                 │
+│  Resilience & Self-Healing Primitives:                                                                          │
+│  • Resilient API Consumption (Day 44): Three-state Circuit Breakers (Closed/Open/Half-Open), bulkhead thread/    │
+│    connection pools, exponential backoff with full jitter to avoid thundering herds.                            │
+│                                                                                                                 │
+│  Real-Time Collaborative State & Distributed API Composition:                                                   │
+│  • CRDTs & Collaborative Editing (Day 45): Conflict-Free Replicated Data Types (Yjs/Automerge), mathematical    │
+│    strong eventual consistency (commutative, associative, idempotent), WebSockets sync.                       │
+│  • GraphQL Federation 2.0 (Day 46): Subgraphs, entity composition via @key, @provides, @requires, Apollo        │
+│    Gateway query planner executing parallel fetch graphs.                                                       │
+│                                                                                                                 │
+│  Durable Orchestration & Sagas:                                                                                 │
+│  • Durable Execution Engines (Day 48): Temporal.io, Event History Replay, strict workflow determinism,          │
+│    non-deterministic activities, durable timers (sleep), Signals, Queries, and automated Saga rollbacks.        │
+│                                                                                                                 │
+└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 ---
 
 ### 1\. Consistent Hashing & Re-Sharding Pipelines (Day 43)

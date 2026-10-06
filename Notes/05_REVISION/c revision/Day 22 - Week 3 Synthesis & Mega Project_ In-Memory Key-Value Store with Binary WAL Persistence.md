@@ -71,9 +71,10 @@ To achieve ACID Durability without sacrificing performance:
 
 3.  **Recovery on Startup:** If the system crashes, the database replays the WAL from byte 0 to rebuild the exact in-memory hash index up to the last committed transaction.
 
-t\ Client Mutation: SET key="user:1" value="Alice"\ │\ ├───────────────────────────────────────────────────────┐\ ▼ ▼
-
-1.  Append to WAL on Disk (Sequential): 2. Apply to In-Memory Hash Table:\ ┌────────────────────────────────────────┐ ┌─────────────────────────────┐\ │ Header: LSN=1, Op=SET, CRC=0x3B8F\... │ │ Bucket [3]: "user:1" -> "Alice" │\ │ Payload: Key="user:1", Val="Alice" │ └─────────────────────────────┘\ └────────────────────────────────────────┘\ │\ ▼
+```text
+tClient Mutation: SET key="user:1" value="Alice"│├───────────────────────────────────────────────────────┐▼                                                       ▼
+Append to WAL on Disk (Sequential):            2. Apply to In-Memory Hash Table:┌────────────────────────────────────────┐        ┌─────────────────────────────┐│ Header: LSN=1, Op=SET, CRC=0x3B8F...   │        │ Bucket [3]: "user:1" -> "Alice" ││ Payload: Key="user:1", Val="Alice"     │        └─────────────────────────────┘└────────────────────────────────────────┘│▼
+```
 
 2.  Call fflush() & fsync() -> Acknowledge to Client
 
@@ -119,350 +120,189 @@ Build a database snapshot engine that takes an in-memory dictionary, serializes 
 
 ```c
 #include <stdio.h>
-
 #include <stdlib.h>
-
 #include <stdint.h>
-
 #include <stdbool.h>
-
 #include <string.h>
-
 #include <unistd.h>
-
 #include <assert.h>
-
 typedef struct {
-
 char key[64];
-
 char val[64];
-
 } Record;
-
 #define MAGIC_SNAP 0x534E4150 // "SNAP"
-
 bool snapshot_export_atomic(const char *target_filename, const Record
 *records, size_t count) {
-
 char temp_filename[300];
-
 snprintf(temp_filename, sizeof(temp_filename), "%s.tmp.%d",
 target_filename, getpid());
-
 FILE *fp = fopen(temp_filename, "wb");
-
 if (!fp) return false;
-
 // 1. Write Header
-
 uint32_t magic = MAGIC_SNAP;
-
 uint32_t rec_count = (uint32_t)count;
-
 if (fwrite(&magic, sizeof(magic), 1, fp) != 1 ||
     fwrite(&rec_count, sizeof(rec_count), 1, fp) != 1) {
-
 fclose(fp);
-
 unlink(temp_filename);
-
 return false;
-
 }
-
 // 2. Write Records
-
 if (fwrite(records, sizeof(Record), count, fp) != count) {
-
 fclose(fp);
-
 unlink(temp_filename);
-
 return false;
-
 }
-
 // 3. Flush userspace buffers & force physical hardware disk commit
-
 fflush(fp);
-
 int fd = fileno(fp);
-
 if (fsync(fd) != 0) {
-
 fclose(fp);
-
 unlink(temp_filename);
-
 return false;
-
 }
-
 fclose(fp);
-
 // 4. Atomic directory metadata replacement
-
 if (rename(temp_filename, target_filename) != 0) {
-
 unlink(temp_filename);
-
 return false;
-
 }
-
 return true;
-
 }
-
 bool snapshot_import(const char *target_filename, Record
 **out_records, size_t *out_count) {
-
 FILE *fp = fopen(target_filename, "rb");
-
 if (!fp) return false;
-
 uint32_t magic = 0, rec_count = 0;
-
 if (fread(&magic, sizeof(magic), 1, fp) != 1 || magic != MAGIC_SNAP) {
-
 fclose(fp);
-
 return false;
-
 }
-
 if (fread(&rec_count, sizeof(rec_count), 1, fp) != 1) {
-
 fclose(fp);
-
 return false;
-
 }
-
 Record *recs = (Record *)malloc(rec_count * sizeof(Record));
-
 if (fread(recs, sizeof(Record), rec_count, fp) != rec_count) {
-
 free(recs);
-
 fclose(fp);
-
 return false;
-
 }
-
 fclose(fp);
-
 *out_records = recs;
-
 *out_count = (size_t)rec_count;
-
 return true;
-
 }
-
 int main(void) {
-
 const char *snap_file = "production.db";
-
 Record table[2] = {
-
 { "api_key", "secret_live_9981" },
-
 { "timeout", "5000" }
-
 };
-
 printf("=== Testing Atomic Database Snapshot Engine ===\\n");
-
 bool ok = snapshot_export_atomic(snap_file, table, 2);
-
 assert(ok);
-
 printf("[1] Atomically exported snapshot to '%s' with fsync
 commit.\\n", snap_file);
-
 Record *loaded = NULL;
-
 size_t loaded_count = 0;
-
 ok = snapshot_import(snap_file, &loaded, &loaded_count);
-
 assert(ok && loaded_count == 2);
-
 printf("[2] Imported %zu records:\\n", loaded_count);
-
 for (size_t i = 0; i < loaded_count; i++) {
-
 printf(" Key: %-10s => Val: %s\\n", loaded[i].key,
 loaded[i].val);
-
 }
-
 free(loaded);
-
 unlink(snap_file);
-
 printf("Snapshot test completed with 0 leaks!\\n\\n");
-
 return 0;
-
 }
-
 # 4. Error Handling & Defensive Programming Challenge
-
 ---
-
 ## Scenario: The Torn WAL Frame & Corrupted Record Replay
-
 Examine the following buggy recovery function:#include <stdio.h>
-
 #include <stdlib.h>
-
 #include <stdint.h>
-
 struct RawRecord {
-
 uint32_t key_len;
-
 uint32_t val_len;
-
 };
-
 // BUGGY IMPLEMENTATION
-
 void recover_wal_faulty(FILE *wal_fp) {
-
 struct RawRecord hdr;
-
 // VULNERABILITY 1: Unchecked payload allocation & integer addition
 overflow!
-
 // VULNERABILITY 2: If crash caused partial write, fread reads partial
 garbage,
-
 // and code assumes it is a valid transaction!
-
 while (fread(&hdr, sizeof(hdr), 1, wal_fp) == 1) {
-
 char *key = (char *)malloc(hdr.key_len + 1);
-
 char *val = (char *)malloc(hdr.val_len + 1);
-
 fread(key, 1, hdr.key_len, wal_fp); // Return value ignored!
-
 fread(val, 1, hdr.val_len, wal_fp); // Return value ignored!
-
 key[hdr.key_len] = '\\0';
-
 val[hdr.val_len] = '\\0';
-
 printf("Recovered: %s = %s\\n", key, val);
-
 free(key);
-
 free(val);
-
 }
-
 }
-
 ## Analysis of Vulnerabilities:
-
 1.  **Unvalidated Framing (Torn Record Bug):** If the OS crashed
     mid-write, hdr might be present while val is truncated. Ignoring the
     return value of fread populates strings with stale uninitialized
     heap memory.
-
 2.  **Missing Checksum Protection:** Without CRC32 verification, random
     bit-rot or partially written payloads are accepted as valid database
     mutations.
-
 3.  **Memory Allocation Denial of Service:** If the length fields are
     corrupted into large values (e.g. 3 GB), malloc() will fail or
     exhaust system RAM.
-
 ## Defensive Fix:
-
 #include <stdio.h>
-
 #include <stdlib.h>
-
 #include <stdint.h>
-
 #include <stdbool.h>
-
 #define MAX_REASONABLE_KEY_LEN (1024)
-
 #define MAX_REASONABLE_VAL_LEN (64 * 1024)
-
 bool recover_record_safe(FILE *wal_fp, uint32_t expected_crc, char
 **out_k, char **out_v, uint32_t klen, uint32_t vlen) {
-
 if (klen > MAX_REASONABLE_KEY_LEN || vlen > MAX_REASONABLE_VAL_LEN)
 {
-
 return false; // Reject corrupt frame
-
 }
-
 char *k = (char *)malloc(klen + 1);
-
 char *v = (char *)malloc(vlen + 1);
-
 if (!k || !v) { free(k); free(v); return false; }
-
 if (fread(k, 1, klen, wal_fp) != klen ||
-
 fread(v, 1, vlen, wal_fp) != vlen) {
-
 // Torn write detected: abort cleanly
-
 free(k);
-
 free(v);
-
 return false;
-
 }
-
 k[klen] = '\\0';
-
 v[vlen] = '\\0';
-
 *out_k = k;
-
 *out_v = v;
-
 return true;
-
 }
-
 # 5. WEEKLY MEGA PROJECT (Week 3 Capstone)
-
 ---
-
 ## Project Title: High-Performance In-Memory Key-Value Store with Binary WAL Persistence & Crash Recovery (c_kvdb)
-
 ### Architectural Overview
-
 Build an embedded, durable Key-Value database in C combining:
-
 1.  **In-Memory Hash Index:** An open-addressing Robin Hood Hash Table
     for \$O(1)\$ lookups in RAM.
-
 2.  **Binary Write-Ahead Log (WAL):** Every mutation (OP_SET, OP_DEL) is
     serialized with a CRC32 checksum, flushed, and synchronized to disk
     before modifying RAM.
-
 3.  **Automated Crash Recovery Engine:** On startup, replays all
     committed log entries sequentially and detects/isolates any torn or
     corrupted tail records.
-
 4.  **Log Compaction / Snapshotting:** Truncates the WAL once a clean
     memory snapshot is synchronized.
-
 t
 ┌────────────────────────────────────────────────────────────────────────┐
 │ KVStore Engine (c_kvdb) │
@@ -483,7 +323,6 @@ t
 │ kv_del(db, key) ──► WAL Tombstone + fsync ──► Remove from Hash │
 │ kv_recover(db) ──► Sequential WAL scan & replay on startup │
 └────────────────────────────────────────────────────────────────────────┘
-
 #### Complete Modular Implementation (`c_kvdb.c`)
 ```c
 

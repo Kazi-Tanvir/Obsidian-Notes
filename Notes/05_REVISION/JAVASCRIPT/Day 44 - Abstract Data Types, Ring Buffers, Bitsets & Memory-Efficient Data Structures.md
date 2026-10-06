@@ -35,27 +35,19 @@ JavaScript developers often treat arrays ([]) and objects ({}) as lightweight pr
 
 3.  **Array Memory Bloat**: Storing 1,000,000 numbers in a plain JavaScript array (const arr = []) consumes approximately **32 MB** of heap memory due to object wrapper allocations. The exact same data stored in an Int32Array consumes precisely **4 MB** (an \$8\\times\$ reduction) with continuous cache-line locality.
 
+```text
 ┌────────────────────────────────────── V8 Memory & Cache Line Locality ──────────────────────────────────────┐
-
-│ │
-
-│ Array of Structs (AoS) - High Cache Misses ⚠️ │
-
-│ [{ x: 1, y: 2 }, { x: 3, y: 4 }, \...] ──► Array of pointers to heap objects scattered across memory. │
-
-│ CPU L1/L2 cache prefetcher misses adjacent properties! │
-
-│ │
-
-│ Struct of Arrays (SoA) - Cache-Friendly Contiguous TypedArrays 🚀 │
-
-│ Float32Array X = [1, 3, 5, 7, \...] ──► Contiguous 32-bit floats in physical RAM. │
-
-│ Float32Array Y = [2, 4, 6, 8, \...] ──► Single CPU cache-line fetch loads 16 consecutive coordinates! │
-
-│ │
-
+│                                                                                                              │
+│  Array of Structs (AoS) - High Cache Misses ⚠️                                                               │
+│  [{ x: 1, y: 2 }, { x: 3, y: 4 }, ...] ──► Array of pointers to heap objects scattered across memory.       │
+│                                            CPU L1/L2 cache prefetcher misses adjacent properties!            │
+│                                                                                                              │
+│  Struct of Arrays (SoA) - Cache-Friendly Contiguous TypedArrays 🚀                                           │
+│  Float32Array X = [1, 3, 5, 7, ...] ──► Contiguous 32-bit floats in physical RAM.                            │
+│  Float32Array Y = [2, 4, 6, 8, ...] ──► Single CPU cache-line fetch loads 16 consecutive coordinates!        │
+│                                                                                                              │
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. High-Performance Ring Buffers (Circular Queues)
 
@@ -185,19 +177,25 @@ userPerms ^= PERM_EXECUTE; // Toggles execute on/off
 
 PACKED_SMI_ELEMENTS (Pure integers)
 
-│ (Add float e.g. arr.push(3.14))
+```text
+        │ (Add float e.g. arr.push(3.14))
+```
 
 ▼
 
 PACKED_DOUBLE_ELEMENTS (Unboxed floats)
 
-│ (Add object or string e.g. arr.push("foo"))
+```text
+        │ (Add object or string e.g. arr.push("foo"))
+```
 
 ▼
 
 PACKED_ELEMENTS (Generic pointers)
 
-│ (Create gap e.g. arr[999] = 1)
+```text
+        │ (Create gap e.g. arr[999] = 1)
+```
 
 ▼
 

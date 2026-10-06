@@ -19,29 +19,20 @@ date: 2026-08-31
 
 In a large monorepo with multiple applications (`apps/web`, `apps/api`, `apps/admin`) and shared packages (`packages/ui`, `packages/db`, `packages/utils`), running test and build suites sequentially across all workspaces on every Pull Request leads to 45+ minute CI bottlenecks.
 
+```text
 ┌────────────────────────────────────── Monorepo CI/CD Optimization ──────────────────────────────────────┐
-
 │                                                                                                          │
-
 │  Naive Approach: Build Everything on Every Commit ──► 45 min build time ($$$ CI compute waste)           │
-
 │                                                                                                          │
-
 │  Optimized Approach:                                                                                     │
-
 │  1. Affected Package Graph Filtering: turbo run build --filter=...[origin/main]                           │
-
 │  2. Remote Caching (Turborepo + S3 / Vercel): Replays build outputs if source code hasn't changed         │
-
 │  3. Docker Pruning (turbo prune): Isolates only target app dependencies for minimal container layers     │
-
 │                                                                                                          │
-
 │  Result: ──► 3 min build time (93% reduction!)                                                           │
-
 │                                                                                                          │
-
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. Turborepo Remote Caching Architecture
 
@@ -51,13 +42,15 @@ Turborepo calculates a cryptographic SHA hash of all inputs (source files, depen
 
 - **Cache Miss**: Executes the build step, uploads the artifacts and logs to the remote bucket, and signs the payload with `TURBO_SIGNATURE_KEY`.
 
+```text
 ┌─────────────────┐        1. Hash Task Inputs (src, env, deps)       ┌──────────────────────┐
-
 │  GitHub Actions │ ────────────────────────────────────────────────► │  Turborepo Engine    │
-
 │  Runner (CI)    │ ◄──────────────────────────────────────────────── │  (Local Hash Match?) │
-
 └────────┬────────┘        2. Cache HIT: Download artifacts & logs    └──────────┬───────────┘
+         │                                                                       │
+         │                 3. Cache MISS: Build & Upload Artifacts               │
+         └───────────────────────────────────────────────────────────────────────┴──────────┐
+```
 
 ```typescript
          │                                                                       │

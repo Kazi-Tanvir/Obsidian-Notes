@@ -33,31 +33,21 @@ For three decades, DOM-based Cross-Site Scripting (DOM XSS) remained the most pr
 
 - Only blessed instances of TrustedHTML, TrustedScript, or TrustedScriptURL created through cryptographically audited policies are permitted.
 
+```text
 ┌────────────────────────────────────── Trusted Types Compiler Gatekeeper ──────────────────────────────────────┐
-
-│ │
-
-│ Traditional DOM (Vulnerable to XSS) ⚠️: │
-
-│ userInput (String) ──► element.innerHTML ──► Browser Parses String as Executable DOM ──► 🚨 XSS Execution! │
-
-│ │
-
-│ Trusted Types Enforced (Zero-Trust DOM) 🛡️: │
-
-│ userInput (String) ──► element.innerHTML ──► 🛑 Uncaught TypeError: Failed to set 'innerHTML': │
-
-│ This document requires 'TrustedHTML' assignment. │
-
-│ │
-
-│ Blessed Policy Path: │
-
-│ userInput ──► trustedTypes.createPolicy('dom-purify', { createHTML }) ──► TrustedHTML Token ──► innerHTML ⚡ │
-
-│ │
-
+│                                                                                                                │
+│  Traditional DOM (Vulnerable to XSS) ⚠️:                                                                       │
+│  userInput (String) ──► element.innerHTML ──► Browser Parses String as Executable DOM ──► 🚨 XSS Execution!   │
+│                                                                                                                │
+│  Trusted Types Enforced (Zero-Trust DOM) 🛡️:                                                                   │
+│  userInput (String) ──► element.innerHTML ──► 🛑 Uncaught TypeError: Failed to set 'innerHTML':               │
+│                                                  This document requires 'TrustedHTML' assignment.              │
+│                                                                                                                │
+│  Blessed Policy Path:                                                                                          │
+│  userInput ──► trustedTypes.createPolicy('dom-purify', { createHTML }) ──► TrustedHTML Token ──► innerHTML ⚡ │
+│                                                                                                                │
 └────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 #### Implementing a Compliant Trusted Types Policy:
 

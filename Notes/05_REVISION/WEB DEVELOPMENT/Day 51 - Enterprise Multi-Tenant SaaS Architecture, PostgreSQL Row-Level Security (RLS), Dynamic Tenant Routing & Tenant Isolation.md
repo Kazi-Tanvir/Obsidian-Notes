@@ -21,45 +21,28 @@ date: 2026-09-20
 
 When engineering software-as-a-service (SaaS) platforms, architects must reconcile two competing forces: **cost efficiency** (maximizing shared hardware utilization) versus **security & compliance** (guaranteeing that Tenant A can never view or mutate Tenant B's data).
 
+```text
 ┌────────────────────────────────────── Multi-Tenant Isolation Models ──────────────────────────────────────┐
-
-│ │
-
-│ Model A: Database-per-Tenant (Silo Model) 🏦 │
-
-│ • Each tenant gets a dedicated PostgreSQL database cluster or logical DB. │
-
-│ • Pros: Hard physical isolation, easy GDPR compliance (drop DB to delete tenant), custom backups. │
-
-│ • Cons: Prohibitive operational cost, idle resource waste, nightmare migrations (running 5,000 DDLs). │
-
-│ │
-
-│ Model B: Schema-per-Tenant (Bridge Model) 🏢 │
-
-│ • Single PostgreSQL database; each tenant gets an isolated schema (`tenant_abc.users`). │
-
-│ • Pros: Logical namespace isolation, shared database instance costs. │
-
-│ • Cons: Postgres table bloat (500 tenants * 50 tables = 25,000 tables!), severe migration bottlenecks, │
-
-│ connection pool churn across schema search paths. │
-
-│ │
-
-│ Model C: Shared Database, Shared Table with Row-Level Security (Pool Model) 🚀 │
-
-│ • All tenants share identical tables with a mandatory `tenant_id` column. │
-
-│ • PostgreSQL kernel enforces security guarantees mathematically via Row-Level Security (RLS). │
-
-│ • Pros: Infinite scalability, minimal infrastructure cost, instantaneous global schema migrations. │
-
-│ • Cons: Requires absolute defensive engineering against SQL injection and connection-pool state leaks. │
-
-│ │
-
+│                                                                                                          │
+│  Model A: Database-per-Tenant (Silo Model) 🏦                                                            │
+│  • Each tenant gets a dedicated PostgreSQL database cluster or logical DB.                              │
+│  • Pros: Hard physical isolation, easy GDPR compliance (drop DB to delete tenant), custom backups.       │
+│  • Cons: Prohibitive operational cost, idle resource waste, nightmare migrations (running 5,000 DDLs).    │
+│                                                                                                          │
+│  Model B: Schema-per-Tenant (Bridge Model) 🏢                                                            │
+│  • Single PostgreSQL database; each tenant gets an isolated schema (`tenant_abc.users`).                 │
+│  • Pros: Logical namespace isolation, shared database instance costs.                                   │
+│  • Cons: Postgres table bloat (500 tenants * 50 tables = 25,000 tables!), severe migration bottlenecks,   │
+│    connection pool churn across schema search paths.                                                     │
+│                                                                                                          │
+│  Model C: Shared Database, Shared Table with Row-Level Security (Pool Model) 🚀                          │
+│  • All tenants share identical tables with a mandatory `tenant_id` column.                               │
+│  • PostgreSQL kernel enforces security guarantees mathematically via Row-Level Security (RLS).           │
+│  • Pros: Infinite scalability, minimal infrastructure cost, instantaneous global schema migrations.       │
+│  • Cons: Requires absolute defensive engineering against SQL injection and connection-pool state leaks.  │
+│                                                                                                          │
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. PostgreSQL Row-Level Security (RLS) Mechanics
 

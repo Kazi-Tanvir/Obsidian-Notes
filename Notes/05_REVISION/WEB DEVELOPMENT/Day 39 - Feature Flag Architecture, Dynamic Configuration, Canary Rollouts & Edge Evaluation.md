@@ -23,41 +23,26 @@ In modern continuous delivery (CD), **Deployment** (shipping code to production 
 
 **Feature Flags (Feature Toggles)** provide dynamic, runtime control over application behavior without code modifications.
 
+```text
 ┌────────────────────────────────────── Feature Flag Evaluation Topologies ──────────────────────────────────────┐
-
-│ │
-
-│ Antipattern: Synchronous Remote API Polling │
-
-│ Client / Server ───────► HTTP GET /api/flags/my-flag ───────► Flag Server (Adds 80ms latency per request! 🐢)│
-
-│ │
-
-│ Enterprise Architecture: In-Memory Local Evaluation with Streaming Sync │
-
-│ │
-
-│ ┌───────────────────────┐ Streaming Deltas (SSE / gRPC) ┌───────────────────────────────────┐ │
-
-│ │ Central Flag Server │ ────────────────────────────────────────────► │ Application Server (Node.js/Next) │ │
-
-│ │ • Rules Management UI │ │ • In-Memory Evaluation Engine │ │
-
-│ │ • Postgres DB │ │ • Sub-microsecond evaluations (<1μs)│
-
-│ └───────────────────────┘ │ • Zero Network Hops on request! ⚡ │
-
-│ └───────────────────────────────────┘ │
-
-│ ▲ │
-
-│ │ Local Hash Check │
-
-│ Inbound User Request │
-
-│ │
-
+│                                                                                                                │
+│  Antipattern: Synchronous Remote API Polling                                                                   │
+│  Client / Server ───────► HTTP GET /api/flags/my-flag ───────► Flag Server (Adds 80ms latency per request! 🐢)│
+│                                                                                                                │
+│  Enterprise Architecture: In-Memory Local Evaluation with Streaming Sync                                       │
+│                                                                                                                │
+│  ┌───────────────────────┐         Streaming Deltas (SSE / gRPC)         ┌───────────────────────────────────┐ │
+│  │ Central Flag Server   │ ────────────────────────────────────────────► │ Application Server (Node.js/Next) │ │
+│  │ • Rules Management UI │                                               │ • In-Memory Evaluation Engine     │ │
+│  │ • Postgres DB         │                                               │ • Sub-microsecond evaluations (<1μs)│
+│  └───────────────────────┘                                               │ • Zero Network Hops on request! ⚡ │
+│                                                                          └───────────────────────────────────┘ │
+│                                                                                            ▲                   │
+│                                                                                            │ Local Hash Check  │
+│                                                                                   Inbound User Request         │
+│                                                                                                                │
 └────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. Deterministic Percentage Rollouts (Consistent Hashing)
 

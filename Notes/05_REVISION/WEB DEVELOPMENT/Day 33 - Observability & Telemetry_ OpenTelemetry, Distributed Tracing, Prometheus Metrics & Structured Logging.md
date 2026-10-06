@@ -27,43 +27,27 @@ In a modern distributed architecture containing dozens of microservices, serverl
 
 **OpenTelemetry (OTel)** is the vendor-neutral CNCF standard providing unified APIs, SDKs, and tooling to generate and export telemetry data to backends like Prometheus, Jaeger, Grafana Tempo, and Datadog.
 
+```text
 ┌────────────────────────────────────── Distributed Context Propagation ──────────────────────────────────┐
-
 │                                                                                                        │
-
 │  User Browser / Mobile Client                                                                          │
-
 │  └────► HTTP Request (Header: traceparent: 00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01)    │
-
 │           │                                                                                            │
-
 │           ▼                                                                                            │
-
 │  ┌───────────────────────────────── API Gateway (Kong / Envoy) ───────────────────────────────────┐  │
-
 │  │ Root Span: "HTTP POST /checkout" [TraceID: 4bf92f..., SpanID: 00f067...]                        │  │
-
 │  └────────┬────────────────────────────────────────────────────────────────────────────────────────┘  │
-
 │           │                                                                                            │
-
 │           │ HTTP Forward (Propagates same TraceID, New Parent SpanID)                                  │
-
 │           ▼                                                                                            │
-
 │  ┌───────────────────────────────── Order Microservice (Fastify) ─────────────────────────────────┐  │
-
-│  │ Child Span: "process\_order" [TraceID: 4bf92f..., SpanID: 5a8e1b...]                             │  │
-
+│  │ Child Span: "process_order" [TraceID: 4bf92f..., SpanID: 5a8e1b...]                             │  │
 │  │  • Sub-Span: "db.query SELECT * FROM inventory" ──► PostgreSQL (SpanID: c3d2e1...)              │  │
-
 │  │  • Sub-Span: "gRPC PaymentService/Charge" ──► Payment Service (SpanID: f7a6b5...)               │  │
-
 │  └─────────────────────────────────────────────────────────────────────────────────────────────────┘  │
-
 │                                                                                                        │
-
 └────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 #### The W3C Trace Context Standard (`traceparent`):
 

@@ -56,43 +56,36 @@ CreateOrder ──► AuthorizePayment ──► ReserveInventory (FAIL!)
 
 To guarantee that database mutations and event publications occur with $100%$ atomicity without distributed locks, we use the **Transactional Outbox Pattern**:
 
-┌──────────────────────────────────────────────┐
-
-│ Service Application                          │
-
-│                                              │
-
-│  BEGIN TRANSACTION;                          │
-
-│    INSERT INTO orders (...);                 │
-
-│    INSERT INTO outbox_table (event_payload); │
-
-│  COMMIT;                                     │
-
-└──────────────────────┬───────────────────────┘
+```text
+                      │                      │
+```
 
 ```typescript
                        │
                        ▼ (PostgreSQL Write-Ahead Log - WAL)
 ```
 
-┌──────────────────────────────────────────────┐
-
-│ Debezium CDC / Kafka Connect Engine          │
-
-└──────────────────────┬───────────────────────┘
+```text
+               RefundPayment ◄───────────────┘
+                      │
+```
 
 ```typescript
                        │
                        ▼ (Guaranteed At-Least-Once Delivery)
 ```
 
+```text
 ┌──────────────────────────────────────────────┐
-
-│ Apache Kafka Topic ('order-events')          │
-
-└──────────────────────────────────────────────┘
+│ Service Application                          │
+│                                              │
+│  BEGIN TRANSACTION;                          │
+│    INSERT INTO orders (...);                 │
+│    INSERT INTO outbox_table (event_payload); │
+│  COMMIT;                                     │
+└──────────────────────┬───────────────────────┘
+                       │
+```
 
 - Order mutation and event envelope are committed inside the **same local ACID database transaction**.
 

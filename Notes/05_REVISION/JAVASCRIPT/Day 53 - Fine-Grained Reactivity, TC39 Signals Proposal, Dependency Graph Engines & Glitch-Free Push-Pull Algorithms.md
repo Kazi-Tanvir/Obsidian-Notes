@@ -33,27 +33,19 @@ For over a decade, web frontends relied on **Virtual DOM (VDOM) reconciliation**
 
 - When a Signal value updates, it bypasses component boundaries entirely and updates **only the specific text node or attribute in the real DOM** that depends on it (\$O(1)\$ direct targeted mutations)!
 
+```text
 ┌────────────────────────────────────── Virtual DOM vs. Signals ──────────────────────────────────────┐
-
-│ │
-
-│ Virtual DOM Reconciliation (Coarse-Grained): │
-
-│ State Change ──► Re-run Entire Component ──► Generate VDOM Tree ──► Diff Trees ──► Patch Real DOM │
-
-│ • High CPU overhead, high GC allocations, requires manual dependency arrays. │
-
-│ │
-
-│ Fine-Grained Reactivity / Signals (Targeted Micro-Updates): │
-
-│ Signal.State.set(value) ──► Mark Graph Dirty ──► Direct Targeted DOM Mutation ⚡ │
-
-│ • Zero VDOM diffing, zero component re-executions, automatic dynamic dependency tracking! │
-
-│ │
-
+│                                                                                                     │
+│  Virtual DOM Reconciliation (Coarse-Grained):                                                       │
+│  State Change ──► Re-run Entire Component ──► Generate VDOM Tree ──► Diff Trees ──► Patch Real DOM  │
+│  • High CPU overhead, high GC allocations, requires manual dependency arrays.                      │
+│                                                                                                     │
+│  Fine-Grained Reactivity / Signals (Targeted Micro-Updates):                                        │
+│  Signal.State.set(value) ──► Mark Graph Dirty ──► Direct Targeted DOM Mutation ⚡                   │
+│  • Zero VDOM diffing, zero component re-executions, automatic dynamic dependency tracking!          │
+│                                                                                                     │
 └─────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. The TC39 Signals Standard Architecture
 
@@ -65,35 +57,23 @@ Recognizing that modern frontend frameworks (Solid.js, Preact, Vue, Angular, Sve
 
 3.  **Signal.subtle.Watcher (Reaction Driver)**: Low-level primitive utilized by framework schedulers to detect when signals become dirty and schedule reactions (effects).
 
+```text
 ┌────────────────────────────────────── Reactive Dependency Graph (DAG) ──────────────────────────────────────┐
-
-│ │
-
-│ [ Signal.State: firstName ] [ Signal.State: lastName ] │
-
-│ │ │ │
-
-│ └───────────────┬────────────────┘ │
-
-│ ▼ │
-
-│ [ Signal.Computed: fullName ] │
-
-│ │ │
-
-│ ▼ │
-
-│ [ Signal.subtle.Watcher / Effect ] │
-
-│ │ │
-
-│ ▼ │
-
-│ Direct DOM Text Node Update! │
-
-│ │
-
+│                                                                                                             │
+│             [ Signal.State: firstName ]        [ Signal.State: lastName ]                                   │
+│                           │                                │                                                │
+│                           └───────────────┬────────────────┘                                                │
+│                                           ▼                                                                 │
+│                             [ Signal.Computed: fullName ]                                                   │
+│                                           │                                                                 │
+│                                           ▼                                                                 │
+│                         [ Signal.subtle.Watcher / Effect ]                                                  │
+│                                           │                                                                 │
+│                                           ▼                                                                 │
+│                              Direct DOM Text Node Update!                                                   │
+│                                                                                                             │
 └─────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 3. The Diamond Dependency Problem & Glitch-Free Algorithms
 

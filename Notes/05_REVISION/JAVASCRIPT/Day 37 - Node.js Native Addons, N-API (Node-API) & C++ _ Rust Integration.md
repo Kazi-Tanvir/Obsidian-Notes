@@ -24,47 +24,29 @@ While the V8 engine compiles JavaScript into optimized machine code via TurboFan
 
 To overcome these constraints, Node.js allows running native compiled code (C, C++, Rust) through **Native Addons**.
 
+```text
 ┌────────────────────────────────────── Native Addon Architecture & ABI ──────────────────────────────────────┐
-
 │                                                                                                              │
-
 │  JavaScript Runtime (V8 Engine)                                                                              │
-
 │  • Call Stack & Garbage Collection (V8 Heap Objects)                                                         │
-
 │         │                                                                                                    │
-
 │         ▼                                                                                                    │
-
 │  Node-API (N-API) C ABI Boundary Layer                                                                       │
-
 │  • Stable Application Binary Interface (ABI) across all Node.js versions (v16, v18, v20, v22+)               │
-
-│  • Opaque handles (`napi\_value`, `napi\_env`) protecting V8 internals from native memory crashes              │
-
+│  • Opaque handles (`napi_value`, `napi_env`) protecting V8 internals from native memory crashes              │
 │         │                                                                                                    │
-
 │         ├───────────────────────────────────────────────┬────────────────────────────────────────────────────┤
-
 │         ▼                                               ▼                                                    │
-
 │  Synchronous Execution (Main Thread)             Asynchronous Execution (libuv Worker Threadpool)            │
-
 │  • Blocks V8 event loop during execution        • Offloads heavy computation to libuv background threads      │
-
-│  • FFI data marshalling overhead                • Threadsafe callbacks (`napi\_threadsafe\_function`)          │
-
+│  • FFI data marshalling overhead                • Threadsafe callbacks (`napi_threadsafe_function`)          │
 │         │                                               │                                                    │
-
 │         ▼                                               ▼                                                    │
-
 │  Native Machine Code (Rust via `napi-rs` / C++ via `node-addon-api`)                                         │
-
 │  • Direct memory access, SIMD parallelization, multi-threading without V8 GC pauses                          │
-
 │                                                                                                              │
-
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ---
 

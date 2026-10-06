@@ -18,13 +18,19 @@ date: 2026-08-24
 
 The Critical Rendering Path is the sequence of steps the browser takes to convert HTML, CSS, and JavaScript into actual visual pixels on the screen.
 
+```text
 HTML Bytes ──► Tokenizer ──► DOM Tree ────────┐
+                                               ├──► Render Tree ──► Layout / Reflow ──► Paint ──► Composite
+CSS Bytes  ──► Tokenizer ──► CSSOM Tree ──────┘
+```
 
 ```typescript
                                                ├──► Render Tree ──► Layout / Reflow ──► Paint ──► Composite
 ```
 
+```text
 CSS Bytes  ──► Tokenizer ──► CSSOM Tree ──────┘
+```
 
 #### Step-by-Step Breakdown:
 

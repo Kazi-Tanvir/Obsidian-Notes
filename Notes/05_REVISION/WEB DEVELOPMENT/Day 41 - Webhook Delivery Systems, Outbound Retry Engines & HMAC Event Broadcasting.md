@@ -29,49 +29,30 @@ While consuming inbound webhooks requires idempotency and signature verification
 
 4.  **Guaranteed Delivery with Exponential Backoff**: Delivering messages reliably across network outages over a 72-hour period requires an asynchronous, durable event outbox and worker pipeline.
 
+```text
 ┌────────────────────────────────────── Outbound Webhook Dispatch Topology ──────────────────────────────────────┐
-
-│ │
-
-│ Primary Application Service (Orders / Billing) │
-
-│ │ │
-
-│ ▼ (Transactional Outbox) │
-
-│ [ PostgreSQL: webhook_outbox Table ] ──► Atomic insert in same DB transaction as business logic │
-
-│ │ │
-
-│ ▼ (Debezium CDC / Worker Poll) │
-
-│ [ Redis / BullMQ Job Queue ] ──────────► Partitioned by customer_id (Prevents noisy-neighbor lockups) │
-
-│ │ │
-
-│ ▼ │
-
-│ [ Webhook Worker Pool ] │
-
-│ │ │
-
-│ ├──► 1. Generates HMAC-SHA256 Signature (Timestamped) │
-
-│ ├──► 2. Sets Strict 5-Second AbortController Timeout │
-
-│ ├──► 3. Dispatches HTTP POST to Customer Endpoint ────────► Customer Server │
-
-│ │ │
-
-│ ├─► Success (2xx) ──► Mark DELIVERED in audit log │
-
-│ └─► Failure (5xx / Timeout) ──► Reschedule with Exponential Backoff + Jitter │
-
-│ (1m, 5m, 15m, 1h, 6h, 24h, 72h ──► Dead Letter Queue) │
-
-│ │
-
+│                                                                                                                 │
+│   Primary Application Service (Orders / Billing)                                                                │
+│        │                                                                                                        │
+│        ▼ (Transactional Outbox)                                                                                 │
+│   [ PostgreSQL: webhook_outbox Table ] ──► Atomic insert in same DB transaction as business logic               │
+│        │                                                                                                        │
+│        ▼ (Debezium CDC / Worker Poll)                                                                           │
+│   [ Redis / BullMQ Job Queue ] ──────────► Partitioned by customer_id (Prevents noisy-neighbor lockups)       │
+│        │                                                                                                        │
+│        ▼                                                                                                        │
+│   [ Webhook Worker Pool ]                                                                                       │
+│        │                                                                                                        │
+│        ├──► 1. Generates HMAC-SHA256 Signature (Timestamped)                                                    │
+│        ├──► 2. Sets Strict 5-Second AbortController Timeout                                                     │
+│        ├──► 3. Dispatches HTTP POST to Customer Endpoint ────────► Customer Server                              │
+│        │                                                                                                        │
+│        ├─► Success (2xx) ──► Mark DELIVERED in audit log                                                        │
+│        └─► Failure (5xx / Timeout) ──► Reschedule with Exponential Backoff + Jitter                             │
+│                                       (1m, 5m, 15m, 1h, 6h, 24h, 72h ──► Dead Letter Queue)                     │
+│                                                                                                                 │
 └─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. Cryptographic Timestamped Signatures: The Modern Standard
 

@@ -35,37 +35,24 @@ For almost a decade, JavaScript developers relied on TypeScript's --experimental
 
 3.  **First-Class Decorator Metadata (Symbol.metadata)**: Native runtime metadata storage directly on the constructor, eliminating the need for reflect-metadata.
 
+```text
 ┌────────────────────────────────────── TC39 Decorator Execution Flow ──────────────────────────────────────┐
-
-│ │
-
-│ Class Definition Evaluated: │
-
-│ \@logged │
-
-│ class AccountService { │
-
-│ \@memoize │
-
-│ calculateBalance() { \... } │
-
-│ } │
-
-│ │
-
-│ Evaluation & Application Order: │
-
-│ 1. Decorator Expressions Evaluated: Top-to-Bottom (like function arguments) │
-
-│ 2. Member Decorators Applied: Bottom-up, Inside-Out (calculateBalance decorated first) │
-
-│ 3. Class Decorator Applied: After all member decorators have completed │
-
-│ 4. Initializers Invoked: context.addInitializer() runs during instance construction │
-
-│ │
-
+│                                                                                                           │
+│  Class Definition Evaluated:                                                                              │
+│  @logged                                                                                                  │
+│  class AccountService {                                                                                   │
+│    @memoize                                                                                               │
+│    calculateBalance() { ... }                                                                             │
+│  }                                                                                                        │
+│                                                                                                           │
+│  Evaluation & Application Order:                                                                          │
+│  1. Decorator Expressions Evaluated: Top-to-Bottom (like function arguments)                              │
+│  2. Member Decorators Applied: Bottom-up, Inside-Out (calculateBalance decorated first)                   │
+│  3. Class Decorator Applied: After all member decorators have completed                                   │
+│  4. Initializers Invoked: context.addInitializer() runs during instance construction                     │
+│                                                                                                           │
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. The 5 Member Decorator Kinds & The accessor Keyword
 

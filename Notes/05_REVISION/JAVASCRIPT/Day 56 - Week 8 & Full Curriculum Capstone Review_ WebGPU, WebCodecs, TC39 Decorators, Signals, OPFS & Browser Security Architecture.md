@@ -20,47 +20,29 @@ date: 2026-09-25
 
 Day 56 represents the culmination of our 8-week intermediate-to-advanced JavaScript journey. Over 56 days, we progressed from execution contexts, event loop microtasks, and V8 JIT compiler optimizations to low-level systems integration, hardware acceleration, and planetary runtime architecture.
 
+```text
 ┌────────────────────────────────────── Week 8 & Capstone Architecture Map ──────────────────────────────────────┐
-
-│ │
-
-│ Hardware & Media Acceleration: │
-
-│ • WebGPU (Day 50): Direct GPGPU parallel computing, WGSL compute shaders, immutable Pipeline State Objects │
-
-│ (PSOs), asynchronous VRAM staging buffer mapping, workgroup thread hierarchies. │
-
-│ • WebCodecs API (Day 51): Low-overhead access to native OS hardware video decoders and encoders (VideoToolbox, │
-
-│ NVDEC/NVENC), zero-copy GPU surfaces, and explicit VideoFrame memory management (frame.close()). │
-
-│ │
-
-│ Modern Language & Metaprogramming Standards: │
-
-│ • TC39 Stage 3 Decorators (Day 52): Standardized metaprogramming, auto-accessors (accessor), context.metadata │
-
-│ reflection (Symbol.metadata), and Explicit Resource Management (using / Symbol.dispose RAII cleanup). │
-
-│ • Fine-Grained Reactivity (Day 53): The TC39 Signals standard proposal (Signal.State, Signal.Computed), │
-
-│ bypassing Virtual DOM diffing via O(1) targeted DOM updates, and glitch-free two-phase push-pull algorithms.│
-
-│ │
-
-│ Storage Engines & Browser Hardening: │
-
-│ • Local-First & OPFS (Day 54): Origin Private File System, FileSystemSyncAccessHandle synchronous binary │
-
-│ I/O on Web Workers, Wasm SQLite persistence, and Web Locks API (navigator.locks) multi-tab coordination. │
-
-│ • Browser Security Hardening (Day 55): Trusted Types compiler gatekeepers eliminating DOM XSS, modern CSP │
-
-│ Level 3 nonces & 'strict-dynamic', and Cross-Origin Isolation (COOP/COEP) mitigating Spectre side-channels. │
-
-│ │
-
+│                                                                                                                │
+│  Hardware & Media Acceleration:                                                                                │
+│  • WebGPU (Day 50): Direct GPGPU parallel computing, WGSL compute shaders, immutable Pipeline State Objects    │
+│    (PSOs), asynchronous VRAM staging buffer mapping, workgroup thread hierarchies.                            │
+│  • WebCodecs API (Day 51): Low-overhead access to native OS hardware video decoders and encoders (VideoToolbox, │
+│    NVDEC/NVENC), zero-copy GPU surfaces, and explicit VideoFrame memory management (frame.close()).             │
+│                                                                                                                │
+│  Modern Language & Metaprogramming Standards:                                                                  │
+│  • TC39 Stage 3 Decorators (Day 52): Standardized metaprogramming, auto-accessors (accessor), context.metadata │
+│    reflection (Symbol.metadata), and Explicit Resource Management (using / Symbol.dispose RAII cleanup).        │
+│  • Fine-Grained Reactivity (Day 53): The TC39 Signals standard proposal (Signal.State, Signal.Computed),        │
+│    bypassing Virtual DOM diffing via O(1) targeted DOM updates, and glitch-free two-phase push-pull algorithms.│
+│                                                                                                                │
+│  Storage Engines & Browser Hardening:                                                                          │
+│  • Local-First & OPFS (Day 54): Origin Private File System, FileSystemSyncAccessHandle synchronous binary       │
+│    I/O on Web Workers, Wasm SQLite persistence, and Web Locks API (navigator.locks) multi-tab coordination.    │
+│  • Browser Security Hardening (Day 55): Trusted Types compiler gatekeepers eliminating DOM XSS, modern CSP    │
+│    Level 3 nonces & 'strict-dynamic', and Cross-Origin Isolation (COOP/COEP) mitigating Spectre side-channels. │
+│                                                                                                                │
 └────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 1. WebGPU Parallel Compute & Memory Staging (Day 50)
 

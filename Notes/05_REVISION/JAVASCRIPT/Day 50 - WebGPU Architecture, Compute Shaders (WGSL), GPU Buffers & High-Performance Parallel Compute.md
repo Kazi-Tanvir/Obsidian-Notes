@@ -35,79 +35,50 @@ For over a decade, browser graphics and parallel computing relied on WebGL (an a
 
 3.  **Massive Data Parallelism**: Executes thousands of arithmetic operations concurrently across thousands of GPU hardware ALUs (Arithmetic Logic Units).
 
+```text
 ┌────────────────────────────────────── WebGPU Hardware Abstraction ──────────────────────────────────────┐
-
-│ │
-
-│ navigator.gpu (Entry Point) │
-
-│ │ │
-
-│ ▼ │
-
-│ GPUAdapter (Physical Hardware: NVIDIA RTX 4090 / Apple M3 Max) │
-
-│ │ │
-
-│ ▼ │
-
-│ GPUDevice (Logical Connection & Memory Sandbox) │
-
-│ ├──► GPUQueue (Submits Command Buffers to GPU hardware queue) │
-
-│ ├──► GPUBuffer (VRAM allocations: Storage, Uniform, Staging, MapRead/Write) │
-
-│ ├──► GPUBindGroup (Binds VRAM buffers to WGSL shader binding slots) │
-
-│ └──► GPUComputePipeline (Compiled WGSL compute kernel) │
-
-│ │
-
+│                                                                                                          │
+│  navigator.gpu (Entry Point)                                                                             │
+│       │                                                                                                  │
+│       ▼                                                                                                  │
+│  GPUAdapter (Physical Hardware: NVIDIA RTX 4090 / Apple M3 Max)                                          │
+│       │                                                                                                  │
+│       ▼                                                                                                  │
+│  GPUDevice (Logical Connection & Memory Sandbox)                                                         │
+│       ├──► GPUQueue (Submits Command Buffers to GPU hardware queue)                                      │
+│       ├──► GPUBuffer (VRAM allocations: Storage, Uniform, Staging, MapRead/Write)                         │
+│       ├──► GPUBindGroup (Binds VRAM buffers to WGSL shader binding slots)                               │
+│       └──► GPUComputePipeline (Compiled WGSL compute kernel)                                            │
+│                                                                                                          │
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. GPU Memory Lifecycle & Buffer Mapping
 
 CPUs and GPUs have separate physical memory spaces (System RAM vs. VRAM). The CPU cannot directly read or write VRAM pointers while the GPU is executing tasks. WebGPU enforces an **asynchronous buffer mapping lifecycle**:
 
+```text
 ┌────────────────────────────────────── VRAM Staging & Memory Synchronization ──────────────────────────────────────┐
-
-│ │
-
-│ CPU System RAM (Host) │
-
-│ • Float32Array (Input Vector A & B) │
-
-│ │ │
-
-│ ▼ device.queue.writeBuffer() [DMA Transfer over PCIe bus] │
-
-│ │
-
-│ GPU VRAM (Device Fast Memory) │
-
-│ ┌─────────────────────────────┬─────────────────────────────┬───────────────────────────────────────────────┐ │
-
-│ │ Input Buffer (STORAGE) │ Output Buffer (STORAGE) │ Staging Buffer (MAP_READ | COPY_DST) │ │
-
-│ │ • Read-only by WGSL shader │ • Written by WGSL shader │ • Cannot be used as Storage Buffer directly! │ │
-
-│ └─────────────────────────────┴─────────────────────────────┴───────────────────────┬───────────────────────┘ │
-
-│ │ │ │
-
-│ └──► commandEncoder.copyBufferToBuffer()┘ (GPU-internal VRAM copy) │
-
-│ │ │
-
-│ ▼ stagingBuffer.mapAsync() │
-
-│ CPU System RAM (Host) ◄─────────────────────────────────────────────────────────────┘ │
-
-│ • stagingBuffer.getMappedRange() (Read back calculated results!) │
-
-│ │
-
+│                                                                                                                   │
+│  CPU System RAM (Host)                                                                                            │
+│  • Float32Array (Input Vector A & B)                                                                              │
+│       │                                                                                                           │
+│       ▼ device.queue.writeBuffer() [DMA Transfer over PCIe bus]                                                   │
+│                                                                                                                   │
+│  GPU VRAM (Device Fast Memory)                                                                                    │
+│  ┌─────────────────────────────┬─────────────────────────────┬───────────────────────────────────────────────┐    │
+│  │ Input Buffer (STORAGE)      │ Output Buffer (STORAGE)     │ Staging Buffer (MAP_READ | COPY_DST)          │    │
+│  │ • Read-only by WGSL shader  │ • Written by WGSL shader    │ • Cannot be used as Storage Buffer directly!  │    │
+│  └─────────────────────────────┴─────────────────────────────┴───────────────────────┬───────────────────────┘    │
+│                                               │                                      │                            │
+│                                               └──► commandEncoder.copyBufferToBuffer()┘ (GPU-internal VRAM copy)  │
+│                                                                                      │                            │
+│                                                                                      ▼ stagingBuffer.mapAsync()   │
+│  CPU System RAM (Host) ◄─────────────────────────────────────────────────────────────┘                            │
+│  • stagingBuffer.getMappedRange() (Read back calculated results!)                                                 │
+│                                                                                                                   │
 └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 3. Writing WGSL Compute Shaders & Workgroup Hierarchies
 

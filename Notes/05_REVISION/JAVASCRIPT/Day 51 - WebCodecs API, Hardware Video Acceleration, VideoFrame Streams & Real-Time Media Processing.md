@@ -27,47 +27,29 @@ Historically, manipulating video in the browser was constrained by high-level, o
 
 The **WebCodecs API** shatters this limitation by providing direct, low-overhead, asynchronous access to the operating system's **native hardware video decoders and encoders** (Apple VideoToolbox, Android MediaCodec, Windows NVDEC/AMF, Linux VA-API).
 
+```text
 ┌────────────────────────────────────── WebCodecs Low-Level Pipeline ──────────────────────────────────────┐
-
-│ │
-
-│ Compressed Video Stream (MP4, WebM, H.264, VP9, AV1) │
-
-│ │ │
-
-│ ▼ Demuxer (MP4Box.js / Rust Wasm Demuxer extracts NAL units) │
-
-│ EncodedVideoChunk ({ type: 'key' | 'delta', timestamp: 16000, data: Uint8Array }) │
-
-│ │ │
-
-│ ▼ videoDecoder.decode(chunk) ──► Direct OS Hardware Video Engine (NVDEC / VideoToolbox) ⚡ │
-
-│ │
-
-│ VideoFrame (Zero-Copy GPU Surface / Pixel Buffer) │
-
-│ ┌───────────────────────────────────────────────────────────────────────────────────────────────────┐ │
-
-│ │ • Direct hardware GPU texture handle (YUV420, NV12, RGBA) │ │
-
-│ │ • Zero memory copy to V8 JavaScript heap! │ │
-
-│ │ • Instant rendering via canvasCtx.drawImage(frame) or device.importExternalTexture({ source }) │ │
-
-│ │ • CRITICAL: Must be explicitly closed via frame.close() to free GPU VRAM! │ │
-
-│ └───────────────────────────────────────────────────────────────────────────────────────────────────┘ │
-
-│ │ │
-
-│ ▼ videoEncoder.encode(frame) ──► Hardware Video Encoder (NVENC / QuickSync) │
-
-│ EncodedVideoChunk ──► WebSocket / WebTransport / WebRTC DataChannel (Ultra-low latency streaming!) │
-
-│ │
-
+│                                                                                                           │
+│  Compressed Video Stream (MP4, WebM, H.264, VP9, AV1)                                                     │
+│       │                                                                                                   │
+│       ▼ Demuxer (MP4Box.js / Rust Wasm Demuxer extracts NAL units)                                        │
+│  EncodedVideoChunk ({ type: 'key' | 'delta', timestamp: 16000, data: Uint8Array })                        │
+│       │                                                                                                   │
+│       ▼ videoDecoder.decode(chunk) ──► Direct OS Hardware Video Engine (NVDEC / VideoToolbox) ⚡          │
+│                                                                                                           │
+│  VideoFrame (Zero-Copy GPU Surface / Pixel Buffer)                                                        │
+│  ┌───────────────────────────────────────────────────────────────────────────────────────────────────┐    │
+│  │ • Direct hardware GPU texture handle (YUV420, NV12, RGBA)                                         │    │
+│  │ • Zero memory copy to V8 JavaScript heap!                                                         │    │
+│  │ • Instant rendering via canvasCtx.drawImage(frame) or device.importExternalTexture({ source })   │    │
+│  │ • CRITICAL: Must be explicitly closed via frame.close() to free GPU VRAM!                         │    │
+│  └───────────────────────────────────────────────────────────────────────────────────────────────────┘    │
+│       │                                                                                                   │
+│       ▼ videoEncoder.encode(frame) ──► Hardware Video Encoder (NVENC / QuickSync)                         │
+│  EncodedVideoChunk ──► WebSocket / WebTransport / WebRTC DataChannel (Ultra-low latency streaming!)       │
+│                                                                                                           │
 └───────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. VideoDecoder Architecture & Chunk Types
 

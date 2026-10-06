@@ -21,43 +21,27 @@ date: 2026-09-23
 
 Building low-latency interactive video systems (video conferencing, remote cloud rendering, live broadcasts) requires choosing the right media transport topology.
 
+```text
 ┌────────────────────────────────────── WebRTC Media Topologies ──────────────────────────────────────┐
-
-│ │
-
-│ Topology A: Peer-to-Peer Mesh (P2P) ⚠️ │
-
-│ • Every participant sends their video to EVERY other participant directly. │
-
-│ • Upstream bandwidth: O(N - 1) connections! │
-
-│ • Fatal Flaw: Mobile clients crash past 4 participants due to upstream bandwidth exhaustion! │
-
-│ │
-
-│ Topology B: Multipoint Control Unit (MCU) 🖥️ │
-
-│ • Central server decodes all incoming video streams, composites them into a single "Brady Bunch" │
-
-│ grid video frame, re-encodes, and sends ONE stream to everyone. │
-
-│ • Downside: Massive server CPU cost, \$500\\text{ms}+\$ transcoding latency, loss of layout control. │
-
-│ │
-
-│ Topology C: Selective Forwarding Unit (SFU) 🚀 │
-
-│ • Every participant publishes ONE upstream video stream to the SFU server. │
-
-│ • The SFU inspects RTP packet headers and routes (forwards) packets to other participants at wire │
-
-│ speed WITHOUT decoding or re-encoding video payloads! │
-
-│ • Delivers sub-50ms glass-to-glass latency with minimal server CPU overhead! ⚡ │
-
-│ │
-
+│                                                                                                     │
+│  Topology A: Peer-to-Peer Mesh (P2P) ⚠️                                                             │
+│  • Every participant sends their video to EVERY other participant directly.                         │
+│  • Upstream bandwidth: O(N - 1) connections!                                                        │
+│  • Fatal Flaw: Mobile clients crash past 4 participants due to upstream bandwidth exhaustion!       │
+│                                                                                                     │
+│  Topology B: Multipoint Control Unit (MCU) 🖥️                                                       │
+│  • Central server decodes all incoming video streams, composites them into a single "Brady Bunch"   │
+│    grid video frame, re-encodes, and sends ONE stream to everyone.                                  │
+│  • Downside: Massive server CPU cost, $500\text{ms}+$ transcoding latency, loss of layout control.   │
+│                                                                                                     │
+│  Topology C: Selective Forwarding Unit (SFU) 🚀                                                     │
+│  • Every participant publishes ONE upstream video stream to the SFU server.                         │
+│  • The SFU inspects RTP packet headers and routes (forwards) packets to other participants at wire  │
+│    speed WITHOUT decoding or re-encoding video payloads!                                            │
+│  • Delivers sub-50ms glass-to-glass latency with minimal server CPU overhead! ⚡                    │
+│                                                                                                     │
 └─────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. Distributed SFU Architecture (LiveKit & Mediasoup)
 
@@ -75,39 +59,25 @@ Modern production SFUs like **LiveKit** (written in Go) or **Mediasoup** (C++ co
 
     - Employs **SRTP encryption** with AES-GCM, negotiating cryptographic keys via DTLS (Datagram Transport Layer Security).
 
+```text
 ┌────────────────────────────────────── LiveKit SFU Architecture ──────────────────────────────────────┐
-
-│ │
-
-│ Broadcaster (Publisher) │
-
-│ │ │
-
-│ ├──► 1. WebSocket Signaling: SDP Offer / Answer Handshake ──► [ Node.js Signaling API ] │
-
-│ │ │
-
-│ ▼ 2. SRTP Media Stream (UDP Port 7880 / 50000-60000) │
-
-│ LiveKit Distributed Media Engine (Go SFU Cluster) │
-
-│ ┌──────────────────────────────────────────────────────────────────────────────────────────────┐ │
-
-│ │ Ingress Router ──► Packet Forwarding Engine (Zero-transcode wire routing) │ │
-
-│ │ │ │ │
-
-│ │ ▼ Bandwidth Estimation (TWCC) & Congestion Controller │ │
-
-│ │ ├── Subscriber A (High Bandwidth / Fiber) ──► Forward High Layer (1080p @ 3 Mbps) │ │
-
-│ │ └── Subscriber B (Mobile 4G / Congested) ───► Forward Low Layer (360p @ 300 kbps) │ │
-
-│ └──────────────────────────────────────────────────────────────────────────────────────────────┘ │
-
-│ │
-
+│                                                                                                      │
+│  Broadcaster (Publisher)                                                                             │
+│       │                                                                                              │
+│       ├──► 1. WebSocket Signaling: SDP Offer / Answer Handshake ──► [ Node.js Signaling API ]        │
+│       │                                                                                              │
+│       ▼ 2. SRTP Media Stream (UDP Port 7880 / 50000-60000)                                           │
+│  LiveKit Distributed Media Engine (Go SFU Cluster)                                                   │
+│  ┌──────────────────────────────────────────────────────────────────────────────────────────────┐    │
+│  │ Ingress Router ──► Packet Forwarding Engine (Zero-transcode wire routing)                   │    │
+│  │       │                                                                                      │    │
+│  │       ▼ Bandwidth Estimation (TWCC) & Congestion Controller                                  │    │
+│  │   ├── Subscriber A (High Bandwidth / Fiber) ──► Forward High Layer (1080p @ 3 Mbps)          │    │
+│  │   └── Subscriber B (Mobile 4G / Congested) ───► Forward Low Layer (360p @ 300 kbps)          │    │
+│  └──────────────────────────────────────────────────────────────────────────────────────────────┘    │
+│                                                                                                      │
 └──────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 3. WHIP & WHEP: The Modern WebRTC Ingest/Egress Standard
 

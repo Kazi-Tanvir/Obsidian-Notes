@@ -28,35 +28,23 @@ In high-throughput distributed systems, real-time trading engines, gaming backen
 
 3.  **Payload Bloat**: Redundant repetition of JSON object keys across arrays of objects multiplies bandwidth consumption by \$3\\times - 8\\times\$.
 
+```text
 ┌───────────────────────────────────── Binary Serialization Memory Pipeline ─────────────────────────────────────┐
-
-│ │
-
-│ Network / Disk Binary Stream (Raw Bytes) │
-
-│ │ │
-
-│ ▼ │
-
-│ [ ArrayBuffer ] ─────────────────────────► Continuous block of raw physical memory in V8. │
-
-│ │ │
-
-│ ├────────────────────────────────────────┬─────────────────────────────────────────────────────┤ │
-
-│ ▼ ▼ ▼ │
-
-│ [ TypedArrays (Uint8Array, Float64Array) ] [ DataView ] [ Zero-Copy ] │
-
-│ • Direct typed index access • Explicit Endianness control FlatBuffers │
-
-│ • Tied to host CPU Endianness • Safe multi-byte reading at arbitrary offsets Reads memory │
-
-│ • Lightning fast for homogeneous arrays • Prevents network byte-order corruption directly! │
-
-│ │
-
+│                                                                                                                │
+│   Network / Disk Binary Stream (Raw Bytes)                                                                     │
+│         │                                                                                                      │
+│         ▼                                                                                                      │
+│  [ ArrayBuffer ] ─────────────────────────► Continuous block of raw physical memory in V8.                     │
+│         │                                                                                                      │
+│         ├────────────────────────────────────────┬─────────────────────────────────────────────────────┤       │
+│         ▼                                        ▼                                                     ▼       │
+│  [ TypedArrays (Uint8Array, Float64Array) ]  [ DataView ]                                       [ Zero-Copy ]  │
+│  • Direct typed index access                 • Explicit Endianness control                      FlatBuffers    │
+│  • Tied to host CPU Endianness               • Safe multi-byte reading at arbitrary offsets     Reads memory   │
+│  • Lightning fast for homogeneous arrays     • Prevents network byte-order corruption           directly!      │
+│                                                                                                                │
 └────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. Endianness, TypedArrays & DataView Mechanics
 

@@ -21,45 +21,28 @@ date: 2026-09-11
 
 Week 6 synthesized the core infrastructure components required to run fault-tolerant, high-concurrency microservices, fintech platforms, and event-driven architectures under heavy production traffic:
 
+```text
 ┌──────────────────────────────────── Production Distributed Systems Topology ────────────────────────────────────┐
-
-│ │
-
-│ Inbound Traffic (API Gateway & Edge Tier) │
-
-│ • Multi-Tier Rate Limiting: Cloudflare WAF (L7 Floods) ──► Envoy Gateway (Global Quotas) │
-
-│ • Edge Dynamic Feature Evaluation (MurmurHash3 Deterministic User Canary Bucketing) │
-
-│ │ │
-
-│ ▼ │
-
-│ Application & Concurrency Layer (Node.js / Fastify / Next.js) │
-
-│ • Distributed Mutual Exclusion: Redis Lua Atomic Locks & Multi-Master Redlock Quorums │
-
-│ • Storage-level fencing protection (Monotonic Fencing Tokens) │
-
-│ │ │
-
-│ ├─────────────────────────────────┬──────────────────────────────────┬──────────────────────────────────┤
-
-│ ▼ ▼ ▼ ▼
-
-│ Database Layer Fintech Payment Core Outbound Webhook Pipeline Configuration Sync
-
-│ • PostgreSQL 16+ • Stripe PaymentIntents Lifecycle • Transactional Outbox (DB) • Real-Time SSE Stream
-
-│ • Zero-Downtime Expand-Contract • Double-Entry Bookkeeping Ledger • Redis/BullMQ Worker Dispatchers • In-Memory Flag Engine
-
-│ • Safe DDL (`lock_timeout = 2s`) • Cryptographic HMAC-SHA256 Sign. • Exponential Backoff + Jitter • Sub-Microsecond Evals
-
-│ • Concurrent Index Creation • Idempotency Deduplication Tables • Circuit-Breaker Auto-Suspension • Instant Kill Switches
-
-│ │
-
+│                                                                                                                 │
+│  Inbound Traffic (API Gateway & Edge Tier)                                                                      │
+│  • Multi-Tier Rate Limiting: Cloudflare WAF (L7 Floods) ──► Envoy Gateway (Global Quotas)                      │
+│  • Edge Dynamic Feature Evaluation (MurmurHash3 Deterministic User Canary Bucketing)                            │
+│         │                                                                                                       │
+│         ▼                                                                                                       │
+│  Application & Concurrency Layer (Node.js / Fastify / Next.js)                                                  │
+│  • Distributed Mutual Exclusion: Redis Lua Atomic Locks & Multi-Master Redlock Quorums                          │
+│  • Storage-level fencing protection (Monotonic Fencing Tokens)                                                  │
+│         │                                                                                                       │
+│         ├─────────────────────────────────┬──────────────────────────────────┬──────────────────────────────────┤
+│         ▼                                 ▼                                  ▼                                  ▼
+│  Database Layer                   Fintech Payment Core               Outbound Webhook Pipeline          Configuration Sync
+│  • PostgreSQL 16+                 • Stripe PaymentIntents Lifecycle  • Transactional Outbox (DB)        • Real-Time SSE Stream
+│  • Zero-Downtime Expand-Contract  • Double-Entry Bookkeeping Ledger  • Redis/BullMQ Worker Dispatchers  • In-Memory Flag Engine
+│  • Safe DDL (`lock_timeout = 2s`) • Cryptographic HMAC-SHA256 Sign.  • Exponential Backoff + Jitter     • Sub-Microsecond Evals
+│  • Concurrent Index Creation      • Idempotency Deduplication Tables • Circuit-Breaker Auto-Suspension  • Instant Kill Switches
+│                                                                                                                 │
 └─────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
 
 ### 2. Core Resilient Systems Architectural Pillars
 
