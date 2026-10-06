@@ -137,34 +137,192 @@ Build a durable Write-Ahead Logging system in C that:
 
 ```c
 #include <stdio.h>
-
 #include <stdlib.h>
-
-#include <stdint.h>
-
 #include <stdbool.h>
-
-#include <string.h>
-
-#include <assert.h>
-
-#define WAL_MAGIC 0x57414C31 // "WAL1" in ASCII
-
-// Packed Record Header (28 bytes)
-
+#define SAFE_BUFFER_SIZE 4096
+bool copy_file_safe(const char *src_path, const char *dst_path) {
+    if (!src_path || !dst_path) return false;
+    // Fix 1: Explicit binary mode ("rb", "wb")
+    FILE *in = fopen(src_path, "rb");
+    if (!in) {
+        perror("Defensive Error: Failed to open source file");
+        return false;
+    }
+    FILE *out = fopen(dst_path, "wb");
+    if (!out) {
+        perror("Defensive Error: Failed to open destination file");
+        fclose(in);
+        return false;
+    }
+    char buffer[SAFE_BUFFER_SIZE];
+    size_t bytes_read = 0;
+    bool success = true;
+    // Fix 2: Condition loop directly on fread() return value
+    while ((bytes_read = fread(buffer, 1, SAFE_BUFFER_SIZE, in)) > 0) {
+        // Fix 3: Write exactly the number of bytes read
+        size_t bytes_written = fwrite(buffer, 1, bytes_read, out);
+        if (bytes_written != bytes_read) {
+            perror("Defensive Error: Incomplete write or disk full");
+            success = false;
+            break;
+        }
+    }
+    // Fix 4: Differentiate between normal EOF and read error
+    if (ferror(in)) {
+        perror("Defensive Error: An I/O error occurred while reading source");
+        success = false;
+    }
+    fclose(in);
+    if (fclose(out) != 0) {
+        perror("Defensive Error: Failed to flush/close destination file");
+        success = false;
+    }
+    return success;
+}
+```
+    fclose(in);
+    fclose(out);
+}
+``` WalHeader;
+/* ========================================================================= */
+/*                          1. CRC-32 IMPLEMENTATION                         */
+/* ========================================================================= */
+uint32_t compute_crc32(const uint8_t *data, size_t len) {
+    uint32_t crc = 0xFFFFFFFFU;
+    for (size_t i = 0; i < len; i++) {
+        crc ^= data[i];
+        for (int b = 0; b < 8; b++) {
+            if (crc & 1) {
+                crc = (crc >> 1) ^ 0xEDB88320U;
+            } else {
+                crc >>= 1;
+            }
+        }
+    }
+    return ~crc;
+}
+/* ========================================================================= */
+/*                       2. WAL MANAGEMENT ENGINE                            */
+/* ========================================================================= */
 typedef struct {
-
-uint32_t magic;
-
-uint64_t lsn;
-
-uint64_t timestamp_sec;
-
-uint32_t payload_len;
-
-uint32_t crc32;
-
-} WalHeader;
+    FILE *fp;
+    char filename[256];
+    uint64_t next_lsn;
+} WriteAheadLog;
+WriteAheadLog *wal_open(const char *filename) {
+    WriteAheadLog *wal = (WriteAheadLog *)malloc(sizeof(WriteAheadLog));
+    if (!wal) return NULL;
+    strncpy(wal->filename, filename, sizeof(wal->filename) - 1);
+    wal->filename[sizeof(wal->filename) - 1] = '\0';
+    wal->next_lsn = 1;
+    // Open for append & read in binary mode
+    wal->fp = fopen(filename, "ab+");
+    if (!wal->fp) {
+        free(wal);
+        return NULL;
+    }
+    return wal;
+}
+void wal_close(WriteAheadLog *wal) {
+    if (!wal) return;
+    if (wal->fp) {
+        fflush(wal->fp);
+        fclose(wal->fp);
+    }
+    free(wal);
+}
+// Append a record with CRC32 framing
+bool wal_append(WriteAheadLog *wal, const void *payload, size_t len, uint64_t ts) {
+    if (!wal || !wal->fp || !payload || len == 0) return false;
+    WalHeader hdr;
+    hdr.magic = WAL_MAGIC;
+    hdr.lsn = wal->next_lsn;
+    hdr.timestamp_sec = ts;
+    hdr.payload_len = (uint32_t)len;
+    hdr.crc32 = compute_crc32((const uint8_t *)payload, len);
+    // Write Header
+    if (fwrite(&hdr, sizeof(WalHeader), 1, wal->fp) != 1) {
+        return false;
+    }
+    // Write Payload
+    if (fwrite(payload, 1, len, wal->fp) != len) {
+        return false;
+    }
+    // Flush to OS cache
+    fflush(wal->fp);
+    wal->next_lsn++;
+    return true;
+}
+// Recovery Callback Signature
+typedef void (*WalReplayFn)(uint64_t lsn, uint64_t ts, const uint8_t *data, size_t len, void *ctx);
+// Read and recover all valid WAL records, reporting any corrupted tail
+size_t wal_recover(const char *filename, WalReplayFn replay_cb, void *ctx) {
+    FILE *fp = fopen(filename, "rb");
+    if (!fp) return 0;
+    size_t valid_records = 0;
+    WalHeader hdr;
+    while (fread(&hdr, sizeof(WalHeader), 1, fp) == 1) {
+        if (hdr.magic != WAL_MAGIC) {
+            fprintf(stderr, "[Recovery] Invalid magic 0x%08X at record #%zu! Halting scan.\n", 
+                    hdr.magic, valid_records + 1);
+            break;
+        }
+        uint8_t *payload = (uint8_t *)malloc(hdr.payload_len);
+        if (!payload) break;
+        size_t bytes_read = fread(payload, 1, hdr.payload_len, fp);
+        if (bytes_read != hdr.payload_len) {
+            fprintf(stderr, "[Recovery] Incomplete payload read (%zu of %u bytes). Truncated record!\n",
+                    bytes_read, hdr.payload_len);
+            free(payload);
+            break;
+        }
+        uint32_t check_crc = compute_crc32(payload, hdr.payload_len);
+        if (check_crc != hdr.crc32) {
+            fprintf(stderr, "[Recovery] CRC32 Mismatch on LSN %llu! Data corrupted.\n", (unsigned long long)hdr.lsn);
+            free(payload);
+            break;
+        }
+        if (replay_cb) {
+            replay_cb(hdr.lsn, hdr.timestamp_sec, payload, hdr.payload_len, ctx);
+        }
+        free(payload);
+        valid_records++;
+    }
+    fclose(fp);
+    return valid_records;
+}
+/* ========================================================================= */
+/*                               DRIVER MAIN                                 */
+/* ========================================================================= */
+void sample_replay_handler(uint64_t lsn, uint64_t ts, const uint8_t *data, size_t len, void *ctx) {
+    (void)ctx;
+    printf("  [REPLAY] LSN: %llu | TS: %llu | Data: \"%.*s\" (%zu bytes)\n", 
+           (unsigned long long)lsn, (unsigned long long)ts, (int)len, data, len);
+}
+int main(void) {
+    const char *log_file = "test_transaction.wal";
+    printf("=== Testing Binary Write-Ahead Log (WAL) Engine ===\n\n");
+    // 1. Initialize and write records
+    WriteAheadLog *wal = wal_open(log_file);
+    assert(wal != NULL);
+    printf("[1] Appending transaction records...\n");
+    wal_append(wal, "TX_BEGIN: Account=1001", strlen("TX_BEGIN: Account=1001"), 1725880000ULL);
+    wal_append(wal, "TX_DEBIT: Account=1001 Amount=250.00", strlen("TX_DEBIT: Account=1001 Amount=250.00"), 1725880001ULL);
+    wal_append(wal, "TX_CREDIT: Account=2002 Amount=250.00", strlen("TX_CREDIT: Account=2002 Amount=250.00"), 1725880002ULL);
+    wal_append(wal, "TX_COMMIT: Account=1001", strlen("TX_COMMIT: Account=1001"), 1725880003ULL);
+    wal_close(wal);
+    printf("    4 transactions committed and flushed to disk.\n\n");
+    // 2. Perform Recovery Scan
+    printf("[2] Executing WAL Recovery & Replay Scan:\n");
+    size_t recovered = wal_recover(log_file, sample_replay_handler, NULL);
+    printf("    Recovery Complete: %zu valid records verified.\n\n", recovered);
+    assert(recovered == 4);
+    // Clean up temporary log file
+    remove(log_file);
+    printf("WAL file cleanly removed. Zero leaks!\n");
+    return 0;
+}
+``` WalHeader;
 
 /*
 =========================================================================

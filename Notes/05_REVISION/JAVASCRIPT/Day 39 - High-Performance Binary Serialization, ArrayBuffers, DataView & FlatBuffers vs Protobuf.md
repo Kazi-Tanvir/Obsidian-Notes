@@ -58,21 +58,16 @@ In high-throughput distributed systems, real-time trading engines, gaming backen
 
 - **The DataView Solution**: DataView provides complete, explicit control over endianness and byte alignment at arbitrary offsets:
 
+```typescript
 const buffer = new ArrayBuffer(8); // 8 bytes of raw memory
-
 const view = new DataView(buffer);
-
 // Write 32-bit unsigned integer in Big-Endian (Network Byte Order)
-
 view.setUint32(0, 4294967295, false); // false = Big-Endian
-
 // Write 32-bit floating point in Little-Endian
-
-view.setFloat32(4, 3.14159, true); // true = Little-Endian
-
+view.setFloat32(4, 3.14159, true);    // true = Little-Endian
 console.log('Byte 0:', view.getUint8(0)); // 255 (0xFF)
-
 console.log('Float32 read:', view.getFloat32(4, true)); // ~3.14159
+```
 
 ### 3. Protocol Buffers vs. FlatBuffers: The Zero-Copy Paradigm
 
@@ -120,27 +115,19 @@ view.getFloat64(byteOffset, littleEndian?);
 
 Analyze the following binary network transmission code:
 
+```typescript
 // Sender (x86_64 Node.js Server - Little Endian)
-
 const sendBuffer = new ArrayBuffer(4);
-
 const u32View = new Uint32Array(sendBuffer);
-
 u32View[0] = 0x12345678;
-
 socket.write(Buffer.from(sendBuffer));
-
 // Receiver (Parsing as Big-Endian Network Packet)
-
 socket.on('data', (rawBytes) => {
-
-const view = new DataView(rawBytes.buffer, rawBytes.byteOffset, rawBytes.byteLength);
-
-const packetId = view.getUint32(0, false); // Expects Big-Endian
-
-console.log('Received ID:', packetId.toString(16));
-
+  const view = new DataView(rawBytes.buffer, rawBytes.byteOffset, rawBytes.byteLength);
+  const packetId = view.getUint32(0, false); // Expects Big-Endian
+  console.log('Received ID:', packetId.toString(16));
 });
+```
 
 *Question*: What hexadecimal value is printed on the receiver? Why did the packet ID corrupt, and how must both sides be refactored to ensure guaranteed cross-platform consistency?
 

@@ -92,268 +92,109 @@ A compute dispatch organizes threads into a two-tiered hierarchy:
 
 2.  **Invocations per Workgroup**: Defined in WGSL via \@workgroup_size(sizeX, sizeY, sizeZ). \$\$\\text{Total Parallel Threads} = (\\text{workgroupsX} \\cdot \\text{sizeX}) \\times (\\text{workgroupsY} \\cdot \\text{sizeY}) \\times (\\text{workgroupsZ} \\cdot \\text{sizeZ})\$\$
 
+```wgsl
 // matrix-vector-multiply.wgsl
-
 // Storage buffer bindings: group(0) matches GPUBindGroup in JS
-
-\@group(0) \@binding(0) var<storage, read> vectorA: array<f32>;
-
-\@group(0) \@binding(1) var<storage, read> vectorB: array<f32>;
-
-\@group(0) \@binding(2) var<storage, read_write> result: array<f32>;
+@group(0) @binding(0) var<storage, read> vectorA: array<f32>;
+@group(0) @binding(1) var<storage, read> vectorB: array<f32>;
+@group(0) @binding(2) var<storage, read_write> result: array<f32>;
 
 // Workgroup size: 64 threads per hardware workgroup
-
-\@compute \@workgroup_size(64)
-
+@compute @workgroup_size(64)
 fn main(@builtin(global_invocation_id) global_id: vec3<u32>) {
-
-let index = global_id.x;
-
-// Bounds check to prevent out-of-bounds VRAM access
-
-if (index >= arrayLength(&vectorA)) {
-
-return;
-
+  let index = global_id.x;
+  // Bounds check to prevent out-of-bounds VRAM access
+  if (index >= arrayLength(&vectorA)) {
+    return;
+  }
+  // Perform SIMD vector addition concurrently across thousands of ALUs
+  result[index] = vectorA[index] + vectorB[index];
 }
+```
 
-// Perform SIMD vector addition concurrently across thousands of ALUs
-
-result[index] = vectorA[index] + vectorB[index];
-
-}
-
-### 4. End-to-End JavaScript Compute Pipeline
-
-Executing the compiled compute kernel from JavaScript:
-
+```typescript
 async function runWebGPUVectorAdd() {
+  // 1. Request hardware adapter and logical device
+  if (!navigator.gpu) throw new Error('WebGPU not supported on this platform');
+  const adapter = await navigator.gpu.requestAdapter({ powerPreference: 'high-performance' });
+  const device = await adapter!.requestDevice();
 
-// 1. Request hardware adapter and logical device
+  const ARRAY_SIZE = 1000000;
+  const BYTE_SIZE = ARRAY_SIZE * Float32Array.BYTES_PER_ELEMENT;
 
-if (!navigator.gpu) throw new Error('WebGPU not supported on this platform');
+  // 2. Allocate GPU VRAM Storage Buffers
+  const gpuBufferA = device.createBuffer({
+    size: BYTE_SIZE,
+    usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST,
+  });
+  const gpuBufferB = device.createBuffer({
+    size: BYTE_SIZE,
+    usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST,
+  });
+  const gpuBufferResult = device.createBuffer({
+    size: BYTE_SIZE,
+    usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC,
+  });
 
-const adapter = await navigator.gpu.requestAdapter({ powerPreference: 'high-performance' });
+  // 3. Allocate Staging Buffer to read results back to CPU
+  const stagingBuffer = device.createBuffer({
+    size: BYTE_SIZE,
+    usage: GPUBufferUsage.MAP_READ | GPUBufferUsage.COPY_DST,
+  });
 
-const device = await adapter.requestDevice();
+  // 4. Create Shader Module
+  const shaderModule = device.createShaderModule({
+    code: `
+      @group(0) @binding(0) var<storage, read> a: array<f32>;
+      @group(0) @binding(1) var<storage, read> b: array<f32>;
+      @group(0) @binding(2) var<storage, read_write> out: array<f32>;
+      @compute @workgroup_size(64)
+      fn main(@builtin(global_invocation_id) id: vec3<u32>) {
+        let idx = id.x;
+        if (idx < arrayLength(&a)) {
+          out[idx] = a[idx] + b[idx];
+        }
+      }
+    `,
+  });
 
-const ARRAY_SIZE = 1000000;
+  // 5. Build Compute Pipeline
+  const computePipeline = device.createComputePipeline({
+    layout: 'auto',
+    compute: { module: shaderModule, entryPoint: 'main' },
+  });
 
-const BYTE_SIZE = ARRAY_SIZE * Float32Array.BYTES_PER_ELEMENT;
+  // 6. Bind GPU Resources into a GPUBindGroup
+  const bindGroup = device.createBindGroup({
+    layout: computePipeline.getBindGroupLayout(0),
+    entries: [
+      { binding: 0, resource: { buffer: gpuBufferA } },
+      { binding: 1, resource: { buffer: gpuBufferB } },
+      { binding: 2, resource: { buffer: gpuBufferResult } },
+    ],
+  });
 
-// 2. Create typed arrays with host data
+  // 7. Record and Submit GPU Command Buffer
+  const commandEncoder = device.createCommandEncoder();
+  const passEncoder = commandEncoder.beginComputePass();
+  passEncoder.setPipeline(computePipeline);
+  passEncoder.setBindGroup(0, bindGroup);
+  passEncoder.dispatchWorkgroups(Math.ceil(ARRAY_SIZE / 64));
+  passEncoder.end();
 
-const inputA = new Float32Array(ARRAY_SIZE).fill(2.5);
+  // Copy result buffer to CPU readable staging buffer
+  commandEncoder.copyBufferToBuffer(gpuBufferResult, 0, stagingBuffer, 0, BYTE_SIZE);
+  device.queue.submit([commandEncoder.finish()]);
 
-const inputB = new Float32Array(ARRAY_SIZE).fill(3.5);
+  // 8. Asynchronously map staging buffer to CPU address space
+  await stagingBuffer.mapAsync(GPUMapMode.READ);
+  const copyArrayBuffer = stagingBuffer.getMappedRange();
+  const finalResult = new Float32Array(copyArrayBuffer.slice(0));
+  stagingBuffer.unmap();
 
-// 3. Allocate GPU VRAM Buffers
-
-const gpuBufferA = device.createBuffer({
-
-size: BYTE_SIZE,
-
-usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST,
-
-});
-
-const gpuBufferB = device.createBuffer({
-
-size: BYTE_SIZE,
-
-usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST,
-
-});
-
-const gpuBufferResult = device.createBuffer({
-
-size: BYTE_SIZE,
-
-usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC,
-
-});
-
-const stagingBuffer = device.createBuffer({
-
-size: BYTE_SIZE,
-
-usage: GPUBufferUsage.MAP_READ | GPUBufferUsage.COPY_DST,
-
-});
-
-// 4. Copy CPU data to GPU VRAM via direct memory queue
-
-device.queue.writeBuffer(gpuBufferA, 0, inputA);
-
-device.queue.writeBuffer(gpuBufferB, 0, inputB);
-
-// 5. Compile WGSL Shader Module & Create Pipeline
-
-const shaderModule = device.createShaderModule({
-
-code: `
-
-\@group(0) \@binding(0) var<storage, read> a: array<f32>;
-
-\@group(0) \@binding(1) var<storage, read> b: array<f32>;
-
-\@group(0) \@binding(2) var<storage, read_write> out: array<f32>;
-
-\@compute \@workgroup_size(64)
-
-fn main(@builtin(global_invocation_id) id: vec3<u32>) {
-
-let i = id.x;
-
-if (i < arrayLength(&a)) {
-
-out[i] = a[i] + b[i];
-
+  console.log('Calculation Finished! Sample[0]:', finalResult[0]); // 6.0
+  return finalResult;
 }
+```
 
-}
 
-`,
-
-});
-
-const computePipeline = device.createComputePipeline({
-
-layout: 'auto',
-
-compute: { module: shaderModule, entryPoint: 'main' },
-
-});
-
-// 6. Bind VRAM Buffers to Pipeline BindGroup
-
-const bindGroup = device.createBindGroup({
-
-layout: computePipeline.getBindGroupLayout(0),
-
-entries: [
-
-{ binding: 0, resource: { buffer: gpuBufferA } },
-
-{ binding: 1, resource: { buffer: gpuBufferB } },
-
-{ binding: 2, resource: { buffer: gpuBufferResult } },
-
-],
-
-});
-
-// 7. Record and Submit GPU Command Buffer
-
-const commandEncoder = device.createCommandEncoder();
-
-const passEncoder = commandEncoder.beginComputePass();
-
-passEncoder.setPipeline(computePipeline);
-
-passEncoder.setBindGroup(0, bindGroup);
-
-// Dispatch: Ceiling division to ensure all items are covered
-
-passEncoder.dispatchWorkgroups(Math.ceil(ARRAY_SIZE / 64));
-
-passEncoder.end();
-
-// Copy GPU output to staging buffer for CPU readback
-
-commandEncoder.copyBufferToBuffer(gpuBufferResult, 0, stagingBuffer, 0, BYTE_SIZE);
-
-device.queue.submit([commandEncoder.finish()]);
-
-// 8. Asynchronously map staging buffer to CPU address space
-
-await stagingBuffer.mapAsync(GPUMapMode.READ);
-
-const copyArrayBuffer = stagingBuffer.getMappedRange();
-
-const finalResult = new Float32Array(copyArrayBuffer.slice(0));
-
-stagingBuffer.unmap();
-
-console.log('Calculation complete! Sample[0]:', finalResult[0]); // 6.0
-
-}
-
-## SECTION 2: DOCUMENTATION CHEAT SHEET
-
-### WebGPU Buffer Usages (GPUBufferUsage):
-
------------------------------------------------------------------------------ **Flag**                **Purpose**             **Allowed CPU / GPU Access** ----------------------- ----------------------- ----------------------------- STORAGE                 Read/write array data   GPU read/write via WGSL in shaders              pointer.
-
-UNIFORM                 Small, read-only        Fast GPU cached read; uniform parameters (<64KB)     across all invocations.
-
-COPY_DST                Destination for         Host-to-device or queue.writeBuffer() or  device-to-device transfer GPU copy                target.
-
-COPY_SRC                Source for GPU-to-GPU   Transfer source for staging copy                    buffer copy.
-
-MAP_READ                CPU readback staging    Host can read via buffer                  mapAsync(GPUMapMode.READ).
-
-MAP_WRITE               CPU staging buffer to   Host can write via populate VRAM           mapAsync(GPUMapMode.WRITE). -----------------------------------------------------------------------------
-
-### WGSL Built-in Input Variables:
-
---------------------------------------------------------------------------------- **Built-in Attribute**            **Type**                **Description** --------------------------------- ----------------------- ----------------------- \@builtin(global_invocation_id)   vec3<u32>             Unique 3D index across all workgroups: workgroup_id * workgroup_size + local_invocation_id.
-
-\@builtin(local_invocation_id)    vec3<u32>             Thread index within the current workgroup (\$0\$ to \$\\text{size}-1\$).
-
-\@builtin(workgroup_id)           vec3<u32>             Coordinates of the workgroup within the dispatch grid.
-
-\@builtin(num_workgroups)         vec3<u32>             Total workgroup dimensions specified in dispatchWorkgroups(). ---------------------------------------------------------------------------------
-
-## SECTION 3: PRACTICAL PROBLEMS
-
-### Problem 1 (Basic): In-Browser GPU Dot Product Engine
-
-**Context**: Neural network vector embeddings require calculating the dot product (\$\\mathbf{A} \\cdot \\mathbf{B} = \\sum A_i \\cdot B_i\$) over 1536-dimensional vectors across thousands of candidates.
-
-**Challenge**: Implement a class WebGPUDotProduct:
-
-1.  Accepts two Float32Array vectors of length \$N\$.
-
-2.  Compiles a WGSL compute shader that performs element-wise multiplication on the GPU.
-
-3.  Stages and downloads the resulting array to sum elements, or performs partial parallel workgroup reductions.
-
-4.  Measures and returns both execution time and resulting scalar value.
-
-*Hint: Use a workgroup size of 128. Handle non-multiples of 128 by checking global_id.x < arrayLength(&vectorA).*
-
-### Problem 2 (Intermediate): Image Brightness & Contrast GPU Kernel
-
-**Context**: Canvas 2D image processing using ctx.getImageData() locks the browser thread when manipulating high-resolution 4K images (\$3840 \\times 2160 \\times 4\$ bytes \$\\approx 33\\text{MB}\$).
-
-**Challenge**: Build a GPUImageProcessor class:
-
-1.  Accepts an ImageData buffer containing RGBA pixel bytes (Uint8ClampedArray).
-
-2.  Uploads pixel data to a GPUBuffer formatted as contiguous floats or packed u32 pixels.
-
-3.  Runs a WGSL 2D compute shader with \@workgroup_size(16, 16) applying: \$\$\\text{Pixel}*{\\text{out}} = \\text{clamp}((\\text{Pixel}*{\\text{in}} - 128.0) \\cdot \\text{contrast} + 128.0 + \\text{brightness}, 0.0, 255.0)\$\$
-
-4.  Maps the output buffer back into an ImageData object with sub-millisecond execution times.
-
-*Hint: Use a 2D dispatch: passEncoder.dispatchWorkgroups(Math.ceil(width / 16), Math.ceil(height / 16)). Leave the alpha channel unchanged.*
-
-### Problem 3 (Advanced): GPU Matrix Multiplication (GEMM) with Shared Workgroup Memory
-
-**Context**: General Matrix Multiplication (\$C = A \\times B\$ where \$A\$ is \$M \\times K\$ and \$B\$ is \$K \\times N\$) is the core computational kernel of Large Language Models (LLMs) running locally in WebGPU (e.g. WebLLM / Transformers.js). Naive global VRAM reads cause severe memory bandwidth saturation.
-
-**Challenge**: Implement an optimized Tiled Matrix Multiplier in WebGPU:
-
-1.  Implements **Shared Workgroup Memory** in WGSL using var<workgroup> tileA: array<array<f32, 16>, 16> and tileB.
-
-2.  Threads within each \$16 \\times 16\$ workgroup cooperatively load a \$16 \\times 16\$ tile from global VRAM into shared on-chip SRAM cache.
-
-3.  Synchronizes threads within the workgroup using workgroupBarrier().
-
-4.  Computes partial dot products from shared memory tiles before advancing to the next tile.
-
-5.  Benchmark performance against a native JS nested loop for two \$1024 \\times 1024\$ matrices, demonstrating a \$>50\\times\$ speedup.
-
-*Hint: Remember that workgroupBarrier() ensures all 256 threads have finished loading their tile element before any thread begins calculating arithmetic products.*

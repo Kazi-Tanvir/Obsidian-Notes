@@ -90,43 +90,27 @@ Argo Rollouts integrates with an **Envoy-based Ingress Controller** (such as Tra
 
 - The Ingress routing rule splits incoming HTTP traffic dynamically at the network level based on weight percentages configured in the Rollout manifest:
 
+```yaml
 # Simplified Ingress traffic routing
-
 apiVersion: networking.k8s.io/v1
-
 kind: Ingress
-
 metadata:
-
-name: payment-api-ingress
-
-annotations:
-
-ingress.kubernetes.io/canary-by-header: "X-Beta-Tester" # Optional targeted header routing
-
+  name: payment-api-ingress
+  annotations:
+    ingress.kubernetes.io/canary-by-header: "X-Beta-Tester" # Optional targeted header routing
 spec:
-
-rules:
-
-- host: api.enterprise.com
-
-http:
-
-paths:
-
-- path: /payments
-
-pathType: Prefix
-
-backend:
-
-service:
-
-name: payment-api-stable
-
-port:
-
-number: 8080
+  rules:
+    - host: api.enterprise.com
+      http:
+        paths:
+          - path: /payments
+            pathType: Prefix
+            backend:
+              service:
+                name: payment-api-stable
+                port:
+                  number: 8080
+```
 
 ### 4. Automated Metric Analysis & Self-Aborting Rollouts
 
@@ -138,149 +122,91 @@ If the error rate exceeds a specified threshold, the analysis fails, and Argo Ro
 
 ### Production Argo Rollout Manifest (rollout.yaml):
 
+```yaml
 apiVersion: argoproj.io/v1alpha1
-
 kind: Rollout
-
 metadata:
-
-name: billing-service
-
+  name: billing-service
 spec:
-
-replicas: 10
-
-selector:
-
-matchLabels:
-
-app: billing-service
-
-template:
-
-metadata:
-
-labels:
-
-app: billing-service
-
-spec:
-
-containers:
-
-- name: billing-node
-
-image: registry.enterprise.com/billing:v2.4.0
-
-resources:
-
-requests:
-
-cpu: "500m"
-
-memory: "512Mi"
-
-limits:
-
-cpu: "1000m"
-
-memory: "1024Mi"
-
-strategy:
-
-canary:
-
-canaryService: billing-service-canary
-
-stableService: billing-service-stable
-
-trafficRouting:
-
-alb:
-
-ingress: billing-ingress
-
-servicePort: 8080
-
-steps:
-
-- setWeight: 5
-
-- pause: { duration: 10m }
-
-- setWeight: 20
-
-- pause: { duration: 30m }
-
-- setWeight: 50
-
-- pause: { duration: 1h }
-
-analysis:
-
-templates:
-
-- templateName: http-error-rate-analysis
-
-args:
-
-- name: service-name
-
-value: billing-service
+  replicas: 10
+  selector:
+    matchLabels:
+      app: billing-service
+  template:
+    metadata:
+      labels:
+        app: billing-service
+    spec:
+      containers:
+        - name: billing-node
+          image: registry.enterprise.com/billing:v2.4.0
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "512Mi"
+            limits:
+              cpu: "1000m"
+              memory: "1024Mi"
+  strategy:
+    canary:
+      canaryService: billing-service-canary
+      stableService: billing-service-stable
+      trafficRouting:
+        alb:
+          ingress: billing-ingress
+          servicePort: 8080
+      steps:
+        - setWeight: 5
+        - pause: { duration: 10m }
+        - setWeight: 20
+        - pause: { duration: 30m }
+        - setWeight: 50
+        - pause: { duration: 1h }
+      analysis:
+        templates:
+          - templateName: http-error-rate-analysis
+        args:
+          - name: service-name
+            value: billing-service
+```
 
 ### Prometheus Automated Analysis Template (analysis-template.yaml):
 
+```yaml
 apiVersion: argoproj.io/v1alpha1
-
 kind: AnalysisTemplate
-
 metadata:
-
-name: http-error-rate-analysis
-
+  name: http-error-rate-analysis
 spec:
-
-metrics:
-
-- name: error-rate-percentage
-
-interval: 1m
-
-successCondition: result[0] <= 0.01 # Allow maximum 1% 5xx errors
-
-failureLimit: 2 # Abort rollout if 2 consecutive samples fail
-
-provider:
-
-prometheus:
-
-address: http://prometheus-k8s.monitoring:9090
-
-query: |
-
-sum(rate(http_requests_total{service="billing-service-canary", status=~"5.."}[2m]))
-
-/
-
-sum(rate(http_requests_total{service="billing-service-canary"}[2m]))
+  metrics:
+    - name: error-rate-percentage
+      interval: 1m
+      successCondition: result[0] <= 0.01 # Allow maximum 1% 5xx errors
+      failureLimit: 2 # Abort rollout if 2 consecutive samples fail
+      provider:
+        prometheus:
+          address: http://prometheus-k8s.monitoring:9090
+          query: |
+            sum(rate(http_requests_total{service="billing-service-canary", status=~"5.."}[2m]))
+            /
+            sum(rate(http_requests_total{service="billing-service-canary"}[2m]))
+```
 
 ### Essential Argo Rollouts CLI Commands:
 
+```bash
 # Inspect real-time visual status of a progressive rollout
-
 kubectl argo rollouts get rollout billing-service --watch
 
 # Manually promote a rollout that is currently paused
-
 kubectl argo rollouts promote billing-service
 
 # Manually abort a rollout immediately and revert traffic to stable
-
 kubectl argo rollouts abort billing-service
 
 # Retry a failed or aborted rollout
-
 kubectl argo rollouts retry rollout billing-service
+```
 
 ## SECTION 3: WEEKLY SYSTEM DESIGN & CODING PROBLEMS
 

@@ -54,139 +54,85 @@ Prior to the modern AudioWorklet specification, custom audio manipulation relied
 
 #### Anatomy of an AudioWorkletProcessor:
 
+```javascript
 // custom-bitcrusher-processor.js (Loaded into AudioWorklet thread)
-
 class BitcrusherProcessor extends AudioWorkletProcessor {
-
-static get parameterDescriptors() {
-
-return [
-
-{
-
-name: 'bitDepth',
-
-defaultValue: 8,
-
-minValue: 1,
-
-maxValue: 16,
-
-automationRate: 'a-rate', // Sample-accurate automation (128 values per quantum)
-
-},
-
-{
-
-name: 'frequencyReduction',
-
-defaultValue: 0.1,
-
-minValue: 0.01,
-
-maxValue: 1.0,
-
-automationRate: 'k-rate', // Block-level automation (1 value per quantum)
-
+  static get parameterDescriptors() {
+    return [
+      {
+        name: 'bitDepth',
+        defaultValue: 8,
+        minValue: 1,
+        maxValue: 16,
+        automationRate: 'a-rate', // Sample-accurate automation (128 values per quantum)
+      },
+      {
+        name: 'frequencyReduction',
+        defaultValue: 0.1,
+        minValue: 0.01,
+        maxValue: 1.0,
+        automationRate: 'k-rate', // Block-level automation (1 value per quantum)
+      }
+    ];
+  }
+  constructor() {
+    super();
+    this.lastSampleValue = 0;
+    this.phase = 0;
+  }
+  // CRITICAL V8 PERFORMANCE RULE: NEVER allocate objects, arrays, or closures inside process()!
+  // Allocations trigger Garbage Collection, destroying real-time audio guarantees.
+  process(inputs, outputs, parameters) {
+    const input = inputs[0];
+    const output = outputs[0];
+    if (!input || input.length === 0) return true;
+    const inputChannel0 = input[0];
+    const outputChannel0 = output[0];
+    const bitDepthParam = parameters.bitDepth;
+    const freqReductionParam = parameters.frequencyReduction[0];
+    const isBitDepthConstant = bitDepthParam.length === 1;
+    for (let i = 0; i < inputChannel0.length; i++) {
+      this.phase += freqReductionParam;
+      if (this.phase >= 1.0) {
+        this.phase -= 1.0;
+        const currentBitDepth = isBitDepthConstant ? bitDepthParam[0] : bitDepthParam[i];
+        const step = Math.pow(0.5, currentBitDepth);
+        // Quantize float sample (-1.0 to +1.0) to discrete bit levels
+        this.lastSampleValue = step * Math.floor(inputChannel0[i] / step + 0.5);
+      }
+      outputChannel0[i] = this.lastSampleValue;
+    }
+    // Returning true keeps the processor alive in the audio graph
+    return true;
+  }
 }
-
-];
-
-}
-
-constructor() {
-
-super();
-
-this.lastSampleValue = 0;
-
-this.phase = 0;
-
-}
-
-// CRITICAL V8 PERFORMANCE RULE: NEVER allocate objects, arrays, or closures inside process()!
-
-// Allocations trigger Garbage Collection, destroying real-time audio guarantees.
-
-process(inputs, outputs, parameters) {
-
-const input = inputs[0];
-
-const output = outputs[0];
-
-if (!input || input.length === 0) return true;
-
-const inputChannel0 = input[0];
-
-const outputChannel0 = output[0];
-
-const bitDepthParam = parameters.bitDepth;
-
-const freqReductionParam = parameters.frequencyReduction[0];
-
-const isBitDepthConstant = bitDepthParam.length === 1;
-
-for (let i = 0; i < inputChannel0.length; i++) {
-
-this.phase += freqReductionParam;
-
-if (this.phase >= 1.0) {
-
-this.phase -= 1.0;
-
-const currentBitDepth = isBitDepthConstant ? bitDepthParam[0] : bitDepthParam[i];
-
-const step = Math.pow(0.5, currentBitDepth);
-
-// Quantize float sample (-1.0 to +1.0) to discrete bit levels
-
-this.lastSampleValue = step * Math.floor(inputChannel0[i] / step + 0.5);
-
-}
-
-outputChannel0[i] = this.lastSampleValue;
-
-}
-
-// Returning true keeps the processor alive in the audio graph
-
-return true;
-
-}
-
-}
-
 registerProcessor('bitcrusher-processor', BitcrusherProcessor);
+```
 
 ### 3. AudioParam Automation Curves & Glitch-Free Scheduling
 
 Setting properties directly via assignment (e.g., gainNode.gain.value = 0.5) introduces immediate step discontinuities in the output waveform, manifesting as annoying "clicks" or "zipper noise". To achieve smooth parameter transitions, developers must use **AudioParam Timeline Automation**:
 
+```javascript
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
 const gainNode = audioCtx.createGain();
 
 // Antipattern: Immediate mutation causes audio pop!
-
 // gainNode.gain.value = 0.0;
 
 // Production Pattern: Sample-accurate scheduling via AudioParam
-
 const now = audioCtx.currentTime;
 
 // 1. Cancel any active automations scheduled in the future
-
 gainNode.gain.cancelScheduledValues(now);
 
 // 2. Lock current baseline value
-
 gainNode.gain.setValueAtTime(gainNode.gain.value, now);
 
 // 3. Linear or Exponential Ramp to eliminate discontinuities
-
 // Note: exponentialRamp cannot approach exactly 0.0 (mathematical singularity), use 0.0001
-
 gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.3); // 300ms smooth fadeout
+```
 
 ```text
 ┌────────────────────────────────────── AudioParam Automation Curves ──────────────────────────────────────┐
@@ -212,27 +158,21 @@ The AnalyserNode provides real-time frequency-domain and time-domain analysis wi
 
 - **Time Domain (getByteTimeDomainData)**: Captures raw oscilloscope waveform values.
 
+```javascript
 const analyser = audioCtx.createAnalyser();
-
 analyser.fftSize = 2048; // Must be power of 2 between 32 and 32768
+analyser.smoothingTimeConstant = 0.8; // Smooths transitions between frequency frames
 
-analyser.smoothingTimeConstant = 0.8; // Smoothing factor between successive FFT frames (0.0 to 1.0)
-
-const bufferLength = analyser.frequencyBinCount; // Exactly fftSize / 2 (1024 bins)
-
+const bufferLength = analyser.frequencyBinCount; // Exactly fftSize / 2 (1024)
 const frequencyData = new Uint8Array(bufferLength);
 
 function renderVisualizer() {
-
-requestAnimationFrame(renderVisualizer);
-
-analyser.getByteFrequencyData(frequencyData);
-
-// frequencyData now contains values from 0 (silence) to 255 (max dB) across 1024 bins
-
-// Bin 0 = 0 Hz, Bin 1023 = Nyquist frequency (SampleRate / 2, e.g., 24 kHz)
-
+  requestAnimationFrame(renderVisualizer);
+  analyser.getByteFrequencyData(frequencyData);
+  // frequencyData[0] = Lowest bass frequencies
+  // frequencyData[bufferLength - 1] = Nyquist frequency (SampleRate / 2, e.g., 24 kHz)
 }
+```
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 

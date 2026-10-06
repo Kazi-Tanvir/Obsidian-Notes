@@ -170,23 +170,17 @@ Set up a modular, multi-file C architecture with proper header hygiene, internal
 
 #ifndef COMMON_H
 
+```c
 #define COMMON_H
-
-#include <stdint.h>
-
-#include <stdbool.h>
-
-#include <stddef.h>
-
+#include &lt;stdint.h&gt;
+#include &lt;stdbool.h&gt;
+#include &lt;stddef.h&gt;
 typedef enum {
-
-STATUS_OK = 0,
-
-STATUS_ERROR_INVALID_ARG = -1,
-
-STATUS_ERROR_OVERFLOW = -2
-
+    STATUS_OK = 0,
+    STATUS_ERROR_INVALID_ARG = -1,
+    STATUS_ERROR_OVERFLOW    = -2
 } StatusCode;
+```
 
 #endif // COMMON_H
 
@@ -194,31 +188,24 @@ STATUS_ERROR_OVERFLOW = -2
 
 #### include/logger.h
 
-#ifndef LOGGER_H
-
+```c
+#ifndef LOGGER_H
 #define LOGGER_H
 
-#include &quot;common.h&quot;
+#include "common.h"
 
 typedef enum {
-
-LOG_LEVEL_DEBUG,
-
-LOG_LEVEL_INFO,
-
-LOG_LEVEL_WARN,
-
-LOG_LEVEL_ERROR
-
+    LOG_LEVEL_DEBUG,
+    LOG_LEVEL_INFO,
+    LOG_LEVEL_WARN,
+    LOG_LEVEL_ERROR
 } LogLevel;
 
 void logger_init(LogLevel min_level);
-
-void logger_log(LogLevel level, const char *fmt, \...);
+void logger_log(LogLevel level, const char *fmt, ...);
 
 #endif // LOGGER_H
-
-
+```
 
 #### src/logger.c
 
@@ -270,17 +257,14 @@ putchar(&apos;\\n&apos;);
 
 #ifndef MATH_ENGINE_H
 
+```c
 #define MATH_ENGINE_H
-
 #include &quot;common.h&quot;
-
 // Exported global variable declaration
-
 extern uint64_t g_operation_count;
-
 StatusCode math_safe_add(int32_t a, int32_t b, int32_t *out_result);
-
 StatusCode math_safe_mul(int32_t a, int32_t b, int32_t *out_result);
+```
 
 #endif // MATH_ENGINE_H
 
@@ -346,21 +330,24 @@ return STATUS_OK;
 
 #include <stdio.h>
 
+```c
 int main(void) {
-
-logger_init(LOG_LEVEL_DEBUG);
-
-logger_log(LOG_LEVEL_INFO, &quot;Multi-module application booted successfully.&quot;);
-
-int32_t sum = 0;
-
-StatusCode st = math_safe_add(1500000000, 1000000000, &sum);
-
-if (st == STATUS_ERROR_OVERFLOW) {
-
-logger_log(LOG_LEVEL_WARN, &quot;Detected integer overflow during addition!&quot;);
-
-} else {
+    logger_init(LOG_LEVEL_DEBUG);
+    logger_log(LOG_LEVEL_INFO, &quot;Multi-module application booted successfully.&quot;);
+    int32_t sum = 0;
+    StatusCode st = math_safe_add(1500000000, 1000000000, &amp;sum);
+    if (st == STATUS_ERROR_OVERFLOW) {
+        logger_log(LOG_LEVEL_WARN, &quot;Detected integer overflow during addition!&quot;);
+    } else {
+        logger_log(LOG_LEVEL_INFO, &quot;Sum: %d&quot;, sum);
+    }
+    int32_t prod = 0;
+    math_safe_mul(25, 4, &amp;prod);
+    logger_log(LOG_LEVEL_INFO, &quot;Product: %d&quot;, prod);
+    logger_log(LOG_LEVEL_DEBUG, &quot;Total Math Operations Tracked: %llu&quot;, (unsigned long long)g_operation_count);
+    return 0;
+}
+``` else {
 
 logger_log(LOG_LEVEL_INFO, &quot;Sum: %d&quot;, sum);
 
@@ -484,19 +471,15 @@ Examine the following buggy header file included across multiple .c files in a l
 
 #ifndef CONFIG_H
 
+```c
 #define CONFIG_H
-
-// BUG 1: Initialized non-static variable defined inside a header!
-
-int max_connection_retries = 5;
-
-// BUG 2: Non-static function implementation inside a header!
-
-int get_default_timeout(void) {
-
-return 30;
-
+// Fix 1: Declare as &apos;extern&apos; in the header...
+extern int g_max_connection_retries;
+// Fix 2: Inline functions in headers MUST be declared &apos;static inline&apos;
+static inline int get_default_timeout(void) {
+    return 30;
 }
+```
 
 #endif // CONFIG_H
 

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "05_REVISION/WEB DEVELOPMENT/Day 52 - Cloud-Native Kubernetes Deployments, GitOps (ArgoCD), Progressive Canary Rollouts & Envoy Ingress.md",
+                "file": "05_REVISION/WEB DEVELOPMENT/Day 51 - Enterprise Multi-Tenant SaaS Architecture, PostgreSQL Row-Level Security (RLS), Dynamic Tenant Routing & Tenant Isolation.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Day 52 - Cloud-Native Kubernetes Deployments, GitOps (ArgoCD), Progressive Canary Rollouts & Envoy Ingress"
+              "title": "Day 51 - Enterprise Multi-Tenant SaaS Architecture, PostgreSQL Row-Level Security (RLS), Dynamic Tenant Routing & Tenant Isolation"
             }
           }
         ]
@@ -228,7 +228,6 @@
   "left-ribbon": {
     "hiddenItems": {
       "bases:Create new base": false,
-      "markdown-importer:Open format converter": false,
       "audio-recorder:Start/stop recording": false,
       "switcher:Open quick switcher": false,
       "canvas:Create new canvas": false,
@@ -244,6 +243,7 @@
   },
   "active": "41125d2dba3cc8d9",
   "lastOpenFiles": [
+    "05_REVISION/WEB DEVELOPMENT/Day 52 - Cloud-Native Kubernetes Deployments, GitOps (ArgoCD), Progressive Canary Rollouts & Envoy Ingress.md",
     "05_REVISION/WEB DEVELOPMENT/Day 51 - Enterprise Multi-Tenant SaaS Architecture, PostgreSQL Row-Level Security (RLS), Dynamic Tenant Routing & Tenant Isolation.md",
     "05_REVISION/WEB DEVELOPMENT/Day 50 - Cloudflare Workers, Durable Objects, D1 SQLite & Actor-Based Distributed Edge State.md",
     "05_REVISION/WEB DEVELOPMENT/Day 49 - Week 7 Review_ Global Sharding, Resilient Distributed Systems, CRDTs, GraphQL Federation, Multi-Region Consensus & Temporal Workflows.md",
@@ -269,7 +269,6 @@
     "05_REVISION/c revision/Day 20 - Generic Doubly Linked Lists & Sentinel Node Patterns.md",
     "05_REVISION/c revision/Day 19 - Lock-Free Ring Buffers & Circular Queues using Bitwise Masking.md",
     "05_REVISION/c revision/Day 18 - Low-Level Stream & Binary File IO, Buffering Modes & Atomic File Operations.md",
-    "05_REVISION/JAVASCRIPT/Day 56 - Week 8 & Full Curriculum Capstone Review_ WebGPU, WebCodecs, TC39 Decorators, Signals, OPFS & Browser Security Architecture.md",
     "05_REVISION/WEB DEVELOPMENT/Unconfirmed 340276.crdownload",
     "05_REVISION/WEB DEVELOPMENT/Unconfirmed 989952.crdownload",
     "05_REVISION/WEB DEVELOPMENT/Day 49 - Week 7 Review_ Global Sharding, Resilient Distributed Systems, CRDTs, GraphQL Federation, Multi-Region Consensus & Temporal Workflows.md.docx",

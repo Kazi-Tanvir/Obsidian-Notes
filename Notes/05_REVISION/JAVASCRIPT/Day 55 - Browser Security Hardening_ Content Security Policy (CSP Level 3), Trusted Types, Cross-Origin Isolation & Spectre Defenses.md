@@ -51,45 +51,29 @@ For three decades, DOM-based Cross-Site Scripting (DOM XSS) remained the most pr
 
 #### Implementing a Compliant Trusted Types Policy:
 
+```javascript
 // Registering a strictly controlled policy
-
 if (window.trustedTypes && window.trustedTypes.createPolicy) {
+  const sanitizePolicy = trustedTypes.createPolicy('app-security-policy', {
+    createHTML: (dirtyString) => {
+      // Pass through an industry-standard DOMPurify sanitizer
+      return DOMPurify.sanitize(dirtyString, { RETURN_TRUSTED_TYPE: false });
+    },
+    createScriptURL: (url) => {
+      // Whitelist permitted CDN script origins
+      const parsed = new URL(url, document.baseURI);
+      if (parsed.origin === 'https://cdn.enterprise.com') {
+        return parsed.href;
+      }
+      throw new SecurityError(`Untrusted script URL blocked: ${url}`);
+    },
+  });
 
-const sanitizePolicy = trustedTypes.createPolicy('app-security-policy', {
-
-createHTML: (dirtyString) => {
-
-// Pass through an industry-standard DOMPurify sanitizer
-
-return DOMPurify.sanitize(dirtyString, { RETURN_TRUSTED_TYPE: false });
-
-},
-
-createScriptURL: (url) => {
-
-// Whitelist permitted CDN script origins
-
-const parsed = new URL(url, document.baseURI);
-
-if (parsed.origin === 'https://cdn.enterprise.com') {
-
-return parsed.href;
-
+  // Assigning via blessed token
+  const container = document.getElementById('content');
+  container.innerHTML = sanitizePolicy.createHTML('<h1>Safe Content</h1>');
 }
-
-throw new SecurityError(`Untrusted script URL blocked: \${url}`);
-
-},
-
-});
-
-// Assigning via blessed token
-
-const container = document.getElementById('content');
-
-container.innerHTML = sanitizePolicy.createHTML('<h1>Safe Content</h1>');
-
-}
+```
 
 ### 2. Modern Content Security Policy (CSP Level 3): Strict Nonces & 'strict-dynamic'
 
@@ -157,29 +141,21 @@ Cross-Origin-Resource-Policy   same-origin (CORP)          Prevents external dom
 
 ### Trusted Types API Methods:
 
+```javascript
 // Check browser support
-
 if (window.trustedTypes) {
+  // Create immutable policy
+  const policy = trustedTypes.createPolicy('my-policy', {
+    createHTML: (input: string) => sanitize(input),
+    createScript: (input: string) => validateScript(input),
+    createScriptURL: (input: string) => validateURL(input),
+  });
 
-// Create immutable policy
-
-const policy = trustedTypes.createPolicy('my-policy', {
-
-createHTML: (input: string) => sanitize(input),
-
-createScript: (input: string) => validateScript(input),
-
-createScriptURL: (input: string) => validateURL(input),
-
-});
-
-// Verify type
-
-console.log(trustedTypes.isHTML(policy.createHTML('<div></div>'))); // true
-
-console.log(trustedTypes.isHTML('<div></div>')); // false
-
+  // Verify type
+  console.log(trustedTypes.isHTML(policy.createHTML('<div></div>'))); // true
+  console.log(trustedTypes.isHTML('<div></div>')); // false
 }
+```
 
 ## SECTION 3: PRACTICAL PROBLEMS
 

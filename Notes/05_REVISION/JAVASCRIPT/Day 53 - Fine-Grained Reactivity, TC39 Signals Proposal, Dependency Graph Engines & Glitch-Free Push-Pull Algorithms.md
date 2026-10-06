@@ -121,135 +121,15 @@ Modern signal engines solve this via a **two-phase Push-Pull evaluation algorith
 
 How does a Signal know which computed function is reading it without passing explicit subscribers? It uses **Lexical Execution Context on the Call Stack**:
 
+```typescript
 // Minimalist Signals Engine Implementation
-
 let activeSubscriber = null;
-
 class SignalState {
-
-constructor(value) {
-
-this.value = value;
-
-this.subscribers = new Set();
-
-}
-
-get() {
-
-// If a computed or effect is currently running on the call stack, record dependency!
-
-if (activeSubscriber) {
-
-this.subscribers.add(activeSubscriber);
-
-activeSubscriber.dependencies.add(this);
-
-}
-
-return this.value;
-
-}
-
-set(newValue) {
-
-if (Object.is(this.value, newValue)) return;
-
-this.value = newValue;
-
-// Notify all downstream dependents
-
-const subsToNotify = Array.from(this.subscribers);
-
-for (const sub of subsToNotify) {
-
-sub.notify();
-
-}
-
-}
-
-}
-
-class SignalComputed {
-
-constructor(computation) {
-
-this.computation = computation;
-
-this.dependencies = new Set();
-
-this.subscribers = new Set();
-
-this.isDirty = true;
-
-this.cachedValue = undefined;
-
-}
-
-notify() {
-
-if (!this.isDirty) {
-
-this.isDirty = true;
-
-for (const sub of this.subscribers) {
-
-sub.notify();
-
-}
-
-}
-
-}
-
-get() {
-
-if (activeSubscriber) {
-
-this.subscribers.add(activeSubscriber);
-
-activeSubscriber.dependencies.add(this);
-
-}
-
-if (this.isDirty) {
-
-// Clean up previous dependency edges (handles dynamic branching!)
-
-for (const dep of this.dependencies) {
-
-dep.subscribers.delete(this);
-
-}
-
-this.dependencies.clear();
-
-// Push this computed onto the tracking stack
-
-const prevSubscriber = activeSubscriber;
-
-activeSubscriber = this;
-
-try {
-
-this.cachedValue = this.computation();
-
-this.isDirty = false;
-
-} finally {
-
-activeSubscriber = prevSubscriber;
-
-}
-
-}
-
-return this.cachedValue;
-
-}
-
-}
+  constructor(value) {
+    this.value = value;
+    this.subscribers = new Set();
+  }
+```
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 

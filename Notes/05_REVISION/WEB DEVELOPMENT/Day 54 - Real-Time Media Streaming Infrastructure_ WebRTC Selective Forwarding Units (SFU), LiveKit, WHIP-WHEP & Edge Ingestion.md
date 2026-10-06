@@ -131,89 +131,67 @@ The SFU monitors real-time feedback from every subscriber using **TWCC (Transpor
 
 ### LiveKit Token Generation in Node.js (livekit-server-sdk):
 
+```typescript
 import { AccessToken } from 'livekit-server-sdk';
 
-export function createParticipantToken(roomName: string, participantIdentity: string, isPublisher: boolean): string {
+export function createParticipantToken(
+  roomName: string,
+  participantIdentity: string,
+  isPublisher: boolean = false
+): string {
+  const at = new AccessToken(
+    process.env.LIVEKIT_API_KEY!,
+    process.env.LIVEKIT_API_SECRET!,
+    {
+      identity: participantIdentity,
+      name: participantIdentity,
+    }
+  );
 
-const at = new AccessToken(
+  // Grant room permissions
+  at.addGrant({
+    roomJoin: true,
+    room: roomName,
+    canPublish: isPublisher,
+    canSubscribe: true,
+    canPublishData: true, // For real-time chat / data channels
+  });
 
-process.env.LIVEKIT_API_KEY!,
-
-process.env.LIVEKIT_API_SECRET!,
-
-{
-
-identity: participantIdentity,
-
-ttl: '2h', // Token expires in 2 hours
-
+  return at.toJwt();
 }
-
-);
-
-// Grant room permissions
-
-at.addGrant({
-
-roomJoin: true,
-
-room: roomName,
-
-canPublish: isPublisher,
-
-canSubscribe: true,
-
-canPublishData: true, // For real-time chat / data channels
-
-});
-
-return at.toJwt();
-
-}
+```
 
 ### LiveKit Production Server Config (livekit.yaml):
 
+```yaml
 port: 7880 # HTTP / WebSocket signaling port
-
 rtc:
-
-tcp_port: 7881 # Fallback TCP port
-
-udp_port: 7882 # Primary UDP media socket
-
-port_range_start: 50000
-
-port_range_end: 60000
-
-use_external_ip: true
+  tcp_port: 7881 # Fallback TCP port
+  udp_port: 7882 # Primary UDP media socket
+  port_range_start: 50000
+  port_range_end: 60000
+  use_external_ip: true
 
 turn:
-
-enabled: true
-
-domain: turn.enterprise.com
-
-cert_file: /etc/certs/turn.crt
-
-key_file: /etc/certs/turn.key
-
-tls_port: 5349
+  enabled: true
+  domain: turn.enterprise.com
+  cert_file: /etc/certs/turn.crt
+  key_file: /etc/certs/turn.key
+  tls_port: 5349
 
 keys:
-
-API_KEY_SECRET_PAIR: "devkey: secretsecretsecret"
+  API_KEY_SECRET_PAIR: "devkey: secretsecretsecret"
+```
 
 ### Linux Kernel UDP Buffer Tuning for High-Throughput SFUs:
 
+```bash
 # Increase maximum OS socket receive and send buffer sizes to prevent UDP packet drops
-
 sudo sysctl -w net.core.rmem_max=26214400
-
 sudo sysctl -w net.core.wmem_max=26214400
-
 sudo sysctl -w net.core.rmem_default=26214400
-
 sudo sysctl -w net.core.wmem_default=26214400
+```
 
 ## SECTION 3: WEEKLY SYSTEM DESIGN & CODING PROBLEMS
 

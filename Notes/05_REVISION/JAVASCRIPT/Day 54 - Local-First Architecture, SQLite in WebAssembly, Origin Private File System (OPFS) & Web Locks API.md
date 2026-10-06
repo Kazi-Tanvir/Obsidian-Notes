@@ -84,41 +84,26 @@ To obtain an exclusive, high-performance synchronous access handle:
 
 async function initializeOPFSStorage() {
 
-// 1. Obtain root directory of the Origin Private File System
-
-const root = await navigator.storage.getDirectory();
-
-// 2. Open or create a binary database file handle
-
-const fileHandle = await root.getFileHandle('enterprise_core.db', { create: true });
-
-// 3. Create a synchronous access handle (EXCLUSIVE TO WEB WORKERS!)
-
-// Note: Only one sync access handle can be open per file concurrently.
-
-const accessHandle = await fileHandle.createSyncAccessHandle();
-
-// 4. In-place binary I/O (Synchronous execution, zero async tick overhead!)
-
-const writeBuffer = new TextEncoder().encode('SQLITE_HEADER_BYTES_V1');
-
-const bytesWritten = accessHandle.write(writeBuffer, { at: 0 });
-
-// 5. Force write barrier to physical persistent storage
-
-accessHandle.flush();
-
-// 6. Read back from arbitrary byte offset
-
-const readBuffer = new Uint8Array(bytesWritten);
-
-accessHandle.read(readBuffer, { at: 0 });
-
-console.log('Read back:', new TextDecoder().decode(readBuffer));
-
-// Close handle when finished
-
-accessHandle.close();
+```typescript
+  // 1. Obtain root directory of the Origin Private File System
+  const root = await navigator.storage.getDirectory();
+  // 2. Open or create a binary database file handle
+  const fileHandle = await root.getFileHandle('enterprise_core.db', { create: true });
+  // 3. Create a synchronous access handle (EXCLUSIVE TO WEB WORKERS!)
+  // Note: Only one sync access handle can be open per file concurrently.
+  const accessHandle = await fileHandle.createSyncAccessHandle();
+  // 4. In-place binary I/O (Synchronous execution, zero async tick overhead!)
+  const writeBuffer = new TextEncoder().encode('SQLITE_HEADER_BYTES_V1');
+  const bytesWritten = accessHandle.write(writeBuffer, { at: 0 });
+  // 5. Force write barrier to physical persistent storage
+  accessHandle.flush();
+  // 6. Read back from arbitrary byte offset
+  const readBuffer = new Uint8Array(bytesWritten);
+  accessHandle.read(readBuffer, { at: 0 });
+  console.log('Read back:', new TextDecoder().decode(readBuffer));
+  // Close handle when finished
+  accessHandle.close();
+```
 
 }
 
@@ -138,39 +123,26 @@ We resolve multi-tab coordination using the **Web Locks API** combined with Broa
 
 async function runWithDatabaseLock(callback) {
 
+```typescript
 // Request an exclusive lock across all tabs of this origin
-
 await navigator.locks.request('sqlite-db-exclusive-lock', async (lock) => {
+  console.log('Acquired exclusive lock! Initializing SQLite Wasm on OPFS...');
+  const worker = new Worker('sqlite-worker.js', { type: 'module' });
+  const channel = new BroadcastChannel('db-sync-channel');
 
-console.log('Acquired exclusive lock! Initializing SQLite Wasm on OPFS\...');
+  // Leader processes query requests from follower tabs
+  channel.onmessage = async (event) => {
+    const { queryId, sql } = event.data;
+    const result = await dispatchToWorker(worker, sql);
+    channel.postMessage({ queryId, result });
+  };
 
-const worker = new Worker('sqlite-worker.js', { type: 'module' });
-
-const channel = new BroadcastChannel('db-sync-channel');
-
-channel.onmessage = async (event) => {
-
-// Leader processes query requests from follower tabs
-
-const { queryId, sql } = event.data;
-
-const result = await dispatchToWorker(worker, sql);
-
-channel.postMessage({ queryId, result });
-
-};
-
-// Keep lock alive until tab closes or execution terminates
-
-await new Promise((_, reject) => {
-
-window.addEventListener('beforeunload', () => reject(new Error('Tab closed')));
-
+  // Keep lock alive until tab closes or execution terminates
+  await new Promise((_, reject) => {
+    window.addEventListener('beforeunload', () => reject(new Error('Tab closed')));
+  });
 });
-
-});
-
-}
+```
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 
@@ -194,13 +166,12 @@ accessHandle.close()                  Web Worker        void                    
 
 ### Web Locks API Cheat Sheet:
 
+```javascript
 // Exclusive Lock (One tab at a time)
-
 await navigator.locks.request('my-resource', async (lock) => {
-
-/* Critical Section */
-
+  /* Critical Section */
 });
+```
 
 // Shared Read Lock (Multiple readers allowed concurrently)
 

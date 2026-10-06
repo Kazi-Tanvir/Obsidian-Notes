@@ -73,41 +73,30 @@ Webhooks are distributed messages transmitted over the public internet:
 
     - Prevents Man-in-the-Middle spoofing and replay attacks by validating timestamp tolerance (default \$\\le 300\\text{s}\$).
 
+```typescript
 import Stripe from 'stripe';
-
 import { Request, Response } from 'express';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 export async function stripeWebhookHandler(req: Request, res: Response) {
+  const sig = req.headers['stripe-signature'] as string;
+  const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET!;
+  let event: Stripe.Event;
 
-const sig = req.headers['stripe-signature'] as string;
+  try {
+    // CRITICAL: Must use the RAW unparsed Buffer, not parsed JSON!
+    event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+  } catch (err: any) {
+    console.error('[Security Violation]: Webhook signature verification failed:', err.message);
+    return res.status(400).send(`Webhook Error: ${err.message}`);
+  }
 
-const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET!;
-
-let event: Stripe.Event;
-
-try {
-
-// CRITICAL: Must use the RAW unparsed Buffer, not parsed JSON!
-
-event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
-
-} catch (err: any) {
-
-console.error('[Security Violation]: Webhook signature verification failed:', err.message);
-
-return res.status(400).send(`Webhook Error: \${err.message}`);
-
+  // Pass to idempotent event processor
+  await processWebhookEventIdempotently(event);
+  return res.status(200).json({ received: true });
 }
-
-// Pass to idempotent event processor
-
-await processWebhookEventIdempotently(event);
-
-return res.status(200).json({ received: true });
-
-}
+```
 
 ### 3. Webhook Idempotency & The Double-Entry Ledger Pattern
 
@@ -115,15 +104,13 @@ To guarantee that duplicate webhook deliveries never cause double-crediting or d
 
 #### 1. Idempotency Key Deduplication Table:
 
+```sql
 CREATE TABLE processed_webhook_events (
-
-id VARCHAR(255) PRIMARY KEY, -- Stripe event.id (e.g. evt_1N2\...)
-
-event_type VARCHAR(100) NOT NULL,
-
-processed_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-
+  id VARCHAR(255) PRIMARY KEY, -- Stripe event.id (e.g. evt_1N2...)
+  event_type VARCHAR(100) NOT NULL,
+  processed_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
+```
 
 #### 2. Dual-Entry Financial Ledger:
 

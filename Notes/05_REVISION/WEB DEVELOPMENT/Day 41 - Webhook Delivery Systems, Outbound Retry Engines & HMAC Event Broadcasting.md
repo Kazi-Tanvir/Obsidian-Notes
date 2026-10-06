@@ -64,19 +64,16 @@ To prevent replay attacks and allow consumers to verify authentic origin, every 
 
 - X-Webhook-Signature: Hex-encoded HMAC-SHA256 signature calculated over \${timestamp}.\${raw_payload} using the customer's shared webhook secret:
 
+```typescript
 import crypto from 'node:crypto';
 
 export function signWebhookPayload(payload: string, secret: string, timestamp: number): string {
-
-const signaturePayload = `\${timestamp}.\${payload}`;
-
-const hmac = crypto.createHmac('sha256', secret);
-
-hmac.update(signaturePayload);
-
-return `t=\${timestamp},v1=\${hmac.digest('hex')}`;
-
+  const signaturePayload = `${timestamp}.${payload}`;
+  const hmac = crypto.createHmac('sha256', secret);
+  hmac.update(signaturePayload);
+  return `t=${timestamp},v1=${hmac.digest('hex')}`;
 }
+```
 
 ### 3. Circuit Breakers & Endpoint Auto-Disabling
 

@@ -53,11 +53,11 @@ To engineer 60 FPS (and 120 FPS on ProMotion displays) animations without frame 
 
 Informing the browser ahead of time allows it to promote an element to its own GPU compositor layer:
 
+```css
 .animated-card {
-
-will-change: transform, opacity;
-
+  will-change: transform, opacity;
 }
+```
 
 *Architecture Rule*: Never apply will-change globally to many elements, as each compositor layer consumes dedicated VRAM. Remove it once animation concludes.
 
@@ -71,79 +71,47 @@ Using setTimeout or setInterval for animations is inherently flawed:
 
 - requestAnimationFrame(callback) synchronizes execution immediately before the browser's next vertical refresh pulse, automatically pausing when the user switches tabs to conserve device battery.
 
+```typescript
 let startTimestamp: number | null = null;
-
 const durationMs = 1000;
-
 const element = document.getElementById('ball')!;
-
 function animate(timestamp: number) {
-
-if (!startTimestamp) startTimestamp = timestamp;
-
-const elapsed = timestamp - startTimestamp;
-
-const progress = Math.min(elapsed / durationMs, 1);
-
-// Smooth easing function: easeOutCubic
-
-const easeProgress = 1 - Math.pow(1 - progress, 3);
-
-const translateX = easeProgress * 400;
-
-// GPU composited transform
-
-element.style.transform = `translate3d(\${translateX}px, 0, 0)`;
-
-if (progress < 1) {
-
-requestAnimationFrame(animate);
-
-}
-
-}
-
-requestAnimationFrame(animate);
+  if (!startTimestamp) startTimestamp = timestamp;
+  const elapsed = timestamp - startTimestamp;
+  const progress = Math.min(elapsed / durationMs, 1);
+  // Smooth easing function: easeOutCubic
+  const easeProgress = 1 - Math.pow(1 - progress, 3);
+  const translateX = easeProgress * 400;
+  // GPU composited transform
+  element.style.transform = `translate3d(${translateX}px, 0, 0)`;
+  if (progress < 1) {
+    requestAnimationFrame(animate);
+```
 
 ### 3. The Web Animations API (WAAPI): Native Off-Main-Thread Power
 
 The **Web Animations API (WAAPI)** bridges CSS animations with imperative JavaScript control. Unlike requestAnimationFrame (which executes on the main thread), WAAPI animations can run **completely off the main thread on the GPU compositor thread**, ensuring fluid 60 FPS movement even if heavy JavaScript blocks the main thread.
 
+```typescript
 const heroElement = document.querySelector('.hero-banner')!;
-
 // Native WAAPI Execution
-
 const animation = heroElement.animate(
-
-[
-
-{ transform: 'translateY(50px) scale(0.95)', opacity: 0 },
-
-{ transform: 'translateY(0px) scale(1)', opacity: 1 }
-
-],
-
-{
-
-duration: 600,
-
-easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
-
-fill: 'forwards'
-
-}
-
+  [
+    { transform: 'translateY(50px) scale(0.95)', opacity: 0 },
+    { transform: 'translateY(0px) scale(1)', opacity: 1 }
+  ],
+  {
+    duration: 600,
+    easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
+    fill: 'forwards'
+  }
 );
-
 // Programmatic Playback Control:
-
 animation.pause();
-
 animation.currentTime = 300; // Seek to 50%
-
 animation.reverse();
-
 await animation.finished;
+```
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 
@@ -187,21 +155,14 @@ composite?: 'replace' | 'add' | 'accumulate';
 
 Analyze the following loop attempting to animate 500 DOM cards:
 
+```javascript
 function updateCards() {
-
-const cards = document.querySelectorAll('.card');
-
-for (let i = 0; i < cards.length; i++) {
-
-const currentTop = cards[i].offsetTop; // Reading geometry
-
-cards[i].style.top = (currentTop + 2) + 'px'; // Mutating geometry
-
-}
-
-requestAnimationFrame(updateCards);
-
-}
+  const cards = document.querySelectorAll('.card');
+  for (let i = 0; i < cards.length; i++) {
+    const currentTop = cards[i].offsetTop; // Reading geometry
+    cards[i].style.top = (currentTop + 2) + 'px'; // Mutating geometry
+  }
+```
 
 *Question*: Explain why this code causes severe **Forced Synchronous Layout (Layout Thrashing)**. How many reflow calculations are triggered per frame? Refactor the loop to batch reads and writes using composited transform styling.
 

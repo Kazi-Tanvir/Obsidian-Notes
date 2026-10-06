@@ -1124,7 +1124,10 @@
     "virtual-machine": 932,
     "bytecode-interpreter": 933,
     "stack-machine": 934,
-    "advanced-architecture": 935
+    "advanced-architecture": 935,
+    "workflow-orchestration": 936,
+    "durable-execution": 937,
+    "sagas": 938
   },
   "_version": 3
 }

@@ -193,37 +193,167 @@ Build a memory-hardened dynamic byte and string buffer in C that proactively pre
 
 #### Complete Implementation (safe_buffer.c)
 
-##include <stdio.h>
-
-##include <stdlib.h>
-
-##include <stdint.h>
-
-##include <stdbool.h>
-
-##include <string.h>
-
-##include <assert.h>
-
-/* Compile-time architectural invariants */
-
-_Static_assert(sizeof(void *) == 8, "This engine strictly targets 64-bit architecture");
-
-_Static_assert(sizeof(size_t) >= 8, "size_t must be at least 64 bits");
-
-typedef enum {
-
-BUF_OK = 0,
-
-BUF_ERR_NULL_PTR = -1,
-
-BUF_ERR_OUT_OF_BOUNDS = -2,
-
-BUF_ERR_OVERFLOW = -3,
-
-BUF_ERR_OUT_OF_MEMORY = -4
-
-} BufferStatus;
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+int validate_and_allocate_defensive(int current_payload_len, int extension_len) {
+    // DEFENSIVE RULE: Never allow the overflow operation to execute!
+    // Rearrange the algebra so overflow is impossible:
+    if (current_payload_len < 0 || extension_len < 0) {
+        return -1; // Reject negative bounds immediately
+    }
+    // Check: current_payload_len + extension_len > INT_MAX
+    // Rewritten without overflow: extension_len > INT_MAX - current_payload_len
+    if (extension_len > INT_MAX - current_payload_len) {
+        fprintf(stderr, "[Security Fixed] Prevented integer overflow before arithmetic!\n");
+        return -1;
+    }
+    int total_len = current_payload_len + extension_len;
+    char *packet = (char *)malloc((size_t)total_len);
+    if (!packet) return -1;
+    free(packet);
+    return 0;
+}
+```
+    int total_len = current_payload_len + extension_len;
+    char *packet = (char *)malloc((size_t)total_len);
+    if (!packet) return -1;
+    // Process packet...
+    free(packet);
+    return 0;
+}
+``` BufferStatus;
+typedef struct {
+    uint8_t *data;
+    size_t size;
+    size_t capacity;
+    uint32_t canary_head;
+    uint32_t canary_tail;
+} SafeBuffer;
+#define BUFFER_CANARY 0xDEADBEEF
+/* Secure memory scrubbing that the optimizer cannot eliminate */
+static void secure_zero(void *ptr, size_t len) {
+    if (!ptr || len == 0) return;
+    volatile uint8_t *p = (volatile uint8_t *)ptr;
+    while (len--) {
+        *p++ = 0;
+    }
+}
+BufferStatus buffer_init(SafeBuffer *buf, size_t initial_cap) {
+    if (!buf) return BUF_ERR_NULL_PTR;
+    if (initial_cap == 0) initial_cap = 16;
+    if (initial_cap > (SIZE_MAX / 2)) return BUF_ERR_OVERFLOW;
+    buf->data = (uint8_t *)malloc(initial_cap);
+    if (!buf->data) return BUF_ERR_OUT_OF_MEMORY;
+    buf->size = 0;
+    buf->capacity = initial_cap;
+    buf->canary_head = BUFFER_CANARY;
+    buf->canary_tail = BUFFER_CANARY;
+    return BUF_OK;
+}
+static BufferStatus buffer_grow_checked(SafeBuffer *buf, size_t required_capacity) {
+    if (required_capacity <= buf->capacity) return BUF_OK;
+    size_t new_cap = buf->capacity;
+    while (new_cap < required_capacity) {
+        size_t doubled_cap;
+        // Check for integer multiplication overflow
+        #if defined(__has_builtin) && __has_builtin(__builtin_mul_overflow)
+        if (__builtin_mul_overflow(new_cap, 2, &doubled_cap)) {
+            return BUF_ERR_OVERFLOW;
+        }
+        #else
+        if (new_cap > (SIZE_MAX / 2)) {
+            return BUF_ERR_OVERFLOW;
+        }
+        doubled_cap = new_cap * 2;
+        #endif
+        new_cap = doubled_cap;
+    }
+    uint8_t *new_data = (uint8_t *)realloc(buf->data, new_cap);
+    if (!new_data) return BUF_ERR_OUT_OF_MEMORY;
+    buf->data = new_data;
+    buf->capacity = new_cap;
+    return BUF_OK;
+}
+BufferStatus buffer_append(SafeBuffer *buf, const void *src, size_t len) {
+    if (!buf || !src) return BUF_ERR_NULL_PTR;
+    if (buf->canary_head != BUFFER_CANARY || buf->canary_tail != BUFFER_CANARY) {
+        fprintf(stderr, "[FATAL] Buffer canary corruption detected!\n");
+        abort();
+    }
+    size_t needed;
+    #if defined(__has_builtin) && __has_builtin(__builtin_add_overflow)
+    if (__builtin_add_overflow(buf->size, len, &needed)) {
+        return BUF_ERR_OVERFLOW;
+    }
+    #else
+    if (len > SIZE_MAX - buf->size) {
+        return BUF_ERR_OVERFLOW;
+    }
+    needed = buf->size + len;
+    #endif
+    BufferStatus st = buffer_grow_checked(buf, needed);
+    if (st != BUF_OK) return st;
+    memcpy(buf->data + buf->size, src, len);
+    buf->size = needed;
+    return BUF_OK;
+}
+BufferStatus buffer_read_at(const SafeBuffer *buf, size_t offset, void *dest, size_t len) {
+    if (!buf || !dest) return BUF_ERR_NULL_PTR;
+    size_t end_offset;
+    #if defined(__has_builtin) && __has_builtin(__builtin_add_overflow)
+    if (__builtin_add_overflow(offset, len, &end_offset)) {
+        return BUF_ERR_OVERFLOW;
+    }
+    #else
+    if (len > SIZE_MAX - offset) return BUF_ERR_OVERFLOW;
+    end_offset = offset + len;
+    #endif
+    if (end_offset > buf->size) {
+        return BUF_ERR_OUT_OF_BOUNDS;
+    }
+    memcpy(dest, buf->data + offset, len);
+    return BUF_OK;
+}
+void buffer_destroy(SafeBuffer *buf) {
+    if (!buf) return;
+    if (buf->data) {
+        secure_zero(buf->data, buf->capacity);
+        free(buf->data);
+        buf->data = NULL;
+    }
+    buf->size = 0;
+    buf->capacity = 0;
+    buf->canary_head = 0;
+    buf->canary_tail = 0;
+}
+int main(void) {
+    printf("===================================================================\n");
+    printf("    DEFENSIVE C BUFFER: OVERFLOW GUARDS & ASAN/UBSAN COMPATIBLE     \n");
+    printf("===================================================================\n\n");
+    SafeBuffer buf;
+    BufferStatus st = buffer_init(&buf, 8);
+    assert(st == BUF_OK);
+    const char *msg = "Systems Programming with C17 Defensive Architecture";
+    st = buffer_append(&buf, msg, strlen(msg));
+    assert(st == BUF_OK);
+    printf("[1] Successfully appended %zu bytes. Current Capacity: %zu bytes.\n",
+           buf.size, buf.capacity);
+    // Test 1: Out of Bounds Guard
+    char test_read[64];
+    st = buffer_read_at(&buf, 1000, test_read, sizeof(test_read));
+    assert(st == BUF_ERR_OUT_OF_BOUNDS);
+    printf("[2] Out-of-bounds read at offset 1000 safely rejected (BUF_ERR_OUT_OF_BOUNDS).\n");
+    // Test 2: Arithmetic Overflow Injection
+    st = buffer_append(&buf, msg, SIZE_MAX - 5);
+    assert(st == BUF_ERR_OVERFLOW);
+    printf("[3] Extreme allocation size gracefully rejected with BUF_ERR_OVERFLOW.\n");
+    buffer_destroy(&buf);
+    printf("[4] Buffer scrubbed with secure_zero() and destroyed cleanly with zero leaks.\n");
+    return 0;
+}
+``` BufferStatus;
 
 typedef struct {
 

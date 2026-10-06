@@ -59,111 +59,72 @@ Compared to legacy RSA (which requires bloated 2048-bit or 4096-bit keys), **Ell
 
 A paramount architectural security practice is setting extractable: false. The browser's crypto subsystem will never reveal the raw private key bytes to JavaScript, thwarting malicious browser extensions and memory-scraping attacks.
 
+```typescript
 // 1. Generate Non-Extractable ECDSA Key Pair
-
 const keyPair = await crypto.subtle.generateKey(
-
-{
-
-name: 'ECDSA',
-
-namedCurve: 'P-256',
-
-},
-
-false, // CRITICAL: extractable = false (Private key never leaves browser crypto sandbox!)
-
-['sign', 'verify']
-
+  {
+    name: 'ECDSA',
+    namedCurve: 'P-256',
+  },
+  false, // CRITICAL: extractable = false (Private key never leaves browser crypto sandbox!)
+  ['sign', 'verify']
 );
 
 // 2. Sign an Immutable Audit Event
-
 const encoder = new TextEncoder();
-
-const dataToSign = encoder.encode('TRANSFER: Alice -> Bob: \$5,000');
+const dataToSign = encoder.encode('TRANSFER: Alice -> Bob: $5,000');
 
 const signature = await crypto.subtle.sign(
-
-{
-
-name: 'ECDSA',
-
-hash: { name: 'SHA-256' },
-
-},
-
-keyPair.privateKey,
-
-dataToSign
-
+  {
+    name: 'ECDSA',
+    hash: { name: 'SHA-256' },
+  },
+  keyPair.privateKey,
+  dataToSign
 );
 
 // 3. Verify Signature with Public Key
-
 const isValid = await crypto.subtle.verify(
-
-{
-
-name: 'ECDSA',
-
-hash: { name: 'SHA-256' },
-
-},
-
-keyPair.publicKey,
-
-signature,
-
-dataToSign
-
+  {
+    name: 'ECDSA',
+    hash: { name: 'SHA-256' },
+  },
+  keyPair.publicKey,
+  signature,
+  dataToSign
 );
 
 console.log('Signature Authenticated:', isValid); // true
+```
 
 ### 3. Diffie-Hellman Key Agreement via ECDH
 
 Deriving a shared symmetric AES-GCM encryption key between two clients across an untrusted network:
 
+```typescript
 // Alice & Bob generate their ephemeral ECDH key pairs
-
-const aliceKeys = await crypto.subtle.generateKey({ name: 'ECDH', namedCurve: 'P-256' }, true, ['deriveKey']);
-
-const bobKeys = await crypto.subtle.generateKey({ name: 'ECDH', namedCurve: 'P-256' }, true, ['deriveKey']);
+const aliceKeys = await crypto.subtle.generateKey({ name: 'ECDH', namedCurve: 'P-256' }, false, ['deriveKey']);
+const bobKeys = await crypto.subtle.generateKey({ name: 'ECDH', namedCurve: 'P-256' }, false, ['deriveKey']);
 
 // Alice derives shared AES-GCM key using Bob's public key
-
 const aliceSharedKey = await crypto.subtle.deriveKey(
-
-{ name: 'ECDH', public: bobKeys.publicKey },
-
-aliceKeys.privateKey,
-
-{ name: 'AES-GCM', length: 256 },
-
-false,
-
-['encrypt', 'decrypt']
-
+  { name: 'ECDH', public: bobKeys.publicKey },
+  aliceKeys.privateKey,
+  { name: 'AES-GCM', length: 256 },
+  false,
+  ['encrypt', 'decrypt']
 );
 
 // Bob derives shared AES-GCM key using Alice's public key
-
 const bobSharedKey = await crypto.subtle.deriveKey(
-
-{ name: 'ECDH', public: aliceKeys.publicKey },
-
-bobKeys.privateKey,
-
-{ name: 'AES-GCM', length: 256 },
-
-false,
-
-['encrypt', 'decrypt']
-
+  { name: 'ECDH', public: aliceKeys.publicKey },
+  bobKeys.privateKey,
+  { name: 'AES-GCM', length: 256 },
+  false,
+  ['encrypt', 'decrypt']
 );
-
 // aliceSharedKey and bobSharedKey now share identical 256-bit symmetric entropy!
+```
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 

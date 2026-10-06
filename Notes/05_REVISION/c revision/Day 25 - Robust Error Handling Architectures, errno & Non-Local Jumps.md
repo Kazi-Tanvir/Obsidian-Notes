@@ -42,17 +42,27 @@ day: 25
 
 ### setjmp & longjmp Non-Local Jumps (<setjmp.h>)
 
-##include <setjmp.h>
-
+```c
+#include <setjmp.h>
 jmp_buf g_env;
-
 void deeply_nested_func(void) {
-
-// Abort and jump back to setjmp site, returning value 42
-
-longjmp(g_env, 42);
-
+    // Abort and jump back to setjmp site, returning value 42
+    longjmp(g_env, 42); 
 }
+int main(void) {
+    volatile int counter = 0; // MUST BE volatile to survive longjmp!
+    int val = setjmp(g_env);
+    if (val == 0) {
+        // Direct invocation (First time here)
+        counter = 10;
+        deeply_nested_func();
+    } else {
+        // Returned via longjmp! val == 42
+        printf("Recovered from error code %d. Counter = %d\n", val, counter);
+    }
+    return 0;
+}
+```
 
 int main(void) {
 
@@ -225,39 +235,176 @@ Build a nested, thread-safe exception handling system in pure C using preprocess
 
 #### Complete Implementation (cexcept.c)
 
-##include <stdio.h>
-
-##include <stdlib.h>
-
-##include <stdint.h>
-
-##include <stdbool.h>
-
-##include <string.h>
-
-##include <setjmp.h>
-
-##include <threads.h>
-
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <setjmp.h>
+jmp_buf g_err_env;
+void process_records_defensive(const char *filename) {
+    // FIX 1: Explicitly qualify locals modified after setjmp as 'volatile'
+    volatile int records_processed = 0;
+    FILE * volatile fp = NULL;
+    char * volatile scratch_buffer = NULL;
+    fp = fopen(filename, "r");
+    scratch_buffer = (char *)malloc(1024);
+    if (setjmp(g_err_env) == 0) {
+        records_processed += 10;
+        // Simulate safe execution or jump
+        if (!fp || !scratch_buffer) {
+            longjmp(g_err_env, 1);
+        }
+    } else {
+        printf("[Defensive Handler] Interrupted. Correct recorded count = %d\n", 
+               records_processed);
+    }
+    // FIX 2: Guaranteed unified cleanup block executed in all control paths
+    if (scratch_buffer) {
+        free(scratch_buffer);
+        scratch_buffer = NULL;
+    }
+    if (fp) {
+        fclose(fp);
+        fp = NULL;
+    }
+}
+```
+// BUGGY CODE: Look for undefined behavior and memory leaks
+void process_records_faulty(const char *filename) {
+    int records_processed = 0; // BUG 1: Non-volatile local variable modified after setjmp!
+    FILE *fp = fopen(filename, "r");
+    char *scratch_buffer = (char *)malloc(1024);
+    if (setjmp(g_err_env) == 0) {
+        records_processed += 10;
+        step_two(); // Jumps back!
+        records_processed += 20;
+    } else {
+        // Returned via longjmp
+        // BUG 2: Reading 'records_processed' here is UNDEFINED BEHAVIOR under -O2/-O3!
+        printf("Error occurred! Records count was: %d\n", records_processed);
+        // BUG 3: 'fp' and 'scratch_buffer' are permanently LEAKED! 
+        // Neither fclose() nor free() is invoked during the longjmp escape!
+    }
+}
+``` ExceptionCode;
+typedef struct ExceptionFrame {
+    jmp_buf env;
+    struct ExceptionFrame *prev;
+    ExceptionCode exception_code;
+    const char *error_message;
+    const char *file;
+    int line;
+    bool caught;
+} ExceptionFrame;
+// Thread-local stack head for exception nesting
+static _Thread_local ExceptionFrame *t_current_exception_frame = NULL;
+static inline const char *exception_code_str(ExceptionCode code) {
+    switch (code) {
+        case EX_NONE:           return "EX_NONE";
+        case EX_OUT_OF_MEMORY:  return "EX_OUT_OF_MEMORY";
+        case EX_IO_FAILURE:     return "EX_IO_FAILURE";
+        case EX_PARSING_ERROR:  return "EX_PARSING_ERROR";
+        case EX_DIVIDE_BY_ZERO: return "EX_DIVIDE_BY_ZERO";
+        default:                return "EX_UNKNOWN";
+    }
+}
 /* ========================================================================= */
-
-/* EXCEPTION CORE ENGINE TYPES */
-
+/*                      MACRO-BASED SYNTAX CONSTRUCTS                        */
 /* ========================================================================= */
-
-typedef enum {
-
-EX_NONE = 0,
-
-EX_OUT_OF_MEMORY,
-
-EX_IO_FAILURE,
-
-EX_PARSING_ERROR,
-
-EX_DIVIDE_BY_ZERO
-
-} ExceptionCode;
+#define TRY \
+    do { \
+        ExceptionFrame __ex_frame; \
+        __ex_frame.exception_code = EX_NONE; \
+        __ex_frame.error_message = NULL; \
+        __ex_frame.caught = false; \
+        __ex_frame.prev = t_current_exception_frame; \
+        t_current_exception_frame = &__ex_frame; \
+        int __ex_sig = setjmp(__ex_frame.env); \
+        if (__ex_sig == 0) {
+#define CATCH(code_var, msg_var) \
+        } else { \
+            __ex_frame.caught = true; \
+            ExceptionCode code_var = __ex_frame.exception_code; \
+            const char *msg_var = __ex_frame.error_message;
+#define FINALLY \
+        } { \
+            t_current_exception_frame = __ex_frame.prev; \
+#define END_TRY \
+        } \
+        if (!__ex_frame.caught && __ex_frame.exception_code != EX_NONE) { \
+            /* Re-throw uncaught exception up to next outer handler */ \
+            cexcept_throw(__ex_frame.exception_code, __ex_frame.error_message, \
+                          __ex_frame.file, __ex_frame.line); \
+        } \
+    } while (0)
+void cexcept_throw(ExceptionCode code, const char *msg, const char *file, int line) {
+    if (t_current_exception_frame == NULL) {
+        fprintf(stderr, "\n[FATAL] Uncaught Exception: %s (%s) at %s:%d\n",
+                exception_code_str(code), msg ? msg : "No details", file, line);
+        exit(EXIT_FAILURE);
+    }
+    t_current_exception_frame->exception_code = code;
+    t_current_exception_frame->error_message = msg;
+    t_current_exception_frame->file = file;
+    t_current_exception_frame->line = line;
+    longjmp(t_current_exception_frame->env, (int)code);
+}
+#define THROW(code, msg) cexcept_throw((code), (msg), __FILE__, __LINE__)
+/* ========================================================================= */
+/*                       APPLICATION DEMONSTRATION                           */
+/* ========================================================================= */
+double safe_divide(double numerator, double denominator) {
+    if (denominator == 0.0) {
+        THROW(EX_DIVIDE_BY_ZERO, "Attempted division by zero floating-point value");
+    }
+    return numerator / denominator;
+}
+void parse_record_deep(const char *raw_data) {
+    if (!raw_data || strlen(raw_data) == 0) {
+        THROW(EX_PARSING_ERROR, "Empty payload passed to record parser");
+    }
+    printf("      [Parser] Successfully processed payload: \"%s\"\n", raw_data);
+}
+void business_logic_pipeline(const char *input_data) {
+    printf("  --> Entering business_logic_pipeline...\n");
+    TRY {
+        parse_record_deep(input_data);
+        double result = safe_divide(100.0, 0.0);
+        printf("Result: %f\n", result);
+    }
+    CATCH(err, err_msg) {
+        printf("    [PIPELINE RECOVERY] Caught Inner Exception: %s => \"%s\"\n",
+               exception_code_str(err), err_msg);
+        // Clean recovery or rethrow demonstration
+    }
+    FINALLY {
+        printf("    [PIPELINE FINALLY] Cleaning up inner pipeline resources.\n");
+    } END_TRY;
+    printf("  <-- Exiting business_logic_pipeline normally.\n");
+}
+int main(void) {
+    printf("===================================================================\n");
+    printf("    C EXCEPTIONS: TRY / CATCH / FINALLY via setjmp & TLS frames    \n");
+    printf("===================================================================\n\n");
+    // Test Case 1: Handled Nested Exception with Cleanup
+    printf("[1] Test Case 1: Division by zero inside nested call frame:\n");
+    business_logic_pipeline("valid_data_token_99");
+    printf("\n[2] Test Case 2: Outer Catch Catching Unhandled Inner Exception:\n");
+    TRY {
+        printf("  --> Outer block: Triggering invalid payload...\n");
+        parse_record_deep(""); // Throws EX_PARSING_ERROR
+        printf("  This line will NEVER be reached.\n");
+    }
+    CATCH(code, msg) {
+        printf("  [OUTER RECOVERY] Handled top-level exception: %s (\"%s\")\n",
+               exception_code_str(code), msg);
+    }
+    FINALLY {
+        printf("  [OUTER FINALLY] Global cleanup and logging finalized.\n");
+    } END_TRY;
+    printf("\nAll structured exception tests completed successfully!\n");
+    return 0;
+}
+``` ExceptionCode;
 
 typedef struct ExceptionFrame {
 

@@ -51,33 +51,22 @@ Traditional native plugins grant ambient authority, allowing untrusted code to r
 
 - Capabilities are explicitly injected by the host runtime:
 
+```typescript
 import { WASI } from 'wasi';
-
 import fs from 'node:fs';
-
 const wasi = new WASI({
-
-version: 'preview1',
-
-args: process.argv,
-
-env: { TENANT_ID: 'tenant-409' },
-
-preopens: {
-
-'/sandbox': './isolated_tenant_dir', // Explicit filesystem capability
-
-},
-
+  version: 'preview1',
+  args: process.argv,
+  env: { TENANT_ID: 'tenant-409' },
+  preopens: {
+    '/sandbox': './isolated_tenant_dir', // Explicit filesystem capability
+  },
 });
-
 const wasmBuffer = fs.readFileSync('./module.wasm');
-
 const wasmModule = await WebAssembly.compile(wasmBuffer);
-
 const instance = await WebAssembly.instantiate(wasmModule, wasi.getImportObject());
-
 wasi.start(instance);
+```
 
 ### 2. High-Performance Data Structures & V8 Memory Layout (Day 44)
 

@@ -72,105 +72,64 @@ accessor                Auto-accessor field     Object with { get?, set?, init? 
 
 Traditional fields (name = "Tamim") cannot be intercepted by getters/setters without rewriting class prototypes. The accessor keyword introduces an **auto-accessor** that desugars into a private storage slot with auto-generated getter/setter methods:
 
+```typescript
 // Implementing a Reactive Auto-Accessor Decorator
-
 function observed<T, V>(
-
-target: ClassAccessorDecoratorTarget<T, V>,
-
-context: ClassAccessorDecoratorContext<T, V>
-
+  target: ClassAccessorDecoratorTarget<T, V>,
+  context: ClassAccessorDecoratorContext<T, V>
 ): ClassAccessorDecoratorResult<T, V> {
-
-const { get, set } = target;
-
-return {
-
-get() {
-
-const value = get.call(this);
-
-console.log(`[GET] \${String(context.name)} =>`, value);
-
-return value;
-
-},
-
-set(newValue: V) {
-
-console.log(`[SET] \${String(context.name)} from`, get.call(this), 'to', newValue);
-
-set.call(this, newValue);
-
-},
-
-init(initialValue: V) {
-
-console.log(`[INIT] \${String(context.name)} with`, initialValue);
-
-return initialValue;
-
-}
-
-};
-
+  const { get, set } = target;
+  return {
+    get(this: T) {
+      const value = get.call(this);
+      console.log(`[GET] ${String(context.name)} =>`, value);
+      return value;
+    },
+    set(this: T, newValue: V) {
+      console.log(`[SET] ${String(context.name)} <=`, newValue);
+      set.call(this, newValue);
+    },
+    init(initialValue: V) {
+      console.log(`[INIT] ${String(context.name)} with`, initialValue);
+      return initialValue;
+    }
+  };
 }
 
 class UserProfile {
-
-\@observed accessor username: string = 'tamim_dev';
-
+  @observed accessor username: string = 'tamim_dev';
 }
+```
 
 ### 3. Native Decorator Metadata (Symbol.metadata)
 
 TC39 standardizes runtime reflection without third-party libraries via context.metadata. All decorators applied to a class share the exact same metadata dictionary:
 
+```typescript
 // An API Routing Decorator using native Symbol.metadata
-
 function Route(path: string) {
-
-return function (target: Function, context: ClassMethodDecoratorContext) {
-
-if (context.kind !== 'method') throw new Error('@Route can only decorate methods');
-
-// Attach metadata to the class's Symbol.metadata dictionary
-
-const metadata = context.metadata;
-
-metadata.routes = metadata.routes || [];
-
-(metadata.routes as Array<{ path: string; methodName: string | symbol }>).push({
-
-path,
-
-methodName: context.name,
-
-});
-
-};
-
+  return function (target: Function, context: ClassMethodDecoratorContext) {
+    if (context.kind !== 'method') throw new Error('@Route can only decorate methods');
+    // Attach metadata to the class's Symbol.metadata dictionary
+    const metadata = context.metadata;
+    metadata.routes = metadata.routes || [];
+    (metadata.routes as Array<{ path: string; methodName: string | symbol }>).push({
+      path,
+      methodName: context.name,
+    });
+  };
 }
-
 class PaymentController {
-
-\@Route('/api/v1/charge')
-
-processPayment() { return { status: 'ok' }; }
-
-\@Route('/api/v1/refund')
-
-processRefund() { return { status: 'refunded' }; }
-
+  @Route('/api/v1/charge')
+  processPayment() { return { status: 'ok' }; }
+  @Route('/api/v1/refund')
+  processRefund() { return { status: 'refunded' }; }
 }
-
 // Inspecting metadata directly from the class constructor:
-
 const routes = (PaymentController as any)[Symbol.metadata]?.routes;
-
 console.log(routes);
-
-// Output: [ { path: '/api/v1/charge', methodName: 'processPayment' }, \... ]
+// Output: [ { path: '/api/v1/charge', methodName: 'processPayment' }, ... ]
+```
 
 ### 4. Explicit Resource Management: The using Keyword & RAII in JS
 
@@ -178,57 +137,38 @@ Resource leaks (unclosed database transactions, forgotten file handles, dangling
 
 #### The Disposable Contract (Symbol.dispose & Symbol.asyncDispose):
 
+```typescript
 // Implementing a Database Transaction Disposable
-
 class ScopedTransaction implements Disposable {
+  private active = true;
 
-private active = true;
+  constructor(private txId: string) {
+    console.log(`[BEGIN] Transaction ${this.txId}`);
+  }
 
-constructor(private txId: string) {
+  commit() {
+    this.active = false;
+    console.log(`[COMMIT] Transaction ${this.txId}`);
+  }
 
-console.log(`[BEGIN] Transaction \${this.txId}`);
-
-}
-
-commit() {
-
-this.active = false;
-
-console.log(`[COMMIT] Transaction \${this.txId}`);
-
-}
-
-// Invoked AUTOMATICALLY when block scope exits!
-
-[Symbol.dispose]() {
-
-if (this.active) {
-
-console.warn(`[ROLLBACK] Transaction \${this.txId} rolled back due to unhandled error or early return!`);
-
-}
-
-}
-
+  // Invoked AUTOMATICALLY when block scope exits!
+  [Symbol.dispose]() {
+    if (this.active) {
+      console.warn(`[ROLLBACK] Transaction ${this.txId} rolled back due to unhandled error or early return!`);
+    }
+  }
 }
 
 function transferFunds(from: string, to: string, amount: number) {
-
-// 'using' guarantees cleanup as soon as the block terminates!
-
-using tx = new ScopedTransaction('tx-9821');
-
-if (amount <= 0) {
-
-return; // tx[Symbol.dispose]() automatically called! Rollback logged!
-
-}
-
-// Perform database mutations\...
-
-tx.commit();
-
+  // 'using' guarantees cleanup as soon as the block terminates!
+  using tx = new ScopedTransaction('tx-9821');
+  if (amount <= 0) {
+    return; // tx[Symbol.dispose]() automatically called! Rollback logged!
+  }
+  // Perform database mutations...
+  tx.commit();
 } // tx[Symbol.dispose]() called here automatically!
+```
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 
@@ -255,9 +195,10 @@ addInitializer          (fn: Function) => void Registers an initialization hook 
 
 using resource = acquireResource(); // Must implement [Symbol.dispose](): void
 
+```typescript
 // Asynchronous Disposable:
-
 await using asyncResource = acquireAsyncResource(); // Must implement [Symbol.asyncDispose](): Promise<void>
+```
 
 ## SECTION 3: PRACTICAL PROBLEMS
 

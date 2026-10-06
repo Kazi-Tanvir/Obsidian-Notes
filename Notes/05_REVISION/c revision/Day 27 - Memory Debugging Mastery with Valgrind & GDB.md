@@ -219,35 +219,107 @@ calloc, realloc, and free. The system detects:
 
 ### Complete Implementation (dbg_alloc.c)
 
+```c
 #include <stdio.h>
-
+```c
 #include <stdlib.h>
-
-#include <stdint.h>
-
-#include <stdbool.h>
-
 #include <string.h>
-
-#include <assert.h>
-
-#define CANARY_PATTERN 0xDEADBEEFCAFEBABEU
-
-typedef struct DebugBlock {
-
-uint64_t head_canary;
-
-size_t requested_size;
-
-const char *file;
-
-int line;
-
-struct DebugBlock *prev;
-
-struct DebugBlock *next;
-
-} DebugBlock;
+#include <ctype.h>
+char *extract_token(const char *input) {
+    char *buf = (char *)malloc(strlen(input) + 1);
+    if (!buf) return NULL;
+    strcpy(buf, input);
+    while (isspace((unsigned char)*buf)) {
+        buf++; // FATAL BUG: Base pointer lost!
+    }
+    return buf;
+}
+int main(void) {
+    char *tok = extract_token("    Authorization: Bearer secret_99");
+    printf("Token: %s\n", tok);
+    free(tok); // CRASH: Passing interior pointer to free()
+    return 0;
+}
+``` DebugBlock;
+#define GET_TAIL_CANARY(block) \
+    ((uint64_t *)((uint8_t *)(block + 1) + (block)->requested_size))
+static DebugBlock *g_head = NULL;
+static size_t g_total_allocated = 0;
+static size_t g_current_allocated = 0;
+void *dbg_malloc_internal(size_t size, const char *file, int line) {
+    if (size == 0) size = 1;
+    size_t total_size = sizeof(DebugBlock) + size + sizeof(uint64_t);
+    uint8_t *raw = (uint8_t *)malloc(total_size);
+    if (!raw) return NULL;
+    DebugBlock *block = (DebugBlock *)raw;
+    block->head_canary = CANARY_PATTERN;
+    block->requested_size = size;
+    block->file = file;
+    block->line = line;
+    uint64_t *tail = GET_TAIL_CANARY(block);
+    *tail = CANARY_PATTERN;
+    block->prev = NULL;
+    block->next = g_head;
+    if (g_head) g_head->prev = block;
+    g_head = block;
+    g_total_allocated += size;
+    g_current_allocated += size;
+    return (void *)(block + 1);
+}
+void dbg_free_internal(void *ptr, const char *file, int line) {
+    if (!ptr) return;
+    DebugBlock *block = ((DebugBlock *)ptr) - 1;
+    DebugBlock *curr = g_head;
+    bool found = false;
+    while (curr) {
+        if (curr == block) { found = true; break; }
+        curr = curr->next;
+    }
+    if (!found) {
+        fprintf(stderr, "\n[CRITICAL MEMORY FAULT] Invalid or Double Free at %s:%d!\n", file, line);
+        abort();
+    }
+    if (block->head_canary != CANARY_PATTERN || *GET_TAIL_CANARY(block) != CANARY_PATTERN) {
+        fprintf(stderr, "\n[CRITICAL MEMORY FAULT] Corruption detected at %s:%d!\n", file, line);
+        abort();
+    }
+    if (block->prev) block->prev->next = block->next;
+    if (block->next) block->next->prev = block->prev;
+    if (g_head == block) g_head = block->next;
+    g_current_allocated -= block->requested_size;
+    memset(block, 0x55, sizeof(DebugBlock) + block->requested_size + sizeof(uint64_t));
+    free(block);
+}
+void dbg_print_leak_report(void) {
+    printf("\n=======================================================\n");
+    printf("            DEBUG HEAP ALLOCATION REPORT               \n");
+    printf("=======================================================\n");
+    if (g_head == NULL) {
+        printf("  STATUS: CLEAN! Zero memory leaks detected.\n");
+        return;
+    }
+    printf("  STATUS: LEAKS DETECTED!\n");
+    DebugBlock *curr = g_head;
+    while (curr) {
+        printf("  [Leak] Address: %p | Size: %zu | Allocated at: %s:%d\n",
+               (void *)(curr + 1), curr->requested_size, curr->file, curr->line);
+        curr = curr->next;
+    }
+    printf("=======================================================\n");
+}
+#define malloc(sz) dbg_malloc_internal(sz, __FILE__, __LINE__)
+#define free(p) dbg_free_internal(p, __FILE__, __LINE__)
+int main(void) {
+    printf("=== Starting Custom Debug Allocator Suite ===\n\n");
+    char *clean_buf = (char *)malloc(32);
+    strcpy(clean_buf, "Secure Data 2026");
+    free(clean_buf);
+    int *leaked_array = (int *)malloc(10 * sizeof(int));
+    dbg_print_leak_report();
+    free(leaked_array);
+    return 0;
+}
+``` DebugBlock;
 
 #define GET_TAIL_CANARY(block) 
 
@@ -469,15 +541,31 @@ return 0;
 
 ## Defensive Fix
 
+```c
 typedef struct {
-
-char *base_ptr;
-
-const char *start;
-
-size_t length;
-
+    char *base_ptr;      
+    const char *start;   
+    size_t length;
 } TokenSlice;
+TokenSlice extract_token_safe(const char *input) {
+    TokenSlice slice = {0};
+    if (!input) return slice;
+    slice.base_ptr = (char *)malloc(strlen(input) + 1);
+    if (!slice.base_ptr) return slice;
+    strcpy(slice.base_ptr, input);
+    const char *p = slice.base_ptr;
+    while (isspace((unsigned char)*p)) p++;
+    slice.start = p;
+    slice.length = strlen(p);
+    return slice;
+}
+void token_slice_destroy(TokenSlice *slice) {
+    if (slice && slice->base_ptr) {
+        free(slice->base_ptr); 
+        slice->base_ptr = NULL;
+    }
+}
+``` TokenSlice;
 
 TokenSlice extract_token_safe(const char *input) {
 

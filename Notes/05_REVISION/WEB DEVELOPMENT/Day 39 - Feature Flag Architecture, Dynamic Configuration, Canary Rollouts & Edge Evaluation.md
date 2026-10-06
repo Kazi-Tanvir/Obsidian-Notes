@@ -60,51 +60,38 @@ To perform a canary release (e.g. expose a new checkout flow to exactly 10% of u
 
 // Example: Deterministic In-Memory Hashing
 
+```typescript
 import murmurhash from 'murmurhash';
-
 function evaluatePercentageRollout(userId: string, flagKey: string, rolloutPercentage: number): boolean {
-
-const seed = 0;
-
-const hash = murmurhash.v3(`\${userId}:\${flagKey}`, seed);
-
-const bucket = (Math.abs(hash) % 100) + 1; // Scale 1 to 100
-
-return bucket <= rolloutPercentage;
-
+  const seed = 0;
+  const hash = murmurhash.v3(`${userId}:${flagKey}`, seed);
+  const bucket = (Math.abs(hash) % 100) + 1; // Scale 1 to 100
+  return bucket <= rolloutPercentage;
 }
-
 console.log(evaluatePercentageRollout('usr_9812', 'new-checkout-v2', 10)); // Deterministic boolean
+```
 
 ### 3. Edge Flag Evaluation (Vercel Edge / Cloudflare Workers)
 
 Evaluating feature flags inside Next.js Edge Middleware allows zero-latency A/B routing and HTML streaming before SSR execution:
 
+```typescript
 // middleware.ts (Next.js Edge Middleware)
-
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function middleware(req: NextRequest) {
+  const userId = req.cookies.get('user_id')?.value || crypto.randomUUID();
+  const res = NextResponse.next();
 
-const userId = req.cookies.get('user_id')?.value || crypto.randomUUID();
-
-const res = NextResponse.next();
-
-// Edge in-memory deterministic flag evaluation:
-
-const isV2Enabled = evaluatePercentageRollout(userId, 'checkout-v2', 25);
-
-if (isV2Enabled) {
-
-// Zero-redirect URL rewrite to V2 variant at the edge:
-
-return NextResponse.rewrite(new URL('/checkout/v2', req.url));
-
+  // Edge in-memory deterministic flag evaluation:
+  const isV2Enabled = evaluatePercentageRollout(userId, 'checkout-v2', 25);
+  if (isV2Enabled) {
+    // Zero-redirect URL rewrite to V2 variant at the edge:
+    return NextResponse.rewrite(new URL('/checkout/v2', req.url));
+  }
+  return res;
 }
-
-return res;
-
-}
+```
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 

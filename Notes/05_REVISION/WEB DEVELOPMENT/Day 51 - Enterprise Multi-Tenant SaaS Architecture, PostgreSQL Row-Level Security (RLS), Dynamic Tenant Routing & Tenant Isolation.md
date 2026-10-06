@@ -64,23 +64,19 @@ If a single junior engineer forgets AND tenant_id = \$2 in an obscure report end
 
 #### DDL Definition for Bulletproof RLS:
 
+```sql
 -- 1. Enable RLS on the table
-
 ALTER TABLE documents ENABLE ROW LEVEL SECURITY;
 
 -- 2. CRITICAL: FORCE RLS ensures that table owners and superusers cannot bypass policies!
-
 ALTER TABLE documents FORCE ROW LEVEL SECURITY;
 
 -- 3. Define the security policy using a session configuration setting
-
 CREATE POLICY tenant_isolation_policy ON documents
-
 FOR ALL -- Applies to SELECT, INSERT, UPDATE, DELETE
-
 USING (tenant_id = current_setting('app.current_tenant_id', true)::uuid)
-
 WITH CHECK (tenant_id = current_setting('app.current_tenant_id', true)::uuid);
+```
 
 - USING: Evaluated on existing rows for SELECT, UPDATE, and DELETE.
 
@@ -98,153 +94,109 @@ If an application executes SET app.current_tenant_id = 'tenant-A', that setting 
 
 SET LOCAL binds the variable **strictly to the current transaction**:
 
+```sql
 BEGIN;
-
--- Binds ONLY to this transaction. Automatically wiped when transaction finishes!
-
-SET LOCAL app.current_tenant_id = 'tenant-123e4567-e89b-12d3-a456-426614174000';
-
--- Query executes with RLS enforcement:
-
-SELECT * FROM documents;
-
+  -- Binds ONLY to this transaction. Automatically wiped when transaction finishes!
+  SET LOCAL app.current_tenant_id = 'tenant-123e4567-e89b-12d3-a456-426614174000';
+  -- Query executes with RLS enforcement:
+  SELECT * FROM documents;
 COMMIT;
+```
 
 ### 4. Tenant Context Propagation via AsyncLocalStorage & Prisma
 
 In Node.js backends, passing tenantId manually through controller \$\\to\$ service \$\\to\$ repository functions leads to brittle code. Node's AsyncLocalStorage creates an asynchronous execution context that propagates the tenant across async call chains:
 
+```typescript
 // context/tenant-context.ts
-
 import { AsyncLocalStorage } from 'node:async_hooks';
 
 interface TenantContext {
-
-tenantId: string;
-
-userId: string;
-
+  tenantId: string;
+  userId: string;
 }
 
 export const tenantStorage = new AsyncLocalStorage<TenantContext>();
 
 export function getTenantId(): string {
-
-const context = tenantStorage.getStore();
-
-if (!context?.tenantId) {
-
-throw new Error('Security Violation: Database operation attempted outside tenant context!');
-
+  const context = tenantStorage.getStore();
+  if (!context?.tenantId) {
+    throw new Error('Security Violation: Database operation attempted outside tenant context!');
+  }
+  return context.tenantId;
 }
-
-return context.tenantId;
-
-}
+```
 
 #### Prisma Client Extension with Automatic SET LOCAL:
 
+```typescript
 // db/prisma-tenant-client.ts
-
 import { PrismaClient } from '@prisma/client';
-
 import { getTenantId } from '../context/tenant-context';
 
-export const prisma = new PrismaClient().\$extends({
-
-query: {
-
-\$allModels: {
-
-async \$allOperations({ args, query }) {
-
-const tenantId = getTenantId();
-
-// Execute inside an interactive transaction with SET LOCAL
-
-return prisma.\$transaction(async (tx) => {
-
-await tx.\$executeRawUnsafe(
-
-`SET LOCAL app.current_tenant_id = '\${tenantId}'`
-
-);
-
-return query(args);
-
+export const prisma = new PrismaClient().$extends({
+  query: {
+    $allModels: {
+      async $allOperations({ args, query }) {
+        const tenantId = getTenantId();
+        // Execute inside an interactive transaction with SET LOCAL
+        return prisma.$transaction(async (tx) => {
+          await tx.$executeRawUnsafe(
+            `SET LOCAL app.current_tenant_id = '${tenantId}'`
+          );
+          return query(args);
+        });
+      },
+    },
+  },
 });
-
-},
-
-},
-
-},
-
-});
+```
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 
 ### PostgreSQL Row-Level Security DDL Reference:
 
+```sql
 -- Enable & Force RLS (Guarantees isolation cannot be bypassed)
-
 ALTER TABLE table_name ENABLE ROW LEVEL SECURITY;
-
 ALTER TABLE table_name FORCE ROW LEVEL SECURITY;
 
 -- Read / Write Unified Isolation Policy
-
 CREATE POLICY table_tenant_isolation ON table_name
-
 AS RESTRICTIVE
-
 FOR ALL
-
 TO authenticated_user_role
-
 USING (tenant_id = NULLIF(current_setting('app.current_tenant_id', true), '')::uuid)
-
 WITH CHECK (tenant_id = NULLIF(current_setting('app.current_tenant_id', true), '')::uuid);
 
 -- Drop Policy
-
 DROP POLICY IF EXISTS table_tenant_isolation ON table_name;
+```
 
 ### Express / Fastify Tenant Extraction Middleware:
 
+```typescript
 // middleware/tenant-resolver.ts
-
 import { Request, Response, NextFunction } from 'express';
-
 import { tenantStorage } from '../context/tenant-context';
 
 export function tenantResolverMiddleware(req: Request, res: Response, next: NextFunction) {
+  // Extract tenant from custom subdomain, JWT claims, or API header
+  const tenantId =
+    req.headers['x-tenant-id'] as string ||
+    (req.user as any)?.tenantId ||
+    req.subdomains[0];
 
-// Extract tenant from custom subdomain, JWT claims, or API header
+  if (!tenantId) {
+    return res.status(400).json({ error: 'Missing tenant identifier' });
+  }
 
-const tenantId =
-
-req.headers['x-tenant-id'] as string ||
-
-(req.user as any)?.tenantId ||
-
-req.subdomains[0];
-
-if (!tenantId) {
-
-return res.status(400).json({ error: 'Missing tenant identifier' });
-
+  // Wrap remaining request pipeline in AsyncLocalStorage scope
+  tenantStorage.run({ tenantId, userId: (req.user as any)?.id }, () => {
+    next();
+  });
 }
-
-// Wrap remaining request pipeline in AsyncLocalStorage scope
-
-tenantStorage.run({ tenantId, userId: (req.user as any)?.id }, () => {
-
-next();
-
-});
-
-}
+```
 
 ## SECTION 3: WEEKLY SYSTEM DESIGN & CODING PROBLEMS
 

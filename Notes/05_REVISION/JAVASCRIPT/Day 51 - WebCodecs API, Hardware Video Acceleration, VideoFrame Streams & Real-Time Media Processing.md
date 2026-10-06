@@ -59,49 +59,31 @@ To decode a video stream, the developer must feed **EncodedVideoChunk** objects 
 
 2.  **Delta Frames ('delta')**: Differential frames (P-frames and B-frames) storing only pixel motion vectors relative to prior reference frames. Cannot be decoded without preceding key frames.
 
+```typescript
 // Initializing a Hardware-Accelerated VideoDecoder
-
 const videoDecoder = new VideoDecoder({
-
-output: (videoFrame) => {
-
-// Invoked asynchronously as soon as a frame is decoded by hardware
-
-renderFrameToCanvas(videoFrame);
-
-// CRITICAL: Explicitly release the GPU hardware buffer!
-
-// Failing to close frames exhausts native video memory, crashing the browser tab.
-
-videoFrame.close();
-
-},
-
-error: (err) => {
-
-console.error('Hardware decoding failure:', err);
-
-}
-
+  output: (videoFrame) => {
+    // Invoked asynchronously as soon as a frame is decoded by hardware
+    renderFrameToCanvas(videoFrame);
+    // CRITICAL: Explicitly release the GPU hardware buffer!
+    // Failing to close frames exhausts native video memory, crashing the browser tab.
+    videoFrame.close();
+  },
+  error: (err) => {
+    console.error('Hardware decoding failure:', err);
+  }
 });
 
 // Configure decoder with video codec string (e.g. AVC1 / H.264 Baseline Profile Level 3.1)
-
 videoDecoder.configure({
-
-codec: 'avc1.42001f',
-
-codedWidth: 1920,
-
-codedHeight: 1080,
-
-// Optional hardware acceleration preference
-
-hardwareAcceleration: 'prefer-hardware',
-
-optimizeForLatency: true, // Crucial for real-time WebRTC / cloud gaming
-
+  codec: 'avc1.42001f',
+  codedWidth: 1920,
+  codedHeight: 1080,
+  // Optional hardware acceleration preference
+  hardwareAcceleration: 'prefer-hardware',
+  optimizeForLatency: true, // Crucial for real-time WebRTC / cloud gaming
 });
+```
 
 ### 3. The Lifecycle of a VideoFrame & Memory Leak Pitfalls
 
@@ -111,31 +93,17 @@ A VideoFrame represents an in-memory video frame. Crucially, its underlying pixe
 
 - **Rule of Thumb**: Treat VideoFrame like a native file handle or C pointer. Every new VideoFrame() or decoded frame callback **must** be paired with frame.close() as soon as processing or rendering is complete.
 
+```javascript
 function processFrame(sourceFrame) {
-
-try {
-
-// Query frame dimensions and color space without copying pixels
-
-const width = sourceFrame.displayWidth;
-
-const height = sourceFrame.displayHeight;
-
-const timestamp = sourceFrame.timestamp;
-
-// Draw directly to 2D Canvas (Hardware-to-Hardware blit, zero CPU memory cost!)
-
-canvasCtx.drawImage(sourceFrame, 0, 0, width, height);
-
-} finally {
-
-// Ensure native memory is released even if drawing throws an exception
-
-sourceFrame.close();
-
-}
-
-}
+  try {
+    // Query frame dimensions and color space without copying pixels
+    const width = sourceFrame.displayWidth;
+    const height = sourceFrame.displayHeight;
+    const timestamp = sourceFrame.timestamp;
+    // Draw directly to 2D Canvas (Hardware-to-Hardware blit, zero CPU memory cost!)
+    canvasCtx.drawImage(sourceFrame, 0, 0, width, height);
+  } finally {
+```
 
 ### 4. Encoding Video Streams with Backpressure (VideoEncoder)
 
@@ -173,45 +141,16 @@ latencyMode: 'realtime', // Optimizes for lowest latency over compression effici
 
 async function captureAndEncodeLoop(canvas) {
 
-let frameIndex = 0;
-
-while (isRecording) {
-
-// BACKPRESSURE CHECK: If hardware encoder is falling behind, drop or throttle frames
-
-if (videoEncoder.encodeQueueSize > 5) {
-
-console.warn('Encoder saturated; throttling frame pipeline');
-
-await new Promise(resolve => setTimeout(resolve, 33));
-
-continue;
-
-}
-
-const timestampMicros = performance.now() * 1000;
-
-// Create VideoFrame directly from Canvas without getImageData()
-
-const frame = new VideoFrame(canvas, { timestamp: timestampMicros });
-
-// Force a key frame every 60 frames (every 2 seconds at 30 FPS)
-
-const isKeyFrame = (frameIndex % 60 === 0);
-
-videoEncoder.encode(frame, { keyFrame: isKeyFrame });
-
-// Release JavaScript handle to the frame
-
-frame.close();
-
-frameIndex++;
-
-await new Promise(r => requestAnimationFrame(r));
-
-}
-
-}
+```typescript
+  let frameIndex = 0;
+  while (isRecording) {
+    // BACKPRESSURE CHECK: If hardware encoder is falling behind, drop or throttle frames
+    if (videoEncoder.encodeQueueSize > 5) {
+      console.warn('Encoder saturated; throttling frame pipeline');
+      await new Promise(resolve => setTimeout(resolve, 33));
+      continue;
+    }
+```
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 

@@ -81,37 +81,28 @@ When diagnosing memory leaks, developers inspect DevTools Heap Snapshots using t
 
 A notorious memory leak occurs when closures share the same parent lexical environment:
 
+```javascript
 // The Shared Lexical Environment Memory Leak
-
 let runLeak;
 
 function setup() {
+  const hugePayload = new Array(1000000).fill('leak'); // ~8 MB memory
 
-const hugePayload = new Array(1000000).fill('leak'); // ~8 MB memory
+  // Closure 1: Uses hugePayload
+  function leakHolder() {
+    return hugePayload[0];
+  }
 
-// Closure 1: Uses hugePayload
-
-function leakHolder() {
-
-return hugePayload[0];
-
-}
-
-// Closure 2: Does NOT use hugePayload, but shares lexical scope with Closure 1!
-
-runLeak = function activeListener() {
-
-console.log("Active worker running\...");
-
-};
-
+  // Closure 2: Does NOT use hugePayload, but shares lexical scope with Closure 1!
+  runLeak = function activeListener() {
+    console.log("Active worker running...");
+  };
 }
 
 setup();
-
 // Even though `leakHolder` is never saved or called, `runLeak` keeps the
-
 // shared parent lexical scope alive, permanently leaking `hugePayload`!
+```
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 
@@ -161,48 +152,17 @@ Analyze the object graph below:
 
 The following WebSocket connection manager leaks 50MB of memory per disconnected socket because an unused debug function captures the socket buffer:
 
+```javascript
 // Buggy Leaking Code
-
 function registerSocket(socket) {
-
-const socketBuffer = new Uint8Array(50 * 1024 * 1024); // 50MB payload
-
-function debugDump() {
-
-return socketBuffer.byteLength;
-
+  const socketBuffer = new Uint8Array(50 * 1024 * 1024); // 50MB payload
+  function debugDump() {
+    return socketBuffer.byteLength;
+  }
+  socket.onMessage = function() {
+    console.log("Packet received");
+  };
 }
+```
 
-socket.onMessage = function handleMessage(msg) {
 
-console.log("Received:", msg.length);
-
-};
-
-return socket.onMessage;
-
-}
-
-*Task*: Refactor this function so that socket.onMessage retains **only** what it actually needs, allowing socketBuffer to be reclaimed by the V8 Garbage Collector immediately after registerSocket exits.
-
-### Challenge 3: In-Process Heap Anomaly & Leak Detector in TypeScript
-
-Build an Enterprise **Automated In-Process Heap Leak Detection Service** in TypeScript:
-
-**Requirements**:
-
-1.  **Periodic Telemetry Polling**:
-
-    - Polls v8.getHeapSpaceStatistics() every 5 seconds.
-
-    - Calculates moving averages of used_size in Old Space and Large Object Space.
-
-2.  **Event Loop Lag Correlation**:
-
-    - Measures Event Loop lag via high-resolution timers (performance.now()).
-
-    - Distinguishes between healthy garbage collection reclamation and runaway heap bloat.
-
-3.  **Automated Snapshot Dump**:
-
-    - If Old Space memory grows monotonically across 5 consecutive checks without dropping after Major GC, automatically writes a diagnostic .heapsnapshot file to disk and emits an alert event with stack metrics.

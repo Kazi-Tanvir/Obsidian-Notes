@@ -58,133 +58,57 @@ Module Federation allows a JavaScript application to dynamically load code from 
 
 - **Shared Scope (shared)**: Defines dependencies that can be shared between the host and remotes to prevent downloading duplicate libraries.
 
+```javascript
 // host/webpack.config.js
-
 const { ModuleFederationPlugin } = require('webpack').container;
-
 module.exports = {
-
-plugins: [
-
-new ModuleFederationPlugin({
-
-name: 'shell_app',
-
-remotes: {
-
-// Points to the remote entry bundle published by team Checkout:
-
-checkout: 'checkout_app@https://checkout.enterprise.com/remoteEntry.js',
-
-},
-
-shared: {
-
-react: { singleton: true, requiredVersion: '^18.2.0', eager: false },
-
-'react-dom': { singleton: true, requiredVersion: '^18.2.0' },
-
-},
-
-}),
-
-],
-
+  plugins: [
+    new ModuleFederationPlugin({
+      name: 'shell_app',
+      remotes: {
+        // Points to the remote entry bundle published by team Checkout:
+        checkout: 'checkout_app@https://checkout.enterprise.com/remoteEntry.js',
+      },
+      shared: {
+        react: { singleton: true, requiredVersion: '^18.2.0', eager: false },
+        'react-dom': { singleton: true, requiredVersion: '^18.2.0' },
+      },
+    }),
+  ],
 };
+```
 
+```javascript
 // checkout-remote/webpack.config.js
-
 const { ModuleFederationPlugin } = require('webpack').container;
 
 module.exports = {
-
-plugins: [
-
-new ModuleFederationPlugin({
-
-name: 'checkout_app',
-
-filename: 'remoteEntry.js',
-
-exposes: {
-
-// Exposes internal component for consumption by Host:
-
-'./CartWidget': './src/components/CartWidget',
-
-},
-
-shared: {
-
-react: { singleton: true, requiredVersion: '^18.2.0' },
-
-'react-dom': { singleton: true, requiredVersion: '^18.2.0' },
-
-},
-
-}),
-
-],
-
+  plugins: [
+    new ModuleFederationPlugin({
+      name: 'checkout_app',
+      filename: 'remoteEntry.js',
+      exposes: {
+        // Exposes internal component for consumption by Host:
+        './CartWidget': './src/components/CartWidget',
+      },
+      shared: {
+        react: { singleton: true, requiredVersion: '^18.2.0' },
+      },
+    }),
+  ],
 };
-
-#### Shared Scope Resolution & The Singleton Rule:
-
-When multiple federated apps request react, Webpack's runtime initializes __webpack_share_scopes__.default.
-
-- If singleton: true is configured, only the highest compatible semver instance is loaded into memory.
-
-- If versions conflict and strictVersion: true is enabled, Webpack rejects the mismatch; if strictVersion: false, it falls back to loading separate versions with a runtime warning.
+```
 
 ### 3. Dynamic Remote Loading at Runtime
 
 Hardcoding remote URLs in Webpack configs prevents multi-environment deployments (staging vs. production). Modern hosts load remotes dynamically by URL at runtime:
 
+```typescript
 // Dynamic Remote Script Injector & Initializer
-
 export async function loadDynamicRemote(remoteUrl: string, scope: string, module: string) {
-
-// 1. Inject script tag if not already present
-
-if (!document.querySelector(`script[src="\${remoteUrl}"]`)) {
-
-await new Promise<void>((resolve, reject) => {
-
-const script = document.createElement('script');
-
-script.src = remoteUrl;
-
-script.type = 'text/javascript';
-
-script.async = true;
-
-script.onload = () => resolve();
-
-script.onerror = () => reject(new Error(`Failed to load remote: \${remoteUrl}`));
-
-document.head.appendChild(script);
-
-});
-
-}
-
-// 2. Initialize the container with the shared scope
-
-// \@ts-ignore
-
-const container = window[scope];
-
-// \@ts-ignore
-
-await container.init(__webpack_share_scopes__.default);
-
-// 3. Obtain factory and resolve module
-
-const factory = await container.get(module);
-
-return factory();
-
-}
+  // 1. Inject script tag if not already present
+  if (!document.querySelector(`script[src="${remoteUrl}"]`)) {
+```
 
 ### 4. Client Sandbox Isolation via Window Proxy
 
@@ -192,53 +116,10 @@ When micro-frontends are not encapsulated inside Shadow DOM, an errant remote ca
 
 A **Proxy Sandbox** provides each micro-app with a virtualized window object:
 
+```typescript
 export class WindowProxySandbox {
-
-private fakeWindow: Record<string, any> = {};
-
-public proxy: Window;
-
-public active = false;
-
-constructor() {
-
-const rawWindow = window;
-
-this.proxy = new Proxy(rawWindow, {
-
-get: (target, prop: string) => {
-
-if (this.fakeWindow.hasOwnProperty(prop)) {
-
-return this.fakeWindow[prop];
-
-}
-
-return (target as any)[prop];
-
-},
-
-set: (target, prop: string, value: any) => {
-
-if (this.active) {
-
-this.fakeWindow[prop] = value; // Trap writes locally!
-
-}
-
-return true;
-
-},
-
-});
-
-}
-
-activate() { this.active = true; }
-
-deactivate() { this.active = false; this.fakeWindow = {}; }
-
-}
+  private fakeWindow: Record<string, any> = {};
+```
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 

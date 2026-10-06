@@ -60,39 +60,37 @@ Modern JavaScript has introduced powerful primitives that improve expressiveness
 
 // Matches dollar amounts preceded by '\$' without including the '\$' in the match:
 
-const pricePattern = /(?<=\\\$)\\d+(\\.\\d{2})?/;
-
-console.log('Total: \$149.99'.match(pricePattern)[0]); // "149.99"
+```javascript
+// Matches dollar amounts preceded by '$' without including the '$' in the match:
+const pricePattern = /(?<=\$)\d+(\.\d{2})?/;
+console.log('Total: $149.99'.match(pricePattern)[0]); // "149.99"
+```
 
 #### 2. Named Capture Groups & Indices (d flag):
 
 The d flag generates start and end byte/character index coordinates for every capture group:
 
-const dateRegex = /(?<year>\\d{4})-(?<month>\\d{2})-(?<day>\\d{2})/d;
-
+```javascript
+const dateRegex = /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/d;
 const match = dateRegex.exec('Launch date: 2026-09-10');
-
 console.log(match.groups.year); // "2026"
-
 console.log(match.indices.groups.year); // [13, 17] (Precise substring coordinates)
+```
 
 #### 3. Sticky Flag (y) for High-Throughput Streaming Tokenizers:
 
 Unlike the global flag (g) which searches forward across the entire string, the sticky flag (y) forces matches to succeed strictly at regex.lastIndex. This enables **\$O(1)\$ zero-copy lexing** without string slicing:
 
+```typescript
 const source = "const x = 42;";
-
-const tokenRegex = /\\s+|[a-zA-Z_]\\w*|\\d+|[=;]/y;
-
+const tokenRegex = /\s+|[a-zA-Z_]\w*|\d+|[=;]/y;
 tokenRegex.lastIndex = 0;
 
 let tokenMatch: RegExpExecArray | null;
-
 while ((tokenMatch = tokenRegex.exec(source)) !== null) {
-
-console.log(`Token at \${tokenMatch.index}:`, tokenMatch[0]);
-
+  console.log(`Matched at ${tokenMatch.index}:`, tokenMatch[0]);
 }
+```
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 

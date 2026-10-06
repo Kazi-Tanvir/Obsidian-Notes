@@ -163,9 +163,14 @@ If a client queries 100 products and their inventory status, naive Federation wo
 
 ### Supergraph Composition Command (rover):
 
+```bash
+```bash
 # Validate and compose subgraphs into supergraph schema
-
 rover supergraph compose --config ./supergraph.yaml > supergraph.graphql
+SECTION 3: WEEKLY SYSTEM DESIGN & CODING PROBLEMS
+```
+SECTION 3: WEEKLY SYSTEM DESIGN & CODING PROBLEMS
+```
 
 ## SECTION 3: WEEKLY SYSTEM DESIGN & CODING PROBLEMS
 

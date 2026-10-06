@@ -125,95 +125,63 @@ Storing static database passwords in Kubernetes Secrets or environment variables
 
 #### 1. Enforcing Cluster-Wide Strict mTLS (peer-authentication.yaml):
 
+```yaml
 apiVersion: security.istio.io/v1beta1
-
 kind: PeerAuthentication
-
 metadata:
-
-name: default
-
-namespace: istio-system
-
+  name: default
+  namespace: istio-system
 spec:
-
-mtls:
-
-mode: STRICT # Rejects all plaintext unencrypted traffic cluster-wide!
+  mtls:
+    mode: STRICT # Rejects all plaintext unencrypted traffic cluster-wide!
+```
 
 #### 2. Least-Privilege Authorization Policy (auth-policy.yaml):
 
+```yaml
 apiVersion: security.istio.io/v1beta1
-
 kind: AuthorizationPolicy
-
 metadata:
-
-name: allow-billing-to-payment
-
-namespace: payment
-
+  name: allow-billing-to-payment
+  namespace: payment
 spec:
-
-selector:
-
-matchLabels:
-
-app: payment-service
-
-action: ALLOW
-
-rules:
-
-- from:
-
-- source:
-
-# Enforce exact cryptographic SPIFFE identity!
-
-principals: ["cluster.local/ns/billing/sa/billing-service-sa"]
-
-to:
-
-- operation:
-
-methods: ["POST"]
-
-paths: ["/api/v1/charge"]
+  selector:
+    matchLabels:
+      app: payment-service
+  action: ALLOW
+  rules:
+    - from:
+        - source:
+            # Enforce exact cryptographic SPIFFE identity!
+            principals: ["cluster.local/ns/billing/sa/billing-service-sa"]
+      to:
+        - operation:
+            methods: ["POST"]
+            paths: ["/api/v1/charge"]
+```
 
 ### HashiCorp Vault Dynamic Database Engine Setup:
 
+```bash
 # 1. Mount database secrets engine
-
 vault secrets enable database
 
 # 2. Configure PostgreSQL connection plugin
-
-vault write database/config/postgresql
-
-plugin_name=postgresql-database-plugin
-
-allowed_roles="billing-role"
-
-connection_url="postgresql://{{username}}:{{password}}@postgres.db:5432/core?sslmode=disable"
-
-username="vault_admin"
-
-password="vault_admin_master_password"
+vault write database/config/postgresql \
+  plugin_name=postgresql-database-plugin \
+  allowed_roles="billing-role" \
+  connection_url="postgresql://{{username}}:{{password}}@postgres.db:5432/core?sslmode=disable" \
+  username="vault_admin" \
+  password="vault_admin_master_password"
 
 # 3. Define dynamic user creation statement with 1-hour TTL
-
-vault write database/roles/billing-role
-
-db_name=postgresql
-
-creation_statements="CREATE ROLE \\"{{name}}\\" WITH LOGIN PASSWORD '{{password}}' VALID UNTIL '{{expiration}}';
-
-GRANT SELECT, INSERT, UPDATE ON ALL TABLES IN SCHEMA public TO \\"{{name}}\\";"
-
-default_ttl="1h"
-
-max_ttl="24h"
+vault write database/roles/billing-role \
+  db_name=postgresql \
+  creation_statements="CREATE ROLE \"{{name}}\" WITH LOGIN PASSWORD '{{password}}' VALID UNTIL '{{expiration}}'; \
+    GRANT SELECT, INSERT, UPDATE ON ALL TABLES IN SCHEMA public TO \"{{name}}\";" \
+  default_ttl="1h" \
+  max_ttl="24h"
+```
 
 ## SECTION 3: WEEKLY SYSTEM DESIGN & CODING PROBLEMS
 

@@ -56,53 +56,10 @@ Traditional operating system interfaces (POSIX) grant applications ambient acces
 
 Node.js provides native WASI execution through the node:wasi built-in module:
 
+```typescript
 import { readFile } from 'node:fs/promises';
-
 import { WASI } from 'node:wasi';
-
-import { argv, env } from 'node:process';
-
-async function runWasmPlugin(wasmPath: string) {
-
-// 1. Configure WASI instance with capability-based sandboxing
-
-const wasi = new WASI({
-
-version: 'preview1',
-
-args: argv,
-
-env: { APP_ENV: 'sandbox' },
-
-// Restrict filesystem: Map virtual guest path '/workspace' to host local folder
-
-preopens: {
-
-'/workspace': './isolated_storage',
-
-},
-
-});
-
-// 2. Load compiled WebAssembly bytecode
-
-const wasmBuffer = await readFile(wasmPath);
-
-const wasmModule = await WebAssembly.compile(wasmBuffer);
-
-// 3. Inject WASI system call import table into the WebAssembly instance
-
-const instance = await WebAssembly.instantiate(wasmModule, {
-
-wasi_snapshot_preview1: wasi.wasiImport,
-
-});
-
-// 4. Start execution (invokes guest `_start` / `main` entrypoint)
-
-wasi.start(instance);
-
-}
+```
 
 ### 3. The WebAssembly Component Model & WIT (Wasm Interface Types)
 
@@ -114,27 +71,16 @@ The **Wasm Component Model** and **WIT (Wasm Interface Type)** eliminate this hu
 
 - **Canonical ABI**: Automatically serializes and lifts complex data across guest and host memory boundaries with zero manual glue code.
 
+```wit
 // plugin.wit - Interface Definition
-
 package enterprise:plugins@1.0.0;
-
 interface data-transformer {
-
-record user-record {
-
-id: string,
-
-email: string,
-
-tier: string,
-
-}
-
-// Pure typed interface without raw memory pointers!
-
-transform: func(input: user-record) -> result<user-record, string>;
-
-}
+  record user-record {
+    id: string,
+    email: string,
+    tier: string,
+  }
+```
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 
@@ -152,17 +98,14 @@ stdin / stdout /  number            0, 1, 2           File descriptors stderr   
 
 ### WebAssembly Memory Management APIs:
 
+```typescript
 // Allocate memory: 1 page = 65,536 bytes (64 KB)
-
 const memory = new WebAssembly.Memory({ initial: 2, maximum: 10 }); // 128 KB to 640 KB
-
 // Grow memory dynamically (fails if exceeds maximum)
-
 memory.grow(1); // Allocates +64 KB
-
 // Direct byte access via typed views
-
 const rawBytes = new Uint8Array(memory.buffer);
+```
 
 ## SECTION 3: PRACTICAL PROBLEMS
 
@@ -170,17 +113,17 @@ const rawBytes = new Uint8Array(memory.buffer);
 
 Analyze the following WASI capability setup:
 
-const wasi = new WASI({
-
-version: 'preview1',
-
-preopens: {
-
-'/data': './tenant_files',
-
-},
-
-});
+```typescript
+  const wasi = new WASI({
+    version: 'preview1',
+    args: argv,
+    env: { APP_ENV: 'sandbox' },
+    // Restrict filesystem: Map virtual guest path '/workspace' to host local folder
+    preopens: {
+      '/workspace': './isolated_storage',
+    },
+  });
+```
 
 *Question*: If the guest WebAssembly module attempts to open ../../etc/passwd or /etc/shadow, what exact WASI error code is returned (__WASI_ERRNO_NOTCAPABLE vs __WASI_ERRNO_NOENT)? Explain how the WASI runtime performs path canonicalization before translating virtual paths to host file descriptors.
 

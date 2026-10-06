@@ -57,107 +57,43 @@ A **Circular Ring Buffer** operates over a fixed-size contiguous buffer with hea
 
 \$\$\\text{Index} = \\text{pointer} \\ & \\ (\\text{capacity} - 1)\$\$
 
+```typescript
 export class RingBuffer<T> {
-
-private buffer: (T | undefined)[];
-
-private capacity: number;
-
-private mask: number;
-
-private head: number = 0;
-
-private tail: number = 0;
-
-private count: number = 0;
-
-constructor(powerOfTwoCapacity: number = 1024) {
-
-// Ensure capacity is a power of 2
-
-this.capacity = 1 << Math.ceil(Math.log2(powerOfTwoCapacity));
-
-this.mask = this.capacity - 1;
-
-this.buffer = new Array(this.capacity);
-
-}
-
-push(item: T): boolean {
-
-if (this.count === this.capacity) {
-
-// Buffer is full (overwrite oldest item or reject)
-
-this.head = (this.head + 1) & this.mask;
-
-} else {
-
-this.count++;
-
-}
-
-this.buffer[this.tail] = item;
-
-this.tail = (this.tail + 1) & this.mask; // \$O(1)\$ bitwise wrap!
-
-return true;
-
-}
-
-pop(): T | undefined {
-
-if (this.count === 0) return undefined;
-
-const item = this.buffer[this.head];
-
-this.buffer[this.head] = undefined; // Avoid memory leak
-
-this.head = (this.head + 1) & this.mask;
-
-this.count--;
-
-return item;
-
-}
-
-get size(): number { return this.count; }
-
-}
+  private buffer: (T | undefined)[];
+  private capacity: number;
+  private mask: number;
+  private head: number = 0;
+  private tail: number = 0;
+  private count: number = 0;
+  constructor(powerOfTwoCapacity: number = 1024) {
+    // Ensure capacity is a power of 2
+    this.capacity = 1 << Math.ceil(Math.log2(powerOfTwoCapacity));
+    this.mask = this.capacity - 1;
+    this.buffer = new Array(this.capacity);
+  }
+```
 
 ### 3. Bitsets / Bitfields: 32 Booleans in a Single Integer
 
 Instead of allocating an object { read: true, write: false, execute: true } (consuming ~56 bytes in V8), a **Bitset** packs up to 32 boolean flags into a single 4-byte 32-bit integer:
 
+```typescript
 // Bitwise Flag Definitions
-
-const PERM_READ = 1 << 0; // 0001 (1)
-
-const PERM_WRITE = 1 << 1; // 0010 (2)
-
+const PERM_READ    = 1 << 0; // 0001 (1)
+const PERM_WRITE   = 1 << 1; // 0010 (2)
 const PERM_EXECUTE = 1 << 2; // 0100 (4)
-
-const PERM_DELETE = 1 << 3; // 1000 (8)
-
+const PERM_DELETE  = 1 << 3; // 1000 (8)
 let userPerms = 0;
-
 // 1. Set Flag (Bitwise OR):
-
 userPerms |= (PERM_READ | PERM_WRITE); // 0011 (3)
-
 // 2. Check Flag (Bitwise AND):
-
 const canWrite = (userPerms & PERM_WRITE) !== 0; // true
-
 const canDelete = (userPerms & PERM_DELETE) !== 0; // false
-
 // 3. Clear Flag (Bitwise AND with NOT):
-
 userPerms &= ~PERM_WRITE; // Clears write permission
-
 // 4. Toggle Flag (Bitwise XOR):
-
 userPerms ^= PERM_EXECUTE; // Toggles execute on/off
+```
 
 ## SECTION 2: DOCUMENTATION CHEAT SHEET
 
@@ -207,15 +143,12 @@ HOLEY_ELEMENTS (Slowest: prototype chain checks on every lookup!)
 
 Analyze the snippet below:
 
+```javascript
 const array = [];
-
 for (let i = 0; i < 5; i++) array.push(i); // PACKED_SMI_ELEMENTS
-
 array.push(4.2); // PACKED_DOUBLE_ELEMENTS
-
 array.length = 10; // What element kind does this transition to?
-
-delete array[0]; // What happens now?
+```
 
 *Question*: What are the resulting element kinds after array.length = 10 and delete array[0]? Explain why deleting an element from an array permanently destroys TurboFan optimization for subsequent indexing loops.
 

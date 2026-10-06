@@ -120,55 +120,45 @@ Modern CDNs and edge layers utilize **Surrogate-Keys (Cache-Tags)**:
 
 ### Redis Core Commands for High-Concurrency Caching:
 
------------------------------------------------------------------------ **Command**             **Signature**           **Performance / Atomic Guarantee** ----------------------- ----------------------- ----------------------- SET key val EX 3600 NX  Atomic conditional set  Sets key with 1-hour expiration **only if key does not exist**. Used for distributed mutexes.
-
-MGET key1 key2 \...     Vectorized read         Collapses multiple network round-trips into a single pipelined socket fetch.
-
-GETEX key EX 3600       Read and refresh        Retrieves value and updates expiration atomically in a single operation.
-
-PUBLISH                 Pub/Sub broadcast       Broadcasts cache cache:invalidate key                            eviction events to L1 in-memory caches across all Node.js cluster pods. -----------------------------------------------------------------------
+| **Command** | **Signature** | **Performance / Atomic Guarantee** |
+| :--- | :--- | :--- |
+| `SET key val EX 3600 NX` | Atomic conditional set | Sets key with 1-hour expiration **only if key does not exist**. Used for distributed mutexes. |
+| `MGET key1 key2 ...` | Vectorized read | Collapses multiple network round-trips into a single pipelined socket fetch. |
+| `GETEX key EX 3600` | Read and refresh | Retrieves value and updates expiration atomically in a single operation. |
+| `PUBLISH cache:invalidate key` | Pub/Sub broadcast | Broadcasts cache eviction events to L1 in-memory caches across all Node.js cluster pods. |
 
 ### The XFetch Algorithm in TypeScript:
 
+```typescript
 interface CacheEntry<T> {
-
-value: T;
-
-delta: number; // Execution duration in seconds
-
-expiry: number; // Epoch timestamp in seconds
-
+  value: T;
+  delta: number;    // Execution duration in seconds
+  expiry: number;   // Epoch timestamp in seconds
 }
 
 export function shouldRecomputeXFetch<T>(entry: CacheEntry<T>, beta = 1.0): boolean {
+  const now = Date.now() / 1000;
+  const deltaRemaining = entry.expiry - now;
 
-const now = Date.now() / 1000;
+  // If already expired, must recompute immediately
+  if (deltaRemaining <= 0) return true;
 
-const deltaRemaining = entry.expiry - now;
-
-// If already expired, must recompute immediately
-
-if (deltaRemaining <= 0) return true;
-
-// XFetch decision rule: Δ - β * δ * ln(rand()) <= 0
-
-const randomFactor = -Math.log(Math.random());
-
-return (deltaRemaining - (beta * entry.delta * randomFactor)) <= 0;
-
+  // XFetch decision rule: Δ - β * δ * ln(rand()) <= 0
+  const randomFactor = -Math.log(Math.random());
+  return (deltaRemaining - (beta * entry.delta * randomFactor)) <= 0;
 }
+```
 
 ### Edge CDN Cache-Tag Headers:
 
+```http
 # Cloudflare Enterprise Cache Tagging
-
 Cache-Tag: entity-user-402, entity-team-99, view-dashboard
 
 # Fastly Surrogate Control
-
 Surrogate-Key: product-543 category-footwear
-
 Surrogate-Control: max-age=86400, stale-while-revalidate=3600
+```
 
 ## SECTION 3: WEEKLY SYSTEM DESIGN & CODING PROBLEMS
 
