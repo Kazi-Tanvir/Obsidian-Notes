@@ -1,42 +1,40 @@
-Tags: c, static-libraries, shared-libraries, position-independent-code,
-dynamic-loading, dlopen-dlsym\
-Date: 2026-09-15
+---
+tags:
+  - c
+  - static-libraries
+  - shared-libraries
+  - position-independent-code
+  - dynamic-loading
+  - dlopen-dlsym
+date: 2026-09-15
+day: 24
+---
 
-# 1. Quick Reference & Cheat Sheet
+# Day 24: Static vs Dynamic Libraries, Position Independent Code & Dynamic Loading
 
-## Static vs Shared Libraries Comparison
+---
 
-  -----------------------------------------------------------------------
-  Feature                 Static Library (.a)     Shared Library (.so /
-                                                  .dylib / .dll)
-  ----------------------- ----------------------- -----------------------
-  **Creation Tool**       ar rcs libname.a foo.o  gcc -shared -fPIC -o
-                          bar.o                   libname.so foo.o bar.o
+## 1. Quick Reference & Cheat Sheet
 
-  **Compilation Flag**    Standard (-c)           Position-Independent
-                                                  Code (-fPIC)
+### Static vs Shared Libraries Comparison
 
-  **Link Time**           Copied directly into    Linked as a dynamic
-                          final executable        reference record
+----------------------------------------------------------------------- Feature                 Static Library (.a)     Shared Library (.so / .dylib / .dll) ----------------------- ----------------------- ----------------------- **Creation Tool**       ar rcs libname.a foo.o  gcc -shared -fPIC -o bar.o                   libname.so foo.o bar.o
 
-  **Executable Size**     Larger (contains        Minimal (stubs and
-                          library machine code)   dynamic symbols only)
+**Compilation Flag**    Standard (-c)           Position-Independent Code (-fPIC)
 
-  **Runtime Memory**      Duplicated across every Single physical .text
-                          running process         page shared across
-                                                  processes
+**Link Time**           Copied directly into    Linked as a dynamic final executable        reference record
 
-  **Updating**            Requires full relink &  Replace .so file on
-                          recompile of client     disk without relinking
+**Executable Size**     Larger (contains        Minimal (stubs and library machine code)   dynamic symbols only)
 
-  **Linker Flag**         gcc main.o -L. -lname   gcc main.o -L. -lname
-                          -o app                  -Wl,-rpath=. -o app
-  -----------------------------------------------------------------------
+**Runtime Memory**      Duplicated across every Single physical .text running process         page shared across processes
 
-## Critical Linker Rule: Order Sensitivity
+**Updating**            Requires full relink &  Replace .so file on recompile of client     disk without relinking
 
-The GNU linker (ld) processes objects and archives sequentially from
-**left to right**, maintaining an active set of *unresolved symbols*:h
+**Linker Flag**         gcc main.o -L. -lname   gcc main.o -L. -lname -o app                  -Wl,-rpath=. -o app -----------------------------------------------------------------------
+
+### Critical Linker Rule: Order Sensitivity
+
+The GNU linker (ld) processes objects and archives sequentially from **left to right**, maintaining an active set of *unresolved symbols*:h
 
 CORRECT: main.o needs symbols; libmath.a satisfies them
 
@@ -44,20 +42,19 @@ gcc main.o -L. -lmath -o app
 
 WRONG: At the time libmath.a is read, no symbols are unresolved!
 
-gcc -L. -lmath main.o -o app \# Linker error: undefined reference to
-\'\...\'
+gcc -L. -lmath main.o -o app # Linker error: undefined reference to '\...'
 
-\### Dynamic Loading API (\`\<dlfcn.h\>\`)
+#### Dynamic Loading API (`<dlfcn.h>`)
 
-\`\`\`c
+```c
 
-#include \<dlfcn.h\>
+#include <dlfcn.h>
 
 // 1. Open shared object
 
-void \*handle = dlopen(\"./libplugin.so\", RTLD_NOW \| RTLD_LOCAL);
+void *handle = dlopen("./libplugin.so", RTLD_NOW | RTLD_LOCAL);
 
-if (!handle) { fprintf(stderr, \"%s\\n\", dlerror()); exit(1); }
+if (!handle) { fprintf(stderr, "%s\\n", dlerror()); exit(1); }
 
 // 2. Clear pre-existing error flag
 
@@ -66,13 +63,13 @@ dlerror();
 // 3. Resolve symbol address (POSIX-compliant function pointer
 assignment)
 
-int (\*init_fn)(void);
+int (*init_fn)(void);
 
-\*(void \*\*)(&init_fn) = dlsym(handle, \"plugin_init\");
+*(void **)(&init_fn) = dlsym(handle, "plugin_init");
 
-char \*err = dlerror();
+char *err = dlerror();
 
-if (err != NULL) { fprintf(stderr, \"dlsym error: %s\\n\", err);
+if (err != NULL) { fprintf(stderr, "dlsym error: %s\\n", err);
 dlclose(handle); exit(1); }
 
 // 4. Invoke function
@@ -128,13 +125,13 @@ Address Space Process B Address Space
 
 ┌───────────────────────┐ ┌───────────────────────┐
 
-│ \[Private Stack/Heap\] │ │ \[Private Stack/Heap\] │
+│ [Private Stack/Heap] │ │ [Private Stack/Heap] │
 
 ├───────────────────────┤ ├───────────────────────┤
 
 │ libcrypto GOT (Data) │ │ libcrypto GOT (Data) │
 
-│ \[Base: 0x7fff0000\] │ │ \[Base: 0x55aa0000\] │
+│ [Base: 0x7fff0000] │ │ [Base: 0x55aa0000] │
 
 └───────────┬───────────┘ └───────────┬───────────┘
 
@@ -148,7 +145,7 @@ Shared Physical RAM Page (.text section):
 
 ┌──────────────────────────────────────────┐
 
-│ Machine Code: JMP \*GOT_OFFSET(%rip) │
+│ Machine Code: JMP *GOT_OFFSET(%rip) │
 
 │ (100% Position-Independent, Read-Only) │
 
@@ -172,21 +169,21 @@ without knowing their absolute addresses at compile time?
 2.  **Procedure Linkage Table (PLT) & Lazy Binding:**
 
     - Calling a shared library function (e.g. printf) does not jump
-      directly into libc.so. It jumps to a stub in the executable\'s
+      directly into libc.so. It jumps to a stub in the executable's
       .plt.
 
     - **First Call (Lazy Resolution):**
 
       i.  main calls printf@plt.
 
-      ii. printf@plt jumps to the address currently in GOT\[printf\].
+      ii. printf@plt jumps to the address currently in GOT[printf].
 
-      iii. Initially, GOT\[printf\] points back to the next instruction
+      iii. Initially, GOT[printf] points back to the next instruction
            in printf@plt (which pushes the symbol ID and jumps to the
-           dynamic linker resolver \_dl_runtime_resolve).
+           dynamic linker resolver _dl_runtime_resolve).
 
-      iv. \_dl_runtime_resolve locates printf in libc.so and writes the
-          real virtual address into GOT\[printf\].
+      iv. _dl_runtime_resolve locates printf in libc.so and writes the
+          real virtual address into GOT[printf].
 
       v.  The resolver executes printf.
 
@@ -194,7 +191,7 @@ without knowing their absolute addresses at compile time?
 
       i.  main calls printf@plt.
 
-      ii. printf@plt jumps through GOT\[printf\], which now directly
+      ii. printf@plt jumps through GOT[printf], which now directly
           points to printf in libc.so! No resolver overhead.
 
 ## D. Dynamic Symbol Loading (dlopen, dlsym)
@@ -207,14 +204,14 @@ without knowing their absolute addresses at compile time?
   not available to resolve references in subsequently loaded libraries)
   vs RTLD_GLOBAL.
 
-- **Standard C vs POSIX Function Pointer Casting:**\
-  ISO C does not technically guarantee that an object pointer (void \*)
-  can be safely converted to a function pointer.\
-  POSIX formally resolves this with the idiom:void (\*func_ptr)(void);
+- **Standard C vs POSIX Function Pointer Casting:**
+  ISO C does not technically guarantee that an object pointer (void *)
+  can be safely converted to a function pointer.
+  POSIX formally resolves this with the idiom:void (*func_ptr)(void);
 
-> \*(void \*\*)(&func_ptr) = dlsym(handle, \"symbol_name\");
+> *(void **)(&func_ptr) = dlsym(handle, "symbol_name");
 
-# 3. Thoughtful Mini-Project (\~1 Hour Scope)
+# 3. Thoughtful Mini-Project (~1 Hour Scope)
 
 ## Project Title: Extensible Dynamic Plugin Engine (c_plugin_loader)
 
@@ -250,60 +247,60 @@ plugin_project/
 
 #define PLUGIN_API_H
 
-#include \<stdint.h\>
+#include <stdint.h>
 
-#define PLUGIN_MAGIC 0x504C5547 // \"PLUG\"
+#define PLUGIN_MAGIC 0x504C5547 // "PLUG"
 
 typedef struct {
 
 uint32_t magic;
 
-const char \*name;
+const char *name;
 
-const char \*version;
+const char *version;
 
-int (\*init)(void);
+int (*init)(void);
 
-void (\*process)(char \*io_text);
+void (*process)(char *io_text);
 
-void (\*shutdown)(void);
+void (*shutdown)(void);
 
 } PluginDescriptor;
 
 // Export macro for plugins
 
-#define EXPORT_PLUGIN(desc) \\
+#define EXPORT_PLUGIN(desc) 
 
-\_\_attribute\_\_((visibility(\"default\"))) const PluginDescriptor
+__attribute__((visibility("default"))) const PluginDescriptor
 plugin_export = desc
 
 #endif // PLUGIN_API_H
 
 ### 2. Plugin 1: Uppercase Converter (plugins/plugin_uppercase.c)
 
-#include \<stdio.h\>
+#include <stdio.h>
 
-#include \<ctype.h\>
+#include <ctype.h>
 
-#include \<stdint.h\>
+#include <stdint.h>
 
-#include \"plugin_api.h\"
+#include "plugin_api.h"
 
 static int upper_init(void) {
 
-printf(\" \[Uppercase Plugin\] Initialized.\\n\");
+printf(" [Uppercase Plugin] Initialized.\\n");
 
 return 0;
 
 }
 
-static void upper_process(char \*text) {
+static void upper_process(char *text) {
 
 if (!text) return;
 
-for (int i = 0; text\[i\] != \'\\0\'; i++) {
+for (int i = 0; text[i] != '\\0'; i++) {
 
-text\[i\] = (char)toupper((unsigned char)text\[i\]);
+text[i] = (char)toupper((unsigned char)text[i]);
 
 }
 
@@ -311,7 +308,7 @@ text\[i\] = (char)toupper((unsigned char)text\[i\]);
 
 static void upper_shutdown(void) {
 
-printf(\" \[Uppercase Plugin\] Shut down successfully.\\n\");
+printf(" [Uppercase Plugin] Shut down successfully.\\n");
 
 }
 
@@ -319,9 +316,9 @@ static const PluginDescriptor s_desc = {
 
 .magic = PLUGIN_MAGIC,
 
-.name = \"Uppercase Transformer\",
+.name = "Uppercase Transformer",
 
-.version = \"1.0.0\",
+.version = "1.0.0",
 
 .init = upper_init,
 
@@ -335,35 +332,35 @@ EXPORT_PLUGIN(s_desc);
 
 ### 3. Plugin 2: ROT13 Cipher (plugins/plugin_rot13.c)
 
-#include \<stdio.h\>
+#include <stdio.h>
 
-#include \<stdint.h\>
+#include <stdint.h>
 
-#include \"plugin_api.h\"
+#include "plugin_api.h"
 
 static int rot13_init(void) {
 
-printf(\" \[ROT13 Plugin\] Initialized.\\n\");
+printf(" [ROT13 Plugin] Initialized.\\n");
 
 return 0;
 
 }
 
-static void rot13_process(char \*text) {
+static void rot13_process(char *text) {
 
 if (!text) return;
 
-for (int i = 0; text\[i\] != \'\\0\'; i++) {
+for (int i = 0; text[i] != '\\0'; i++) {
 
-char c = text\[i\];
+char c = text[i];
 
-if (c \>= \'a\' && c \<= \'z\') {
+if (c >= 'a' && c <= 'z') {
 
-text\[i\] = (char)(\'a\' + (c - \'a\' + 13) % 26);
+text[i] = (char)('a' + (c - 'a' + 13) % 26);
 
-} else if (c \>= \'A\' && c \<= \'Z\') {
+} else if (c >= 'A' && c <= 'Z') {
 
-text\[i\] = (char)(\'A\' + (c - \'A\' + 13) % 26);
+text[i] = (char)('A' + (c - 'A' + 13) % 26);
 
 }
 
@@ -373,7 +370,7 @@ text\[i\] = (char)(\'A\' + (c - \'A\' + 13) % 26);
 
 static void rot13_shutdown(void) {
 
-printf(\" \[ROT13 Plugin\] Shut down successfully.\\n\");
+printf(" [ROT13 Plugin] Shut down successfully.\\n");
 
 }
 
@@ -381,9 +378,9 @@ static const PluginDescriptor s_desc = {
 
 .magic = PLUGIN_MAGIC,
 
-.name = \"ROT13 Cipher\",
+.name = "ROT13 Cipher",
 
-.version = \"2.1.0\",
+.version = "2.1.0",
 
 .init = rot13_init,
 
@@ -397,35 +394,35 @@ EXPORT_PLUGIN(s_desc);
 
 ### 4. The Host Application (src/host_main.c)
 
-#include \<stdio.h\>
+#include <stdio.h>
 
-#include \<stdlib.h\>
+#include <stdlib.h>
 
-#include \<string.h\>
+#include <string.h>
 
-#include \<stdint.h\>
+#include <stdint.h>
 
-#include \<dlfcn.h\>
+#include <dlfcn.h>
 
-#include \"plugin_api.h\"
+#include "plugin_api.h"
 
 typedef struct {
 
-void \*lib_handle;
+void *lib_handle;
 
-const PluginDescriptor \*descriptor;
+const PluginDescriptor *descriptor;
 
 } LoadedPlugin;
 
-LoadedPlugin \*plugin_load(const char \*path) {
+LoadedPlugin *plugin_load(const char *path) {
 
 // 1. Open shared object
 
-void \*handle = dlopen(path, RTLD_NOW \| RTLD_LOCAL);
+void *handle = dlopen(path, RTLD_NOW | RTLD_LOCAL);
 
 if (!handle) {
 
-fprintf(stderr, \"\[-\] dlopen failed: %s\\n\", dlerror());
+fprintf(stderr, "[-] dlopen failed: %s\\n", dlerror());
 
 return NULL;
 
@@ -437,16 +434,16 @@ dlerror();
 
 // 3. Resolve export symbol
 
-const PluginDescriptor \*desc = NULL;
+const PluginDescriptor *desc = NULL;
 
-\*(const void \*\*)(&desc) = dlsym(handle, \"plugin_export\");
+*(const void **)(&desc) = dlsym(handle, "plugin_export");
 
-char \*err = dlerror();
+char *err = dlerror();
 
-if (err != NULL \|\| !desc) {
+if (err != NULL || !desc) {
 
-fprintf(stderr, \"\[-\] dlsym failed: %s\\n\", err ? err : \"NULL
-descriptor\");
+fprintf(stderr, "[-] dlsym failed: %s\\n", err ? err : "NULL
+descriptor");
 
 dlclose(handle);
 
@@ -456,9 +453,9 @@ return NULL;
 
 // 4. Validate magic
 
-if (desc-\>magic != PLUGIN_MAGIC) {
+if (desc->magic != PLUGIN_MAGIC) {
 
-fprintf(stderr, \"\[-\] Invalid plugin magic in %s\\n\", path);
+fprintf(stderr, "[-] Invalid plugin magic in %s\\n", path);
 
 dlclose(handle);
 
@@ -468,10 +465,10 @@ return NULL;
 
 // 5. Initialize plugin
 
-if (desc-\>init && desc-\>init() != 0) {
+if (desc->init && desc->init() != 0) {
 
-fprintf(stderr, \"\[-\] Plugin initialization rejected by %s\\n\",
-desc-\>name);
+fprintf(stderr, "[-] Plugin initialization rejected by %s\\n",
+desc->name);
 
 dlclose(handle);
 
@@ -479,27 +476,27 @@ return NULL;
 
 }
 
-LoadedPlugin \*plug = (LoadedPlugin \*)malloc(sizeof(LoadedPlugin));
+LoadedPlugin *plug = (LoadedPlugin *)malloc(sizeof(LoadedPlugin));
 
-plug-\>lib_handle = handle;
+plug->lib_handle = handle;
 
-plug-\>descriptor = desc;
+plug->descriptor = desc;
 
 return plug;
 
 }
 
-void plugin_unload(LoadedPlugin \*plug) {
+void plugin_unload(LoadedPlugin *plug) {
 
 if (!plug) return;
 
-if (plug-\>descriptor-\>shutdown) {
+if (plug->descriptor->shutdown) {
 
-plug-\>descriptor-\>shutdown();
+plug->descriptor->shutdown();
 
 }
 
-dlclose(plug-\>lib_handle);
+dlclose(plug->lib_handle);
 
 free(plug);
 
@@ -507,51 +504,51 @@ free(plug);
 
 int main(void) {
 
-printf(\"=======================================================\\n\");
+printf("=======================================================\\n");
 
-printf(\" DYNAMIC PLUGIN ENGINE (dlopen / dlsym Runtime) \\n\");
+printf(" DYNAMIC PLUGIN ENGINE (dlopen / dlsym Runtime) \\n");
 
-printf(\"=======================================================\\n\\n\");
+printf("=======================================================\\n\\n");
 
-const char \*plugin_paths\[\] = {
+const char *plugin_paths[] = {
 
-\"./plugins/libplugin_uppercase.so\",
+"./plugins/libplugin_uppercase.so",
 
-\"./plugins/libplugin_rot13.so\"
+"./plugins/libplugin_rot13.so"
 
 };
 
-size_t count = sizeof(plugin_paths) / sizeof(plugin_paths\[0\]);
+size_t count = sizeof(plugin_paths) / sizeof(plugin_paths[0]);
 
-for (size_t i = 0; i \< count; i++) {
+for (size_t i = 0; i < count; i++) {
 
-printf(\"\[\*\] Loading plugin: %s\\n\", plugin_paths\[i\]);
+printf("[*] Loading plugin: %s\\n", plugin_paths[i]);
 
-LoadedPlugin \*plug = plugin_load(plugin_paths\[i\]);
+LoadedPlugin *plug = plugin_load(plugin_paths[i]);
 
 if (!plug) continue;
 
-printf(\" Plugin Active: %s (v%s)\\n\",
+printf(" Plugin Active: %s (v%s)\\n",
 
-plug-\>descriptor-\>name, plug-\>descriptor-\>version);
+plug->descriptor->name, plug->descriptor->version);
 
-char buffer\[128\];
+char buffer[128];
 
-strcpy(buffer, \"Hello Systems World! 2026\");
+strcpy(buffer, "Hello Systems World! 2026");
 
-printf(\" Original Text : \\\"%s\\\"\\n\", buffer);
+printf(" Original Text : \\"%s\\"\\n", buffer);
 
 // Execute transformation
 
-plug-\>descriptor-\>process(buffer);
+plug->descriptor->process(buffer);
 
-printf(\" Processed Text: \\\"%s\\\"\\n\", buffer);
+printf(" Processed Text: \\"%s\\"\\n", buffer);
 
 // Clean unload
 
 plugin_unload(plug);
 
-printf(\"\[+\] Unloaded.\\n\\n\");
+printf("[+] Unloaded.\\n\\n");
 
 }
 
@@ -573,13 +570,13 @@ host: bin/host_app
 
 plugins: plugins/libplugin_uppercase.so plugins/libplugin_rot13.so
 
-bin/host_app: src/host_main.c include/plugin_api.h \| bin
+bin/host_app: src/host_main.c include/plugin_api.h | bin
 
-\$(CC) \$(CFLAGS) -Iinclude \$\< \$(LDFLAGS) -o \$@
+\$(CC) \$(CFLAGS) -Iinclude \$< \$(LDFLAGS) -o \$@
 
 plugins/%.so: plugins/%.c include/plugin_api.h
 
-\$(CC) \$(CFLAGS) -fPIC -shared -Iinclude \$\< -o \$@
+\$(CC) \$(CFLAGS) -fPIC -shared -Iinclude \$< -o \$@
 
 bin:
 
@@ -591,32 +588,32 @@ run: all
 
 clean:
 
-rm -rf bin plugins/\*.so
+rm -rf bin plugins/*.so
 
 # 4. Error Handling & Defensive Programming Challenge
 
 ## Scenario: The Dangling Symbol Pointer & Memory Fault After dlclose()
 
-Examine the following buggy dynamic plugin executor:#include \<stdio.h\>
+Examine the following buggy dynamic plugin executor:#include <stdio.h>
 
-#include \<stdlib.h\>
+#include <stdlib.h>
 
-#include \<dlfcn.h\>
+#include <dlfcn.h>
 
-typedef void (\*action_fn)(void);
+typedef void (*action_fn)(void);
 
 // BUGGY CODE: Look for severe memory safety bugs
 
-action_fn load_and_get_action(const char \*path) {
+action_fn load_and_get_action(const char *path) {
 
-void \*h = dlopen(path, RTLD_LAZY);
+void *h = dlopen(path, RTLD_LAZY);
 
 if (!h) return NULL;
 
-action_fn fn = (action_fn)dlsym(h, \"run_action\"); // BUG 1: dlerror()
+action_fn fn = (action_fn)dlsym(h, "run_action"); // BUG 1: dlerror()
 unchecked!
 
-// BUG 2: dlclose unmaps the shared library\'s .text pages from virtual
+// BUG 2: dlclose unmaps the shared library's .text pages from virtual
 memory!
 
 dlclose(h);
@@ -629,7 +626,7 @@ return fn;
 
 int main(void) {
 
-action_fn act = load_and_get_action(\"./libaction.so\");
+action_fn act = load_and_get_action("./libaction.so");
 
 if (act) {
 
@@ -645,7 +642,7 @@ return 0;
 
 1.  **Unmapped Page Execution (Use-After-Close):** Calling dlclose(h)
     decrements the reference count of the shared library. When it
-    reaches zero, munmap() is invoked on the library\'s .text and .data
+    reaches zero, munmap() is invoked on the library's .text and .data
     segments. Calling act() immediately triggers a segmentation fault
     (SIGSEGV) because the code is no longer mapped in memory.
 
@@ -660,27 +657,27 @@ return 0;
 
 ## Defensive Fix:
 
-#include \<stdio.h\>
+#include <stdio.h>
 
-#include \<stdlib.h\>
+#include <stdlib.h>
 
-#include \<dlfcn.h\>
+#include <dlfcn.h>
 
 typedef struct {
 
-void \*handle;
+void *handle;
 
-void (\*run_action)(void);
+void (*run_action)(void);
 
 } SafePluginContext;
 
-SafePluginContext \*safe_plugin_init(const char \*path) {
+SafePluginContext *safe_plugin_init(const char *path) {
 
-void \*h = dlopen(path, RTLD_NOW \| RTLD_LOCAL);
+void *h = dlopen(path, RTLD_NOW | RTLD_LOCAL);
 
 if (!h) {
 
-fprintf(stderr, \"dlopen error: %s\\n\", dlerror());
+fprintf(stderr, "dlopen error: %s\\n", dlerror());
 
 return NULL;
 
@@ -688,17 +685,17 @@ return NULL;
 
 dlerror(); // Clear error state
 
-void (\*fn)(void) = NULL;
+void (*fn)(void) = NULL;
 
-\*(void \*\*)(&fn) = dlsym(h, \"run_action\"); // POSIX-compliant
+*(void **)(&fn) = dlsym(h, "run_action"); // POSIX-compliant
 assignment
 
-char \*err = dlerror();
+char *err = dlerror();
 
-if (err != NULL \|\| !fn) {
+if (err != NULL || !fn) {
 
-fprintf(stderr, \"dlsym error: %s\\n\", err ? err : \"NULL function
-pointer\");
+fprintf(stderr, "dlsym error: %s\\n", err ? err : "NULL function
+pointer");
 
 dlclose(h);
 
@@ -706,24 +703,24 @@ return NULL;
 
 }
 
-SafePluginContext \*ctx = (SafePluginContext
-\*)malloc(sizeof(SafePluginContext));
+SafePluginContext *ctx = (SafePluginContext
+*)malloc(sizeof(SafePluginContext));
 
-ctx-\>handle = h;
+ctx->handle = h;
 
-ctx-\>run_action = fn;
+ctx->run_action = fn;
 
 return ctx;
 
 }
 
-void safe_plugin_destroy(SafePluginContext \*ctx) {
+void safe_plugin_destroy(SafePluginContext *ctx) {
 
 if (!ctx) return;
 
 // Only unload shared library AFTER all invocations have completed!
 
-dlclose(ctx-\>handle);
+dlclose(ctx->handle);
 
 free(ctx);
 
