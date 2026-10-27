@@ -22,7 +22,7 @@ image: https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/367520
 released: true
 releaseDate: 02/24/2017
 platform: []
-playtime: 20
+playtime: 60
 played: false
 franchise: ""
 prequel: ""

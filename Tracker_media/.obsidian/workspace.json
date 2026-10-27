@@ -127,22 +127,9 @@
               "icon": "lucide-layout-grid",
               "title": "Mobile Game View"
             }
-          },
-          {
-            "id": "f2731d5deb6002bd",
-            "type": "leaf",
-            "state": {
-              "type": "bases",
-              "state": {
-                "file": "Movie View.base",
-                "viewName": "All Movies"
-              },
-              "icon": "lucide-layout-grid",
-              "title": "Movie View"
-            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -284,10 +271,10 @@
             "state": {
               "type": "file-properties",
               "state": {
-                "file": "Movie View.base"
+                "file": "Anime View.base"
               },
               "icon": "lucide-info",
-              "title": "File properties for Movie View"
+              "title": "File properties"
             }
           },
           {
@@ -371,7 +358,6 @@
   "left-ribbon": {
     "hiddenItems": {
       "bases:Create new base": false,
-      "markdown-importer:Open format converter": false,
       "audio-recorder:Start/stop recording": false,
       "switcher:Open quick switcher": false,
       "graph:Open graph view": false,
@@ -384,19 +370,22 @@
       "obsidian-media-db-plugin:Add new Media DB entry": false
     }
   },
-  "active": "6ca308cfc6e590d4",
+  "active": "76a7d9e5ac61db85",
   "lastOpenFiles": [
-    "Movie View.base",
-    "Mobile Game View.base",
-    "Game View.base",
-    "Series View.base",
-    "Manga View.base",
     "Anime Movie View.base",
     "Anime View.base",
+    "Home.md",
+    "Mobile Game View.base",
+    "series/House of the Dragon (2022).md",
+    "Series View.base",
+    "Movie View.base",
+    "Game View.base",
+    "Untitled.base",
+    "games/Hollow Knight (2017).md",
+    "Manga View.base",
     "anime movies/Tonari no Totoro (1988).md",
     "movies/Gone Girl (2014).md",
     "movies/लापता लेडीज़ (2024).md",
-    "Home.md",
     "games/Free Fire (2017).md",
     "movies/Homebound (2025).md",
     "anime/Overflow (2020).md",
@@ -406,7 +395,6 @@
     "python/import_hentai.py",
     "CoMix Wave Films.md",
     "database/series.txt",
-    "database/movies.txt",
     "manga/Goodnight Punpun (2007).md",
     "games/The Witcher 3 - Wild Hunt (2015).md",
     "games/Genshin Impact (2020).md",
@@ -419,8 +407,6 @@
     "games/Call of Duty - Mobile (2019).md",
     "games/Brawl Stars (2018).md",
     "games/Boom Beach (2014).md",
-    "series/Ozark (2017).md",
-    "series/Hannibal (2013).md",
     "Untitled.canvas",
     "Untitled 1.canvas",
     "Business/Journal/Technical/Migrated/assets/why-not-jwt.png",
