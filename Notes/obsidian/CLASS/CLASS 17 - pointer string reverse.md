@@ -18,7 +18,7 @@ prev: "[[CLASS 16 - pointer min max]]"
 next: "[[CLASS 18 - pointer books 2d arr]]"
 related:
   - "[[LAB 23 - pointer array reverse]]"
-  - "[[PRAC LC 344 - reverse string]]"
+  - "[[PRAC LC - Index]]"
   - "[[PRAC CW 06 - pointer reverse string]]"
 created: 2026-10-29
 status: draft
@@ -97,5 +97,5 @@ rivnaT
 
 ## Related
 - [[LAB 23 - pointer array reverse]] - Recursive pointer-based array reversal
-- [[PRAC LC 344 - reverse string]] - LeetCode #344 solution
+- [[PRAC LC - Index]] - LeetCode #344 solution
 - [[PRAC CW 06 - pointer reverse string]] - Concept-wise pointer string reverse

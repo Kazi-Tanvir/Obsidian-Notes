@@ -1152,7 +1152,20 @@
     "c/sorting": 18,
     "c/bit-manipulation": 19,
     "c/encryption": 20,
-    "level/advanced": 3
+    "level/advanced": 3,
+    "type/practice": 4,
+    "c/recursion": 21,
+    "type/archive": 5,
+    "c/image-processing": 22,
+    "c/bmp-format": 23,
+    "c/testing": 24,
+    "c/gui-iup": 25,
+    "type/assignment": 6,
+    "c/linked-list": 26,
+    "c/dynamic-memory": 27,
+    "type/lab": 7,
+    "c/csv-parsing": 28,
+    "type/project": 8
   },
   "_version": 3
 }

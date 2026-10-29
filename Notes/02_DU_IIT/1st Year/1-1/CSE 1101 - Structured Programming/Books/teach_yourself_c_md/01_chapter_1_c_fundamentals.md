@@ -457,6 +457,11 @@ int main(void)
 }
 ```
 
+### EXERCISES
+
+1. Write a program that computes the volume of a cube. Have the program prompt the user for each dimension.
+2. Write a program that computes the number of seconds in a year.
+
 ---
 
 ## 1.6 ADD COMMENTS TO A PROGRAM
