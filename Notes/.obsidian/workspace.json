@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/00-overview.md",
+                "file": "docs/20-assumptions.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "00-overview"
+              "title": "20-assumptions"
             }
           }
         ]
@@ -243,6 +243,11 @@
   },
   "active": "f2de5461d944ad67",
   "lastOpenFiles": [
+    "docs/05-module-M3-wifi-http-relay.md",
+    "docs/04-module-M2-sensors-oled.md",
+    "docs/11-module-M9-demo-prep.md",
+    "docs/01-interface-contracts.md",
+    "docs/00-overview.md",
     "stat_chapter3.md",
     "obsidian/PRACTICE/PRAC BOOK Ch10 - Index.md",
     "obsidian/PRACTICE/PRAC BOOK Ch08 - Index.md",
@@ -264,11 +269,6 @@
     "obsidian/LAB/LAB - Index.md",
     "obsidian/LAB_PROJECT/PROJ - Index.md",
     "obsidian/LAB_PROJECT/PROJ Final Exam - grader harness.md",
-    "obsidian/LAB_PROJECT/PROJ Final Exam - food ordering system.md",
-    "obsidian/CLASS/CLASS 06 - calc menu switch.md",
-    "obsidian/CLASS/CLASS - Index.md",
-    "obsidian/ASSIGNMENT/ASG 05 - dictionary sort lexicographic.md",
-    "obsidian/99_archive/ARCH - Project documentation.md",
     "obsidian/PRACTICE",
     "obsidian/LAB_PROJECT",
     "obsidian/LAB",
