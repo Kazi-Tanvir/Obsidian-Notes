@@ -24,7 +24,7 @@ Express is a minimal Node.js web framework. If you've built any web server in Ja
 
 ## 2. Interface Contracts
 
-This module **must** obey every contract defined in [01-interface-contracts.md](./01-interface-contracts.md). Here's a summary:
+This module **must** obey every contract defined in [01-interface-contracts.md](01-interface-contracts.md). Here's a summary:
 
 ### 2.1 Endpoints (from §4 of the contracts)
 
@@ -49,7 +49,7 @@ All endpoints require an `X-API-Key` header matching the `API_KEY` environment v
 
 ### 2.3 JSON Schemas
 
-See [01-interface-contracts.md §3](./01-interface-contracts.md) for the exact JSON shapes for sensor data, command queue, and command acknowledgement.
+See [01-interface-contracts.md §3](01-interface-contracts.md) for the exact JSON shapes for sensor data, command queue, and command acknowledgement.
 
 ### 2.4 Validation Rules
 
@@ -175,7 +175,7 @@ This creates:
 
 ## 6. Prisma Schema
 
-Copy this into `prisma/schema.prisma`. This is identical to the schema in [01-interface-contracts.md §5](./01-interface-contracts.md).
+Copy this into `prisma/schema.prisma`. This is identical to the schema in [01-interface-contracts.md §5](01-interface-contracts.md).
 
 ```prisma
 // prisma/schema.prisma
@@ -746,7 +746,7 @@ module.exports = router;
 
 ### 8.4 Vapi Webhook Route
 
-This is the most complex route. See [01-interface-contracts.md §6](./01-interface-contracts.md) and §10 for the full tool definitions and webhook handler.
+This is the most complex route. See [01-interface-contracts.md §6](01-interface-contracts.md) and §10 for the full tool definitions and webhook handler.
 
 ```javascript
 // src/routes/vapi.js
