@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "obsidian/ASSIGNMENT/ASG 08 - recursion practice.md",
+                "file": "docs/00-overview.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "ASG 08 - recursion practice"
+              "title": "00-overview"
             }
           }
         ]
@@ -243,6 +243,11 @@
   },
   "active": "f2de5461d944ad67",
   "lastOpenFiles": [
+    "stat_chapter3.md",
+    "obsidian/PRACTICE/PRAC BOOK Ch10 - Index.md",
+    "obsidian/PRACTICE/PRAC BOOK Ch08 - Index.md",
+    "obsidian/PRACTICE/PRAC - Index.md",
+    "obsidian/ASSIGNMENT/ASG 08 - recursion practice.md",
     "obsidian/ASSIGNMENT/ASG 06 - grading app.md",
     "obsidian/ASSIGNMENT/ASG 04 - sort student by cgpa.md",
     "obsidian/LAB_PROJECT/PROJ Image Editor - main.md",
@@ -264,11 +269,6 @@
     "obsidian/CLASS/CLASS - Index.md",
     "obsidian/ASSIGNMENT/ASG 05 - dictionary sort lexicographic.md",
     "obsidian/99_archive/ARCH - Project documentation.md",
-    "obsidian/99_archive/ARCH - Image editor logs.md",
-    "obsidian/99_archive/ARCH - Image editor bugs.md",
-    "obsidian/99_archive/ARCH - Early prototypes.md",
-    "obsidian/00_BUET_CSE_101/BUET - Index.md",
-    "obsidian/PRACTICE/PRAC PYG 02 - final 23 7d.md",
     "obsidian/PRACTICE",
     "obsidian/LAB_PROJECT",
     "obsidian/LAB",
